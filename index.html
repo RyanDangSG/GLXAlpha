@@ -16,7 +16,6 @@
             --green: #00ff88; 
             --blue: #2563eb; 
             --gold: #f59e0b; 
-            /* Biến Responsive cho Quỹ đạo */
             --orbit-radius: 130px; 
         }
         @media (min-width: 768px) { :root { --orbit-radius: 170px; } }
@@ -35,7 +34,7 @@
             background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* CURSOR GLOW (Chỉ bật trên Desktop/chuột) */
+        /* CURSOR GLOW */
         #cursor-glow { display: none; }
         @media (hover: hover) and (pointer: fine) {
             #cursor-glow {
@@ -52,14 +51,11 @@
         /* HIỆU ỨNG CUỘN (REVEAL) */
         .reveal { opacity: 0; transform: translateY(30px) scale(0.98); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
-        @media (min-width: 768px) {
-            .reveal-delay-1 { transition-delay: 0.15s; }
-            .reveal-delay-2 { transition-delay: 0.3s; }
-        }
+        @media (min-width: 768px) { .reveal-delay-1 { transition-delay: 0.15s; } .reveal-delay-2 { transition-delay: 0.3s; } }
 
         /* GLASSMORPHISM */
         .glass-nav { background: rgba(1, 1, 3, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .glass-card { background: rgba(12, 16, 28, 0.5); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; }
+        .glass-card { background: rgba(12, 16, 28, 0.5); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
         .glass-card:hover { border-color: rgba(255, 111, 97, 0.3); box-shadow: 0 15px 40px rgba(255, 111, 97, 0.1); transform: translateY(-4px); }
 
         /* NÚT CTA */
@@ -81,14 +77,15 @@
         .node-item {
             position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
             width: 60px; height: 60px; background: rgba(5, 8, 15, 0.95); backdrop-filter: blur(5px); border: 2px solid rgba(255,111,97,0.5);
-            border-radius: 16px; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 111, 97, 0.3); transition: all 0.3s ease;
+            border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(255, 111, 97, 0.3); transition: all 0.3s ease;
         }
         @media (min-width: 768px) { .node-item { width: 76px; height: 76px; border-radius: 20px; } }
 
+        .node-item:hover { transform: translate(-50%, -50%) scale(1.2); box-shadow: 0 0 50px rgba(255, 111, 97, 0.8); border-color: #fff; z-index: 50; cursor: crosshair; }
         .node-content { display: flex; flex-direction: column; align-items: center; animation: counter-rotate 20s linear infinite; }
         .node-content span { font-size: 9px; font-weight: 900; color: white; letter-spacing: 1px; }
-        @media (min-width: 768px) { .node-content span { font-size: 11px; } }
+        .node-content i { font-size: 14px; margin-top: 4px; color: var(--cyan); opacity: 0.8; }
+        @media (min-width: 768px) { .node-content span { font-size: 11px; } .node-content i { font-size: 16px; margin-top: 6px; } }
 
         @keyframes rotate-container { from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); } to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); } }
         @keyframes counter-rotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
@@ -96,28 +93,38 @@
         .node-3 { animation-delay: -13.33s; }
 
         /* LIVE TICKER */
-        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,255,255,0.03); padding: 6px 0; margin-top: 70px; }
+        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,255,255,0.03); padding: 6px 0; margin-top: 64px; }
         @media (min-width: 1024px) { .ticker-wrap { margin-top: 80px; } }
-        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 25s linear infinite; }
+        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-        /* STICKY STACKING CARDS (Responsive) */
+        /* STICKY STACKING CARDS */
         .sticky-card-wrapper { position: relative; padding-bottom: 50px; }
         .sticky-stack { position: sticky; transition: transform 0.4s ease; }
-        /* Cấu hình Top khoảng cách xếp bài tùy màn hình */
         .stack-1 { top: 80px; } .stack-2 { top: 100px; } .stack-3 { top: 120px; }
         @media (min-width: 1024px) { .stack-1 { top: 120px; } .stack-2 { top: 140px; } .stack-3 { top: 160px; } }
+
+        /* ANIMATED BORDER CHO THẺ DIAMOND VIP */
+        .animated-border-card { position: relative; border: 1px solid transparent; background-clip: padding-box; }
+        .animated-border-card::before {
+            content: ''; position: absolute; inset: -2px; z-index: -1; border-radius: inherit;
+            background: linear-gradient(90deg, #00f0ff, #FF6F61, #00f0ff, #FF6F61); background-size: 300% 300%; animation: gradient-border 4s linear infinite;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+        }
+        @keyframes gradient-border { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
 
         /* TIỆN ÍCH */
         .text-gradient { background: linear-gradient(to right, #fff, #FF6F61); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .animate-glow { animation: pulse-glow 3s infinite alternate; }
         @keyframes pulse-glow { 0% { box-shadow: 0 0 30px rgba(255, 111, 97, 0.2); } 100% { box-shadow: 0 0 60px rgba(255, 111, 97, 0.6); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+        .animate-float { animation: float 8s ease-in-out infinite; }
         
-        .input-vip { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; color: white; width: 100%; outline: none; transition: 0.3s; font-size: 14px; }
+        .input-vip { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; color: white; width: 100%; outline: none; transition: 0.3s; font-size: 14px; }
         .input-vip:focus { border-color: var(--primary); background: rgba(255,255,255,0.05); box-shadow: 0 0 15px rgba(255, 111, 97, 0.2); }
         
-        /* STICKY CTA BAR */
         .sticky-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(1, 1, 3, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.05); z-index: 90; transform: translateY(100%); transition: transform 0.5s ease; padding: 12px 16px; }
         @media (min-width: 768px) { .sticky-cta { padding: 16px 24px; } }
         .sticky-cta.show { transform: translateY(0); }
@@ -125,30 +132,44 @@
         .view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
         .view-section.active { display: block; opacity: 1; }
 
-        /* MOBILE MENU OVERLAY */
+        /* TABS & MOBILE MENU */
+        .auth-tab { color: #64748b; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
+        .auth-tab.active { color: #fff; border-bottom-color: var(--primary); text-shadow: 0 0 15px rgba(255, 111, 97, 0.6); }
+        
         #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         #mobile-menu.open { transform: translateX(0); }
         .menu-item { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: space-between; align-items: center; }
+
+        /* 3D TILT EFFECT */
+        @media (hover: hover) and (pointer: fine) {
+            .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
+            .tilt-card-inner { transform: translateZ(30px); }
+        }
     </style>
 </head>
 <body>
 
     <div id="preloader">
         <div class="loader-ring mb-6"></div>
-        <div class="text-gray-500 font-mono tracking-[0.3em] text-[9px] md:text-[11px] uppercase animate-pulse">Syncing Alpha Data...</div>
+        <div class="text-gray-500 font-mono tracking-[0.4em] text-[9px] md:text-[11px] uppercase animate-pulse">Syncing Institutional Data...</div>
     </div>
 
     <div class="bg-noise"></div>
     <div id="cursor-glow"></div>
+    <div class="fixed inset-0 z-[-2] pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-[#FF6F61]/5 rounded-full blur-[120px] transform -translate-x-1/2 -translate-y-1/2 animate-float"></div>
+        <div class="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[#00f0ff]/5 rounded-full blur-[150px] transform translate-x-1/4 translate-y-1/4 animate-float" style="animation-delay: -4s;"></div>
+    </div>
 
     <header class="fixed w-full top-0 z-[100] glass-nav h-16 lg:h-20">
         <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
             <div onclick="switchView('home-view')" class="flex items-center gap-3 cursor-pointer group">
-                <div class="w-9 h-9 lg:w-11 lg:h-11 bg-gradient-to-br from-[#FF3B30] to-[#FF8E53] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255,111,97,0.3)] lg:group-hover:scale-110 transition-transform">
+                <div class="w-9 h-9 lg:w-12 lg:h-12 bg-gradient-to-br from-[#FF3B30] to-[#FF8E53] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255,111,97,0.3)] lg:group-hover:scale-110 transition-transform">
                     <i class="fas fa-atom text-white text-lg lg:text-xl"></i>
                 </div>
                 <div class="flex flex-col">
                     <span class="text-lg lg:text-xl font-black tracking-tighter text-white uppercase leading-none">GALAXY<span class="text-[#FF6F61]">ALPHA</span></span>
+                    <span class="hidden lg:block text-[9px] font-mono text-gray-500 tracking-[0.2em] mt-1">TRADING ECOSYSTEM</span>
                 </div>
             </div>
             
@@ -156,7 +177,7 @@
                 <button onclick="switchView('home-view')" class="hover:text-white text-gray-400 transition-all">Trang Chủ</button>
                 <button onclick="switchView('about-view')" class="hover:text-white text-gray-400 transition-all">Giới Thiệu</button>
                 <button onclick="switchView('tools-view')" class="hover:text-white text-gray-400 transition-all">Công Cụ</button>
-                <button onclick="switchView('academy-view')" class="text-yellow-500 hover:text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all">Học Viện</button>
+                <button onclick="switchView('academy-view')" class="text-yellow-500 hover:text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all">Học Viện VIP</button>
             </nav>
             
             <button onclick="openAuthModal('login')" class="hidden lg:flex bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-2.5 rounded-full font-black text-[10px] tracking-widest items-center gap-2 transition">
@@ -177,8 +198,8 @@
             <button onclick="switchView('academy-view'); toggleMobileMenu();" class="w-full text-left menu-item text-yellow-500 hover:text-yellow-400">Học Viện VIP <i class="fas fa-star text-[10px] opacity-50"></i></button>
         </div>
         <div class="mt-auto space-y-4 pb-10">
-            <button onclick="toggleMobileMenu(); openAuthModal('login');" class="w-full py-4 border border-white/20 rounded-2xl text-white font-black text-xs tracking-widest uppercase"><i class="fas fa-user-circle mr-2"></i>Đăng Nhập</button>
-            <button onclick="toggleMobileMenu(); openAuthModal('register');" class="w-full btn-zenith text-white py-4 rounded-2xl font-black text-xs tracking-widest uppercase">Nhận Tư Vấn Ngay</button>
+            <button onclick="toggleMobileMenu(); openAuthModal('login');" class="w-full py-4 border border-white/20 rounded-2xl text-white font-black text-xs tracking-widest uppercase"><i class="fas fa-terminal mr-2"></i>Đăng Nhập Terminal</button>
+            <button onclick="toggleMobileMenu(); openAuthModal('register');" class="w-full btn-zenith text-white py-4 rounded-2xl font-black text-xs tracking-widest uppercase">Kích Hoạt Tài Khoản</button>
         </div>
     </div>
 
@@ -187,45 +208,39 @@
             <span class="mx-4 md:mx-8"><span class="text-[#FF6F61]">•</span> LIVE: GALAXY ALPHA ONLINE</span>
             <span class="mx-4 md:mx-8"><span class="text-yellow-500">XAUUSD:</span> ORDER FLOW <span class="text-green-500">BUY</span> @ 2450.50</span>
             <span class="mx-4 md:mx-8"><span class="text-cyan-400">BTCUSDT:</span> SMC OB DETECTED <span class="text-red-500">SELL</span> @ 64,200</span>
-            <span class="mx-4 md:mx-8"><span class="text-[#00ff88]">ETHUSDT:</span> DARVAS BREAKOUT <span class="text-green-500">+12%</span></span>
+            <span class="mx-4 md:mx-8"><span class="text-[#00ff88]">ETHUSDT:</span> DARVAS BREAKOUT <span class="text-green-500">+12.5%</span></span>
             <span class="mx-4 md:mx-8"><span class="text-[#FF6F61]">•</span> LIVE: GALAXY ALPHA ONLINE</span>
             <span class="mx-4 md:mx-8"><span class="text-yellow-500">XAUUSD:</span> ORDER FLOW <span class="text-green-500">BUY</span> @ 2450.50</span>
+            <span class="mx-4 md:mx-8"><span class="text-cyan-400">BTCUSDT:</span> SMC OB DETECTED <span class="text-red-500">SELL</span> @ 64,200</span>
+            <span class="mx-4 md:mx-8"><span class="text-[#00ff88]">ETHUSDT:</span> DARVAS BREAKOUT <span class="text-green-500">+12.5%</span></span>
         </div>
     </div>
 
     <main id="home-view" class="view-section active pt-6 md:pt-10">
-        
-        <section class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pb-20 md:pb-32 text-center lg:text-left">
+        <section class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pb-20 md:pb-32 text-center lg:text-left min-h-[85vh]">
             <div class="relative z-10 order-2 lg:order-1 mt-8 lg:mt-0">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF6F61]/10 border border-[#FF6F61]/30 text-[#FF6F61] text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(255,111,97,0.2)]">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#FF6F61] animate-ping"></span> Hệ Thống Giao Dịch Bất Bại
                 </div>
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black mb-4 md:mb-6 leading-[1.1] text-white uppercase tracking-tighter reveal">
-                    GALAXY ALPHA <br><span class="text-gradient text-3xl sm:text-5xl md:text-6xl">ĐỔI VỊ THẾ</span>
+                <h1 class="text-5xl md:text-7xl lg:text-[85px] font-black mb-4 md:mb-6 leading-[1.05] text-white uppercase tracking-tighter reveal">
+                    Đọc Vị Cá Mập <br><span class="text-gradient">Thống Trị Cuộc Chơi</span>
                 </h1>
-                <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-6 tracking-wide reveal reveal-delay-1">LÀM CHỦ CUỘC CHƠI TÀI CHÍNH</h2>
                 
-                <p class="text-gray-400 text-sm md:text-base mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light reveal reveal-delay-1">
-                    Cung cấp công nghệ phân tích dữ liệu thực tế từ các định chế tài chính lớn. Giúp bạn nhìn thấu thị trường và đi lệnh với độ chính xác 95.8%.
+                <p class="text-gray-400 text-sm md:text-lg mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light reveal reveal-delay-1">
+                    95% Trader đang làm thanh khoản cho thị trường. Đã đến lúc bạn <b>đổi phe</b>. Hệ thống Galaxy Alpha phân tích Dòng Tiền trực tiếp từ sổ lệnh để bạn đi lệnh cùng gã khổng lồ.
                 </p>
 
                 <div class="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4 mb-8 reveal reveal-delay-2">
-                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#1877F2] rounded-full flex items-center justify-center text-white shadow-lg"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" class="w-10 h-10 md:w-12 md:h-12 bg-[#0068FF] rounded-full flex items-center justify-center text-white shadow-lg"><b class="font-sans text-xl">Z</b></a>
-                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#000000] border border-gray-700 rounded-full flex items-center justify-center text-white shadow-lg"><i class="fab fa-x-twitter text-lg"></i></a>
-                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#FF0000] rounded-full flex items-center justify-center text-white shadow-lg"><i class="fab fa-youtube text-lg"></i></a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#1877F2] rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition"><i class="fab fa-facebook-f text-lg"></i></a>
+                    <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" target="_blank" class="w-10 h-10 md:w-12 md:h-12 bg-[#0068FF] rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition"><b class="font-sans text-xl">Z</b></a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#000000] border border-gray-700 rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition"><i class="fab fa-x-twitter text-lg"></i></a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-[#FF0000] rounded-full flex items-center justify-center text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:scale-110 transition"><i class="fab fa-youtube text-lg"></i></a>
                 </div>
 
                 <div class="mb-10 reveal reveal-delay-2">
-                    <button onclick="switchView('academy-view')" class="w-full sm:w-auto btn-zenith text-white px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center lg:justify-start gap-3">
-                        <i class="fas fa-book-open text-lg"></i> THAM GIA KHÓA HỌC
+                    <button onclick="switchView('tools-view')" class="w-full sm:w-auto btn-zenith text-white px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest shadow-2xl">
+                        KHÁM PHÁ CÔNG NGHỆ
                     </button>
-                </div>
-
-                <div class="grid grid-cols-3 gap-2 sm:gap-6 text-center lg:text-left border-t border-white/10 pt-6 reveal reveal-delay-2">
-                    <div><h4 class="text-2xl md:text-3xl font-black text-white counter" data-target="5000" data-suffix="+">0</h4><p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-1">Thành viên</p></div>
-                    <div><h4 class="text-2xl md:text-3xl font-black text-white counter" data-target="50" data-suffix="+">0</h4><p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-1">Bot Trading</p></div>
-                    <div><h4 class="text-2xl md:text-3xl font-black text-[#00ff88] counter" data-target="95" data-suffix="%">0</h4><p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-1">Độ chính xác</p></div>
                 </div>
             </div>
 
@@ -234,78 +249,66 @@
                     <div class="orbit-path w-full h-full"></div>
                     <div class="orbit-path w-[60%] h-[60%] opacity-20"></div>
                     
-                    <div class="absolute z-20 w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 bg-gradient-to-br from-[#FF3B30] to-[#FF8E53] rounded-[30px] md:rounded-[45px] flex items-center justify-center animate-glow shadow-[0_0_50px_rgba(255,111,97,0.4)]">
-                        <i class="fas fa-atom text-[45px] md:text-[70px] lg:text-[85px] text-white opacity-90"></i>
+                    <div class="absolute z-20 w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 bg-gradient-to-br from-[#FF3B30] to-[#FF8E53] rounded-[30px] md:rounded-[40px] flex items-center justify-center animate-glow shadow-[0_0_50px_rgba(255,111,97,0.4)] cursor-crosshair hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-atom text-[50px] md:text-[70px] lg:text-[80px] text-white opacity-95"></i>
                     </div>
 
-                    <div class="node-container node-1"><div class="node-item"><div class="node-content"><span>ICT</span><i class="fas fa-brain text-purple-400"></i></div></div></div>
+                    <div class="node-container node-1"><div class="node-item"><div class="node-content"><span>ICT</span><i class="fas fa-brain text-[#00f0ff]"></i></div></div></div>
                     <div class="node-container node-2"><div class="node-item"><div class="node-content"><span>DARVAS</span><i class="fas fa-cube text-yellow-400"></i></div></div></div>
                     <div class="node-container node-3"><div class="node-item"><div class="node-content"><span>ORDER</span><i class="fas fa-water text-green-400"></i></div></div></div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 md:py-24 bg-[#010103] border-y border-white/5 relative">
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="text-center mb-10 md:mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-3 uppercase tracking-tighter">🚀 Đăng Ký Tín Hiệu</h2>
-                    <p class="text-gray-400 font-light text-xs md:text-sm">Trải nghiệm <span class="text-cyan-400 font-bold">tín hiệu</span> và chiến lược độc quyền.</p>
-                </div>
-                <div class="glass-card p-6 sm:p-12 md:p-16 rounded-[35px] md:rounded-[50px] border-[#FF6F61]/20 shadow-[0_0_50px_rgba(255,111,97,0.1)] reveal relative z-10">
-                    <form class="space-y-4 md:space-y-6" onsubmit="handleAuthSubmit(event, 'register')">
-                        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                            <input type="text" placeholder="Họ và Tên" class="input-vip text-sm" required>
-                            <input type="tel" placeholder="Số Điện Thoại" class="input-vip text-sm" required>
+        <section class="py-16 md:py-24 border-t border-white/5 bg-[#010103] relative overflow-hidden">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[35px] reveal tilt-card">
+                        <div class="tilt-card-inner">
+                            <h4 class="text-3xl md:text-5xl font-black text-white mb-2 font-mono counter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" data-target="5000" data-suffix="+">0</h4>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-[0.2em] mt-3">Học Viên</p>
                         </div>
-                        <input type="email" placeholder="Gmail nhận tài khoản" class="input-vip text-sm" required>
-                        <button type="submit" class="w-full btn-zenith text-white font-black py-4 md:py-6 rounded-2xl uppercase tracking-widest text-[10px] md:text-xs shadow-2xl hover:scale-[1.02] transition mt-2"><i class="fas fa-paper-plane mr-2"></i> GỬI YÊU CẦU NGAY</button>
-                    </form>
-                    <p class="text-center text-gray-500 text-[8px] md:text-[10px] uppercase tracking-widest mt-6 font-bold"><i class="fas fa-lock mr-2 text-yellow-500"></i>Thông tin bảo mật tuyệt đối 100%.</p>
-                </div>
-
-                <div class="grid grid-cols-3 gap-3 md:gap-6 mt-8 md:mt-12">
-                    <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-3xl text-center reveal">
-                        <div class="w-10 h-10 md:w-14 md:h-14 bg-yellow-500 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-bolt text-white md:text-xl"></i></div>
-                        <h4 class="font-bold text-white uppercase text-[9px] md:text-sm">Tín Hiệu Nhanh</h4>
                     </div>
-                    <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-3xl text-center border-green-500/20 reveal reveal-delay-1">
-                        <div class="w-10 h-10 md:w-14 md:h-14 bg-green-500 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-bullseye text-white md:text-xl"></i></div>
-                        <h4 class="font-bold text-white uppercase text-[9px] md:text-sm">Độ Chính Xác</h4>
+                    <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[35px] border-green-500/20 reveal reveal-delay-1 tilt-card">
+                        <div class="tilt-card-inner">
+                            <h4 class="text-3xl md:text-5xl font-black text-green-400 mb-2 font-mono counter drop-shadow-[0_0_15px_rgba(0,255,136,0.2)]" data-target="95" data-suffix="%">0</h4>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-[0.2em] mt-3">Độ Chính Xác</p>
+                        </div>
                     </div>
-                    <div class="glass-card p-4 md:p-8 rounded-2xl md:rounded-3xl text-center border-purple-500/20 reveal reveal-delay-2">
-                        <div class="w-10 h-10 md:w-14 md:h-14 bg-purple-500 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-crown text-white md:text-xl"></i></div>
-                        <h4 class="font-bold text-white uppercase text-[9px] md:text-sm">Hoàn Toàn Free</h4>
+                    <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[35px] border-cyan-500/20 reveal reveal-delay-2 tilt-card">
+                        <div class="tilt-card-inner">
+                            <h4 class="text-3xl md:text-5xl font-black text-cyan-400 mb-2 font-mono drop-shadow-[0_0_15px_rgba(0,240,255,0.2)]">#01</h4>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-[0.2em] mt-3">System VN</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[35px] border-yellow-500/20 reveal reveal-delay-2 tilt-card">
+                        <div class="tilt-card-inner">
+                            <h4 class="text-3xl md:text-5xl font-black text-yellow-500 mb-2 font-mono drop-shadow-[0_0_15px_rgba(245,158,11,0.2)]">24/7</h4>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-[0.2em] mt-3">Live Support</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 md:py-32">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-black text-white uppercase mb-3 tracking-tighter reveal"><i class="fas fa-comments text-[#FF6F61] mr-2"></i> Phản Hồi Trader</h2>
-                <p class="text-gray-500 mb-12 md:mb-20 uppercase tracking-[0.2em] md:tracking-[0.4em] text-[9px] md:text-[10px] font-bold reveal">Chia sẻ thật từ cộng đồng</p>
-                <div class="grid md:grid-cols-3 gap-6 md:gap-10 text-left">
-                    <div class="glass-card p-8 md:p-10 rounded-[30px] md:rounded-[40px] border-white/5 reveal">
-                        <div class="flex items-center gap-4 mb-6 md:mb-8">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-green-500/20 rounded-full border border-green-500/40 flex items-center justify-center font-black text-green-400 text-sm md:text-base">HT</div>
-                            <div><h4 class="text-white font-bold text-sm md:text-base">Hoàng Tuấn</h4><p class="text-[9px] md:text-[10px] text-gray-500 uppercase">Học viên K1</p></div>
-                        </div>
-                        <p class="text-gray-400 text-xs md:text-sm leading-loose italic">"Copy trade với các signal đã giúp tài khoản tăng trưởng ổn định. Cảm ơn hệ thống đã giúp tôi tự do tài chính."</p>
+        <section class="py-20 md:py-32 relative">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="glass-card p-8 sm:p-12 md:p-24 rounded-[40px] md:rounded-[60px] border-[#FF6F61]/20 shadow-[0_0_100px_rgba(255,111,97,0.1)] relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#FF6F61]/10 rounded-full blur-[80px] -mr-32 -mt-32 pointer-events-none"></div>
+                    <div class="text-center mb-10 md:mb-16">
+                        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 md:mb-6 uppercase tracking-tighter">Kích Hoạt <span class="text-[#FF6F61]">Đặc Quyền</span></h2>
+                        <p class="text-gray-400 font-light text-xs md:text-base max-w-lg mx-auto">Trải nghiệm sức mạnh của hệ thống phân tích dòng tiền cấp quỹ hoàn toàn miễn phí ngay hôm nay.</p>
                     </div>
-                    <div class="glass-card p-8 md:p-10 rounded-[30px] md:rounded-[40px] border-[#FF6F61]/30 shadow-[0_10px_30px_rgba(255,111,97,0.1)] reveal reveal-delay-1">
-                        <div class="flex items-center gap-4 mb-6 md:mb-8">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-pink-500/20 rounded-full border border-pink-500/40 flex items-center justify-center font-black text-pink-400 text-sm md:text-base">AT</div>
-                            <div><h4 class="text-white font-bold text-sm md:text-base">Anh Thư</h4><p class="text-[9px] md:text-[10px] text-gray-500 uppercase">Trader Tự Do</p></div>
+                    <form class="space-y-4 md:space-y-6" onsubmit="handleAuthSubmit(event, 'register')">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                            <input id="reg-name-home" type="text" placeholder="Họ và Tên" class="input-vip" required>
+                            <input id="reg-zalo-home" type="tel" placeholder="Số Zalo liên hệ" class="input-vip" required>
                         </div>
-                        <p class="text-gray-300 text-xs md:text-sm leading-loose font-medium">"Là trader nữ, tôi rất thích cộng đồng này vì mọi người support nhiệt tình. Chiến lược dễ hiểu áp dụng được ngay."</p>
-                    </div>
-                    <div class="glass-card p-8 md:p-10 rounded-[30px] md:rounded-[40px] border-white/5 reveal reveal-delay-2">
-                        <div class="flex items-center gap-4 mb-6 md:mb-8">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-500/20 rounded-full border border-blue-500/40 flex items-center justify-center font-black text-blue-400 text-sm md:text-base">DK</div>
-                            <div><h4 class="text-white font-bold text-sm md:text-base">Đức Khang</h4><p class="text-[9px] md:text-[10px] text-gray-500 uppercase">Fund Manager</p></div>
-                        </div>
-                        <p class="text-gray-400 text-xs md:text-sm leading-loose italic">"Học được nhiều kiến thức từ cơ bản đến nâng cao. Giờ tôi đã có thể trade độc lập và thu nhập ổn định từ crypto."</p>
-                    </div>
+                        <input id="reg-email-home" type="email" placeholder="Gmail nhận tài khoản hệ thống" class="input-vip" required>
+                        <input id="reg-pass-home" type="password" placeholder="Tạo Mật khẩu Terminal (6+ ký tự)" class="input-vip" required minlength="6">
+                        <button type="submit" id="btn-register-home" class="w-full btn-zenith text-white font-black py-4 md:py-6 rounded-2xl uppercase tracking-[0.2em] text-[10px] md:text-[11px] shadow-2xl hover:scale-[1.02] transition mt-6">GỬI YÊU CẦU TRUY CẬP</button>
+                    </form>
+                    <p class="text-center text-gray-600 text-[8px] md:text-[10px] uppercase tracking-[0.3em] mt-8 md:mt-10 font-bold"><i class="fas fa-lock mr-2 text-green-500"></i>Dữ liệu được mã hóa bảo mật 256-bit</p>
                 </div>
             </div>
         </section>
@@ -314,86 +317,111 @@
     <div id="about-view" class="view-section pt-20 md:pt-24 pb-32 md:pb-40">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16 md:mb-24 reveal">
-                <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-4 md:mb-6 uppercase tracking-tighter leading-tight">
-                    GALAXY ALPHA: <br>
-                    <span class="text-transparent bg-gradient-to-r from-[#FF6F61] to-[#FF8E53] bg-clip-text">ĐỔI VỊ THẾ LÀM CHỦ</span>
+                <span class="text-cyan-400 font-mono tracking-[0.4em] text-[8px] md:text-[10px] border border-cyan-500/30 px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 inline-block shadow-[0_0_20px_rgba(0,240,255,0.1)]">BEYOND TRADING</span>
+                <h2 class="text-4xl sm:text-5xl md:text-[80px] font-black text-white mb-4 md:mb-8 uppercase tracking-tighter leading-[1.05] mt-4 md:mt-8">
+                    ĐỔI VỊ THẾ <br>
+                    <span class="text-transparent bg-gradient-to-r from-[#FF6F61] to-[#FF8E53] bg-clip-text">LÀM CHỦ CUỘC CHƠI TÀI CHÍNH</span>
                 </h2>
-                <p class="text-gray-400 text-sm md:text-lg max-w-3xl mx-auto font-light leading-relaxed">
-                    Ngừng giao dịch dựa trên may mắn. Hãy trang bị vũ khí phân tích để đứng vào hàng ngũ <b class="text-white">5% nhà giao dịch chiến thắng</b>.
+                <p class="text-gray-400 text-sm md:text-xl max-w-3xl mx-auto font-light leading-relaxed mt-6 md:mt-10">
+                    Ngừng giao dịch dựa trên may mắn. Hãy trang bị vũ khí phân tích cấp độ Quỹ đầu tư để đứng vào hàng ngũ <b class="text-white">5% nhà giao dịch tinh anh nhất</b>.
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-20">
-                <div class="glass-card p-8 md:p-12 rounded-[35px] md:rounded-[50px] border-l-4 border-[#FF6F61] reveal">
-                    <h3 class="text-2xl md:text-3xl font-black text-white mb-6 uppercase tracking-tighter text-[#FF6F61]">Sứ Mệnh Khai Sáng</h3>
-                    <p class="text-gray-400 leading-loose font-light mb-4 text-xs md:text-base">Thị trường tài chính là một chiến trường. Sự thật tàn khốc là 95% nhà giao dịch thất bại vì họ bước vào với "tay không" và một tâm thế mơ hồ về luật chơi.</p>
-                    <p class="text-gray-400 leading-loose font-light text-xs md:text-base">Chúng tôi mang những công cụ phân tích phức tạp nhất của các định chế lớn đến tận tay Trader Việt, giúp bạn cân bằng vị thế.</p>
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-24">
+                <div class="glass-card p-8 md:p-14 rounded-[35px] md:rounded-[50px] border-l-4 border-[#FF6F61] reveal tilt-card">
+                    <div class="tilt-card-inner">
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-6 md:mb-8 uppercase tracking-tighter text-[#FF6F61]">Sứ Mệnh Khai Sáng: <br> Phá Bỏ Lời Nguyền "95% Thua Lỗ"</h3>
+                        <p class="text-gray-400 leading-loose font-light mb-4 md:mb-6 text-sm md:text-base">Thị trường tài chính là một chiến trường không khoan nhượng. 95% nhà giao dịch thất bại vì họ dùng các chỉ báo miễn phí để chống lại các thuật toán tỷ đô của nhà tạo lập (Market Maker).</p>
+                        <p class="text-gray-400 leading-loose font-light text-sm md:text-base">Galaxy Alpha ra đời để <b class="text-white">"Dân chủ hóa công nghệ"</b>. Chúng tôi mang những công cụ phân tích dòng tiền phức tạp nhất đến tay cộng đồng Trader Việt, giúp bạn giao dịch sòng phẳng với những gã khổng lồ.</p>
+                    </div>
                 </div>
 
-                <div class="glass-card p-8 md:p-12 rounded-[35px] md:rounded-[50px] border-l-4 border-cyan-400 reveal reveal-delay-1">
-                    <h3 class="text-2xl md:text-3xl font-black text-white mb-6 uppercase tracking-tighter text-cyan-400">Triết Lý Giao Dịch</h3>
-                    <p class="text-gray-400 leading-loose font-light mb-6 text-xs md:text-base">Hệ thống vận hành dựa trên sự giao thoa của hai trụ cột vững chắc:</p>
-                    <ul class="space-y-4 text-gray-400 font-light mb-6 text-xs md:text-sm">
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-cyan-400 mt-1"></i> <div><b class="text-white">Smart Money Concepts:</b> Thấu hiểu hành vi của dòng tiền lớn (Cá mập).</div></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-cyan-400 mt-1"></i> <div><b class="text-white">Real-time Data:</b> Phân tích dữ liệu sổ lệnh để xác nhận tín hiệu.</div></li>
-                    </ul>
+                <div class="glass-card p-8 md:p-14 rounded-[35px] md:rounded-[50px] border-l-4 border-[#00f0ff] reveal reveal-delay-1 tilt-card">
+                    <div class="tilt-card-inner">
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-6 md:mb-8 uppercase tracking-tighter text-[#00f0ff]">Triết Lý: <br> Sự Kết Hợp Hoàn Hảo</h3>
+                        <p class="text-gray-400 leading-loose font-light mb-6 md:mb-8 text-sm md:text-base">Hệ thống của chúng tôi loại bỏ hoàn toàn yếu tố cảm xúc, vận hành dựa trên 2 trụ cột:</p>
+                        <ul class="space-y-4 md:space-y-6 text-gray-300 font-light mb-6 md:mb-10 text-xs md:text-sm">
+                            <li class="flex items-start gap-4 hover:translate-x-2 transition-transform"><i class="fas fa-check-circle text-[#00f0ff] mt-1 text-base md:text-lg"></i> <div><b class="text-white md:text-base">Smart Money Concepts:</b> Thấu hiểu hành vi, săn tìm thanh khoản của dòng tiền lớn.</div></li>
+                            <li class="flex items-start gap-4 hover:translate-x-2 transition-transform"><i class="fas fa-check-circle text-[#00f0ff] mt-1 text-base md:text-lg"></i> <div><b class="text-white md:text-base">Real-time Data:</b> Phân tích dữ liệu sổ lệnh thực tế để xác nhận tín hiệu đảo chiều.</div></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="text-center bg-gradient-to-b from-[#111827] to-[#030508] p-10 md:p-24 rounded-[40px] md:rounded-[60px] border border-white/10 shadow-[0_0_50px_rgba(255,111,97,0.1)] reveal">
-                <h2 class="text-2xl sm:text-4xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">Bắt Đầu Viết Nên Câu Chuyện <br> Thành Công Ngay Hôm Nay!</h2>
-                <button onclick="openAuthModal('register')" class="w-full md:w-auto btn-zenith text-white px-8 md:px-12 py-4 md:py-6 rounded-2xl font-black text-xs md:text-sm shadow-2xl uppercase tracking-widest mt-4">NHẬN TƯ VẤN LỘ TRÌNH</button>
+            <div class="text-center bg-gradient-to-b from-[#111827] to-[#010103] p-10 md:p-24 rounded-[40px] md:rounded-[60px] border border-white/10 shadow-[0_0_100px_rgba(255,111,97,0.15)] reveal relative overflow-hidden">
+                <h2 class="text-3xl sm:text-5xl font-black text-white mb-6 md:mb-8 uppercase tracking-tighter leading-tight relative z-10">Viết Lại Câu Chuyện <br> Giao Dịch Của Bạn Ngay Hôm Nay!</h2>
+                <p class="text-gray-400 text-sm md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed relative z-10">Hãy trở thành Alpha Trader - Kẻ làm chủ cuộc chơi.</p>
+                <button onclick="openAuthModal('register')" class="btn-zenith text-white px-8 md:px-12 py-4 md:py-6 rounded-2xl font-black text-xs md:text-sm shadow-2xl uppercase tracking-[0.2em] hover:-translate-y-1 transition-transform relative z-10">NHẬN TƯ VẤN LỘ TRÌNH NGAY</button>
             </div>
         </div>
     </div>
 
-    <div id="tools-view" class="view-section pt-20 md:pt-24 pb-32 md:pb-40 bg-[#010102]">
+    <div id="tools-view" class="view-section pt-20 md:pt-24 pb-32 md:pb-40 bg-[#010103]">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16 md:mb-24 reveal">
-                <h2 class="text-4xl md:text-5xl lg:text-[60px] font-black text-white uppercase tracking-tighter mb-4 leading-tight">HỆ SINH THÁI ĐỘC BẢN<br><span class="text-[#FF6F61]">TRADER 5.0</span></h2>
-                <p class="text-gray-500 uppercase tracking-[0.2em] md:tracking-[0.3em] text-[9px] md:text-[11px] font-bold">Thành quả của hàng ngàn giờ nghiên cứu dữ liệu.</p>
+            <div class="text-center mb-16 md:mb-32 reveal">
+                <span class="text-[#FF6F61] font-mono tracking-[0.4em] text-[8px] md:text-[10px] border border-[#FF6F61]/30 px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 inline-block shadow-[0_0_20px_rgba(255,111,97,0.2)]">GALAXY ALPHA TERMINAL</span>
+                <h2 class="text-4xl md:text-[70px] font-black text-white uppercase tracking-tighter mb-4 md:mb-6 leading-[1.05] mt-4 md:mt-8">HỆ SINH THÁI ĐỘC BẢN<br><span class="text-[#FF6F61]">TRADER 5.0</span></h2>
+                <p class="text-gray-500 uppercase tracking-[0.2em] md:tracking-[0.4em] text-[9px] md:text-[12px] font-bold">Thành quả của hàng ngàn giờ nghiên cứu dữ liệu thực chiến.</p>
             </div>
             
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[40px] group border-white/5 hover:border-green-500/50 flex flex-col h-full overflow-hidden reveal">
-                    <div class="overflow-hidden rounded-2xl md:rounded-3xl mb-6 relative border border-white/10">
-                        <img src="./Orderflow.png" class="w-full h-40 md:h-48 object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ORDER FLOW</h3>
-                    <p class="text-green-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Giải Mã Dòng Tiền Ngầm</p>
-                    <p class="text-gray-400 text-xs md:text-sm leading-loose mb-6 font-light flex-1">Phân tích trực tiếp khối lượng chủ động. Nhận diện vùng Hấp thụ (Absorption) và Cạn kiệt (Exhaustion) của Cá mập để bắt đỉnh đáy cực chuẩn.</p>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-3 text-center">TradingView | Crypto, Gold</p>
-                        <button class="w-full py-3 md:py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-green-500 hover:text-black transition flex items-center justify-center gap-2 text-[10px] uppercase tracking-widest"><i class="fas fa-play text-sm"></i> Video Demo</button>
-                    </div>
-                </div>
-
-                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[40px] border-yellow-500/30 transform lg:-translate-y-8 flex flex-col h-full overflow-hidden group hover:border-yellow-500 reveal reveal-delay-1">
-                    <div class="overflow-hidden rounded-2xl md:rounded-3xl mb-6 relative border border-white/10">
-                        <img src="./DravasBox.png" class="w-full h-40 md:h-48 object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">DARVAS DCA</h3>
-                    <p class="text-yellow-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Công Thức Nhân Tài Khoản</p>
-                    <p class="text-gray-400 text-xs md:text-sm leading-loose mb-6 font-light flex-1">Hệ thống tự động quét hộp Darvas. Tích hợp DCA nhồi lệnh lãi khi giá phá vỡ cấu trúc hộp, giúp gia tăng lợi nhuận theo cấp số nhân an toàn.</p>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-3 text-center">TradingView, MT4, MT5</p>
-                        <button class="w-full py-3 md:py-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 font-bold hover:bg-yellow-500 hover:text-black transition flex items-center justify-center gap-2 text-[10px] uppercase tracking-widest"><i class="fas fa-play text-sm"></i> Video Demo</button>
+            <div class="grid lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] group border-white/5 hover:border-green-500/50 flex flex-col h-full overflow-hidden transition-all duration-500 reveal tilt-card">
+                    <div class="tilt-card-inner flex flex-col h-full">
+                        <div class="overflow-hidden rounded-2xl md:rounded-[30px] mb-6 md:mb-10 relative border border-white/10 shadow-2xl">
+                            <img src="./Orderflow.png" class="w-full h-40 md:h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
+                            <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-green-500/20 text-green-400 text-[8px] md:text-[9px] font-black px-2 md:px-3 py-1 rounded backdrop-blur-md border border-green-500/30">LIVE DATA</div>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ORDER FLOW</h3>
+                        <p class="text-green-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-8">Giải Mã Dòng Tiền Ngầm</p>
+                        <ul class="space-y-4 md:space-y-5 text-gray-400 text-xs md:text-sm font-light flex-1">
+                            <li class="flex items-start gap-3"><i class="fas fa-eye text-green-500 mt-1"></i> <p><b class="text-white">Thấu thị sổ lệnh:</b> Phân tích khối lượng chủ động (Aggressive Orders) thời gian thực.</p></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-search-dollar text-green-500 mt-1"></i> <p><b class="text-white">Đọc vị Cá mập:</b> Nhận diện vùng Hấp thụ (Absorption) và Cạn kiệt (Exhaustion).</p></li>
+                        </ul>
+                        <div class="mt-8 md:mt-10 pt-4 md:pt-6 border-t border-white/5">
+                            <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-4 text-center">TradingView | Crypto, Gold</p>
+                            <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-green-500 hover:text-black transition flex items-center justify-center gap-2 text-[10px] md:text-[11px] uppercase tracking-widest group-hover:shadow-[0_0_25px_rgba(0,255,136,0.3)]"><i class="fas fa-play text-lg"></i> Xem Video Demo</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[40px] group border-white/5 hover:border-cyan-400/50 flex flex-col h-full overflow-hidden reveal reveal-delay-2">
-                    <div class="overflow-hidden rounded-2xl md:rounded-3xl mb-6 relative border border-white/10">
-                        <img src="./ICT.png" class="w-full h-40 md:h-48 object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
+                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] border-yellow-500/30 transform lg:-translate-y-10 flex flex-col h-full overflow-hidden group hover:border-yellow-500 transition-all duration-500 shadow-[0_20px_50px_rgba(245,158,11,0.15)] reveal reveal-delay-1 tilt-card">
+                    <div class="tilt-card-inner flex flex-col h-full">
+                        <div class="overflow-hidden rounded-2xl md:rounded-[30px] mb-6 md:mb-10 relative border border-white/10 shadow-2xl">
+                            <img src="./DravasBox.png" class="w-full h-40 md:h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
+                            <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-yellow-500/20 text-yellow-400 text-[8px] md:text-[9px] font-black px-2 md:px-3 py-1 rounded backdrop-blur-md border border-yellow-500/30">AUTO PYRAMIDING</div>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">DARVAS DCA</h3>
+                        <p class="text-yellow-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-8">Công Thức Nhân Tài Khoản</p>
+                        <ul class="space-y-4 md:space-y-5 text-gray-400 text-xs md:text-sm font-light flex-1">
+                            <li class="flex items-start gap-3"><i class="fas fa-box text-yellow-500 mt-1"></i> <p><b class="text-white">Tự quét vùng tích lũy:</b> Vẽ hộp Darvas theo dữ liệu thanh khoản.</p></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-layer-group text-yellow-500 mt-1"></i> <p><b class="text-white">Chiến thuật Thắng đậm:</b> Tích hợp DCA nhồi lệnh lãi khi giá phá vỡ hộp.</p></li>
+                        </ul>
+                        <div class="mt-8 md:mt-10 pt-4 md:pt-6 border-t border-white/5">
+                            <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-4 text-center">TradingView, MT4, MT5</p>
+                            <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 font-bold hover:bg-yellow-500 hover:text-black transition flex items-center justify-center gap-2 text-[10px] md:text-[11px] uppercase tracking-widest group-hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]"><i class="fas fa-play text-lg"></i> Xem Video Demo</button>
+                        </div>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ICT SMC</h3>
-                    <p class="text-cyan-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Bản Đồ Định Chế</p>
-                    <p class="text-gray-400 text-xs md:text-sm leading-loose mb-6 font-light flex-1">Hệ thống săn Stop-hunt. Tự động hóa việc xác định Order Block (OB), FVG. Loại bỏ hoàn toàn các tín hiệu giả mạo với bộ lọc nhiễu thông minh.</p>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-3 text-center">TradingView | All Markets</p>
-                        <button class="w-full py-3 md:py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-cyan-400 hover:text-black transition flex items-center justify-center gap-2 text-[10px] uppercase tracking-widest"><i class="fas fa-play text-sm"></i> Video Demo</button>
+                </div>
+
+                <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] group border-white/5 hover:border-[#00f0ff]/50 flex flex-col h-full overflow-hidden transition-all duration-500 reveal reveal-delay-2 tilt-card">
+                    <div class="tilt-card-inner flex flex-col h-full">
+                        <div class="overflow-hidden rounded-2xl md:rounded-[30px] mb-6 md:mb-10 relative border border-white/10 shadow-2xl">
+                            <img src="./ICT.png" class="w-full h-40 md:h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-transparent to-transparent"></div>
+                            <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-[#00f0ff]/20 text-[#00f0ff] text-[8px] md:text-[9px] font-black px-2 md:px-3 py-1 rounded backdrop-blur-md border border-[#00f0ff]/30">SMART FILTER</div>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ICT SMC PRO</h3>
+                        <p class="text-[#00f0ff] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-8">Bản Đồ Định Chế</p>
+                        <ul class="space-y-4 md:space-y-5 text-gray-400 text-xs md:text-sm font-light flex-1">
+                            <li class="flex items-start gap-3"><i class="fas fa-crosshairs text-[#00f0ff] mt-1"></i> <p><b class="text-white">Săn Stop-hunt:</b> Nhận diện các bẫy thanh khoản của thị trường.</p></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-filter text-[#00f0ff] mt-1"></i> <p><b class="text-white">Bộ lọc nhiễu 90%:</b> Chỉ cung cấp điểm vào lệnh khi có xác nhận đồng thuận.</p></li>
+                        </ul>
+                        <div class="mt-8 md:mt-10 pt-4 md:pt-6 border-t border-white/5">
+                            <p class="text-[8px] md:text-[9px] text-gray-500 font-mono uppercase tracking-widest mb-4 text-center">TradingView | All Markets</p>
+                            <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-[#00f0ff] hover:text-black transition flex items-center justify-center gap-2 text-[10px] md:text-[11px] uppercase tracking-widest group-hover:shadow-[0_0_25px_rgba(0,240,255,0.4)]"><i class="fas fa-play text-lg"></i> Xem Video Demo</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -401,78 +429,82 @@
     </div>
 
     <div id="academy-view" class="view-section pt-20 md:pt-24 pb-32 md:pb-40 bg-[#010103]">
-        <div class="max-w-7xl mx-auto px-4 text-center mb-16 md:mb-24 reveal">
-            <h2 class="text-4xl sm:text-5xl md:text-[70px] font-black text-white mt-4 mb-4 md:mb-6 uppercase tracking-tighter leading-[1.1]">
-                KHAI PHÓNG TƯ DUY
+        <div class="max-w-7xl mx-auto px-4 text-center mb-16 md:mb-32 reveal">
+            <span class="text-[#FF6F61] font-mono tracking-[0.4em] text-[8px] md:text-[10px] border border-[#FF6F61]/30 px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 inline-block shadow-[0_0_20px_rgba(255,111,97,0.2)]">GALAXY ALPHA ACADEMY</span>
+            <h2 class="text-4xl sm:text-5xl md:text-[80px] font-black text-white mt-4 mb-4 md:mb-8 uppercase tracking-tighter leading-[1]">
+                HÀNH TRÌNH BIẾN GIAO DỊCH<br>THÀNH NGHỀ CHUYÊN NGHIỆP
             </h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-light">
-                Hệ thống đào tạo 3 cấp độ. Chuyển giao toàn bộ tư duy và bộ công cụ của các quỹ đầu tư lớn.
+            <p class="text-gray-400 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed font-light">
+                Hệ thống đào tạo 3 cấp độ. Chuyển giao toàn bộ tư duy và bộ công cụ của các quỹ đầu tư lớn để bạn tồn tại và thịnh vượng.
             </p>
         </div>
 
-        <div class="sticky-card-wrapper max-w-4xl mx-auto px-4">
+        <div class="sticky-card-wrapper max-w-5xl mx-auto px-4">
             
-            <div class="sticky-stack stack-1 glass-card p-8 md:p-12 rounded-[35px] md:rounded-[50px] border-white/10 flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-6 shadow-2xl reveal">
+            <div class="sticky-stack stack-1 glass-card p-8 md:p-16 rounded-[35px] md:rounded-[50px] border-white/10 flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-6 shadow-2xl reveal">
                 <div class="flex-1 text-left w-full">
-                    <p class="text-green-400 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] mb-3 font-mono">LEVEL 01: FOUNDATION</p>
-                    <h4 class="text-3xl md:text-4xl font-black text-white mb-4 uppercase">LỚP 1 <span class="text-gray-600 text-lg md:text-xl font-light">(Miễn phí)</span></h4>
-                    <ul class="space-y-3 text-gray-400 text-xs md:text-sm font-light mt-4 md:mt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> Tư duy SMC chuẩn.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> Quản lý rủi ro tuyệt đối.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-500"></i> Tối ưu TradingView.</li>
+                    <p class="text-green-400 font-black text-[9px] md:text-[11px] uppercase tracking-[0.3em] mb-3 md:mb-4 font-mono">LEVEL 01: FOUNDATION</p>
+                    <h4 class="text-3xl md:text-5xl font-black text-white mb-4 md:mb-6 uppercase">LỚP 1 <span class="text-gray-600 text-lg md:text-2xl font-light">(Miễn phí)</span></h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-6 md:mb-8 font-light italic border-l-2 border-green-500 pl-3 md:pl-4">Dành cho: Người mới bắt đầu hoặc muốn xây dựng lại tư duy đúng đắn.</p>
+                    <ul class="space-y-4 md:space-y-5 text-gray-300 text-xs md:text-sm font-light">
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500/20 flex items-center justify-center shrink-0"><i class="fas fa-check text-green-500 text-[10px] md:text-xs"></i></div> <div><b class="text-white">Tư duy SMC:</b> Hiểu rõ bản chất "Smart Money".</div></li>
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500/20 flex items-center justify-center shrink-0"><i class="fas fa-check text-green-500 text-[10px] md:text-xs"></i></div> <div><b class="text-white">Quản lý rủi ro:</b> Bảo vệ vốn tuyệt đối.</div></li>
                     </ul>
                 </div>
                 <div class="w-full md:w-1/3 mt-4 md:mt-0">
-                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl bg-white/10 border border-white/20 text-white font-black hover:bg-[#00ff88] hover:text-black transition uppercase text-[10px] md:text-[11px] tracking-widest shadow-xl">Vào Học - 0 Đồng</button>
+                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-6 rounded-2xl md:rounded-3xl bg-white/10 border border-white/20 text-white font-black hover:bg-[#00ff88] hover:border-[#00ff88] hover:text-black transition uppercase text-[10px] md:text-[11px] tracking-widest shadow-xl">Vào Học - 0 Đồng</button>
                 </div>
             </div>
             
-            <div class="sticky-stack stack-2 glass-card p-8 md:p-12 rounded-[35px] md:rounded-[50px] border-yellow-500/40 bg-[#0a0f0d] flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-6" style="box-shadow: 0 -15px 40px rgba(0,0,0,0.95);">
-                <div class="flex-1 text-left w-full">
-                    <p class="text-yellow-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] mb-3 font-mono">LEVEL 02: STRATEGIC</p>
-                    <h4 class="text-3xl md:text-4xl font-black text-yellow-500 mb-4 uppercase">LỚP 2 & 3 <span class="text-yellow-700 text-lg md:text-xl font-light">(Gold)</span></h4>
-                    <ul class="space-y-3 text-gray-300 text-xs md:text-sm font-light mt-4 md:mt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-bolt text-yellow-500"></i> Thực chiến Darvas Box V2.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-bolt text-yellow-500"></i> Chiến thuật DCA nhồi lệnh.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-bolt text-yellow-500"></i> Đặc quyền Zalo VIP Gold.</li>
+            <div class="sticky-stack stack-2 glass-card p-8 md:p-16 rounded-[35px] md:rounded-[50px] border-yellow-500/40 bg-[#0a0f0d] flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-6" style="box-shadow: 0 -20px 60px rgba(0,0,0,0.95);">
+                <div class="flex-1 text-left relative z-10 w-full">
+                    <p class="text-yellow-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.3em] mb-3 md:mb-4 font-mono">LEVEL 02: STRATEGIC</p>
+                    <h4 class="text-3xl md:text-5xl font-black text-yellow-500 mb-4 md:mb-6 uppercase">LỚP 2 & 3 <span class="text-yellow-700 text-lg md:text-2xl font-light">(Gold)</span></h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-6 md:mb-8 font-light italic border-l-2 border-yellow-500 pl-3 md:pl-4">Dành cho: Trader muốn tối ưu lợi nhuận và giao dịch có hệ thống.</p>
+                    <ul class="space-y-4 md:space-y-5 text-gray-300 text-xs md:text-sm font-light">
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0"><i class="fas fa-bolt text-yellow-500 text-[10px] md:text-xs"></i></div> <div><b class="text-white">Darvas Box V2 Nâng Cao:</b> Săn tìm điểm bùng nổ.</div></li>
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0"><i class="fas fa-bolt text-yellow-500 text-[10px] md:text-xs"></i></div> <div><b class="text-white">Đặc quyền Zalo VIP Gold:</b> Nhận tín hiệu thực chiến.</div></li>
                     </ul>
                 </div>
-                <div class="w-full md:w-1/3 mt-4 md:mt-0">
-                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl bg-yellow-500 text-black font-black uppercase tracking-widest text-[10px] md:text-[11px] hover:scale-105 transition">Nâng Cấp Gói Gold</button>
+                <div class="w-full md:w-1/3 relative z-10 mt-4 md:mt-0">
+                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-6 rounded-2xl md:rounded-3xl bg-yellow-500 text-black font-black uppercase tracking-widest text-[10px] md:text-[11px] shadow-[0_15px_40px_rgba(245,158,11,0.4)] hover:scale-105 transition">Nâng Cấp Gói Gold</button>
                 </div>
             </div>
 
-            <div class="sticky-stack stack-3 glass-card p-8 md:p-12 rounded-[35px] md:rounded-[50px] border-cyan-400/40 bg-[#080b14] flex flex-col md:flex-row items-center gap-6 md:gap-10" style="box-shadow: 0 -15px 40px rgba(0,0,0,0.95);">
-                <div class="flex-1 text-left w-full">
-                    <p class="text-cyan-400 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] mb-3 font-mono">LEVEL 03: INSTITUTIONAL</p>
-                    <h4 class="text-3xl md:text-4xl font-black text-cyan-400 mb-4 uppercase">LỚP 4, 5, 6 <span class="text-cyan-800 text-lg md:text-xl font-light">(Diamond)</span></h4>
-                    <ul class="space-y-3 text-gray-300 text-xs md:text-sm font-light mt-4 md:mt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-star text-cyan-400"></i> Bí mật Order Flow.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-star text-cyan-400"></i> Bộ 3 Indicator VIP Vĩnh Viễn.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-star text-cyan-400"></i> Coaching 1-1 Chuyên gia.</li>
+            <div class="sticky-stack stack-3 glass-card p-8 md:p-16 rounded-[35px] md:rounded-[50px] border-[#00f0ff]/50 bg-[#050812] flex flex-col md:flex-row items-center gap-8 md:gap-12 animated-border-card" style="box-shadow: 0 -20px 80px rgba(0,0,0,0.95);">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent rounded-[35px] md:rounded-[50px] pointer-events-none"></div>
+                <div class="flex-1 text-left relative z-10 w-full">
+                    <p class="text-[#00f0ff] font-black text-[9px] md:text-[11px] uppercase tracking-[0.3em] mb-3 md:mb-4 font-mono">LEVEL 03: INSTITUTIONAL</p>
+                    <h4 class="text-3xl md:text-5xl font-black text-[#00f0ff] mb-4 md:mb-6 uppercase">LỚP 4, 5, 6 <span class="text-[#00f0ff]/50 text-lg md:text-2xl font-light">(Diamond)</span></h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-6 md:mb-8 font-light italic border-l-2 border-[#00f0ff] pl-3 md:pl-4">Dành cho: Những nhà giao dịch muốn sở hữu đặc quyền cao cấp nhất.</p>
+                    <ul class="space-y-4 md:space-y-5 text-gray-300 text-xs md:text-sm font-light">
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#00f0ff]/20 flex items-center justify-center shrink-0"><i class="fas fa-star text-[#00f0ff] text-[10px] md:text-xs"></i></div> <div><b class="text-white">Bí mật Order Flow & Footprint.</b></div></li>
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#00f0ff]/20 flex items-center justify-center shrink-0"><i class="fas fa-star text-[#00f0ff] text-[10px] md:text-xs"></i></div> <div><b class="text-white">Bộ 3 Indicator VIP Vĩnh Viễn.</b></div></li>
+                        <li class="flex items-center gap-3 md:gap-4"><div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#00f0ff]/20 flex items-center justify-center shrink-0"><i class="fas fa-star text-[#00f0ff] text-[10px] md:text-xs"></i></div> <div><b class="text-white">Coaching 1-1 Chuyên gia.</b></div></li>
                     </ul>
                 </div>
-                <div class="w-full md:w-1/3 mt-4 md:mt-0">
-                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-5 rounded-2xl btn-zenith text-white font-black uppercase tracking-widest text-[10px] md:text-[11px] hover:scale-105 transition">Trở Thành VIP</button>
+                <div class="w-full md:w-1/3 relative z-10 mt-4 md:mt-0">
+                    <button onclick="openAuthModal('register')" class="w-full py-4 md:py-6 rounded-2xl md:rounded-3xl btn-zenith text-white font-black uppercase tracking-widest text-[10px] md:text-[11px] shadow-[0_0_50px_rgba(255,111,97,0.5)] hover:scale-105 transition animate-glow">Trở Thành VIP Member</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-[#010102] pt-16 md:pt-24 pb-8 md:pb-12 border-t border-white/5 relative z-10">
+    <footer class="bg-[#010103] pt-16 md:pt-32 pb-8 md:pb-16 border-t border-white/5 relative z-10 mt-10">
         <div class="max-w-7xl mx-auto px-4 text-center md:text-left">
-            <div class="grid md:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-16">
+            <div class="grid md:grid-cols-4 gap-12 md:gap-16 mb-12 md:mb-20">
                 <div class="md:col-span-1 flex flex-col items-center md:items-start">
                     <div class="flex items-center gap-3 mb-4 md:mb-6">
-                        <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-[#FF6F61] to-[#FF8E53] rounded-xl flex items-center justify-center text-white"><i class="fas fa-atom text-sm md:text-lg"></i></div>
-                        <span class="text-lg md:text-xl font-black text-white tracking-widest uppercase">GALAXY ALPHA</span>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#FF6F61] to-[#FF8E53] rounded-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(255,111,97,0.3)]"><i class="fas fa-atom text-lg md:text-xl"></i></div>
+                        <span class="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">GALAXY ALPHA</span>
                     </div>
-                    <p class="text-[#00e5ff] text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-2 font-mono">Smart Money, Real Data.</p>
+                    <p class="text-[#00f0ff] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-3 md:mb-4 font-mono">Smart Money, Real Data.</p>
+                    <p class="text-gray-500 text-[10px] md:text-[11px] leading-relaxed uppercase tracking-[0.1em] font-light">Hệ sinh thái phân tích dữ liệu chuyên nghiệp dành cho Trader Việt Nam.</p>
                 </div>
                 
                 <div class="flex flex-col items-center md:items-start">
-                    <h4 class="text-white font-black mb-4 md:mb-6 uppercase text-[10px] md:text-[11px] tracking-[0.3em]">Hệ Thống</h4>
-                    <ul class="space-y-3 text-gray-500 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.1em]">
+                    <h4 class="text-white font-black mb-4 md:mb-8 uppercase text-[10px] md:text-[11px] tracking-[0.3em] text-[#FF6F61]">Hệ Thống</h4>
+                    <ul class="space-y-3 md:space-y-4 text-gray-500 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.1em]">
                         <li><button onclick="switchView('home-view')" class="hover:text-white transition">Trang Chủ</button></li>
                         <li><button onclick="switchView('about-view')" class="hover:text-white transition">Giới Thiệu</button></li>
                         <li><button onclick="switchView('tools-view')" class="hover:text-white transition">Công Cụ</button></li>
@@ -482,22 +514,24 @@
                 
                 <div class="md:col-span-2 grid md:grid-cols-2 gap-8 md:gap-10">
                     <div class="flex flex-col items-center md:items-start">
-                        <h4 class="text-white font-black mb-4 md:mb-6 uppercase text-[10px] md:text-[11px] tracking-[0.3em]">Hỗ Trợ 24/7</h4>
-                        <p class="text-gray-400 text-[10px] md:text-xs font-mono mb-2">Hotline: 077.84.66662</p>
+                        <h4 class="text-white font-black mb-4 md:mb-8 uppercase text-[10px] md:text-[11px] tracking-[0.3em] text-[#FF6F61]"><i class="fas fa-headset mr-2"></i> Hỗ Trợ 24/7</h4>
+                        <p class="text-gray-400 text-[10px] md:text-xs font-mono mb-2 md:mb-3">Hotline: 077.84.66662</p>
                         <p class="text-gray-400 text-[10px] md:text-xs font-mono">Email: contact@galaxyalpha.vn</p>
                     </div>
                     <div class="flex flex-col items-center md:items-start">
-                        <h4 class="text-white font-black mb-4 md:mb-6 uppercase text-[10px] md:text-[11px] tracking-[0.3em]">Mạng Xã Hội</h4>
-                        <div class="flex gap-3">
-                            <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" target="_blank" class="w-8 h-8 md:w-10 md:h-10 bg-white/5 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-yellow-600 transition hover:-translate-y-1"><i class="fas fa-crown text-xs md:text-base"></i></a>
-                            <a href="https://zalo.me/g/hkxpg4rvxpld1oec2u0p" target="_blank" class="w-8 h-8 md:w-10 md:h-10 bg-white/5 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition hover:-translate-y-1"><i class="fas fa-users text-xs md:text-base"></i></a>
-                            <a href="#" target="_blank" class="w-8 h-8 md:w-10 md:h-10 bg-white/5 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-600 transition hover:-translate-y-1"><i class="fab fa-youtube text-xs md:text-base"></i></a>
-                        </div>
+                        <h4 class="text-white font-black mb-4 md:mb-8 uppercase text-[10px] md:text-[11px] tracking-[0.3em] text-[#FF6F61]"><i class="fas fa-map-marker-alt mr-2"></i> Trụ Sở</h4>
+                        <p class="text-gray-400 text-[10px] md:text-xs font-light leading-relaxed max-w-[200px] text-center md:text-left">Trung tâm tài chính - TP. Hồ Chí Minh, Việt Nam.</p>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/5 pt-6 md:pt-10 text-center">
-                <p class="text-gray-700 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] md:tracking-[0.5em]">© 2026 GALAXY ALPHA. TRADING ECOSYSTEM.</p>
+            
+            <div class="border-t border-white/5 pt-8 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
+                <div class="flex gap-4">
+                    <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" target="_blank" class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-black hover:bg-yellow-500 hover:border-yellow-500 transition hover:-translate-y-1"><i class="fas fa-crown text-sm md:text-lg"></i></a>
+                    <a href="https://zalo.me/g/hkxpg4rvxpld1oec2u0p" target="_blank" class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition hover:-translate-y-1"><i class="fas fa-users text-sm md:text-lg"></i></a>
+                    <a href="#" target="_blank" class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-600 hover:border-red-500 transition hover:-translate-y-1"><i class="fab fa-youtube text-sm md:text-lg"></i></a>
+                </div>
+                <p class="text-gray-700 text-[8px] md:text-[10px] font-black uppercase tracking-[0.5em]">© 2026 GALAXY ALPHA. PRESTIGE ECOSYSTEM.</p>
             </div>
         </div>
     </footer>
@@ -507,14 +541,14 @@
             <span class="text-white font-black uppercase tracking-widest text-sm">GALAXY ALPHA</span>
             <span class="text-[#FF6F61] text-[9px] uppercase tracking-[0.2em] font-bold mt-1">Đổi Vị Thế - Làm Chủ Cuộc Chơi</span>
         </div>
-        <button onclick="openAuthModal('register')" class="w-full md:w-auto btn-zenith text-white px-6 md:px-10 py-3 md:py-4 rounded-xl font-black uppercase tracking-widest text-[10px] md:text-xs animate-glow shadow-[0_0_20px_rgba(255,111,97,0.4)]">
+        <button onclick="openAuthModal('register')" class="w-full md:w-auto btn-zenith text-white px-6 md:px-10 py-3 md:py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] animate-glow shadow-[0_0_30px_rgba(255,111,97,0.4)]">
             ĐĂNG KÝ TƯ VẤN MIỄN PHÍ
         </button>
     </div>
 
     <div id="authModal" class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeAuthModal()"></div>
-        <div class="relative bg-[#0a0d14] border border-white/10 rounded-[30px] md:rounded-[40px] p-8 md:p-12 max-w-md w-[90%] md:w-full max-h-[90vh] overflow-y-auto shadow-[0_0_80px_rgba(255,111,97,0.15)] transform scale-95 transition-transform duration-500" id="authBox">
+        <div class="relative bg-[#0a0d14] border border-white/10 rounded-[40px] md:rounded-[50px] p-8 md:p-14 max-w-md w-[90%] md:w-full max-h-[90vh] overflow-y-auto shadow-[0_0_100px_rgba(255,111,97,0.15)] transform scale-95 transition-transform duration-500" id="authBox">
             <button onclick="closeAuthModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300"><i class="fas fa-times text-xl md:text-2xl"></i></button>
             
             <div class="text-center mb-6 md:mb-8 mt-2">
@@ -527,18 +561,19 @@
             </div>
 
             <form id="form-register" class="space-y-3 md:space-y-4" onsubmit="handleAuthSubmit(event, 'register')">
-                <input type="text" placeholder="Họ và tên của sếp" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
-                <input type="tel" placeholder="Số điện thoại / Zalo" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
-                <input type="email" placeholder="Email nhận thông tin" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="reg-name" type="text" placeholder="Họ và tên của sếp" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="reg-zalo" type="tel" placeholder="Số điện thoại / Zalo" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="reg-email" type="email" placeholder="Email nhận thông tin" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="reg-pass" type="password" placeholder="Tạo mật khẩu (Ít nhất 6 ký tự)" class="input-vip text-xs md:text-sm p-3 md:p-4" required minlength="6">
                 <button type="submit" id="btn-register" class="w-full btn-zenith text-white font-black py-4 md:py-5 rounded-xl md:rounded-2xl shadow-2xl uppercase tracking-widest text-[9px] md:text-[10px] mt-2 md:mt-4 flex justify-center items-center gap-2">
                     <span>Nhận Tư Vấn Lộ Trình</span>
                 </button>
-                <p class="text-center text-[8px] md:text-[9px] text-gray-600 mt-4 md:mt-6 uppercase tracking-widest font-bold"><i class="fas fa-shield-alt mr-1 text-green-500"></i> Bảo mật thông tin quân đội</p>
+                <p class="text-center text-[8px] md:text-[9px] text-gray-600 mt-4 md:mt-6 uppercase tracking-widest font-bold"><i class="fas fa-shield-alt mr-1 text-green-500"></i> Bảo mật thông tin chuẩn quân sự</p>
             </form>
 
             <form id="form-login" class="space-y-3 md:space-y-4 hidden" onsubmit="handleAuthSubmit(event, 'login')">
-                <input type="email" placeholder="Email đã đăng ký" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
-                <input type="password" placeholder="Mật khẩu Terminal" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="log-email" type="email" placeholder="Email đã đăng ký" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
+                <input id="log-pass" type="password" placeholder="Mật khẩu Terminal" class="input-vip text-xs md:text-sm p-3 md:p-4" required>
                 <div class="text-right"><a href="#" class="text-[9px] md:text-[10px] text-[#FF6F61] hover:text-white transition uppercase font-bold tracking-widest">Quên mật khẩu?</a></div>
                 <button type="submit" id="btn-login" class="w-full bg-white/10 border border-white/20 hover:bg-white hover:text-black text-white font-black py-4 md:py-5 rounded-xl md:rounded-2xl shadow-2xl uppercase tracking-widest text-[9px] md:text-[10px] mt-2 md:mt-4 flex justify-center items-center gap-2 transition-all">
                     <span>Truy Cập Terminal</span>
@@ -548,7 +583,7 @@
     </div>
 
     <script>
-        // Preloader & Countup
+        // 1. Preloader & Countup
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const preloader = document.getElementById('preloader');
@@ -561,7 +596,7 @@
             }, 1000); 
         });
 
-        // Counter Logic
+        // Smart Counter
         let countersInitialized = false;
         function initCounters() {
             if (countersInitialized) return;
@@ -586,7 +621,7 @@
             countersInitialized = true;
         }
 
-        // Custom Cursor (Desktop Only)
+        // 2. Custom Cursor (Desktop Only)
         const cursor = document.getElementById('cursor-glow');
         document.addEventListener('mousemove', (e) => {
             requestAnimationFrame(() => {
@@ -595,12 +630,32 @@
             });
         });
 
-        // Mobile Menu Toggle
+        // 3. 3D Tilt Card Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -8; 
+                const rotateY = ((x - centerX) / centerX) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transition = 'none'; 
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; 
+            });
+        });
+
+        // 4. Mobile Menu
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('open');
         }
 
-        // SPA Navigation
+        // 5. SPA Navigation
         function switchView(viewId) {
             const views = ['home-view', 'about-view', 'tools-view', 'academy-view'];
             views.forEach(id => {
@@ -621,7 +676,7 @@
         function showTools() { switchView('tools-view'); }
         function showAcademy() { switchView('academy-view'); }
 
-        // Popup & Tabs
+        // 6. Popup & Tabs
         function openAuthModal(tab = 'register'){ 
             document.getElementById('authModal').classList.remove('opacity-0','pointer-events-none'); 
             document.getElementById('authBox').classList.remove('scale-95');
@@ -649,32 +704,7 @@
             }
         }
 
-        // Submit Form Animation
-        function handleAuthSubmit(event, type) {
-            event.preventDefault();
-            const btn = document.getElementById(type === 'register' ? 'btn-register' : 'btn-login');
-            const originalHTML = btn.innerHTML;
-            const originalBg = btn.style.background;
-            
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-sm md:text-lg"></i> ĐANG MÃ HÓA...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check-circle text-sm md:text-lg text-white"></i> KẾT NỐI THÀNH CÔNG';
-                btn.style.background = '#00ff88';
-                
-                setTimeout(() => {
-                    closeAuthModal();
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
-                    btn.style.background = originalBg;
-                    if(type === 'register') alert("Đã mã hóa thông tin. Chuyên gia Galaxy Alpha sẽ liên hệ sếp ngay!");
-                    else alert("Terminal truy cập thành công!");
-                }, 1200);
-            }, 1500); 
-        }
-
-        // Scroll Reveal & Sticky CTA
+        // 7. Scroll Reveal & Sticky CTA
         function triggerReveal() {
             const reveals = document.querySelectorAll('.reveal');
             const windowHeight = window.innerHeight;
@@ -695,6 +725,94 @@
             if (window.scrollY > 400) stickyBar.classList.add('show');
             else stickyBar.classList.remove('show');
         });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // SẾP ĐIỀN CONFIG CỦA FIREBASE VÀO ĐÂY SAU NHÉ
+        const firebaseConfig = {
+  apiKey: "AIzaSyArg95Ub_bK1rbVGO1udrMMpuWZJJ6b0a8",
+  authDomain: "galaxyalpha-45df5.firebaseapp.com",
+  projectId: "galaxyalpha-45df5",
+  storageBucket: "galaxyalpha-45df5.firebasestorage.app",
+  messagingSenderId: "640919053590",
+  appId: "1:640919053590:web:53189c6d45d7559b0e1c37"
+};
+
+        let auth, db;
+        const isFirebaseConfigured = !firebaseConfig.apiKey.includes("xxxx");
+        
+        if (isFirebaseConfigured) {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        }
+
+        window.handleAuthSubmit = async function(event, type) {
+            event.preventDefault();
+            const btn = document.getElementById(type === 'register' ? 'btn-register' : 'btn-login');
+            const originalHTML = btn.innerHTML;
+            const originalBg = btn.style.background;
+            
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-sm md:text-lg"></i> ĐANG MÃ HÓA...';
+            btn.disabled = true;
+
+            if (!isFirebaseConfigured) {
+                // CHẠY UI FAKE NẾU CHƯA CÓ FIREBASE (Cho sếp test giao diện)
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check-circle text-sm md:text-lg text-white"></i> KẾT NỐI THÀNH CÔNG';
+                    btn.style.background = '#00ff88';
+                    setTimeout(() => {
+                        closeAuthModal();
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+                        btn.style.background = originalBg;
+                        if(type === 'register') alert("Chế độ Demo: Đã lưu thông tin. (Vui lòng gắn cấu hình Firebase để lưu dữ liệu thật)");
+                        else alert("Chế độ Demo: Đăng nhập thành công!");
+                    }, 1200);
+                }, 1500);
+                return;
+            }
+
+            // CHẠY FIREBASE THẬT KHI ĐÃ NHẬP CONFIG
+            try {
+                if (type === 'register') {
+                    const name = document.getElementById('reg-name').value;
+                    const zalo = document.getElementById('reg-zalo').value;
+                    const email = document.getElementById('reg-email').value;
+                    const pass = document.getElementById('reg-pass').value;
+
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                    await setDoc(doc(db, "users", userCredential.user.uid), {
+                        name: name, zalo: zalo, email: email, createdAt: new Date().toISOString()
+                    });
+
+                    btn.innerHTML = '<i class="fas fa-check-circle text-sm md:text-lg text-white"></i> ĐĂNG KÝ THÀNH CÔNG';
+                    btn.style.background = '#00ff88';
+                    setTimeout(() => { closeAuthModal(); alert("🎉 Đăng ký thành công! Sếp đã có thể đăng nhập."); }, 1000);
+
+                } else if (type === 'login') {
+                    const email = document.getElementById('log-email').value;
+                    const pass = document.getElementById('log-pass').value;
+                    await signInWithEmailAndPassword(auth, email, pass);
+
+                    btn.innerHTML = '<i class="fas fa-check-circle text-sm md:text-lg text-white"></i> KẾT NỐI THÀNH CÔNG';
+                    btn.style.background = '#00ff88';
+                    setTimeout(() => { closeAuthModal(); alert("🦅 Terminal truy cập thành công! Chào mừng sếp."); }, 1000);
+                }
+            } catch (error) {
+                console.error(error);
+                let msg = "Lỗi hệ thống!";
+                if (error.code === 'auth/email-already-in-use') msg = "Email này đã được sử dụng!";
+                if (error.code === 'auth/invalid-credential') msg = "Sai email hoặc mật khẩu!";
+                alert("❌ " + msg);
+            } finally {
+                setTimeout(() => { btn.innerHTML = originalHTML; btn.disabled = false; btn.style.background = originalBg; }, 1000);
+            }
+        };
     </script>
 </body>
 </html>
