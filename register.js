@@ -10,6 +10,10 @@ import {
 import { submitToSheet } from "./sheet-submit.js";
 
 export async function registerUser(name, phone, email, password) {
+  if (!name || !phone || !email || !password) {
+    throw new Error("Vui lòng nhập đầy đủ họ tên, số điện thoại, email và mật khẩu.");
+  }
+
   // 1) Tạo tài khoản Firebase Auth
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const uid = userCredential.user.uid;
@@ -25,8 +29,9 @@ export async function registerUser(name, phone, email, password) {
     updatedAt: serverTimestamp()
   });
 
-  // 3) Đẩy data sang Google Sheet
+  // 3) Đẩy data qua Google Sheet
   try {
+    console.log("Data gui sang sheet:", { name, phone, email });
     const sheetResult = await submitToSheet({ name, phone, email });
     console.log("Sheet result:", sheetResult);
   } catch (error) {
