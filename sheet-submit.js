@@ -20,7 +20,7 @@ export async function submitToSheet({ name, phone, email }) {
   try {
     return JSON.parse(text);
   } catch (error) {
-    console.error("Sheet response parse error:", error, text);
+    console.error("Sheet parse error:", error, text);
     return {
       success: false,
       error: "Google Sheet trả về dữ liệu không hợp lệ."
