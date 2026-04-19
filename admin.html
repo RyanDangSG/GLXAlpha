@@ -4,14 +4,521 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin | Logan Crypto</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: #101729;
+      --border: rgba(255,255,255,.08);
+      --text: #fff;
+      --muted: #94a3b8;
+      --primary: #38dfff;
+      --primary2: #33a9ff;
+      --danger: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0a0f1c 0%, #070b14 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .topbar, .card {
+      background: rgba(15,23,42,.82);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    input, select, textarea, button {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 12px 14px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    input, select, textarea {
+      background: #111827;
+      color: white;
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .btn {
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
+      color: #02131a;
+      border: none;
+    }
+    .btn-soft {
+      background: #111827;
+      color: white;
+    }
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+      border: none;
+    }
+    .muted { color: var(--muted); line-height: 1.6; }
+    .title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #7ddfff;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 420px;
+      overflow: auto;
+    }
+    .item {
+      background: #0e1526;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+    }
+    .item.active {
+      border-color: rgba(56,223,255,.45);
+      box-shadow: 0 0 0 1px rgba(56,223,255,.18) inset;
+    }
+    .item-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .msg {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+    }
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(56,223,255,.12);
+      color: #8feaff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    @media (max-width: 980px) {
+      .grid, .row, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body style="font-family:Arial;background:#05070b;color:white;padding:30px;">
-  <h1>Khu Admin</h1>
-  <p>Chỉ admin mới vào được trang này.</p>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <div class="title">Admin Logan Crypto</div>
+        <div class="muted">Tạo course và lesson trực tiếp vào Firestore. Chỉ admin mới vào được.</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-soft" onclick="window.location.href='./dashboard.html'">Về Dashboard</button>
+        <button id="logoutBtn" class="btn-danger">Đăng xuất</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="subtitle">Trạng thái đăng nhập</div>
+      <div id="adminInfo" class="muted">Đang kiểm tra quyền admin...</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="subtitle">Tạo khóa học</div>
+        <div class="title">Course</div>
+
+        <div class="stack">
+          <input id="courseId" placeholder="course-id, ví dụ: course-cung-cau" />
+          <input id="courseTitle" placeholder="Tên khóa học" />
+          <input id="courseSlug" placeholder="slug, ví dụ: giao-dich-theo-cung-cau" />
+          <input id="courseThumbnail" placeholder="Thumbnail URL hoặc tên ảnh, ví dụ: Bia logancrpto.jpg" />
+
+          <div class="row">
+            <select id="courseRole">
+              <option value="free">free</option>
+              <option value="medium">medium</option>
+              <option value="pro">pro</option>
+              <option value="admin">admin</option>
+            </select>
+            <input id="courseOrder" type="number" placeholder="Thứ tự" value="1" />
+          </div>
+
+          <div class="row">
+            <select id="coursePublished">
+              <option value="true">published = true</option>
+              <option value="false">published = false</option>
+            </select>
+            <button id="saveCourseBtn" class="btn">Lưu khóa học</button>
+          </div>
+        </div>
+
+        <div id="courseMsg" class="msg"></div>
+      </div>
+
+      <div class="card">
+        <div class="subtitle">Danh sách khóa học</div>
+        <div class="title">Courses hiện có</div>
+        <div id="courseList" class="list"></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="subtitle">Tạo bài học</div>
+        <div class="title">Lesson</div>
+
+        <div class="muted" style="margin-bottom:12px;">
+          Khóa học đang chọn:
+          <span id="selectedCourseText" class="pill">chưa chọn</span>
+        </div>
+
+        <div class="stack">
+          <input id="lessonId" placeholder="lesson-id, ví dụ: lesson-01" />
+          <input id="lessonTitle" placeholder="Tên bài học" />
+          <input id="lessonSummary" placeholder="Mô tả ngắn" />
+
+          <div class="row">
+            <select id="lessonRole">
+              <option value="free">free</option>
+              <option value="medium">medium</option>
+              <option value="pro">pro</option>
+              <option value="admin">admin</option>
+            </select>
+            <input id="lessonOrder" type="number" placeholder="Thứ tự" value="1" />
+          </div>
+
+          <div class="row">
+            <select id="lessonPreview">
+              <option value="false">isPreview = false</option>
+              <option value="true">isPreview = true</option>
+            </select>
+            <select id="lessonPublished">
+              <option value="true">published = true</option>
+              <option value="false">published = false</option>
+            </select>
+          </div>
+
+          <input id="lessonThumbnail" placeholder="Thumbnail URL (có thể để trống)" />
+          <input id="lessonVimeo" placeholder="Vimeo Embed URL, ví dụ: https://player.vimeo.com/video/123456789?h=abc123" />
+          <textarea id="lessonContent" placeholder="contentHtml, ví dụ: <p>Ghi chú bài học...</p>"></textarea>
+
+          <button id="saveLessonBtn" class="btn">Lưu bài học</button>
+        </div>
+
+        <div id="lessonMsg" class="msg"></div>
+      </div>
+
+      <div class="card">
+        <div class="subtitle">Danh sách bài học</div>
+        <div class="title">Lessons của khóa đang chọn</div>
+        <div id="lessonList" class="list"></div>
+      </div>
+    </div>
+  </div>
 
   <script type="module">
-    import { requireRole } from "./auth-guard.js";
-    requireRole(["admin"]);
+    import { auth, db } from "./firebase.js";
+    import { logoutUser } from "./login.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      doc,
+      getDoc,
+      setDoc,
+      collection,
+      getDocs,
+      query,
+      orderBy,
+      where
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const adminInfo = document.getElementById("adminInfo");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    const courseId = document.getElementById("courseId");
+    const courseTitle = document.getElementById("courseTitle");
+    const courseSlug = document.getElementById("courseSlug");
+    const courseThumbnail = document.getElementById("courseThumbnail");
+    const courseRole = document.getElementById("courseRole");
+    const courseOrder = document.getElementById("courseOrder");
+    const coursePublished = document.getElementById("coursePublished");
+    const saveCourseBtn = document.getElementById("saveCourseBtn");
+    const courseMsg = document.getElementById("courseMsg");
+    const courseList = document.getElementById("courseList");
+
+    const selectedCourseText = document.getElementById("selectedCourseText");
+    const lessonId = document.getElementById("lessonId");
+    const lessonTitle = document.getElementById("lessonTitle");
+    const lessonSummary = document.getElementById("lessonSummary");
+    const lessonRole = document.getElementById("lessonRole");
+    const lessonOrder = document.getElementById("lessonOrder");
+    const lessonPreview = document.getElementById("lessonPreview");
+    const lessonPublished = document.getElementById("lessonPublished");
+    const lessonThumbnail = document.getElementById("lessonThumbnail");
+    const lessonVimeo = document.getElementById("lessonVimeo");
+    const lessonContent = document.getElementById("lessonContent");
+    const saveLessonBtn = document.getElementById("saveLessonBtn");
+    const lessonMsg = document.getElementById("lessonMsg");
+    const lessonList = document.getElementById("lessonList");
+
+    let currentUserProfile = null;
+    let selectedCourseId = null;
+
+    function boolValue(v) {
+      return v === "true";
+    }
+
+    function slugify(text) {
+      return (text || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    async function requireAdmin(user) {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        alert("Không tìm thấy hồ sơ người dùng.");
+        window.location.href = "./login.html";
+        return false;
+      }
+
+      currentUserProfile = userSnap.data();
+
+      if (currentUserProfile.role !== "admin") {
+        alert("Bạn không có quyền vào trang admin.");
+        window.location.href = "./dashboard.html";
+        return false;
+      }
+
+      adminInfo.textContent = `Đã đăng nhập admin: ${currentUserProfile.email || ""}`;
+      return true;
+    }
+
+    async function loadCourses() {
+      courseList.innerHTML = `<div class="muted">Đang tải courses...</div>`;
+
+      const q = query(collection(db, "courses"), where("published", "in", [true, false]), orderBy("order", "asc"));
+      const snap = await getDocs(q);
+
+      courseList.innerHTML = "";
+
+      if (snap.empty) {
+        courseList.innerHTML = `<div class="muted">Chưa có khóa học nào.</div>`;
+        return;
+      }
+
+      snap.forEach((docSnap) => {
+        const data = docSnap.data();
+        const item = document.createElement("div");
+        item.className = "item" + (selectedCourseId === docSnap.id ? " active" : "");
+        item.innerHTML = `
+          <div class="item-title">${data.title || docSnap.id}</div>
+          <div class="muted" style="font-size:13px;">
+            ID: ${docSnap.id} • role: ${data.requiredRole || "free"} • order: ${data.order ?? 0}
+          </div>
+        `;
+        item.addEventListener("click", async () => {
+          selectedCourseId = docSnap.id;
+          selectedCourseText.textContent = selectedCourseId;
+          await loadCourses();
+          await loadLessons();
+        });
+        courseList.appendChild(item);
+      });
+    }
+
+    async function loadLessons() {
+      if (!selectedCourseId) {
+        lessonList.innerHTML = `<div class="muted">Hãy chọn một course trước.</div>`;
+        return;
+      }
+
+      lessonList.innerHTML = `<div class="muted">Đang tải lessons...</div>`;
+
+      const lessonsRef = collection(db, "courses", selectedCourseId, "lessons");
+      const q = query(lessonsRef, where("published", "in", [true, false]), orderBy("order", "asc"));
+      const snap = await getDocs(q);
+
+      lessonList.innerHTML = "";
+
+      if (snap.empty) {
+        lessonList.innerHTML = `<div class="muted">Khóa này chưa có lesson nào.</div>`;
+        return;
+      }
+
+      snap.forEach((docSnap) => {
+        const data = docSnap.data();
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div class="item-title">${data.title || docSnap.id}</div>
+          <div class="muted" style="font-size:13px;">
+            ID: ${docSnap.id} • role: ${data.requiredRole || "free"} • preview: ${data.isPreview ? "true" : "false"} • order: ${data.order ?? 0}
+          </div>
+        `;
+        lessonList.appendChild(item);
+      });
+    }
+
+    saveCourseBtn.addEventListener("click", async () => {
+      try {
+        const id = courseId.value.trim();
+        const title = courseTitle.value.trim();
+        const slug = (courseSlug.value.trim() || slugify(title));
+        const thumbnail = courseThumbnail.value.trim();
+        const requiredRole = courseRole.value;
+        const order = Number(courseOrder.value || 0);
+        const published = boolValue(coursePublished.value);
+
+        if (!id) {
+          courseMsg.textContent = "Bạn chưa nhập course ID.";
+          return;
+        }
+        if (!title) {
+          courseMsg.textContent = "Bạn chưa nhập tên khóa học.";
+          return;
+        }
+
+        await setDoc(doc(db, "courses", id), {
+          title,
+          slug,
+          thumbnail,
+          published,
+          requiredRole,
+          order
+        }, { merge: true });
+
+        courseMsg.textContent = `Đã lưu khóa học: ${id}`;
+        selectedCourseId = id;
+        selectedCourseText.textContent = id;
+        await loadCourses();
+        await loadLessons();
+      } catch (error) {
+        console.error(error);
+        courseMsg.textContent = "Lỗi lưu khóa học: " + error.message;
+      }
+    });
+
+    saveLessonBtn.addEventListener("click", async () => {
+      try {
+        if (!selectedCourseId) {
+          lessonMsg.textContent = "Bạn cần chọn một course trước khi tạo lesson.";
+          return;
+        }
+
+        const id = lessonId.value.trim();
+        const title = lessonTitle.value.trim();
+        const summary = lessonSummary.value.trim();
+        const requiredRole = lessonRole.value;
+        const order = Number(lessonOrder.value || 0);
+        const isPreview = boolValue(lessonPreview.value);
+        const published = boolValue(lessonPublished.value);
+        const thumbnail = lessonThumbnail.value.trim();
+        const vimeoEmbedUrl = lessonVimeo.value.trim();
+        const contentHtml = lessonContent.value.trim();
+
+        if (!id) {
+          lessonMsg.textContent = "Bạn chưa nhập lesson ID.";
+          return;
+        }
+        if (!title) {
+          lessonMsg.textContent = "Bạn chưa nhập tên bài học.";
+          return;
+        }
+
+        await setDoc(doc(db, "courses", selectedCourseId, "lessons", id), {
+          title,
+          summary,
+          published,
+          isPreview,
+          requiredRole,
+          order,
+          thumbnail,
+          vimeoEmbedUrl,
+          contentHtml
+        }, { merge: true });
+
+        lessonMsg.textContent = `Đã lưu lesson: ${id} trong ${selectedCourseId}`;
+        await loadLessons();
+      } catch (error) {
+        console.error(error);
+        lessonMsg.textContent = "Lỗi lưu lesson: " + error.message;
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await logoutUser();
+        window.location.href = "./login.html";
+      } catch (error) {
+        console.error(error);
+        alert("Không thể đăng xuất.");
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "./login.html";
+        return;
+      }
+
+      const ok = await requireAdmin(user);
+      if (!ok) return;
+
+      await loadCourses();
+      await loadLessons();
+    });
   </script>
 </body>
 </html>
