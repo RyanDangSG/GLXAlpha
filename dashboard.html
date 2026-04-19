@@ -313,10 +313,7 @@
       doc,
       getDoc,
       collection,
-      getDocs,
-      query,
-      orderBy,
-      where
+      getDocs
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const roleBadge = document.getElementById("roleBadge");
@@ -501,64 +498,87 @@
     }
 
     async function loadCourses(profile) {
-  try {
-    const coursesRef = collection(db, "courses");
-    const snap = await getDocs(coursesRef);
+      try {
+        const coursesRef = collection(db, "courses");
+        const snap = await getDocs(coursesRef);
 
-    currentCourses = [];
-    snap.forEach((docSnap) => {
-      const data = docSnap.data();
-
-      if (data.published === true) {
-        currentCourses.push({
-          id: docSnap.id,
-          ...data
+        currentCourses = [];
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data.published === true) {
+            currentCourses.push({
+              id: docSnap.id,
+              ...data
+            });
+          }
         });
+
+        currentCourses.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        renderCourseCards(profile, currentCourses);
+
+        if (currentCourses[0]) {
+          currentCourse = currentCourses[0];
+          metaCourse.textContent = currentCourses[0].title || "Chưa chọn";
+          await loadLessons(profile, currentCourses[0].id);
+        } else {
+          showEmptyState();
+        }
+      } catch (error) {
+        console.error("Lỗi loadCourses:", error);
+        alert("Lỗi khi tải dashboard: " + error.message);
       }
-    });
-
-    currentCourses.sort((a, b) => (a.order || 0) - (b.order || 0));
-
-    renderCourseCards(profile, currentCourses);
-
-    if (currentCourses[0]) {
-      currentCourse = currentCourses[0];
-      metaCourse.textContent = currentCourses[0].title || "Chưa chọn";
-      await loadLessons(profile, currentCourses[0].id);
-    } else {
-      showEmptyState();
     }
-  } catch (error) {
-    console.error("Lỗi loadCourses:", error);
-    alert("Lỗi khi tải dashboard.");
-  }
-}
 
     async function loadLessons(profile, courseId) {
-  try {
-    const lessonsRef = collection(db, "courses", courseId, "lessons");
-    const snap = await getDocs(lessonsRef);
+      try {
+        const lessonsRef = collection(db, "courses", courseId, "lessons");
+        const snap = await getDocs(lessonsRef);
 
-    currentLessons = [];
-    snap.forEach((docSnap) => {
-      const data = docSnap.data();
-
-      if (data.published === true) {
-        currentLessons.push({
-          id: docSnap.id,
-          ...data
+        currentLessons = [];
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data.published === true) {
+            currentLessons.push({
+              id: docSnap.id,
+              ...data
+            });
+          }
         });
+
+        currentLessons.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        renderLessonList(profile, currentLessons);
+      } catch (error) {
+        console.error("Lỗi loadLessons:", error);
+        lessonList.innerHTML = `<div class="muted">Không tải được bài học.</div>`;
+      }
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "./login.html";
+        return;
+      }
+
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+          alert("Không tìm thấy hồ sơ người dùng.");
+          window.location.href = "./login.html";
+          return;
+        }
+
+        currentProfile = userSnap.data();
+        renderRoleUI(currentProfile);
+        await loadCourses(currentProfile);
+      } catch (error) {
+        console.error("Lỗi dashboard chi tiết:", error);
+        alert("Lỗi khi tải dashboard: " + error.message);
       }
     });
-
-    currentLessons.sort((a, b) => (a.order || 0) - (b.order || 0));
-
-    renderLessonList(profile, currentLessons);
-  } catch (error) {
-  console.error("Lỗi dashboard chi tiết:", error);
-  alert("Lỗi khi tải dashboard: " + error.message);
-}
-});
 
     logoutBtn.addEventListener("click", async () => {
       try {
