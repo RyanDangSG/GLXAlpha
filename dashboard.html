@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Logan Crypto</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #05070b;
+      color: white;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #0b1020;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #19e5ff, #41bdf6);
+      color: #02131a;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+    }
+    .btn-soft {
+      background: #111727;
+      color: white;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+    }
+    .role-badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(25,229,255,.12);
+      color: #74ecff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .lesson-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .muted {
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+    .locked {
+      opacity: 0.78;
+      border: 1px dashed rgba(255,255,255,.15);
+    }
+    .hidden {
+      display: none;
+    }
+    #loading {
+      color: #cbd5e1;
+      padding: 24px 0;
+    }
+    .admin-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1 style="margin:0 0 8px 0;">Dashboard Logan Crypto</h1>
+        <div class="muted">Tất cả người dùng đều vào đây. Nội dung sẽ hiển thị theo role.</div>
+      </div>
+      <button id="logoutBtn" class="btn-soft">Đăng xuất</button>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;">
+        <div>
+          <div id="welcomeText" style="font-size:20px;font-weight:700;">Xin chào</div>
+          <div id="userEmail" class="muted"></div>
+        </div>
+        <div id="roleBadge" class="role-badge">free</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0;">Khu vực của bạn</h2>
+      <div id="roleDescription" class="muted"></div>
+
+      <div id="upgradeBox" class="admin-tools" style="margin-top:16px;">
+        <button class="btn">Nâng cấp Medium</button>
+        <button class="btn-soft">Nâng cấp Pro</button>
+      </div>
+
+      <div id="adminBox" class="hidden" style="margin-top:16px;">
+        <div class="admin-tools">
+          <button class="btn" onclick="window.location.href='./admin.html'">Vào trang quản trị</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0;">Danh sách bài học</h2>
+      <div class="muted" style="margin-bottom:16px;">
+        Free vẫn xem được dashboard, nhưng bài medium và pro sẽ bị khóa nếu chưa đủ quyền.
+      </div>
+
+      <div id="loading">Đang tải bài học...</div>
+      <div id="lessonList" class="grid"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { logoutUser } from "./login.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      doc,
+      getDoc,
+      collection,
+      getDocs,
+      query,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const welcomeText = document.getElementById("welcomeText");
+    const userEmail = document.getElementById("userEmail");
+    const roleBadge = document.getElementById("roleBadge");
+    const roleDescription = document.getElementById("roleDescription");
+    const lessonList = document.getElementById("lessonList");
+    const loading = document.getElementById("loading");
+    const upgradeBox = document.getElementById("upgradeBox");
+    const adminBox = document.getElementById("adminBox");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    function canViewLesson(userRole, lesson) {
+      if (lesson.isPreview === true) return true;
+      if (lesson.requiredRole === "free") return true;
+      if (lesson.requiredRole === "medium") {
+        return ["medium", "pro", "admin"].includes(userRole);
+      }
+      if (lesson.requiredRole === "pro") {
+        return ["pro", "admin"].includes(userRole);
+      }
+      if (lesson.requiredRole === "admin") {
+        return ["admin"].includes(userRole);
+      }
+      return false;
+    }
+
+    function renderRoleUI(profile) {
+      const role = profile.role || "free";
+
+      roleBadge.textContent = role;
+      welcomeText.textContent = `Xin chào ${profile.name || "bạn"}`;
+      userEmail.textContent = profile.email || "";
+
+      if (role === "free") {
+        roleDescription.textContent = "Bạn đang ở tầng Free. Bạn vẫn ở trong hệ thống, vẫn xem được bài preview và phần giới thiệu, nhưng các bài Medium và Pro sẽ bị khóa.";
+        upgradeBox.classList.remove("hidden");
+        adminBox.classList.add("hidden");
+      } else if (role === "medium") {
+        roleDescription.textContent = "Bạn đang ở tầng Medium. Bạn xem được bài Free và Medium. Các bài Pro vẫn bị khóa.";
+        upgradeBox.classList.remove("hidden");
+        adminBox.classList.add("hidden");
+      } else if (role === "pro") {
+        roleDescription.textContent = "Bạn đang ở tầng Pro. Bạn xem được toàn bộ nội dung Free, Medium và Pro.";
+        upgradeBox.classList.add("hidden");
+        adminBox.classList.add("hidden");
+      } else if (role === "admin") {
+        roleDescription.textContent = "Bạn đang ở tầng Admin. Bạn xem được toàn bộ nội dung và có quyền quản trị.";
+        upgradeBox.classList.add("hidden");
+        adminBox.classList.remove("hidden");
+      } else {
+        roleDescription.textContent = "Không xác định role. Tạm xem như Free.";
+        upgradeBox.classList.remove("hidden");
+        adminBox.classList.add("hidden");
+      }
+    }
+
+    function renderLessons(profile, lessons) {
+      lessonList.innerHTML = "";
+
+      lessons.forEach((lesson) => {
+        const canView = canViewLesson(profile.role, lesson);
+
+        const item = document.createElement("div");
+        item.className = "card" + (canView ? "" : " locked");
+
+        item.innerHTML = `
+          <div class="lesson-title">${lesson.title || "Chưa có tiêu đề"}</div>
+          <div class="muted" style="margin-bottom:12px;">
+            ${lesson.summary || ""}
+          </div>
+          <div class="muted" style="margin-bottom:12px;">
+            Yêu cầu quyền: <b>${lesson.isPreview ? "preview" : (lesson.requiredRole || "free")}</b>
+          </div>
+          ${
+            canView
+              ? `<button class="btn">Xem bài</button>`
+              : `<button class="btn-soft">Bị khóa - cần nâng cấp</button>`
+          }
+        `;
+
+        lessonList.appendChild(item);
+      });
+
+      loading.classList.add("hidden");
+    }
+
+    async function loadLessons(profile) {
+      try {
+        const lessonsRef = collection(db, "courses", "course-test", "lessons");
+        const q = query(lessonsRef, orderBy("order", "asc"));
+        const snap = await getDocs(q);
+
+        const lessons = [];
+        snap.forEach((docSnap) => {
+          lessons.push({
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+        });
+
+        renderLessons(profile, lessons);
+      } catch (error) {
+        console.error(error);
+        loading.textContent = "Không tải được bài học. Hãy kiểm tra Firestore hoặc Rules.";
+      }
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "./login.html";
+        return;
+      }
+
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+          alert("Không tìm thấy hồ sơ người dùng.");
+          window.location.href = "./login.html";
+          return;
+        }
+
+        const profile = userSnap.data();
+        renderRoleUI(profile);
+        await loadLessons(profile);
+      } catch (error) {
+        console.error(error);
+        alert("Lỗi khi tải dashboard.");
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await logoutUser();
+        window.location.href = "./login.html";
+      } catch (error) {
+        console.error(error);
+        alert("Không thể đăng xuất.");
+      }
+    });
+  </script>
+</body>
+</html>
