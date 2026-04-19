@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập | Logan Crypto</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #05070b;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .box {
+      width: 100%;
+      max-width: 420px;
+      background: #0b1020;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 24px;
+    }
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      box-sizing: border-box;
+    }
+    input {
+      background: #111727;
+      color: white;
+    }
+    button {
+      background: linear-gradient(90deg, #19e5ff, #41bdf6);
+      color: #02131a;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+    a { color: #56dfff; }
+    .msg { margin-top: 12px; font-size: 14px; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Đăng nhập</h2>
+    <form id="loginForm">
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="password" type="password" placeholder="Mật khẩu" required />
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <div class="msg" id="loginMsg"></div>
+    <p class="msg">Chưa có tài khoản? <a href="./register.html">Đăng ký</a></p>
+  </div>
+
+  <script type="module">
+    import { loginUser } from "./login.js";
+    import { redirectByRole } from "./redirect-by-role.js";
+
+    const form = document.getElementById("loginForm");
+    const msg = document.getElementById("loginMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "Đang xử lý...";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const result = await loginUser(email, password);
+        msg.textContent = "Đăng nhập thành công. Đang chuyển trang...";
+        setTimeout(() => {
+          redirectByRole(result.profile);
+        }, 700);
+      } catch (error) {
+        console.error(error);
+        msg.textContent = "Lỗi: " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>

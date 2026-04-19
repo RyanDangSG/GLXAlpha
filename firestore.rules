@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function userRole() {
+      return userData().role;
+    }
+
+    function isAdmin() {
+      return signedIn() && userRole() == "admin";
+    }
+
+    function isProOrAdmin() {
+      return signedIn() &&
+        (userRole() == "pro" || userRole() == "admin");
+    }
+
+    function isMediumOrHigher() {
+      return signedIn() &&
+        (
+          userRole() == "medium" ||
+          userRole() == "pro" ||
+          userRole() == "admin"
+        );
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if isAdmin();
+    }
+
+    match /posts/{postId} {
+      allow read: if resource.data.published == true;
+      allow write: if isAdmin();
+    }
+
+    match /courses/{courseId} {
+      allow read: if resource.data.published == true &&
+        (
+          resource.data.requiredRole == "free" ||
+          (resource.data.requiredRole == "medium" && isMediumOrHigher()) ||
+          (resource.data.requiredRole == "pro" && isProOrAdmin()) ||
+          (resource.data.requiredRole == "admin" && isAdmin())
+        );
+      allow write: if isAdmin();
+    }
+
+    match /courses/{courseId}/lessons/{lessonId} {
+      allow read: if resource.data.published == true &&
+        (
+          resource.data.isPreview == true ||
+          resource.data.requiredRole == "free" ||
+          (resource.data.requiredRole == "medium" && isMediumOrHigher()) ||
+          (resource.data.requiredRole == "pro" && isProOrAdmin()) ||
+          (resource.data.requiredRole == "admin" && isAdmin())
+        );
+      allow write: if isAdmin();
+    }
+  }
+}

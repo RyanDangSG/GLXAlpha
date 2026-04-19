@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Logan Crypto</title>
+</head>
+<body style="font-family:Arial;background:#05070b;color:white;padding:30px;">
+  <h1>Khu Admin</h1>
+  <p>Chỉ admin mới vào được trang này.</p>
+
+  <script type="module">
+    import { requireRole } from "./auth-guard.js";
+    requireRole(["admin"]);
+  </script>
+</body>
+</html>

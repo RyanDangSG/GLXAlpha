@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký | Logan Crypto</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #05070b;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .box {
+      width: 100%;
+      max-width: 420px;
+      background: #0b1020;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 24px;
+    }
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      box-sizing: border-box;
+    }
+    input {
+      background: #111727;
+      color: white;
+    }
+    button {
+      background: linear-gradient(90deg, #19e5ff, #41bdf6);
+      color: #02131a;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+    a { color: #56dfff; }
+    .msg { margin-top: 12px; font-size: 14px; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Đăng ký tài khoản</h2>
+    <form id="registerForm">
+      <input id="name" type="text" placeholder="Họ tên" required />
+      <input id="phone" type="tel" placeholder="Số điện thoại" required />
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="password" type="password" placeholder="Mật khẩu" required />
+      <button type="submit">Đăng ký</button>
+    </form>
+    <div class="msg" id="registerMsg"></div>
+    <p class="msg">Đã có tài khoản? <a href="./login.html">Đăng nhập</a></p>
+  </div>
+
+  <script type="module">
+    import { registerUser } from "./register.js";
+
+    const form = document.getElementById("registerForm");
+    const msg = document.getElementById("registerMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "Đang xử lý...";
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        await registerUser(name, phone, email, password);
+        msg.textContent = "Đăng ký thành công. Đang chuyển trang...";
+        setTimeout(() => {
+          window.location.href = "./dashboard-free.html";
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+        msg.textContent = "Lỗi: " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>

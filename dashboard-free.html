@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Dashboard | Logan Crypto</title>
+</head>
+<body style="font-family:Arial;background:#05070b;color:white;padding:30px;">
+  <h1>Khu Free</h1>
+  <p>Bạn đang ở tầng free.</p>
+  <p>Trang này dành cho người dùng mới, preview bài học và nội dung cơ bản.</p>
+
+  <script type="module">
+    import { requireRole } from "./auth-guard.js";
+    requireRole(["free", "medium", "pro", "admin"]);
+  </script>
+</body>
+</html>

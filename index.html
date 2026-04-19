@@ -1,678 +1,778 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    
-    <title>LOGAN CRYPTO | Đọc Vị Cá Mập - Thống Trị Cuộc Chơi</title>
-    <link rel="icon" href="ava.jpg" type="image/jpeg">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;700&display=swap');
-
-        :root { 
-            --primary: #00f0ff; 
-            --dark-bg: #010103; 
-            --green: #00ff88; 
-        }
-
-        body { 
-            background-color: var(--dark-bg); 
-            color: #e2e8f0; 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            margin: 0; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-            padding-bottom: 90px; 
-        }
-
-        .font-mono { font-family: 'Space Grotesk', monospace; }
-
-        /* Effects */
-        .bg-noise { position: fixed; inset: 0; z-index: -1; opacity: 0.04; pointer-events: none; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); }
-        #cursor-glow { display: none; }
-        @media (hover: hover) and (pointer: fine) {
-            #cursor-glow { display: block; position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 50%); pointer-events: none; z-index: -1; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; mix-blend-mode: screen; }
-        }
-
-        #preloader { position: fixed; inset: 0; z-index: 9999; background: #010103; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
-        .loader-ring { width: 50px; height: 50px; border: 2px solid rgba(0,240,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
-        
-        .reveal { opacity: 0; transform: translateY(30px) scale(0.98); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
-        @media (min-width: 768px) { .reveal-delay-1 { transition-delay: 0.15s; } .reveal-delay-2 { transition-delay: 0.3s; } }
-
-        /* GIAO DIỆN THÔNG BÁO (TOAST) */
-        .toast {
-            min-width: 300px; max-width: 400px; background: rgba(10, 13, 20, 0.95);
-            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white; padding: 16px 20px; border-radius: 16px;
-            display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            pointer-events: auto; z-index: 99999;
-        }
-        .toast.show { transform: translateX(0); }
-        .toast.success { border-left: 4px solid var(--green); }
-        .toast.error { border-left: 4px solid #ff3b30; }
-        .toast-icon { font-size: 24px; }
-        .toast.success .toast-icon { color: var(--green); }
-        .toast.error .toast-icon { color: #ff3b30; }
-
-        /* UI Components */
-        .glass-nav { background: rgba(1, 1, 3, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .glass-card { background: rgba(12, 16, 28, 0.5); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; box-shadow: 0 4px 30px rgba(0,0,0,0.5); position: relative; z-index: 10; }
-        .glass-card:hover { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.1); transform: translateY(-4px); }
-        
-        .btn-zenith { background: linear-gradient(135deg, #00f0ff, #00aaff, #00ffff); background-size: 200% auto; box-shadow: 0 8px 25px rgba(0, 240, 255, 0.2); position: relative; overflow: hidden; border: none; transition: 0.5s; cursor: pointer; color: black !important; }
-        .btn-zenith::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); transition: 0.6s ease; }
-        .btn-zenith:hover::after { left: 120%; }
-        .btn-zenith:hover { background-position: right center; transform: scale(1.02); box-shadow: 0 12px 30px rgba(0, 240, 255, 0.4); }
-
-        /* Layout & Ticker */
-        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,255,255,0.03); padding: 6px 0; margin-top: 64px; }
-        @media (min-width: 1024px) { .ticker-wrap { margin-top: 80px; } }
-        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
-        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
-
-        .sticky-stack { position: sticky; transition: transform 0.4s ease; }
-        .stack-1 { top: 80px; } .stack-2 { top: 100px; } .stack-3 { top: 120px; }
-        @media (min-width: 1024px) { .stack-1 { top: 120px; } .stack-2 { top: 140px; } .stack-3 { top: 160px; } }
-
-        .animated-border-card { position: relative; border: 1px solid transparent; background-clip: padding-box; }
-        .animated-border-card::before { content: ''; position: absolute; inset: -2px; z-index: -1; border-radius: inherit; background: linear-gradient(90deg, #00f0ff, #00ffff, #00f0ff, #00ffff); background-size: 300% 300%; animation: gradient-border 4s linear infinite; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
-        @keyframes gradient-border { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
-
-        .text-gradient { background: linear-gradient(to right, #fff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .animate-glow { animation: pulse-glow 3s infinite alternate; }
-        @keyframes pulse-glow { 0% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.2); } 100% { box-shadow: 0 0 60px rgba(0, 240, 255, 0.6); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .input-vip { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; color: white; width: 100%; outline: none; transition: 0.3s; font-size: 14px; position: relative; z-index: 20; }
-        .input-vip:focus { border-color: var(--primary); background: rgba(255,255,255,0.05); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
-        
-        .sticky-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(1, 1, 3, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.05); z-index: 90; transform: translateY(100%); transition: transform 0.5s ease; padding: 12px 16px; }
-        @media (min-width: 768px) { .sticky-cta { padding: 16px 24px; } }
-        .sticky-cta.show { transform: translateY(0); }
-
-        .view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
-        .view-section.active { display: block; opacity: 1; }
-
-        .auth-tab { color: #64748b; border-bottom: 2px solid transparent; transition: all 0.3s ease; cursor: pointer; }
-        .auth-tab.active { color: #fff; border-bottom-color: var(--primary); text-shadow: 0 0 15px rgba(0, 240, 255, 0.6); }
-        
-        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        #mobile-menu.open { transform: translateX(0); }
-
-        @media (hover: hover) and (pointer: fine) {
-            .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
-            .tilt-card-inner { transform: translateZ(30px); pointer-events: none; }
-            .tilt-card button, .tilt-card a { pointer-events: auto; }
-        }
-
-        .tv-chart-container { height: 500px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        #toolModalContent::-webkit-scrollbar { width: 6px; }
-        #toolModalContent::-webkit-scrollbar-track { background: transparent; }
-        #toolModalContent::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-
-        /* HÌNH NỀN 3D VÀ OVERLAY */
-        .hero-section {
-            position: relative; overflow: hidden; display: flex; align-items: center;
-        }
-        .hero-bg-container {
-            position: absolute; inset: -5%; width: 110%; height: 110%;
-            background-image: url('Bia logancrpto.jpg');
-            background-size: cover; background-position: center; z-index: 0;
-            transition: transform 0.1s ease-out; 
-        }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(1,1,3,0.95) 0%, rgba(1,1,3,0.6) 50%, rgba(1,1,3,0.9) 100%);
-            z-index: 1; pointer-events: none; 
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>LOGAN CRYPTO | Chỉ Báo VIP & Copytrade Thực Chiến</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00eaff;
+      --dark-bg: #04050a;
+      --panel: rgba(11, 15, 26, 0.74);
+      --text-main: #e2e8f0;
+      --text-soft: #94a3b8;
+      --nav-bg: rgba(4,5,10,.84);
+      --modal-bg: #0a0d14;
+      --hero-left: rgba(4,5,10,.94);
+      --hero-mid: rgba(4,5,10,.66);
+      --hero-right: rgba(4,5,10,.92);
+      --soft-btn-bg: rgba(255,255,255,.04);
+      --soft-btn-border: rgba(255,255,255,.1);
+      --input-bg: rgba(255,255,255,.03);
+      --input-border: rgba(255,255,255,.09);
+      --input-placeholder: rgba(255,255,255,.45);
+      --footer-bg: #04050a;
+      --sticky-bg: rgba(4,5,10,.94);
+    }
+    body.light-theme {
+      --dark-bg: #eef4f8;
+      --panel: rgba(255,255,255,.84);
+      --text-main: #0f172a;
+      --text-soft: #475569;
+      --nav-bg: rgba(255,255,255,.9);
+      --modal-bg: #ffffff;
+      --hero-left: rgba(238,244,248,.60);
+      --hero-mid: rgba(238,244,248,.34);
+      --hero-right: rgba(238,244,248,.56);
+      --soft-btn-bg: rgba(15,23,42,.04);
+      --soft-btn-border: rgba(15,23,42,.12);
+      --input-bg: rgba(255,255,255,.92);
+      --input-border: rgba(148,163,184,.45);
+      --input-placeholder: rgba(71,85,105,.78);
+      --footer-bg: #edf3f7;
+      --sticky-bg: rgba(255,255,255,.92);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      padding-bottom: 88px;
+      transition: background .35s ease, color .35s ease;
+    }
+    .font-mono { font-family: 'Space Grotesk', monospace; }
+    .bg-noise {
+      position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: .04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body.light-theme .bg-noise { opacity: .018; filter: invert(1); }
+    .hero-section { position: relative; overflow: hidden; display: flex; align-items: center; }
+    .hero-bg-container {
+      position: absolute; inset: -5%; width: 110%; height: 110%;
+      background-image: url('Bia logancrpto.jpg');
+      background-size: cover; background-position: center; z-index: 0;
+      transform: scale(1.02);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to right, var(--hero-left) 0%, var(--hero-mid) 48%, var(--hero-right) 100%);
+      transition: background .35s ease;
+    }
+    .glass-nav {
+      background: var(--nav-bg); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.05);
+      transition: background .35s ease;
+    }
+    body.light-theme .glass-nav { border-bottom-color: rgba(15,23,42,.08); }
+    .glass-card {
+      background: var(--panel); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.07);
+      box-shadow: 0 10px 40px rgba(0,0,0,.38); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .35s ease;
+    }
+    body.light-theme .glass-card {
+      border-color: rgba(15,23,42,.08);
+      box-shadow: 0 10px 30px rgba(15,23,42,.08);
+    }
+    .glass-card:hover { transform: translateY(-4px); border-color: rgba(0,234,255,.24); box-shadow: 0 18px 50px rgba(0,0,0,.45); }
+    .btn-zenith {
+      background: linear-gradient(135deg, #00f0ff, #2dd4bf 45%, #38bdf8 100%); color: #02131a !important; border: none;
+      box-shadow: 0 12px 28px rgba(0,240,255,.18); transition: .25s ease;
+    }
+    .btn-zenith:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(0,240,255,.25); }
+    .btn-soft {
+      background: var(--soft-btn-bg); border: 1px solid var(--soft-btn-border); color: var(--text-main); transition: .25s ease;
+    }
+    .btn-soft:hover { background: rgba(255,255,255,.08); }
+    body.light-theme .btn-soft:hover { background: rgba(15,23,42,.07); }
+    .text-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #9be8ff 45%, #00f0ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    body.light-theme .text-gradient {
+      background: linear-gradient(90deg, #0f172a 0%, #0f172a 30%, #0891b2 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .ticker-wrap {
+      width: 100%; overflow: hidden; background: rgba(0,0,0,.78);
+      border-bottom: 1px solid rgba(255,255,255,.05); padding: 6px 0; margin-top: 64px;
+    }
+    body.light-theme .ticker-wrap { background: rgba(255,255,255,.82); border-bottom-color: rgba(15,23,42,.08); }
+    .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 34s linear infinite; }
+    @keyframes ticker { 0% { transform: translate3d(0,0,0);} 100% { transform: translate3d(-50%,0,0);} }
+    .view-section { display: none; opacity: 0; transition: opacity .35s ease; }
+    .view-section.active { display: block; opacity: 1; }
+    .input-vip {
+      background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main); border-radius: 14px;
+      padding: 16px; width: 100%; outline: none; transition: .2s ease;
+    }
+    .input-vip::placeholder { color: var(--input-placeholder); }
+    .input-vip:focus { border-color: rgba(0,240,255,.7); box-shadow: 0 0 0 3px rgba(0,240,255,.12); background: rgba(255,255,255,.05); }
+    body.light-theme .input-vip:focus { background: #fff; }
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; width: 100%; z-index: 80; background: var(--sticky-bg);
+      backdrop-filter: blur(18px); border-top: 1px solid rgba(255,255,255,.06); padding: 12px 16px;
+      transform: translateY(100%); transition: transform .35s ease, background .35s ease;
+    }
+    body.light-theme .sticky-cta { border-top-color: rgba(15,23,42,.08); }
+    .sticky-cta.show { transform: translateY(0); }
+    .float-actions { position: fixed; right: 16px; bottom: 92px; z-index: 85; display: flex; flex-direction: column; gap: 12px; }
+    .section-label {
+      display: inline-block; color: var(--primary); border: 1px solid rgba(0,234,255,.25); padding: 8px 18px; border-radius: 9999px;
+      text-transform: uppercase; letter-spacing: .28em; font-size: 10px; font-weight: 800;
+    }
+    #mobile-menu { transform: translateX(100%); transition: transform .35s ease; background: var(--nav-bg); backdrop-filter: blur(18px); }
+    #mobile-menu.open { transform: translateX(0); }
+    .modal-wrap { opacity: 0; pointer-events: none; transition: .35s ease; }
+    .modal-wrap.open { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      transform: scale(.96); transition: .35s ease; background: var(--modal-bg); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 0 100px rgba(0,240,255,.08);
+    }
+    body.light-theme .modal-box { border-color: rgba(15,23,42,.08); box-shadow: 0 20px 60px rgba(15,23,42,.12); }
+    .modal-wrap.open .modal-box { transform: scale(1); }
+    .faq-answer { display: none; }
+    .faq-answer.open { display: block; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all .75s cubic-bezier(.2,.8,.2,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .theme-toggle {
+      width: 42px; height: 42px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: white; transition: .25s ease;
+    }
+    .theme-toggle:hover { transform: rotate(12deg); }
+    body.light-theme .theme-toggle { color: #0f172a; border-color: rgba(15,23,42,.12); background: rgba(255,255,255,.9); }
+    body.light-theme .text-white { color: #0f172a !important; }
+    body.light-theme .text-slate-300, body.light-theme .text-slate-400, body.light-theme .text-slate-500, body.light-theme .text-slate-600 { color: #475569 !important; }
+    body.light-theme .bg-black\/30 { background-color: rgba(255,255,255,.72) !important; }
+    body.light-theme .bg-\[\#060912\] { background-color: rgba(255,255,255,.42) !important; }
+    body.light-theme .bg-\[\#0b100d\] { background-color: rgba(255,255,255,.76) !important; }
+    body.light-theme .bg-\[\#071018\] { background-color: rgba(255,255,255,.78) !important; }
+    body.light-theme .bg-\[\#04050a\] { background-color: var(--footer-bg) !important; }
+    @media (min-width: 768px) {
+      .ticker-wrap { margin-top: 80px; }
+      .sticky-cta { padding: 16px 24px; }
+      .float-actions { bottom: 100px; right: 24px; }
+    }
+  </style>
 </head>
 <body>
+  <div class="bg-noise"></div>
 
-    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-3 pointer-events-none"></div>
+  <div class="float-actions">
+    <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0068FF] text-white flex items-center justify-center text-2xl border border-white/20 shadow-[0_0_20px_rgba(0,104,255,0.5)] hover:scale-110 transition"><b>Z</b></a>
+    <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-500 text-white flex items-center justify-center text-xl border border-white/20 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:scale-110 transition"><i class="fas fa-phone-alt"></i></a>
+  </div>
 
-    <div id="preloader">
-        <div class="loader-ring mb-6"></div>
-        <div class="text-gray-500 font-mono tracking-[0.4em] text-[11px] uppercase animate-pulse">Syncing Institutional Data...</div>
-    </div>
-
-    <div class="bg-noise"></div>
-    <div id="cursor-glow"></div>
-
-    <header class="fixed w-full top-0 z-[100] glass-nav h-16 lg:h-20">
-        <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
-            <div onclick="switchView('home-view')" class="flex items-center gap-3 cursor-pointer group">
-                <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center lg:group-hover:scale-110 transition-transform overflow-hidden border border-[#00f0ff]/50 shadow-[0_0_20px_rgba(0,240,255,0.3)] bg-black">
-                    <img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-lg lg:text-xl font-black tracking-tighter text-white uppercase leading-none">LOGAN<span class="text-[#00f0ff]">CRYPTO</span></span>
-                    <span class="hidden lg:block text-[9px] font-mono text-gray-500 tracking-[0.2em] mt-1">TRADING ECOSYSTEM</span>
-                </div>
-            </div>
-            
-            <nav class="hidden lg:flex gap-10 text-[11px] font-bold uppercase tracking-[0.25em]">
-                <button onclick="switchView('home-view')" class="hover:text-white text-gray-400 transition-all">Trang Chủ</button>
-                <button onclick="switchView('about-view')" class="hover:text-white text-gray-400 transition-all">Giới Thiệu</button>
-                <button onclick="switchView('tools-view')" class="hover:text-white text-gray-400 transition-all">Công Cụ Live</button>
-                <button onclick="switchView('reviews-view')" class="hover:text-white text-gray-400 transition-all">Đánh Giá</button>
-                <button onclick="switchView('academy-view')" class="text-yellow-500 hover:text-yellow-400 transition-all">Học Viện VIP</button>
-            </nav>
-            
-            <button onclick="openAuthModal('login')" class="hidden lg:flex bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-2.5 rounded-full font-black text-[10px] tracking-widest items-center gap-2 transition">
-                <i class="fas fa-terminal mr-2"></i> LOGIN
-            </button>
-
-            <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl p-2">
-                <i class="fas fa-bars"></i>
-            </button>
+  <header class="fixed top-0 w-full z-[100] glass-nav h-16 lg:h-20">
+    <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+      <button onclick="switchView('home-view')" class="flex items-center gap-3 text-left">
+        <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black shadow-[0_0_18px_rgba(0,240,255,.16)]">
+          <img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
         </div>
-    </header>
-
-    <div id="mobile-menu" class="fixed inset-0 z-[90] bg-[#010103] pt-24 px-8 flex flex-col lg:hidden">
-        <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
-        <div class="flex-1 mt-4">
-            <button onclick="switchView('home-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-white font-bold uppercase tracking-widest text-sm">Trang Chủ</button>
-            <button onclick="switchView('about-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-gray-400 font-bold uppercase tracking-widest text-sm">Giới Thiệu</button>
-            <button onclick="switchView('tools-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-gray-400 font-bold uppercase tracking-widest text-sm">Công Cụ Live</button>
-            <button onclick="switchView('reviews-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-gray-400 font-bold uppercase tracking-widest text-sm">Đánh Giá</button>
-            <button onclick="switchView('academy-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-yellow-500 font-bold uppercase tracking-widest text-sm">Học Viện VIP</button>
+        <div>
+          <div class="text-lg lg:text-xl font-black tracking-tight uppercase text-white">LOGAN <span class="text-cyan-300">CRYPTO</span></div>
+          <div class="hidden lg:block text-[9px] font-mono text-slate-500 tracking-[0.28em] mt-1 uppercase">Trading Ecosystem</div>
         </div>
-        <button onclick="toggleMobileMenu(); openAuthModal('login');" class="mt-auto mb-10 btn-zenith py-5 rounded-2xl text-black font-black uppercase text-xs">Truy Cập Terminal</button>
-    </div>
-
-    <div class="ticker-wrap">
-        <div class="ticker-move text-[10px] font-mono text-gray-500 font-bold tracking-widest uppercase">
-            <span class="mx-8"><span class="text-[#00f0ff]">•</span> LIVE: LOGAN CRYPTO ONLINE</span>
-            <span class="mx-8"><span class="text-yellow-500">XAUUSD:</span> ORDER FLOW <span class="text-green-500">BUY</span> @ 2450.50</span>
-            <span class="mx-8"><span class="text-cyan-400">BTCUSDT:</span> SMC OB DETECTED <span class="text-red-500">SELL</span> @ 64,200</span>
-            <span class="mx-8"><span class="text-[#00ff88]">ETHUSDT:</span> DARVAS BREAKOUT <span class="text-green-500">+12.5%</span></span>
-            <span class="mx-8"><span class="text-purple-400">SOLUSDT:</span> COPYTRADE ENTRY <span class="text-green-500">LONG</span></span>
-            <span class="mx-8"><span class="text-[#00f0ff]">•</span> LIVE: LOGAN CRYPTO ONLINE</span>
-        </div>
-    </div>
-
-    <main id="home-view" class="view-section active">
-        
-        <section class="hero-section min-h-[85vh] pt-24 pb-20">
-            <div id="hero-bg" class="hero-bg-container"></div>
-            <div class="hero-overlay"></div>
-
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full relative z-10 text-center lg:text-left">
-                <div class="reveal">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-[10px] font-black uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping"></span> Hệ Thống Giao Dịch Định Chế
-                    </div>
-                    <h1 class="text-5xl md:text-7xl lg:text-[85px] font-black mb-6 leading-[1.05] text-white uppercase tracking-tighter drop-shadow-2xl">
-                        Đọc Vị Cá Mập <br><span class="text-gradient">Thống Trị Cuộc Chơi</span>
-                    </h1>
-                    <p class="text-gray-300 text-sm md:text-lg mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium drop-shadow-md">
-                        95% Trader đang làm thanh khoản cho thị trường. Đã đến lúc bạn <b>đổi phe</b>. Hệ thống Logan Crypto phân tích Dòng Tiền trực tiếp từ sổ lệnh để bạn đi lệnh cùng gã khổng lồ.
-                    </p>
-
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
-                        <a href="#" class="w-12 h-12 bg-[#1877F2] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition"><i class="fab fa-facebook-f text-lg"></i></a>
-                        <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" target="_blank" class="w-12 h-12 bg-[#0068FF] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition"><b class="font-sans text-xl">Z</b></a>
-                        <a href="#" class="w-12 h-12 bg-[#FF0000] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition"><i class="fab fa-youtube text-lg"></i></a>
-                    </div>
-
-                    <button onclick="switchView('tools-view')" class="w-full sm:w-auto btn-zenith text-black px-12 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:scale-105">
-                        KHÁM PHÁ CÔNG NGHỆ
-                    </button>
-                </div>
-
-                <div class="lg:pl-16">
-                    <div class="grid grid-cols-2 gap-6 text-center mt-12 lg:mt-0 reveal reveal-delay-1">
-                        <div class="glass-card p-8 rounded-3xl border-cyan-500/20 col-span-2 sm:col-span-1 bg-black/40">
-                            <h4 class="text-4xl md:text-5xl font-black text-white counter" data-target="5000" data-suffix="+">0</h4>
-                            <p class="text-[9px] text-gray-400 uppercase font-black tracking-widest mt-2">Học Viên</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-3xl border-green-500/20 col-span-2 sm:col-span-1 bg-black/40">
-                            <h4 class="text-4xl md:text-5xl font-black text-green-400 counter" data-target="95" data-suffix="%">0</h4>
-                            <p class="text-[9px] text-gray-400 uppercase font-black tracking-widest mt-2">Winrate</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-3xl border-yellow-500/20 col-span-2 bg-black/40">
-                            <h4 class="text-4xl md:text-5xl font-black text-yellow-500">24/7</h4>
-                            <p class="text-[9px] text-gray-400 uppercase font-black tracking-widest mt-2">Hỗ trợ Trực Tiếp</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 bg-[#020305] border-y border-white/5 relative z-20">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 reveal">
-                    <span class="text-[#00f0ff] font-mono tracking-[0.4em] text-[10px] border border-[#00f0ff]/30 px-6 py-2 rounded-full mb-6 inline-block">MARKET TERMINAL</span>
-                    <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mt-4">Theo Dõi Thanh Khoản <span class="text-[#00f0ff]">Real-time</span></h2>
-                </div>
-                <div class="tv-chart-container reveal shadow-[0_0_50px_rgba(0,0,0,0.8)]">
-                    <div id="tradingview_widget_main" style="height: 100%;"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "D", "timezone": "Etc/UTC", "theme": "dark", "style": "1", "locale": "vi", "enable_publishing": false, "backgroundColor": "rgba(1, 1, 3, 1)", "gridColor": "rgba(255, 255, 255, 0.06)", "hide_top_toolbar": false, "hide_legend": false, "save_image": false, "container_id": "tradingview_widget_main"
-                        });
-                    </script>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-32 relative z-20">
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="glass-card p-10 md:p-24 rounded-[60px] border-[#00f0ff]/20 shadow-[0_0_100px_rgba(0,240,255,0.1)] relative overflow-hidden reveal">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#00f0ff]/10 rounded-full blur-[80px] -mr-32 -mt-32 pointer-events-none"></div>
-                    <div class="text-center mb-16 relative z-30">
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">Kích Hoạt <span class="text-[#00f0ff]">Đặc Quyền</span></h2>
-                        <p class="text-gray-400 font-light text-base max-w-lg mx-auto">Trải nghiệm sức mạnh của hệ thống phân tích dòng tiền cấp quỹ hoàn toàn miễn phí ngay hôm nay.</p>
-                    </div>
-                    <form class="space-y-6 relative z-30" onsubmit="handleAuthSubmit(event, 'register')">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <input id="reg-name-home" type="text" placeholder="Họ và Tên" class="input-vip" required>
-                            <input id="reg-zalo-home" type="tel" placeholder="Số Zalo liên hệ" class="input-vip" required>
-                        </div>
-                        <input id="reg-email-home" type="email" placeholder="Gmail nhận tài khoản hệ thống" class="input-vip" required>
-                        <input id="reg-pass-home" type="password" placeholder="Tạo Mật khẩu Terminal (6+ ký tự)" class="input-vip" required minlength="6">
-                        <button type="submit" class="w-full btn-zenith text-black font-black py-6 rounded-2xl uppercase tracking-[0.2em] text-[11px] shadow-2xl mt-6">GỬI YÊU CẦU TRUY CẬP</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-	<div id="tools-view" class="view-section pt-24 pb-40 bg-[#010103]">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-24 reveal">
-                <span class="text-[#00f0ff] font-mono tracking-[0.4em] text-[10px] border border-[#00f0ff]/30 px-6 py-2 rounded-full mb-8 inline-block shadow-[0_0_20px_rgba(0,240,255,0.2)]">LOGAN CRYPTO TERMINAL</span>
-                <h2 class="text-5xl md:text-[70px] font-black text-white uppercase tracking-tighter mb-6 leading-[1.05] mt-8">HỆ SINH THÁI ĐỘC BẢN<br><span class="text-[#00f0ff]">TRADER 5.0</span></h2>
-                <p class="text-gray-400 font-light text-lg">Trang bị tận răng vũ khí định chế. Nhấp vào để xem chi tiết sức mạnh.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                <div class="glass-card p-10 rounded-[45px] group border-white/5 hover:border-green-500/50 flex flex-col h-full transition-all duration-500 reveal tilt-card">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="overflow-hidden rounded-[30px] mb-8 relative border border-white/10 shadow-2xl">
-                            <img src="./Orderflow.png" class="w-full h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] to-transparent"></div>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">ORDER FLOW</h3>
-                        <p class="text-green-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Giải Mã Dòng Tiền Ngầm</p>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">Thấu thị sổ lệnh, phân tích khối lượng chủ động thời gian thực. Bắt đỉnh đáy bằng dữ liệu dòng tiền.</p>
-                        <button onclick="openToolModal('orderflow')" class="mt-auto w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-green-500 hover:text-black transition uppercase text-[11px] tracking-widest"><i class="fas fa-search-plus mr-2"></i> Xem Chi Tiết</button>
-                    </div>
-                </div>
-
-                <div class="glass-card p-10 rounded-[45px] group border-purple-500/30 flex flex-col h-full hover:border-purple-500 transition-all duration-500 reveal reveal-delay-1 tilt-card shadow-[0_0_30px_rgba(168,85,247,0.1)]">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="overflow-hidden rounded-[30px] mb-8 relative border border-white/10 shadow-2xl bg-[#0a0514] flex items-center justify-center">
-                            <i class="fas fa-network-wired text-[80px] text-purple-500/50 group-hover:text-purple-400 group-hover:scale-110 transition-all duration-700 h-56 flex items-center"></i>
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] to-transparent"></div>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">ALPHA COPYTRADE</h3>
-                        <p class="text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Auto-Mirror 100% Rảnh Tay</p>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">Khớp lệnh API Zero-Latency. Sếp giữ quyền kiểm soát vốn 100% trên Binance/OKX, chuyên gia của quỹ đánh giúp sếp.</p>
-                        <button onclick="openToolModal('copytrade')" class="mt-auto w-full py-5 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 font-bold hover:bg-purple-500 hover:text-black transition uppercase text-[11px] tracking-widest"><i class="fas fa-search-plus mr-2"></i> Xem Chi Tiết</button>
-                    </div>
-                </div>
-
-                <div class="glass-card p-10 rounded-[45px] border-yellow-500/30 flex flex-col h-full group hover:border-yellow-500 transition-all duration-500 reveal tilt-card">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="overflow-hidden rounded-[30px] mb-8 relative border border-white/10 shadow-2xl">
-                            <img src="./DravasBox.png" class="w-full h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] to-transparent"></div>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">DARVAS DCA</h3>
-                        <p class="text-yellow-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Công Thức Nhân Tài Khoản</p>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">Tự quét vùng tích lũy thanh khoản. Nhồi lệnh thuận xu hướng khi giá phá hộp mang lại RR cực cao.</p>
-                        <button onclick="openToolModal('darvas')" class="mt-auto w-full py-5 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 font-bold hover:bg-yellow-500 hover:text-black transition uppercase text-[11px] tracking-widest"><i class="fas fa-search-plus mr-2"></i> Xem Chi Tiết</button>
-                    </div>
-                </div>
-
-                <div class="glass-card p-10 rounded-[45px] group border-white/5 hover:border-[#00f0ff]/50 flex flex-col h-full transition-all duration-500 reveal reveal-delay-1 tilt-card">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="overflow-hidden rounded-[30px] mb-8 relative border border-white/10 shadow-2xl">
-                            <img src="./ICT.png" class="w-full h-56 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 blur-[1px] group-hover:blur-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0d14] to-transparent"></div>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">ICT SMC PRO</h3>
-                        <p class="text-[#00f0ff] text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Bản Đồ Định Chế</p>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">Săn Stop-hunt, nhận diện bẫy thanh khoản của Market Maker. Bộ lọc nhiễu 90% cực kỳ sắc bén.</p>
-                        <button onclick="openToolModal('ict')" class="mt-auto w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-[#00f0ff] hover:text-black transition uppercase text-[11px] tracking-widest"><i class="fas fa-search-plus mr-2"></i> Xem Chi Tiết</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="academy-view" class="view-section pt-24 pb-40 bg-[#010103]">
-        <div class="max-w-7xl mx-auto px-4 text-center mb-32 reveal">
-            <span class="text-[#00f0ff] font-mono tracking-[0.4em] text-[10px] border border-[#00f0ff]/30 px-6 py-2 rounded-full mb-8 inline-block shadow-[0_0_20px_rgba(0,240,255,0.2)]">LOGAN CRYPTO ACADEMY</span>
-            <h2 class="text-5xl md:text-[80px] font-black text-white mt-4 mb-8 uppercase tracking-tighter leading-[1]">HÀNH TRÌNH BIẾN GIAO DỊCH<br>THÀNH NGHỀ CHUYÊN NGHIỆP</h2>
-            <p class="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed font-light">Hệ thống đào tạo 3 phân khu chuyên biệt. Chuyển giao toàn bộ tư duy và bộ công cụ của các quỹ đầu tư lớn.</p>
-        </div>
-
-        <div class="sticky-card-wrapper max-w-5xl mx-auto px-4 pb-20">
-            <div class="sticky-stack stack-1 glass-card p-12 md:p-16 rounded-[50px] border-white/10 flex flex-col md:flex-row items-center gap-12 mb-6 shadow-2xl reveal">
-                <div class="flex-1 text-left w-full">
-                    <p class="text-green-400 font-black text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">PHÂN KHU 01: KHỞI NGUYÊN</p>
-                    <h4 class="text-3xl md:text-5xl font-black text-white mb-6 uppercase">TƯ DUY NỀN TẢNG <span class="text-gray-600 text-lg md:text-xl font-light whitespace-nowrap">(MIỄN PHÍ)</span></h4>
-                    <ul class="space-y-5 text-gray-300 text-sm font-light">
-                        <li class="flex items-center gap-4"><i class="fas fa-check text-green-500"></i> <div><b class="text-white">Tư duy SMC:</b> Hiểu rõ bản chất "Smart Money".</div></li>
-                        <li class="flex items-center gap-4"><i class="fas fa-check text-green-500"></i> <div><b class="text-white">Quản lý rủi ro:</b> Bảo vệ vốn tuyệt đối.</div></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/3"><button onclick="openAuthModal('register')" class="w-full py-6 rounded-3xl bg-white/10 border border-white/20 text-white font-black hover:bg-[#00ff88] hover:text-black transition uppercase text-[11px] tracking-widest shadow-xl">Vào Học - 0 Đồng</button></div>
-            </div>
-            
-            <div class="sticky-stack stack-2 glass-card p-12 md:p-16 rounded-[50px] border-yellow-500/40 bg-[#0a0f0d] flex flex-col md:flex-row items-center gap-12 mb-6">
-                <div class="flex-1 text-left w-full relative z-10">
-                    <p class="text-yellow-500 font-black text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">PHÂN KHU 02: CHIẾN LƯỢC</p>
-                    <h4 class="text-3xl md:text-5xl font-black text-yellow-500 mb-6 uppercase">THỰC CHIẾN CHUYÊN SÂU <span class="text-yellow-700 text-lg md:text-xl font-light whitespace-nowrap">(GÓI GOLD)</span></h4>
-                    <ul class="space-y-5 text-gray-300 text-sm font-light">
-                        <li class="flex items-center gap-4"><i class="fas fa-bolt text-yellow-500"></i> <div><b class="text-white">Darvas Box V2:</b> Săn điểm bùng nổ.</div></li>
-                        <li class="flex items-center gap-4"><i class="fas fa-bolt text-yellow-500"></i> <div><b class="text-white">Zalo VIP Gold:</b> Nhận tín hiệu thực chiến.</div></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/3 relative z-10"><button onclick="openAuthModal('register')" class="w-full py-6 rounded-3xl bg-yellow-500 text-black font-black uppercase tracking-widest text-[11px] hover:scale-105 transition shadow-[0_15px_40px_rgba(245,158,11,0.4)]">Nâng Cấp Gói Gold</button></div>
-            </div>
-
-            <div class="sticky-stack stack-3 glass-card p-12 md:p-16 rounded-[50px] border-[#00f0ff]/50 bg-[#050812] flex flex-col md:flex-row items-center gap-12 animated-border-card" style="box-shadow: 0 -20px 80px rgba(0,0,0,0.95);">
-                <div class="flex-1 text-left w-full relative z-10">
-                    <p class="text-[#00f0ff] font-black text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">PHÂN KHU 03: ĐỈNH CAO</p>
-                    <h4 class="text-3xl md:text-5xl font-black text-[#00f0ff] mb-6 uppercase">GIAO DỊCH ĐỊNH CHẾ <span class="text-[#00f0ff]/50 text-lg md:text-xl font-light whitespace-nowrap">(GÓI DIAMOND)</span></h4>
-                    <ul class="space-y-5 text-gray-300 text-sm font-light">
-                        <li class="flex items-center gap-4"><i class="fas fa-star text-[#00f0ff]"></i> <div><b class="text-white">Bí mật Order Flow.</b></div></li>
-                        <li class="flex items-center gap-4"><i class="fas fa-star text-[#00f0ff]"></i> <div><b class="text-white">Full Indicator VIP & Copytrade.</b></div></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/3 relative z-10"><button onclick="openAuthModal('register')" class="w-full py-6 rounded-3xl btn-zenith text-black font-black uppercase tracking-widest text-[11px] animate-glow hover:scale-105 transition">Trở Thành VIP Member</button></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="about-view" class="view-section pt-24 pb-40 bg-[#010103]">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-24 reveal">
-                <span class="text-[#00f0ff] font-mono tracking-[0.4em] text-[10px] border border-[#00f0ff]/30 px-6 py-2 rounded-full mb-8 inline-block shadow-[0_0_20px_rgba(0,240,255,0.1)]">VƯỢT TRÊN CẢ GIAO DỊCH</span>
-                <h2 class="text-5xl md:text-[80px] font-black text-white mb-8 uppercase tracking-tighter leading-[1.05] mt-8">ĐẾ CHẾ <br><span class="text-transparent bg-gradient-to-r from-[#00f0ff] to-[#00aaff] bg-clip-text">LOGAN CRYPTO</span></h2>
-                <p class="text-gray-400 text-xl max-w-4xl mx-auto font-light leading-relaxed mt-10">Không chỉ là một đội ngũ phát triển thuật toán, chúng tôi là một hệ tư tưởng. Logan Crypto sinh ra để tái định hình lại cục diện sân chơi tài chính khắc nghiệt, nơi dữ liệu và kỷ luật lên ngôi.</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-12 mb-12">
-                <div class="glass-card p-14 rounded-[50px] border-l-4 border-[#FF6F61] reveal tilt-card">
-                    <div class="tilt-card-inner">
-                        <div class="w-16 h-16 bg-[#FF6F61]/20 rounded-2xl flex items-center justify-center mb-8"><i class="fas fa-fire text-2xl text-[#FF6F61]"></i></div>
-                        <h3 class="text-3xl font-black text-white mb-6 uppercase text-[#FF6F61]">Câu Chuyện Của Chúng Tôi</h3>
-                        <p class="text-gray-400 leading-loose font-light text-sm md:text-base">Thị trường tài chính là một cỗ máy hút tiền không khoan nhượng. 95% trader cá nhân ném tiền vào thị trường như những con bạc vì thiếu đi <b>dữ liệu thực</b> và chạy theo các chỉ báo miễn phí trễ nải. <br><br>Logan Crypto ra đời từ sự trăn trở đó. Chúng tôi mang sứ mệnh <b>dân chủ hóa công nghệ</b>, mang vũ khí của các Quỹ (Institutions) đến tận tay cộng đồng Việt Nam.</p>
-                    </div>
-                </div>
-                <div class="glass-card p-14 rounded-[50px] border-l-4 border-[#00f0ff] reveal reveal-delay-1 tilt-card">
-                    <div class="tilt-card-inner">
-                        <div class="w-16 h-16 bg-[#00f0ff]/20 rounded-2xl flex items-center justify-center mb-8"><i class="fas fa-database text-2xl text-[#00f0ff]"></i></div>
-                        <h3 class="text-3xl font-black text-white mb-6 uppercase text-[#00f0ff]">Triết Lý Dữ Liệu</h3>
-                        <p class="text-gray-400 leading-loose font-light text-sm md:text-base">Cảm xúc là kẻ thù số 1 của Trading. Hệ thống của chúng tôi được xây dựng trên sự thật duy nhất: <b>Dòng Tiền (Order Flow)</b>. <br><br>Giá cả có thể bị thao túng bởi Market Maker, nhưng Khối Lượng và Dấu Chân Thanh Khoản thì tuyệt đối không thể giấu giếm. Chúng tôi đọc vị những dấu chân ngầm này, cung cấp cho bạn điểm vào lệnh chuẩn xác nhất.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div class="glass-card p-10 rounded-[35px] reveal text-center"><i class="fas fa-shield-alt text-4xl text-green-400 mb-6"></i><h4 class="text-xl font-bold text-white mb-4 uppercase">Bảo Vệ Vốn</h4><p class="text-gray-500 text-sm">Chúng tôi dạy bạn cách sống sót trước khi nghĩ đến việc kiếm tiền.</p></div>
-                <div class="glass-card p-10 rounded-[35px] reveal reveal-delay-1 text-center"><i class="fas fa-microchip text-4xl text-cyan-400 mb-6"></i><h4 class="text-xl font-bold text-white mb-4 uppercase">Công Nghệ Lõi</h4><p class="text-gray-500 text-sm">API Zero-Latency và Server xử lý hàng triệu lệnh mỗi giây.</p></div>
-                <div class="glass-card p-10 rounded-[35px] reveal reveal-delay-2 text-center"><i class="fas fa-users text-4xl text-yellow-500 mb-6"></i><h4 class="text-xl font-bold text-white mb-4 uppercase">Cộng Đồng Alpha</h4><p class="text-gray-500 text-sm">Môi trường của những người giao dịch bằng kỷ luật thép.</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="reviews-view" class="view-section pt-24 pb-40 bg-[#010103]">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-24 reveal">
-                <span class="text-[#00f0ff] font-mono tracking-[0.4em] text-[10px] border border-[#00f0ff]/30 px-6 py-2 rounded-full mb-8 inline-block shadow-[0_0_20px_rgba(0,240,255,0.2)]">HỆ SINH THÁI LOGAN</span>
-                <h2 class="text-5xl md:text-[70px] font-black text-white uppercase tracking-tighter mb-6 leading-[1.05] mt-8">ĐÁNH GIÁ TỪ <br><span class="text-[#00f0ff]">ALPHA TRADERS</span></h2>
-                <p class="text-gray-400 font-light text-lg">Hàng ngàn nhà đầu tư đã thay đổi vị thế. Hãy nghe câu chuyện của họ.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-20">
-                <div class="glass-card p-10 rounded-[45px] group border-white/5 flex flex-col h-full transition-all duration-500 reveal tilt-card">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-14 h-14 rounded-full bg-[#1c2130] flex items-center justify-center text-gray-500 text-xl font-bold">ST</div>
-                            <div><h4 class="text-white font-bold">Sếp Tài</h4><p class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Doanh Nhân</p></div>
-                            <div class="ml-auto text-yellow-500 flex gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        </div>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">“Alpha Copytrade thực sự là một cuộc cách mạng. Không cần thức đêm canh lệnh, API kết nối mượt mà, tôi chỉ việc tận hưởng cuộc sống và xem tài khoản tăng trưởng.”</p>
-                        <p class="text-green-400 text-[10px] font-bold uppercase tracking-[0.2em]">Tỷ lệ sao chép: +350% (6 tháng)</p>
-                    </div>
-                </div>
-                <div class="glass-card p-10 rounded-[45px] group border-yellow-500/30 flex flex-col h-full hover:border-yellow-500 transition-all duration-500 reveal reveal-delay-1 tilt-card shadow-[0_0_30px_rgba(245,158,11,0.1)]">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-14 h-14 rounded-full bg-[#1c2130] flex items-center justify-center text-gray-500 text-xl font-bold">NL</div>
-                            <div><h4 class="text-white font-bold">Ngọc Lan</h4><p class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Trader Tự Do</p></div>
-                            <div class="ml-auto text-yellow-500 flex gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        </div>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">“Học viện Logan Crypto giúp tôi hiểu rõ bản chất thị trường. Kết hợp với bộ công cụ Order Flow, tôi đã tự tin giao dịch và có lợi nhuận đều đặn.”</p>
-                        <p class="text-yellow-400 text-[10px] font-bold uppercase tracking-[0.2em]">Học Viên: Phân Khu 03</p>
-                    </div>
-                </div>
-                <div class="glass-card p-10 rounded-[45px] group border-[#00f0ff]/20 flex flex-col h-full hover:border-[#00f0ff] transition-all duration-500 reveal reveal-delay-2 tilt-card shadow-[0_0_30px_rgba(0,240,255,0.1)]">
-                    <div class="tilt-card-inner flex flex-col h-full">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-14 h-14 rounded-full bg-[#1c2130] flex items-center justify-center text-gray-500 text-xl font-bold">VH</div>
-                            <div><h4 class="text-white font-bold">Văn Hùng</h4><p class="text-[9px] text-gray-500 uppercase font-black tracking-widest">Nhà Đầu Tư F0</p></div>
-                            <div class="ml-auto text-yellow-500 flex gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-                        </div>
-                        <p class="text-gray-400 text-sm font-light leading-loose flex-1 mb-6">“Hỗ trợ 24/7 của Logan Crypto cực kỳ nhiệt tình. Họ đã hướng dẫn tôi từ những bước đầu tiên. Tín hiệu Darvas Box V2 rất chính xác.”</p>
-                        <p class="text-[#00f0ff] text-[10px] font-bold uppercase tracking-[0.2em]">Tỷ lệ Winrate: 92% (Tự giao dịch)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card p-14 rounded-[50px] border-[#00f0ff]/20 bg-[#05080f] text-center reveal">
-                <h3 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter italic">98% <span class="text-[#00f0ff]">ALPHA TRADERS</span> HÀI LÒNG</h3>
-                <p class="text-gray-400 font-light text-base max-w-lg mx-auto mb-10">Chúng tôi không chỉ cung cấp công cụ, chúng tôi xây dựng một cộng đồng Alpha Trader chiến thắng. Hãy trở thành một phần của chúng tôi.</p>
-                <button onclick="openAuthModal('register')" class="btn-zenith text-black px-12 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl">KÍCH HOẠT VỊ THẾ</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-[#010103] pt-32 pb-16 border-t border-white/5 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 text-center md:text-left">
-            <div class="grid md:grid-cols-4 gap-16 mb-20">
-                <div class="md:col-span-1 flex flex-col items-center md:items-start">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden border border-[#00f0ff]/50 shadow-[0_0_20px_rgba(0,240,255,0.3)] bg-black"><img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover"></div>
-                        <span class="text-2xl font-black text-white tracking-tighter uppercase">LOGAN CRYPTO</span>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-white font-black mb-8 uppercase text-[10px] tracking-widest text-[#00f0ff]">Hệ Thống</h4>
-                    <ul class="space-y-4 text-gray-500 text-[9px] font-bold uppercase">
-                        <li><button onclick="switchView('home-view')" class="hover:text-white transition">Trang Chủ</button></li>
-                        <li><button onclick="switchView('tools-view')" class="hover:text-white transition">Công Cụ Live</button></li>
-                        <li><button onclick="switchView('reviews-view')" class="hover:text-white transition">Đánh Giá</button></li>
-                        <li><button onclick="switchView('academy-view')" class="hover:text-white transition">Học Viện VIP</button></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-black mb-8 uppercase text-[10px] tracking-widest text-[#00f0ff]"><i class="fas fa-headset mr-2"></i> Hỗ Trợ 24/7</h4>
-                    <p class="text-gray-400 text-xs font-mono mb-2">logancrypto.com</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-black mb-8 uppercase text-[10px] tracking-widest text-[#00f0ff]"><i class="fas fa-crown mr-2"></i> VIP Member</h4>
-                    <div class="flex justify-center md:justify-start gap-4">
-                        <a href="https://zalo.me/g/74lqgadevxdjba5gyg9c" target="_blank" class="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-yellow-500 hover:bg-white transition hover:-translate-y-1"><i class="fas fa-crown"></i></a>
-                    </div>
-                </div>
-            </div>
-            <p class="text-gray-800 text-[9px] text-center uppercase tracking-[0.5em]">© 2026 LOGAN CRYPTO. PRESTIGE ECOSYSTEM.</p>
-        </div>
-    </footer>
-
-    <div id="stickyBar" class="sticky-cta flex justify-between items-center z-[80]">
-        <div class="hidden md:flex flex-col">
-            <span class="text-white font-black uppercase tracking-widest text-sm">LOGAN CRYPTO</span>
-            <span class="text-[#00f0ff] text-[9px] uppercase tracking-[0.2em] font-bold mt-1">Đổi Vị Thế - Làm Chủ Cuộc Chơi</span>
-        </div>
-        <button onclick="openAuthModal('register')" class="w-full md:w-auto btn-zenith text-black px-10 py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] animate-glow">
-            ĐĂNG KÝ MIỄN PHÍ
+      </button>
+      <nav class="hidden lg:flex gap-8 text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
+        <button onclick="switchView('home-view')" class="hover:text-white transition">Trang Chủ</button>
+        <button onclick="switchView('tools-view')" class="hover:text-white transition">Công Cụ</button>
+        <button onclick="switchView('academy-view')" class="hover:text-white transition">Lộ Trình</button>
+        <button onclick="switchView('about-view')" class="hover:text-white transition">Giới Thiệu</button>
+        <button onclick="switchView('reviews-view')" class="hover:text-white transition">Phản Hồi</button>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Đổi chế độ sáng tối">
+          <i id="theme-icon" class="fas fa-moon"></i>
         </button>
+        <button onclick="openAuthModal('register')" class="hidden lg:flex btn-zenith px-6 py-2.5 rounded-full font-black text-[10px] tracking-[0.18em] uppercase items-center gap-2">Nhận tư vấn miễn phí</button>
+        <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl p-2"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
+  </header>
 
-    <div id="toolModal" class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeToolModal()"></div>
-        <div class="relative bg-[#0a0d14] border border-white/10 rounded-[40px] p-8 md:p-14 max-w-2xl w-[95%] max-h-[90vh] overflow-y-auto shadow-[0_0_100px_rgba(0,240,255,0.15)] transform scale-95 transition-transform duration-500" id="toolBox">
-            <button onclick="closeToolModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300"><i class="fas fa-times text-2xl"></i></button>
-            <div id="toolModalContent" class="mt-4">
-                </div>
+  <div id="mobile-menu" class="fixed inset-0 z-[95] pt-24 px-6 flex flex-col lg:hidden overflow-y-auto">
+    <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+    <div class="flex-1 mt-4 space-y-2">
+      <button onclick="switchView('home-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-white font-bold uppercase tracking-widest text-sm">Trang Chủ</button>
+      <button onclick="switchView('tools-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Công Cụ</button>
+      <button onclick="switchView('academy-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Lộ Trình</button>
+      <button onclick="switchView('about-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Giới Thiệu</button>
+      <button onclick="switchView('reviews-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Phản Hồi</button>
+    </div>
+    <button onclick="toggleMobileMenu(); openAuthModal('register');" class="mt-8 mb-10 btn-zenith py-4 rounded-2xl font-black uppercase text-xs tracking-[0.18em]">Nhận tư vấn miễn phí</button>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-move text-[10px] font-mono text-slate-500 font-bold tracking-widest uppercase">
+      <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
+      <span class="mx-8"><span class="text-cyan-400">Order Flow:</span> đọc phản ứng giá và dòng tiền</span>
+      <span class="mx-8"><span class="text-green-400">Copytrade:</span> đồng hành giao dịch theo hệ thống</span>
+      <span class="mx-8"><span class="text-yellow-400">Market Board:</span> theo dõi nhiều cặp cùng lúc</span>
+      <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
+    </div>
+  </div>
+
+  <main id="home-view" class="view-section active">
+    <section class="hero-section min-h-[85vh] pt-24 pb-16 md:pb-20">
+      <div class="hero-bg-container"></div>
+      <div class="hero-overlay"></div>
+      <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full relative z-10 text-center lg:text-left">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-300/10 border border-cyan-300/25 text-cyan-300 text-[10px] font-black uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,240,255,0.12)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-ping"></span> Chỉ báo VIP & Copytrade thực chiến
+          </div>
+          <h1 class="text-4xl md:text-6xl lg:text-[76px] font-black mb-6 leading-[1.02] text-white tracking-tighter">
+            Hệ thống giao dịch được thiết kế để <span class="text-gradient">nhìn rõ hơn</span>.<br>
+            Và vận hành theo cách <span class="text-gradient">bài bản hơn</span>.
+          </h1>
+          <p class="text-slate-300 text-sm md:text-base lg:text-lg mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">Logan Crypto không xây dựng sản phẩm theo hướng phô trương tín hiệu. Chúng tôi tập trung vào những gì tạo ra khác biệt thật sự cho người giao dịch: <b>bộ chỉ báo đủ sắc để nhìn thị trường rõ hơn</b>, <b>copytrade đủ bài bản để đồng hành tăng trưởng</b>, và một hệ sinh thái đủ chiều sâu để khách hàng có thể đi xa hơn khi sẵn sàng nâng level.</p>
+          <div class="grid sm:grid-cols-3 gap-3 mb-8">
+            <div class="glass-card rounded-2xl p-4 text-sm">Bộ chỉ báo hỗ trợ lọc setup, vùng chờ và điểm hành động có cơ sở hơn</div>
+            <div class="glass-card rounded-2xl p-4 text-sm">Copytrade dành cho khách hàng muốn đi cùng đội ngũ theo cách gọn hơn và thực chiến hơn</div>
+            <div class="glass-card rounded-2xl p-4 text-sm">Hệ sinh thái được thiết kế để khách bắt đầu dễ, đi sâu đúng lúc và nâng cấp đúng thời điểm</div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 mb-6 justify-center lg:justify-start">
+            <button onclick="openAuthModal('register')" class="btn-zenith px-10 py-4 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest">Nhận tư vấn chỉ báo & copytrade</button>
+            <button onclick="switchView('reviews-view')" class="btn-soft px-10 py-4 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest">Xem phản hồi khách hàng</button>
+          </div>
+          <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-400 justify-center lg:justify-start">
+            <div>• Chỉ báo quan sát rõ hơn</div>
+            <div>• Copytrade đồng hành bài bản hơn</div>
+            <div>• Không cam kết lợi nhuận</div>
+          </div>
         </div>
-    </div>
 
-    <div id="authModal" class="fixed inset-0 z-[210] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeAuthModal()"></div>
-        <div class="relative bg-[#0a0d14] border border-white/10 rounded-[40px] p-10 md:p-14 max-w-md w-[95%] max-h-[90vh] overflow-y-auto shadow-[0_0_100px_rgba(0,240,255,0.15)] transform scale-95 transition-transform duration-500" id="authBox">
-            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300"><i class="fas fa-times text-2xl"></i></button>
-            
-            <div class="text-center mb-8 mt-2">
-                <h3 class="text-3xl font-black text-white uppercase tracking-tighter mb-2 italic">Hệ Thống <span class="text-[#00f0ff]">Alpha</span></h3>
-            </div>
-
-            <div class="flex justify-center gap-8 border-b border-white/10 mb-8">
-                <button onclick="switchTab('register')" id="tab-register" class="auth-tab active font-black tracking-widest text-[10px] pb-3 uppercase">Đăng Ký</button>
-                <button onclick="switchTab('login')" id="tab-login" class="auth-tab font-black tracking-widest text-[10px] pb-3 uppercase text-gray-500">Đăng Nhập</button>
-            </div>
-
-            <form id="form-register" class="space-y-4" onsubmit="handleAuthSubmit(event, 'register')">
-                <input id="auth-name" type="text" placeholder="Họ Tên" class="input-vip w-full text-sm" required>
-                <input id="auth-zalo" type="tel" placeholder="Số Zalo" class="input-vip w-full text-sm" required>
-                <input id="auth-email" type="email" placeholder="Email" class="input-vip w-full text-sm" required>
-                <input id="auth-pass" type="password" placeholder="Mật khẩu (6+)" class="input-vip w-full text-sm" required minlength="6">
-                <button type="submit" id="btn-auth-reg" class="w-full btn-zenith text-black font-black py-5 rounded-2xl shadow-2xl uppercase tracking-widest text-[10px] mt-4 flex justify-center items-center gap-2">Xác nhận Đăng ký</button>
+        <div class="lg:pl-10 reveal">
+          <div id="dang-ky-form" class="glass-card p-6 md:p-8 rounded-[34px] border-cyan-300/15 shadow-[0_0_70px_rgba(0,240,255,.08)]">
+            <div class="text-cyan-300 font-mono tracking-[0.34em] text-[10px] uppercase mb-4">Bắt đầu với hệ thống phù hợp</div>
+            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">Đăng ký nhận tư vấn chỉ báo & copytrade</h2>
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6">Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn, từ bộ chỉ báo hỗ trợ giao dịch đến hình thức đồng hành phù hợp hơn với quỹ thời gian và phong cách đầu tư.</p>
+            <form class="space-y-4" id="leadForm">
+              <input id="reg-name-home" type="text" placeholder="Họ và Tên" class="input-vip" required>
+              <input id="reg-phone-home" type="tel" placeholder="Số điện thoại" class="input-vip" required>
+              <input id="reg-email-home" type="email" placeholder="Email nhận tư vấn" class="input-vip" required>
+              <button type="submit" class="w-full btn-zenith font-black py-5 rounded-2xl uppercase tracking-[0.18em] text-[11px]">Tiếp tục đăng ký</button>
             </form>
-
-            <form id="form-login" class="space-y-4 hidden" onsubmit="handleAuthSubmit(event, 'login')">
-                <input id="log-email" type="email" placeholder="Email" class="input-vip w-full text-sm" required>
-                <input id="log-pass" type="password" placeholder="Mật khẩu" class="input-vip w-full text-sm" required>
-                <button type="submit" id="btn-auth-log" class="w-full bg-white/10 border border-white/20 hover:bg-white hover:text-black text-white font-black py-5 rounded-2xl shadow-2xl uppercase tracking-widest text-[10px] mt-4 transition-all">Vào Terminal</button>
-            </form>
+            <p class="text-slate-500 text-xs md:text-sm mt-5 leading-relaxed">Đội ngũ sẽ liên hệ để định hướng lộ trình phù hợp. Không thu phí ở bước đăng ký ban đầu.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-[#060912] border-y border-white/5 relative z-20">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-8 md:mb-12 reveal">
+          <span class="section-label">Giá trị hệ thống</span>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter mt-5">Một nền tảng được tạo ra để giao dịch thật, không chỉ để nhìn cho đẹp</h2>
+          <p class="text-slate-400 mt-4 max-w-3xl mx-auto">Logan Crypto được xây theo một triết lý rất rõ: mọi thứ xuất hiện trên hệ thống đều phải phục vụ cho trải nghiệm giao dịch thật. Không chạy theo cảm giác phô diễn, không cố làm mọi thứ trở nên rối hơn cần thiết. Khách hàng bước vào đây để tìm sự rõ ràng, sự đồng hành và cảm giác đang đi cùng một nền tảng có chiều sâu.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5 reveal">
+          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-white mb-3">Rõ giá trị</div><p class="text-slate-300 leading-relaxed">Mỗi thành phần trong hệ thống đều mang một vai trò đủ rõ để khách hàng cảm nhận được giá trị ngay từ lần tiếp cận đầu tiên.</p></div>
+          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-cyan-300 mb-3">Rõ định hướng</div><p class="text-slate-300 leading-relaxed">Người dùng không bị ném vào một mớ thông tin hỗn tạp, mà được dẫn đi trong một cấu trúc có thứ tự, có logic và có mục tiêu.</p></div>
+          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-green-400 mb-3">Rõ chiều sâu</div><p class="text-slate-300 leading-relaxed">Từ chỉ báo, copytrade đến các tầng nâng cao, hệ sinh thái được xây để giữ giá trị lâu dài hơn một chu kỳ hứng thú ngắn hạn.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-28 relative z-20">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="glass-card p-6 md:p-10 rounded-[38px] md:rounded-[50px] border-cyan-300/10 shadow-[0_0_80px_rgba(0,240,255,.05)] reveal">
+          <div class="text-center mb-8 md:mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-5 tracking-tighter">Xem thị trường đa tài sản trên cùng một màn hình</h2>
+            <p class="text-slate-400 max-w-3xl mx-auto">Theo dõi nhiều cặp cùng lúc, quan sát nhịp vận động rõ hơn và trải nghiệm cảm giác terminal chuyên nghiệp ngay trên landing page.</p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="glass-card rounded-[24px] overflow-hidden p-2"><div id="mini-chart-1" class="h-[320px]"></div></div>
+            <div class="glass-card rounded-[24px] overflow-hidden p-2"><div id="mini-chart-2" class="h-[320px]"></div></div>
+            <div class="glass-card rounded-[24px] overflow-hidden p-2"><div id="mini-chart-3" class="h-[320px]"></div></div>
+            <div class="glass-card rounded-[24px] overflow-hidden p-2"><div id="mini-chart-4" class="h-[320px]"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 max-w-4xl mx-auto px-4 relative z-20">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-black text-white tracking-tighter">Câu hỏi <span class="text-cyan-300">thường gặp</span></h2>
+      </div>
+      <div class="space-y-4 reveal">
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(1)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Tôi phù hợp với chỉ báo hay copytrade? <i id="faq-icon-1" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-1" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Nếu bạn muốn chủ động quan sát và tự ra quyết định giao dịch, bộ chỉ báo sẽ là lựa chọn phù hợp hơn. Nếu bạn ưu tiên tiết kiệm thời gian và muốn đi cùng đội ngũ theo cách gọn hơn, copytrade là hướng nên cân nhắc.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(2)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Logan Crypto có giữ vốn của tôi không? <i id="faq-icon-2" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-2" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Không. Logan Crypto tập trung vào hệ thống công cụ và giải pháp đồng hành. Việc quản lý tài khoản vẫn cần được thực hiện trên nền tảng của chính khách hàng.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(3)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Tôi có cần phải học chuyên sâu ngay từ đầu không? <i id="faq-icon-3" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-3" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Không nhất thiết. Nhiều khách hàng bắt đầu từ chỉ báo hoặc giải pháp đồng hành, sau đó mới mở rộng sang tầng đào tạo khi đã có nhu cầu nâng khả năng tự chủ và đi sâu hơn vào tư duy giao dịch.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="tools-view" class="view-section pt-20 md:pt-24 pb-40">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16 md:mb-24 reveal">
+        <span class="section-label">Logan Crypto Terminal</span>
+        <h2 class="text-4xl md:text-6xl lg:text-[68px] font-black text-white tracking-tighter mb-4 leading-[1.05] mt-5">TRỌN BỘ CÔNG CỤ<br><span class="text-cyan-300">DÀNH CHO GIAO DỊCH THỰC CHIẾN</span></h2>
+        <p class="text-slate-400 font-light text-sm md:text-lg max-w-3xl mx-auto">Giữ lại tinh thần mạnh của bản gốc, nhưng câu chữ được tiết chế và làm sang hơn để người xem cảm nhận rõ vai trò thật của từng công cụ trong hệ thống.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <div class="glass-card p-6 md:p-10 rounded-[35px] md:rounded-[45px] group flex flex-col h-full reveal">
+          <div class="overflow-hidden rounded-[20px] md:rounded-[30px] mb-6 relative border border-white/10 shadow-2xl"><img src="Orderflow.png" alt="Order Flow" class="w-full h-44 md:h-56 object-cover opacity-80"></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ORDER FLOW</h3>
+          <p class="text-cyan-300 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">Giải mã dòng tiền</p>
+          <p class="text-slate-400 text-xs md:text-sm leading-loose flex-1 mb-6">Thấu thị phản ứng giá và dòng tiền để hỗ trợ chọn setup có cơ sở rõ hơn. Đây là công cụ dành cho người không muốn giao dịch dựa trên cảm giác, mà muốn nhìn được vùng đáng chờ, vùng đáng phản ứng và những thời điểm nên ưu tiên sự kiên nhẫn hơn là hành động vội vàng.</p>
+          <button onclick="openToolModal('orderflow')" class="mt-auto w-full py-4 btn-soft font-bold rounded-xl uppercase text-[10px] md:text-[11px] tracking-widest">Xem Chi Tiết</button>
+        </div>
+
+        <div class="glass-card p-6 md:p-10 rounded-[35px] md:rounded-[45px] group flex flex-col h-full reveal">
+          <div class="rounded-[20px] md:rounded-[30px] mb-6 relative border border-white/10 shadow-2xl bg-gradient-to-br from-purple-500/15 to-transparent p-10 h-44 md:h-56 flex items-center justify-center"><div class="w-24 h-24 md:w-28 md:h-28 rounded-[30px] bg-purple-500/20 border border-purple-300/20 flex items-center justify-center shadow-[0_0_36px_rgba(168,85,247,.18)]"><i class="fas fa-people-arrows-left-right text-[42px] md:text-[48px] text-purple-300"></i></div></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">COPYTRADE</h3>
+          <p class="text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">Đồng hành giao dịch</p>
+          <p class="text-slate-400 text-xs md:text-sm leading-loose flex-1 mb-6">Là giải pháp đồng hành dành cho khách hàng muốn đi cùng đội ngũ theo cách gọn hơn, nhanh hơn và đỡ áp lực hơn. Copytrade phù hợp với người bận rộn, người muốn tối ưu thời gian hoặc người chưa muốn tự xử lý toàn bộ quy trình giao dịch một mình nhưng vẫn muốn tham gia vào một hệ thống có định hướng rõ ràng.</p>
+          <button onclick="openToolModal('copytrade')" class="mt-auto w-full py-4 btn-soft font-bold rounded-xl uppercase text-[10px] md:text-[11px] tracking-widest">Xem Chi Tiết</button>
+        </div>
+
+        <div class="glass-card p-6 md:p-10 rounded-[35px] md:rounded-[45px] group flex flex-col h-full reveal">
+          <div class="overflow-hidden rounded-[20px] md:rounded-[30px] mb-6 relative border border-white/10 shadow-2xl"><img src="DravasBox.png" alt="Darvas DCA" class="w-full h-44 md:h-56 object-cover opacity-80"></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">DARVAS DCA</h3>
+          <p class="text-yellow-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">Bám theo động lượng</p>
+          <p class="text-slate-400 text-xs md:text-sm leading-loose flex-1 mb-6">Chỉ báo hỗ trợ nhận diện vùng tích lũy, điểm mở rộng và các giai đoạn thị trường có động lượng tốt hơn. Đây là công cụ phù hợp với người muốn có khuôn khổ rõ ràng hơn khi quan sát nhịp tăng tốc của giá.</p>
+          <button onclick="openToolModal('darvas')" class="mt-auto w-full py-4 btn-soft font-bold rounded-xl uppercase text-[10px] md:text-[11px] tracking-widest">Xem Chi Tiết</button>
+        </div>
+
+        <div class="glass-card p-6 md:p-10 rounded-[35px] md:rounded-[45px] group flex flex-col h-full reveal">
+          <div class="overflow-hidden rounded-[20px] md:rounded-[30px] mb-6 relative border border-white/10 shadow-2xl"><img src="ICT.png" alt="ICT SMC PRO" class="w-full h-44 md:h-56 object-cover opacity-80"></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight">ICT SMC PRO</h3>
+          <p class="text-green-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">Cấu trúc & thanh khoản</p>
+          <p class="text-slate-400 text-xs md:text-sm leading-loose flex-1 mb-6">Bộ lọc hỗ trợ đọc cấu trúc, vùng thanh khoản và bẫy thị trường để tăng thêm độ sắc bén khi vào lệnh. Đây là lớp xác nhận quan trọng cho người muốn đi sâu hơn vào logic vận động của giá.</p>
+          <button onclick="openToolModal('ict')" class="mt-auto w-full py-4 btn-soft font-bold rounded-xl uppercase text-[10px] md:text-[11px] tracking-widest">Xem Chi Tiết</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="academy-view" class="view-section pt-24 pb-40">
+    <div class="max-w-7xl mx-auto px-4 text-center mb-20 md:mb-32 reveal">
+      <span class="section-label">Lộ trình nâng cao</span>
+      <h2 class="text-4xl md:text-5xl lg:text-[74px] font-black text-white mt-5 mb-6 uppercase tracking-tighter leading-[1.1]">LỘ TRÌNH MỞ RỘNG GIÁ TRỊ<br>KHI KHÁCH HÀNG MUỐN ĐI XA HƠN</h2>
+      <p class="text-slate-400 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">Khi khách hàng đã trải nghiệm hệ thống và muốn nâng khả năng tự chủ, phần đào tạo và nâng cao sẽ trở thành lớp giá trị tiếp theo, xuất hiện tự nhiên và thuyết phục hơn.</p>
     </div>
 
-    <script>
-        // 1. Logic Hiện Thông báo Toast 
-        window.showToast = function(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-            toast.innerHTML = `<i class="fas ${icon} toast-icon"></i><div class="flex-1 text-sm font-medium leading-relaxed">${message}</div>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
-        }
+    <div class="max-w-5xl mx-auto px-4 space-y-6">
+      <div class="glass-card p-8 md:p-14 rounded-[40px] md:rounded-[50px] border-white/10 flex flex-col md:flex-row items-center gap-8 md:gap-12 reveal">
+        <div class="flex-1 text-center md:text-left w-full">
+          <p class="text-green-400 font-black text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">TẦNG 01: NỀN TẢNG</p>
+          <h4 class="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-6 uppercase">LÀM QUEN VỚI TƯ DUY GIAO DỊCH</h4>
+          <ul class="space-y-4 text-slate-300 text-sm font-light text-left inline-block md:block">
+            <li class="flex items-center gap-4"><i class="fas fa-check text-green-500"></i><div>Hiểu cách tiếp cận thị trường có trật tự hơn</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-check text-green-500"></i><div>Nắm được logic nền của công cụ đang sử dụng</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-check text-green-500"></i><div>Giảm bớt các sai lầm phổ biến khi mới bắt đầu</div></li>
+          </ul>
+        </div>
+        <div class="w-full md:w-1/3 mt-6 md:mt-0"><button onclick="openAuthModal('register')" class="w-full py-5 rounded-2xl bg-white/10 border border-white/20 text-white font-black hover:bg-green-400 hover:text-black transition uppercase text-[10px] md:text-[11px] tracking-widest">Bắt đầu với hệ thống</button></div>
+      </div>
 
-        // 2. Data cho Popup Tools
-        const toolDetails = {
-            orderflow: { title: "ORDER FLOW", color: "text-green-400", badge: "Phân Tích Dòng Tiền", desc: "Order Flow giúp bạn nhìn xuyên thấu vào bên trong từng cây nến để xem Phe Mua hay Phe Bán đang thực sự kiểm soát khối lượng.", features: ["<b>Heatmap Sổ Lệnh:</b> Hiển thị tường chặn thanh khoản (Limit Orders).", "<b>CVD:</b> Nhận diện sự bất tương xứng giữa giá và khối lượng.", "<b>Vùng Hấp Thụ:</b> Bắt tín hiệu đỉnh/đáy khi Market Maker xả hàng."] },
-            copytrade: { title: "ALPHA COPYTRADE", color: "text-purple-400", badge: "API Zero-Latency", desc: "Hệ thống đầu tư tự động hoàn toàn. Sếp giữ quyền kiểm soát 100% vốn trên sàn của mình, API sẽ tự động bắt lệnh đồng bộ với tài khoản Master của Quỹ.", features: ["<b>Quản Trị Rủi Ro Chặt Chẽ:</b> Tự động tính toán khối lượng lệnh theo vốn của sếp.", "<b>Đa Sàn Giao Dịch:</b> Tương thích hoàn hảo với Binance, OKX.", "<b>Lệnh Real-time:</b> Sếp theo dõi vị thế mở ngay trên điện thoại."] },
-            darvas: { title: "DARVAS DCA", color: "text-yellow-500", badge: "Tối Đa Hóa Lợi Nhuận", desc: "Dựa trên lý thuyết hộp Darvas huyền thoại, nhưng được nâng cấp bằng thuật toán DCA thông minh và nhồi lệnh thuận xu hướng (Pyramiding).", features: ["<b>Vẽ Hộp Tự Động:</b> Xác định chuẩn xác vùng Tích Lũy.", "<b>Breakout Alert:</b> Báo động ngay khi giá phá vỡ hộp.", "<b>Trailing Stop Box:</b> Tự động dịch mức chặn lãi lên theo từng đáy hộp mới."] },
-            ict: { title: "ICT SMC PRO", color: "text-[#00f0ff]", badge: "Bản Đồ Định Chế", desc: "Hệ thống dựa trên thuật toán phân phối giá của Ngân hàng. Cung cấp điểm vào lệnh (Sniper Entry) với Winrate cực cao.", features: ["<b>Vẽ FVG & Order Block:</b> Tự động làm nổi bật Vùng mất cân bằng giá.", "<b>Săn Bẫy Thanh Khoản:</b> Nhận diện cú quét Stop-hunt để đi theo Cá mập.", "<b>Đồng Bộ MTF:</b> Phân tích cấu trúc từ khung D1 xuống M15."] }
-        };
+      <div class="glass-card p-8 md:p-14 rounded-[40px] md:rounded-[50px] border-yellow-500/30 bg-[#0b100d] flex flex-col md:flex-row items-center gap-8 md:gap-12 reveal">
+        <div class="flex-1 text-center md:text-left w-full">
+          <p class="text-yellow-400 font-black text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">TẦNG 02: THỰC CHIẾN</p>
+          <h4 class="text-2xl md:text-4xl lg:text-5xl font-black text-yellow-400 mb-6 uppercase">VẬN HÀNH CÙNG HỆ THỐNG</h4>
+          <ul class="space-y-4 text-slate-300 text-sm font-light text-left inline-block md:block">
+            <li class="flex items-center gap-4"><i class="fas fa-bolt text-yellow-500"></i><div>Tận dụng công cụ và giải pháp đồng hành theo cách bài bản hơn</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-bolt text-yellow-500"></i><div>Tối ưu quyết định khi quỹ thời gian có hạn</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-bolt text-yellow-500"></i><div>Xây nền trải nghiệm trước khi mở rộng năng lực tự chủ</div></li>
+          </ul>
+        </div>
+        <div class="w-full md:w-1/3 mt-6 md:mt-0"><button onclick="openAuthModal('register')" class="w-full py-5 rounded-2xl bg-yellow-500 text-black font-black uppercase tracking-widest text-[10px] md:text-[11px] hover:scale-105 transition">Tìm hiểu giải pháp phù hợp</button></div>
+      </div>
 
-        function openToolModal(toolKey) {
-            const data = toolDetails[toolKey];
-            let listHTML = data.features.map(f => `<li class="flex items-start gap-3 mb-4 text-gray-300 font-light text-sm leading-relaxed"><i class="fas fa-check-circle ${data.color} mt-1"></i> <span>${f}</span></li>`).join('');
-            document.getElementById('toolModalContent').innerHTML = `
-                <div class="mb-8"><span class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 ${data.color} text-[10px] font-black uppercase tracking-widest mb-4">${data.badge}</span><h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">${data.title}</h2><p class="text-gray-400 leading-loose text-sm font-light italic">${data.desc}</p></div>
-                <div class="bg-[#05080f] p-6 md:p-8 rounded-[30px] border border-white/5 mb-8"><h4 class="text-white font-bold uppercase tracking-widest text-[11px] mb-6 border-b border-white/10 pb-3">Tính Năng Cốt Lõi</h4><ul class="m-0 p-0 list-none">${listHTML}</ul></div>
-                <button onclick="closeToolModal(); openAuthModal('register');" class="w-full btn-zenith text-black py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-[0_0_30px_rgba(0,240,255,0.3)] animate-glow">Đăng Ký Nhận Tư Vấn Mở API</button>
-            `;
-            document.getElementById('toolModal').classList.remove('opacity-0','pointer-events-none'); document.getElementById('toolBox').classList.remove('scale-95');
-        }
-        function closeToolModal() { document.getElementById('toolModal').classList.add('opacity-0','pointer-events-none'); document.getElementById('toolBox').classList.add('scale-95'); }
+      <div class="glass-card p-8 md:p-14 rounded-[40px] md:rounded-[50px] border-cyan-300/40 bg-[#071018] flex flex-col md:flex-row items-center gap-8 md:gap-12 reveal">
+        <div class="flex-1 text-center md:text-left w-full">
+          <p class="text-cyan-300 font-black text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-4 font-mono">TẦNG 03: NÂNG CAO</p>
+          <h4 class="text-2xl md:text-4xl lg:text-5xl font-black text-cyan-300 mb-6 uppercase">ĐI SÂU HƠN KHI ĐÃ SẴN SÀNG</h4>
+          <ul class="space-y-4 text-slate-300 text-sm font-light text-left inline-block md:block">
+            <li class="flex items-center gap-4"><i class="fas fa-star text-cyan-300"></i><div>Mở rộng tư duy và kỹ năng ở mức sâu hơn</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-star text-cyan-300"></i><div>Tăng khả năng tự chủ khi quy mô giao dịch lớn hơn</div></li>
+            <li class="flex items-center gap-4"><i class="fas fa-star text-cyan-300"></i><div>Nâng chất lượng quyết định khi mục tiêu đã cao hơn</div></li>
+          </ul>
+        </div>
+        <div class="w-full md:w-1/3 mt-6 md:mt-0"><button onclick="openAuthModal('register')" class="w-full py-5 rounded-2xl btn-zenith font-black uppercase tracking-widest text-[10px] md:text-[11px]">Tìm hiểu lộ trình nâng cao</button></div>
+      </div>
+    </div>
+  </div>
 
-        // 3. System Load, Mouse Parallax & Counters
-        window.addEventListener('load', () => setTimeout(() => { document.getElementById('preloader').style.opacity = '0'; setTimeout(() => { document.getElementById('preloader').style.display='none'; triggerReveal(); initCounters(); }, 800); }, 1000));
-        
-        // HIỆU ỨNG 3D BACKGROUND
-        document.addEventListener('mousemove', (e) => { 
-            const cursor = document.getElementById('cursor-glow');
-            if(cursor) { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
-            
-            const bg = document.getElementById('hero-bg');
-            if(bg) {
-                const moveX = (window.innerWidth - e.pageX * 2) / 100;
-                const moveY = (window.innerHeight - e.pageY * 2) / 100;
-                bg.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
-            }
+  <div id="about-view" class="view-section pt-24 pb-40">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-20 md:mb-24 reveal">
+        <span class="section-label">Về Logan Crypto</span>
+        <h2 class="text-4xl md:text-[74px] font-black text-white mb-6 uppercase tracking-tighter leading-[1.05] mt-5">MỘT HỆ SINH THÁI ĐƯỢC XÂY<br><span class="text-gradient">CHO HÀNH TRÌNH DÀI HƠN</span></h2>
+        <p class="text-slate-400 text-sm md:text-xl max-w-4xl mx-auto leading-relaxed mt-8">Logan Crypto không được định hình như một nơi chỉ đưa ra tín hiệu. Đây là một hệ sinh thái được xây để phục vụ hành trình giao dịch bài bản hơn: quan sát rõ hơn, hành động có cơ sở hơn và nâng cấp đúng thời điểm hơn khi khách hàng thật sự sẵn sàng đi xa.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8 md:gap-12 mb-12">
+        <div class="glass-card p-8 md:p-14 rounded-[40px] md:rounded-[50px] border-l-4 border-[#FF6F61] reveal">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-[#FF6F61]/20 rounded-2xl flex items-center justify-center mb-6 md:mb-8"><i class="fas fa-fire text-xl md:text-2xl text-[#FF6F61]"></i></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 uppercase text-[#FF6F61]">Thực tế của trader nhỏ lẻ</h3>
+          <p class="text-slate-400 leading-loose text-xs md:text-base">Phần lớn người giao dịch không thiếu sự cố gắng, họ thiếu một hệ thống đủ rõ để nhìn thị trường có cấu trúc hơn và ra quyết định ít cảm tính hơn. Khi công cụ, định hướng và trải nghiệm được đặt đúng chỗ, kết quả thường bắt đầu ổn định theo cách bền hơn.</p>
+        </div>
+        <div class="glass-card p-8 md:p-14 rounded-[40px] md:rounded-[50px] border-l-4 border-cyan-300 reveal">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-cyan-300/20 rounded-2xl flex items-center justify-center mb-6 md:mb-8"><i class="fas fa-database text-xl md:text-2xl text-cyan-300"></i></div>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 uppercase text-cyan-300">Triết lý phát triển</h3>
+          <p class="text-slate-400 leading-loose text-xs md:text-base">Logan Crypto không cố trở thành một nơi quá ồn ào. Chúng tôi ưu tiên xây một nền tảng mà khách hàng có thể bước vào, hiểu được vai trò của từng phần, sử dụng được trong thực tế và tiếp tục nâng cấp khi nhu cầu đã đủ chín.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="reviews-view" class="view-section pt-24 pb-40">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16 md:mb-24 reveal">
+        <span class="section-label">Phản hồi khách hàng</span>
+        <h2 class="text-4xl md:text-[68px] font-black text-white uppercase tracking-tighter mb-4 md:mb-6 leading-[1.05] mt-5">NHỮNG CẢM NHẬN ĐỦ THẬT<br><span class="text-cyan-300">ĐỂ NGƯỜI KHÁC CẢM NHẬN ĐƯỢC</span></h2>
+        <p class="text-slate-400 font-light text-sm md:text-lg max-w-3xl mx-auto">Phản hồi không cần ồn ào. Chỉ cần đủ thật để người xem cảm nhận được đây là một hệ thống tạo ra trải nghiệm rõ ràng, có chiều sâu và đáng để đi cùng lâu hơn.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-16 md:mb-20">
+        <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+          <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">AT</div><div><h4 class="text-white font-bold text-sm md:text-base">Anh T.</h4><p class="text-[9px] text-slate-500 uppercase font-black tracking-widest">Dùng chỉ báo</p></div></div>
+          <p class="text-slate-300 text-xs md:text-sm leading-loose flex-1 mb-6">“Điều tôi cảm nhận rõ nhất là cách hệ thống giúp tôi nhìn chart có trật tự hơn. Khi mọi thứ rõ hơn, tâm lý giao dịch cũng bớt rối hơn rất nhiều.”</p>
+          <p class="text-green-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]">Cảm nhận: rõ hơn trước khi hành động</p>
+        </div>
+        <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+          <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">NL</div><div><h4 class="text-white font-bold text-sm md:text-base">Ngọc L.</h4><p class="text-[9px] text-slate-500 uppercase font-black tracking-widest">Copytrade</p></div></div>
+          <p class="text-slate-300 text-xs md:text-sm leading-loose flex-1 mb-6">“Tôi không có nhiều thời gian để theo sát thị trường, nên điều tôi cần nhất là một giải pháp khiến mình yên tâm hơn khi đi cùng đội ngũ có định hướng rõ ràng.”</p>
+          <p class="text-yellow-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]">Cảm nhận: gọn hơn, nhẹ hơn, rõ hơn</p>
+        </div>
+        <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+          <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">VH</div><div><h4 class="text-white font-bold text-sm md:text-base">Văn H.</h4><p class="text-[9px] text-slate-500 uppercase font-black tracking-widest">Khách nâng cao</p></div></div>
+          <p class="text-slate-300 text-xs md:text-sm leading-loose flex-1 mb-6">“Sau khi đã đi cùng hệ thống một thời gian, tôi mới nhận ra mình cần học sâu hơn để nâng khả năng tự chủ. Lúc đó phần nâng cao xuất hiện rất đúng lúc.”</p>
+          <p class="text-cyan-300 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]">Cảm nhận: nâng cấp đúng thời điểm</p>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-14 rounded-[40px] md:rounded-[50px] border-cyan-300/20 bg-black/30 text-center reveal">
+        <h3 class="text-3xl md:text-5xl font-black text-white mb-4 md:mb-6 tracking-tighter">MỘT HỆ THỐNG CÓ GIÁ TRỊ<br><span class="text-cyan-300">SẼ TỰ NÓ NÓI THÀNH TIẾNG</span></h3>
+        <p class="text-slate-400 text-xs md:text-base max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed">Kết quả của mỗi người sẽ khác nhau tùy vốn, kinh nghiệm và cách vận hành. Logan Crypto không cam kết lợi nhuận, mà tập trung vào việc xây ra một trải nghiệm giao dịch rõ hơn, gọn hơn và có chiều sâu hơn.</p>
+        <button onclick="openAuthModal('register')" class="btn-zenith px-12 py-5 rounded-2xl font-black text-[11px] md:text-sm uppercase tracking-widest">Nhận tư vấn miễn phí</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[#04050a] pt-24 md:pt-28 pb-24 md:pb-16 border-t border-white/5 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 text-center md:text-left">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16 md:mb-20">
+        <div class="md:col-span-1 flex flex-col items-center md:items-start">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black"><img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover"></div>
+            <span class="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">LOGAN CRYPTO</span>
+          </div>
+          <p class="text-slate-500 text-sm leading-relaxed max-w-xs">Nền tảng chỉ báo và giải pháp đồng hành dành cho nhà giao dịch muốn quan sát rõ hơn, vận hành gọn hơn và đi xa hơn theo một hệ thống có chiều sâu.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-black mb-6 md:mb-8 uppercase text-[10px] tracking-widest text-cyan-300">Liên hệ & hỗ trợ</h4>
+          <div class="space-y-3 text-slate-500 text-sm leading-relaxed">
+            <p>Tư vấn giải pháp phù hợp theo mục tiêu hiện tại.</p>
+            <p>Hỗ trợ định hướng giữa chỉ báo, copytrade và lộ trình nâng cao.</p>
+            <button onclick="openAuthModal('register')" class="btn-zenith px-6 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] mt-2">Nhận tư vấn miễn phí</button>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-black mb-6 md:mb-8 uppercase text-[10px] tracking-widest text-cyan-300">Điều quan trọng cần biết</h4>
+          <div class="space-y-3 text-slate-500 text-sm leading-relaxed">
+            <p>Hệ thống được thiết kế để hỗ trợ quan sát và ra quyết định rõ ràng hơn.</p>
+            <p>Giải pháp đồng hành phù hợp với người cần tối ưu quỹ thời gian.</p>
+            <p>Hiệu quả thực tế phụ thuộc vào vốn, kinh nghiệm và cách vận hành của mỗi người.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-slate-600 text-[9px] text-center uppercase tracking-[0.3em] md:tracking-[0.5em]">© 2026 LOGAN CRYPTO. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <div id="stickyBar" class="sticky-cta flex justify-between items-center z-[80]">
+    <div class="hidden md:flex flex-col">
+      <span class="text-white font-black uppercase tracking-widest text-sm">LOGAN CRYPTO</span>
+      <span class="text-cyan-300 text-[9px] uppercase tracking-[0.2em] font-bold mt-1">Chỉ báo VIP & Copytrade thực chiến</span>
+    </div>
+    <button onclick="openAuthModal('register')" class="w-full md:w-auto btn-zenith px-6 md:px-10 py-4 rounded-xl font-black uppercase tracking-[0.15em] text-[10px] text-center">Nhận tư vấn miễn phí</button>
+  </div>
+
+  <div id="toolModal" class="modal-wrap fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-0">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeToolModal()"></div>
+    <div class="modal-box relative rounded-[30px] md:rounded-[40px] p-6 md:p-12 max-w-2xl w-full max-h-[85vh] overflow-y-auto">
+      <button onclick="closeToolModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition"><i class="fas fa-times text-xl md:text-2xl"></i></button>
+      <div id="toolModalContent" class="mt-4 md:mt-0"></div>
+    </div>
+  </div>
+
+  <div id="authModal" class="modal-wrap fixed inset-0 z-[210] flex items-center justify-center p-4 md:p-0">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeAuthModal()"></div>
+    <div class="modal-box relative rounded-[30px] md:rounded-[40px] p-6 md:p-12 max-w-md w-full max-h-[85vh] overflow-y-auto">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition"><i class="fas fa-times text-xl md:text-2xl"></i></button>
+      <div class="text-center mb-6 md:mb-8 mt-2">
+        <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-2">Nhận <span class="text-cyan-300">tư vấn chỉ báo & copytrade</span></h3>
+        <p class="text-slate-400 text-sm">Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn.</p>
+      </div>
+      <div class="flex justify-center gap-6 md:gap-8 border-b border-white/10 mb-6 md:mb-8">
+        <button onclick="switchTab('register')" id="tab-register" class="font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300">Đăng Ký</button>
+        <button onclick="switchTab('login')" id="tab-login" class="font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent">Đăng Nhập</button>
+      </div>
+
+      <form id="form-register" class="space-y-4">
+        <input id="auth-name" type="text" placeholder="Họ Tên" class="input-vip" required>
+        <input id="auth-phone" type="tel" placeholder="Số điện thoại" class="input-vip" required>
+        <input id="auth-email" type="email" placeholder="Email" class="input-vip" required>
+        <input id="auth-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
+        <button type="submit" class="w-full btn-zenith font-black py-4 rounded-2xl uppercase tracking-widest text-[10px] mt-2">Xác nhận đăng ký</button>
+      </form>
+
+      <form id="form-login" class="space-y-4 hidden">
+        <input id="log-email" type="email" placeholder="Email" class="input-vip" required>
+        <input id="log-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
+        <button type="submit" class="w-full btn-soft font-black py-4 rounded-2xl uppercase tracking-widest text-[10px] mt-2">Đăng nhập</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const toolContent = {
+      orderflow: {
+        title: 'ORDER FLOW',
+        body: 'Công cụ hỗ trợ đọc phản ứng giá và dòng tiền để giúp người dùng quan sát thị trường một cách có cấu trúc hơn. Giá trị của Order Flow không nằm ở việc tạo ra quá nhiều tín hiệu, mà nằm ở việc giúp bạn nhận ra đâu là vùng đáng chờ, đâu là chuyển động nên quan sát kỹ hơn và đâu là những thời điểm cần tránh sự vội vàng.'
+      },
+      copytrade: {
+        title: 'COPYTRADE',
+        body: 'Giải pháp đồng hành dành cho khách hàng muốn đi cùng đội ngũ theo cách gọn hơn và ít áp lực hơn. Copytrade phù hợp với người bận rộn, người muốn tối ưu quỹ thời gian hoặc người chưa muốn tự xử lý toàn bộ quá trình giao dịch một mình nhưng vẫn muốn tham gia vào một hệ thống có định hướng rõ ràng.'
+      },
+      darvas: {
+        title: 'DARVAS DCA',
+        body: 'Công cụ hỗ trợ nhận diện vùng tích lũy, động lượng và các pha mở rộng theo xu hướng. Phù hợp với người muốn quan sát nhịp thị trường rõ hơn và giữ được một khuôn khổ nhất quán khi bám theo các giai đoạn giá vận động tốt.'
+      },
+      ict: {
+        title: 'ICT SMC PRO',
+        body: 'Bộ lọc hỗ trợ đọc cấu trúc, vùng thanh khoản và các bẫy thị trường để tăng thêm độ sắc bén trước khi vào lệnh. Đây là lớp xác nhận quan trọng cho người muốn đào sâu hơn vào logic vận động của giá.'
+      }
+    };
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById(viewId);
+      if (target) target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('logan-theme', isLight ? 'light' : 'dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+      if (typeof TradingView !== 'undefined') setTimeout(initMiniCharts, 50);
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('logan-theme');
+      const shouldLight = savedTheme === 'light';
+      if (shouldLight) document.body.classList.add('light-theme');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.className = shouldLight ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    function openToolModal(key) {
+      const modal = document.getElementById('toolModal');
+      const content = document.getElementById('toolModalContent');
+      const item = toolContent[key];
+      content.innerHTML = `
+        <div class="text-cyan-300 font-mono tracking-[0.25em] text-[10px] uppercase mb-4">Chi tiết công cụ</div>
+        <h3 class="text-3xl md:text-4xl font-black text-white mb-5 tracking-tight">${item.title}</h3>
+        <p class="text-slate-300 leading-loose text-sm md:text-base">${item.body}</p>
+      `;
+      modal.classList.add('open');
+    }
+
+    function closeToolModal() {
+      document.getElementById('toolModal').classList.remove('open');
+    }
+
+    function openAuthModal(tab = 'register') {
+      switchTab(tab);
+      document.getElementById('authModal').classList.add('open');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('open');
+    }
+
+    function switchTab(tab) {
+      const reg = document.getElementById('form-register');
+      const log = document.getElementById('form-login');
+      const regTab = document.getElementById('tab-register');
+      const logTab = document.getElementById('tab-login');
+
+      if (tab === 'register') {
+        reg.classList.remove('hidden');
+        log.classList.add('hidden');
+        regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
+        logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
+      } else {
+        reg.classList.add('hidden');
+        log.className = 'space-y-4';
+        regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
+        logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
+      }
+    }
+
+    function toggleFAQ(index) {
+      const answer = document.getElementById(`faq-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+      answer.classList.toggle('open');
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.12 });
+
+    function initMiniCharts() {
+      if (typeof TradingView === 'undefined') return;
+      const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+      const toolbarBg = document.body.classList.contains('light-theme') ? '#ffffff' : '#0a0d14';
+      const chartConfigs = [
+        { id: 'mini-chart-1', symbol: 'BINANCE:BTCUSDT' },
+        { id: 'mini-chart-2', symbol: 'BINANCE:ETHUSDT' },
+        { id: 'mini-chart-3', symbol: 'BINANCE:SOLUSDT' },
+        { id: 'mini-chart-4', symbol: 'BINANCE:XRPUSDT' }
+      ];
+      chartConfigs.forEach(cfg => {
+        const container = document.getElementById(cfg.id);
+        if (!container) return;
+        container.innerHTML = '';
+        new TradingView.widget({
+          autosize: true,
+          symbol: cfg.symbol,
+          interval: '1',
+          timezone: 'Etc/UTC',
+          theme: theme,
+          style: '1',
+          locale: 'vi',
+          toolbar_bg: toolbarBg,
+          enable_publishing: false,
+          hide_side_toolbar: false,
+          allow_symbol_change: false,
+          details: false,
+          hotlist: false,
+          calendar: false,
+          withdateranges: false,
+          hide_top_toolbar: false,
+          save_image: false,
+          container_id: cfg.id
         });
+      });
+    }
 
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
-        function switchView(id) { document.querySelectorAll('.view-section').forEach(v => { v.classList.remove('active'); v.style.display='none'; if(v.id===id){ v.style.display='block'; setTimeout(()=>v.classList.add('active'),50); } }); window.scrollTo(0,0); }
-        function initCounters() { document.querySelectorAll('.counter').forEach(c => { let t = +c.dataset.target, cur = 0, inc = t/100; let u = () => { cur += inc; if(cur < t){ c.innerText = Math.ceil(cur)+c.dataset.suffix; requestAnimationFrame(u); } else c.innerText = t+c.dataset.suffix; }; u(); }); }
-        function openAuthModal(t){ document.getElementById('authModal').classList.remove('opacity-0','pointer-events-none'); document.getElementById('authBox').classList.remove('scale-95'); switchTab(t); }
-        function closeAuthModal(){ document.getElementById('authModal').classList.add('opacity-0','pointer-events-none'); document.getElementById('authBox').classList.add('scale-95'); }
-        function switchTab(t){ const rB = document.getElementById('tab-register'), lB = document.getElementById('tab-login'), rF = document.getElementById('form-register'), lF = document.getElementById('form-login'); if(t==='register'){ rB.classList.add('active'); lB.classList.remove('active'); rF.classList.remove('hidden'); lF.classList.add('hidden'); } else { lB.classList.add('active'); rB.classList.remove('active'); lF.classList.remove('hidden'); rF.classList.add('hidden'); } }
-        function triggerReveal() { document.querySelectorAll('.reveal').forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active'); }); }
-        window.addEventListener('scroll', () => { triggerReveal(); document.getElementById('stickyBar').classList.toggle('show', window.scrollY > 400); });
-        
-        document.querySelectorAll('.tilt-card').forEach(c => { c.addEventListener('mousemove', (e) => { const r = c.getBoundingClientRect(), x = e.clientX-r.left, y = e.clientY-r.top, rX = ((y-r.height/2)/(r.height/2))*-8, rY = ((x-r.width/2)/(r.width/2))*8; c.style.transform = `perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg) scale3d(1.02,1.02,1.02)`; c.style.transition = 'none'; }); c.addEventListener('mouseleave', () => { c.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)`; c.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; }); });
-    </script>
+    initTheme();
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    window.addEventListener('scroll', () => {
+      const stickyBar = document.getElementById('stickyBar');
+      if (window.scrollY > 500) stickyBar.classList.add('show');
+      else stickyBar.classList.remove('show');
+    });
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyArg95Ub_bK1rbVGO1udrMMpuWZJJ6b0a8",
-            authDomain: "galaxyalpha-45df5.firebaseapp.com",
-            projectId: "galaxyalpha-45df5",
-            storageBucket: "galaxyalpha-45df5.firebasestorage.app",
-            messagingSenderId: "640919053590",
-            appId: "1:640919053590:web:53189c6d45d7559b0e1c37"
-        };
-        const SHEET_URL = "https://script.google.com/macros/s/AKfycbxfzGfatjyP86xCRw-_ftzgQKbvTDJgiTRlXdZZPuAQWwM0H1w9Qqg1Y0kLRVdnl9AD_g/exec";
-        const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+    const tvScript = document.createElement('script');
+    tvScript.src = 'https://s3.tradingview.com/tv.js';
+    tvScript.onload = initMiniCharts;
+    document.body.appendChild(tvScript);
+  </script>
 
-        window.handleAuthSubmit = async function(e, type) {
-            e.preventDefault();
-            const btn = document.getElementById(type === 'register' ? (document.getElementById('btn-auth-reg') ? 'btn-auth-reg' : 'btn-register') : 'btn-auth-log');
-            const originalHTML = btn.innerHTML; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> ENCRYPTING...'; btn.disabled = true;
+  <script type="module">
+    import { registerUser } from "./register.js";
+    import { loginUser } from "./login.js";
+    import { redirectByRole } from "./redirect-by-role.js";
 
-            try {
-                if(type === 'register') {
-                    const name = document.getElementById('auth-name')?.value || document.getElementById('reg-name-home').value, 
-                          zalo = document.getElementById('auth-zalo')?.value || document.getElementById('reg-zalo-home').value, 
-                          email = document.getElementById('auth-email')?.value || document.getElementById('reg-email-home').value, 
-                          pass = document.getElementById('auth-pass')?.value || document.getElementById('reg-pass-home').value;
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-                    await setDoc(doc(db, "users", userCredential.user.uid), { name, zalo, email, createdAt: new Date().toISOString() });
-                    fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, zalo, email }) });
-                    
-                    btn.innerHTML = 'SUCCESS'; btn.style.background = '#00ff88';
-                    setTimeout(() => { closeAuthModal(); window.showToast("Cập nhật thành công! Chuyên gia sẽ liên hệ Zalo cho sếp ngay.", "success"); e.target.reset(); }, 1000);
-                } else {
-                    const email = document.getElementById('log-email').value, pass = document.getElementById('log-pass').value;
-                    await signInWithEmailAndPassword(auth, email, pass);
-                    btn.innerHTML = 'ACCESS GRANTED'; btn.style.background = '#00ff88';
-                    setTimeout(() => { closeAuthModal(); window.showToast("Truy cập Terminal thành công! Chào mừng sếp.", "success"); e.target.reset(); }, 1000);
-                }
-            } catch (err) {
-                let msg = "Lỗi hệ thống! Vui lòng thử lại sau.";
-                if (err.code === 'auth/email-already-in-use') msg = "Email này đã tồn tại trong hệ thống!";
-                if (err.code === 'auth/invalid-credential') msg = "Sai email hoặc mật khẩu! Vui lòng kiểm tra lại.";
-                if (err.code === 'auth/weak-password') msg = "Mật khẩu quá yếu, cần ít nhất 6 ký tự!";
-                window.showToast(msg, "error");
-                btn.innerHTML = originalHTML; btn.disabled = false;
-            }
+    const leadForm = document.getElementById("leadForm");
+    const registerForm = document.getElementById("form-register");
+    const loginForm = document.getElementById("form-login");
+
+    if (leadForm) {
+      leadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("reg-name-home").value.trim();
+        const phone = document.getElementById("reg-phone-home").value.trim();
+        const email = document.getElementById("reg-email-home").value.trim();
+
+        document.getElementById("auth-name").value = name;
+        document.getElementById("auth-phone").value = phone;
+        document.getElementById("auth-email").value = email;
+
+        openAuthModal("register");
+        document.getElementById("auth-password").focus();
+      });
+    }
+
+    if (registerForm) {
+      registerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("auth-name").value.trim();
+        const phone = document.getElementById("auth-phone").value.trim();
+        const email = document.getElementById("auth-email").value.trim();
+        const password = document.getElementById("auth-password").value;
+
+        try {
+          await registerUser(name, phone, email, password);
+          alert("Đăng ký thành công.");
+          closeAuthModal();
+          window.location.href = "./dashboard-free.html";
+        } catch (error) {
+          console.error(error);
+          alert("Đăng ký thất bại: " + error.message);
         }
-    </script>
+      });
+    }
+
+    if (loginForm) {
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("log-email").value.trim();
+        const password = document.getElementById("log-password").value;
+
+        try {
+          const result = await loginUser(email, password);
+          alert("Đăng nhập thành công.");
+          closeAuthModal();
+          redirectByRole(result.profile);
+        } catch (error) {
+          console.error(error);
+          alert("Đăng nhập thất bại: " + error.message);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

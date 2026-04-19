@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro | Logan Crypto</title>
+</head>
+<body style="font-family:Arial;background:#05070b;color:white;padding:30px;">
+  <h1>Khu Pro</h1>
+  <p>Bạn đang ở tầng pro trở lên.</p>
+  <p>Trang này dành cho khách được mở quyền pro.</p>
+
+  <script type="module">
+    import { requireRole } from "./auth-guard.js";
+    requireRole(["pro", "admin"]);
+  </script>
+</body>
+</html>
