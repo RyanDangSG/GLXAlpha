@@ -46,11 +46,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
     .row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -144,7 +139,7 @@
       text-transform: uppercase;
     }
     @media (max-width: 980px) {
-      .grid, .row, .grid-3 {
+      .grid, .row {
         grid-template-columns: 1fr;
       }
     }
@@ -271,10 +266,7 @@
       getDoc,
       setDoc,
       collection,
-      getDocs,
-      query,
-      orderBy,
-      where
+      getDocs
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const adminInfo = document.getElementById("adminInfo");
@@ -346,69 +338,95 @@
     }
 
     async function loadCourses() {
-      courseList.innerHTML = `<div class="muted">Đang tải courses...</div>`;
+      try {
+        courseList.innerHTML = `<div class="muted">Đang tải courses...</div>`;
 
-      const q = query(collection(db, "courses"), where("published", "in", [true, false]), orderBy("order", "asc"));
-      const snap = await getDocs(q);
+        const snap = await getDocs(collection(db, "courses"));
 
-      courseList.innerHTML = "";
-
-      if (snap.empty) {
-        courseList.innerHTML = `<div class="muted">Chưa có khóa học nào.</div>`;
-        return;
-      }
-
-      snap.forEach((docSnap) => {
-        const data = docSnap.data();
-        const item = document.createElement("div");
-        item.className = "item" + (selectedCourseId === docSnap.id ? " active" : "");
-        item.innerHTML = `
-          <div class="item-title">${data.title || docSnap.id}</div>
-          <div class="muted" style="font-size:13px;">
-            ID: ${docSnap.id} • role: ${data.requiredRole || "free"} • order: ${data.order ?? 0}
-          </div>
-        `;
-        item.addEventListener("click", async () => {
-          selectedCourseId = docSnap.id;
-          selectedCourseText.textContent = selectedCourseId;
-          await loadCourses();
-          await loadLessons();
+        let courses = [];
+        snap.forEach((docSnap) => {
+          courses.push({
+            id: docSnap.id,
+            ...docSnap.data()
+          });
         });
-        courseList.appendChild(item);
-      });
+
+        courses.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        courseList.innerHTML = "";
+
+        if (!courses.length) {
+          courseList.innerHTML = `<div class="muted">Chưa có khóa học nào.</div>`;
+          return;
+        }
+
+        courses.forEach((data) => {
+          const item = document.createElement("div");
+          item.className = "item" + (selectedCourseId === data.id ? " active" : "");
+          item.innerHTML = `
+            <div class="item-title">${data.title || data.id}</div>
+            <div class="muted" style="font-size:13px;">
+              ID: ${data.id} • role: ${data.requiredRole || "free"} • order: ${data.order ?? 0} • published: ${data.published === true ? "true" : "false"}
+            </div>
+          `;
+          item.addEventListener("click", async () => {
+            selectedCourseId = data.id;
+            selectedCourseText.textContent = selectedCourseId;
+            await loadCourses();
+            await loadLessons();
+          });
+          courseList.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Lỗi loadCourses admin:", error);
+        courseList.innerHTML = `<div class="muted">Không tải được courses: ${error.message}</div>`;
+      }
     }
 
     async function loadLessons() {
-      if (!selectedCourseId) {
-        lessonList.innerHTML = `<div class="muted">Hãy chọn một course trước.</div>`;
-        return;
+      try {
+        if (!selectedCourseId) {
+          lessonList.innerHTML = `<div class="muted">Hãy chọn một course trước.</div>`;
+          return;
+        }
+
+        lessonList.innerHTML = `<div class="muted">Đang tải lessons...</div>`;
+
+        const lessonsRef = collection(db, "courses", selectedCourseId, "lessons");
+        const snap = await getDocs(lessonsRef);
+
+        let lessons = [];
+        snap.forEach((docSnap) => {
+          lessons.push({
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+        });
+
+        lessons.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        lessonList.innerHTML = "";
+
+        if (!lessons.length) {
+          lessonList.innerHTML = `<div class="muted">Khóa này chưa có lesson nào.</div>`;
+          return;
+        }
+
+        lessons.forEach((data) => {
+          const item = document.createElement("div");
+          item.className = "item";
+          item.innerHTML = `
+            <div class="item-title">${data.title || data.id}</div>
+            <div class="muted" style="font-size:13px;">
+              ID: ${data.id} • role: ${data.requiredRole || "free"} • preview: ${data.isPreview ? "true" : "false"} • order: ${data.order ?? 0} • published: ${data.published === true ? "true" : "false"}
+            </div>
+          `;
+          lessonList.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Lỗi loadLessons admin:", error);
+        lessonList.innerHTML = `<div class="muted">Không tải được lessons: ${error.message}</div>`;
       }
-
-      lessonList.innerHTML = `<div class="muted">Đang tải lessons...</div>`;
-
-      const lessonsRef = collection(db, "courses", selectedCourseId, "lessons");
-      const q = query(lessonsRef, where("published", "in", [true, false]), orderBy("order", "asc"));
-      const snap = await getDocs(q);
-
-      lessonList.innerHTML = "";
-
-      if (snap.empty) {
-        lessonList.innerHTML = `<div class="muted">Khóa này chưa có lesson nào.</div>`;
-        return;
-      }
-
-      snap.forEach((docSnap) => {
-        const data = docSnap.data();
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <div class="item-title">${data.title || docSnap.id}</div>
-          <div class="muted" style="font-size:13px;">
-            ID: ${docSnap.id} • role: ${data.requiredRole || "free"} • preview: ${data.isPreview ? "true" : "false"} • order: ${data.order ?? 0}
-          </div>
-        `;
-        lessonList.appendChild(item);
-      });
     }
 
     saveCourseBtn.addEventListener("click", async () => {
