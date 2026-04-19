@@ -592,49 +592,32 @@
   </script>
 
   <script type="module">
-    import { registerUser } from "./register.js";
-    import { loginUser } from "./login.js";
-    import { redirectByRole } from "./redirect-by-role.js";
+  import { registerUser } from "./register.js";
 
-    const leadForm = document.getElementById("leadForm");
-    const registerForm = document.getElementById("form-register");
-    const loginForm = document.getElementById("form-login");
+  const form = document.getElementById("registerForm");
+  const msg = document.getElementById("registerMsg");
 
-    if (leadForm) {
-      leadForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = document.getElementById("reg-name-home").value.trim();
-        const phone = document.getElementById("reg-phone-home").value.trim();
-        const email = document.getElementById("reg-email-home").value.trim();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.textContent = "Đang xử lý...";
 
-        document.getElementById("auth-name").value = name;
-        document.getElementById("auth-phone").value = phone;
-        document.getElementById("auth-email").value = email;
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-        openAuthModal("register");
-        document.getElementById("auth-password").focus();
-      });
+    try {
+      await registerUser(name, phone, email, password);
+      msg.textContent = "Đăng ký thành công. Đang chuyển trang...";
+      setTimeout(() => {
+        window.location.href = "./dashboard.html";
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      msg.textContent = "Lỗi: " + error.message;
     }
-
-    if (registerForm) {
-      registerForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("auth-name").value.trim();
-        const phone = document.getElementById("auth-phone").value.trim();
-        const email = document.getElementById("auth-email").value.trim();
-        const password = document.getElementById("auth-password").value;
-
-        try {
-          await registerUser(name, phone, email, password);
-          alert("Đăng ký thành công.");
-          closeAuthModal();
-          window.location.href = "./dashboard.html";
-        } catch (error) {
-          console.error(error);
-          alert("Đăng ký thất bại: " + error.message);
-        }
-      });
+  });
+</script>
     }
 
     if (loginForm) {
