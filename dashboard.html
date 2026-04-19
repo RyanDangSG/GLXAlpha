@@ -6,234 +6,552 @@
   <title>Dashboard | Logan Crypto</title>
   <style>
     :root {
-      --bg: #070b14;
-      --panel: #101729;
-      --panel-2: #0c1220;
-      --border: rgba(255,255,255,.08);
-      --text: #ffffff;
-      --muted: #94a3b8;
-      --primary: #3ad7ff;
-      --primary-2: #2ca6ff;
+      --bg: #050812;
+      --bg-2: #09111f;
+      --panel: rgba(10, 18, 33, 0.88);
+      --panel-2: rgba(14, 24, 42, 0.95);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(74, 222, 255, 0.22);
+      --text: #f8fbff;
+      --muted: #8ea0b8;
+      --muted-2: #6f8099;
+      --primary: #35e0ff;
+      --primary-2: #3aa8ff;
+      --primary-soft: rgba(53, 224, 255, 0.12);
+      --success: #22c55e;
+      --warning: #f59e0b;
       --danger: #ff7373;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
     }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #0a0f1c 0%, #070b14 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(53,224,255,0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(58,168,255,0.08), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
     }
+
     .app {
-      max-width: 1350px;
+      max-width: 1420px;
       margin: 0 auto;
-      padding: 18px;
+      padding: 20px;
     }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      padding: 14px 18px;
-      background: rgba(15,23,42,.75);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      gap: 14px;
+      padding: 18px 22px;
       margin-bottom: 18px;
-      backdrop-filter: blur(12px);
-      flex-wrap: wrap;
     }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
+
     .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
       object-fit: cover;
       border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
     }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
     .top-actions {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
+
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
+      justify-content: center;
+      min-width: 84px;
+      padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(58,215,255,.12);
-      color: #8feaff;
-      font-weight: 700;
+      background: var(--primary-soft);
+      border: 1px solid rgba(53,224,255,.18);
+      color: #9aecff;
+      font-weight: 800;
       font-size: 12px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .btn, .btn-soft {
+
+    .btn,
+    .btn-soft,
+    .btn-danger {
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px 16px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
+      transition: .22s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .btn:hover,
+    .btn-soft:hover,
+    .btn-danger:hover {
+      transform: translateY(-1px);
+    }
+
     .btn {
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-      color: #02131a;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #03131b;
+      box-shadow: 0 12px 30px rgba(53,224,255,.16);
     }
+
     .btn-soft {
-      background: #111827;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ff8c8c, #ff6b6b);
       color: white;
-      border: 1px solid rgba(255,255,255,.1);
     }
-    .layout {
+
+    .hero {
       display: grid;
-      grid-template-columns: 1.1fr 3fr;
+      grid-template-columns: 1.35fr .95fr;
       gap: 18px;
-      margin-top: 18px;
+      margin-bottom: 18px;
     }
-    .panel {
-      background: rgba(15,23,42,.78);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-      backdrop-filter: blur(10px);
+
+    .hero-card {
+      padding: 24px;
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
     }
-    .panel-title {
-      font-size: 18px;
-      font-weight: 700;
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(53,224,255,.18), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hello {
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1;
+      margin: 0 0 12px;
+      letter-spacing: -0.04em;
+    }
+
+    .email {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 18px;
+    }
+
+    .role-desc {
+      color: #d9e7ff;
+      max-width: 840px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .admin-panel {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 190px;
+    }
+
+    .admin-panel .mini-title {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .admin-panel .big {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+      padding: 18px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
       margin-bottom: 14px;
+      letter-spacing: -0.02em;
     }
+
     .course-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 16px;
     }
+
     .course-card {
-      background: linear-gradient(180deg, #0d1526 0%, #0b1120 100%);
+      background: linear-gradient(180deg, rgba(14,24,42,.95) 0%, rgba(9,15,28,.96) 100%);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       cursor: pointer;
-      transition: .25s ease;
+      transition: .22s ease;
+      position: relative;
     }
-    .course-card:hover { transform: translateY(-2px); border-color: rgba(58,215,255,.35); }
-    .course-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      display: block;
+
+    .course-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: 0 16px 36px rgba(0,0,0,.32);
     }
-    .course-body { padding: 12px; }
-    .course-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
+
+    .course-card.active {
+      border-color: rgba(53,224,255,.38);
+      box-shadow: 0 0 0 1px rgba(53,224,255,.22) inset, 0 16px 36px rgba(0,0,0,.35);
     }
-    .course-status {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #8feaff;
-    }
+
     .course-card.locked {
-      opacity: .82;
+      opacity: .85;
       border-style: dashed;
     }
+
+    .course-cover {
+      width: 100%;
+      height: 148px;
+      object-fit: cover;
+      display: block;
+      background: #0c1322;
+    }
+
+    .course-body {
+      padding: 14px;
+    }
+
+    .course-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .course-slug {
+      color: var(--muted-2);
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 18px;
+    }
+
+    .course-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .course-status {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .status-open { color: #9aecff; }
+    .status-locked { color: #ffd08a; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 18px;
+    }
+
+    .side-panel,
+    .content-panel {
+      padding: 18px;
+    }
+
     .lesson-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      max-height: 860px;
+      overflow: auto;
+      padding-right: 4px;
     }
+
     .lesson-item {
       width: 100%;
       text-align: left;
-      padding: 12px 14px;
-      border-radius: 12px;
+      padding: 14px;
+      border-radius: 16px;
       border: 1px solid var(--border);
-      background: #111727;
+      background: linear-gradient(180deg, rgba(17,23,39,.96) 0%, rgba(10,16,30,.96) 100%);
       color: white;
       cursor: pointer;
       transition: .2s ease;
     }
-    .lesson-item:hover { border-color: rgba(58,215,255,.35); }
+
+    .lesson-item:hover {
+      border-color: var(--border-strong);
+    }
+
     .lesson-item.locked {
-      background: #0b1020;
-      opacity: .82;
       border-style: dashed;
+      opacity: .84;
+      background: linear-gradient(180deg, rgba(12,16,27,.96) 0%, rgba(8,12,22,.98) 100%);
     }
+
     .lesson-item.active {
-      border-color: rgba(58,215,255,.45);
-      box-shadow: 0 0 0 1px rgba(58,215,255,.2) inset;
+      border-color: rgba(53,224,255,.42);
+      box-shadow: 0 0 0 1px rgba(53,224,255,.22) inset;
     }
+
     .lesson-item-title {
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 16px;
       margin-bottom: 6px;
+      line-height: 1.35;
     }
-    .muted { color: var(--muted); line-height: 1.6; }
-    .content-wrap {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.6;
     }
-    .video-frame {
-      width: 100%;
-      min-height: 520px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background: #000;
+
+    .lesson-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
     }
-    .empty-state, .locked-box {
-      padding: 24px;
-      border-radius: 16px;
-      border: 1px dashed rgba(255,255,255,.12);
-      background: #0b1020;
+
+    .lesson-badge.open {
+      background: rgba(34,197,94,.12);
+      color: #8ef1b0;
+      border: 1px solid rgba(34,197,94,.18);
     }
-    .locked-box h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
+
+    .lesson-badge.locked {
+      background: rgba(245,158,11,.12);
+      color: #ffd08a;
+      border: 1px solid rgba(245,158,11,.18);
     }
+
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 18px;
     }
+
     .meta-card {
-      background: rgba(255,255,255,.03);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 90px;
     }
+
+    .meta-label {
+      color: var(--muted-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .meta-value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    .viewer-card {
+      padding: 18px;
+    }
+
+    .empty-state,
+    .locked-box {
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(10,16,29,.9), rgba(8,13,24,.95));
+    }
+
+    .empty-state h3,
+    .locked-box h3 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .lesson-heading {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.12;
+      margin: 0 0 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .lesson-summary {
+      color: #d4e4fb;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .video-frame {
+      width: 100%;
+      min-height: 560px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 18px 40px rgba(0,0,0,.26);
+    }
+
+    .lesson-body {
+      margin-top: 18px;
+      color: #dce8fb;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .lesson-body p {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
     .admin-tools {
       display: none;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 16px;
     }
+
     .show { display: flex !important; }
-    @media (max-width: 1100px) {
-      .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .layout { grid-template-columns: 1fr; }
-      .meta-grid { grid-template-columns: 1fr; }
+
+    @media (max-width: 1180px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .course-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    @media (max-width: 640px) {
-      .course-grid { grid-template-columns: 1fr; }
-      .video-frame { min-height: 300px; }
+
+    @media (max-width: 720px) {
+      .app {
+        padding: 14px;
+      }
+
+      .brand-title {
+        font-size: 22px;
+      }
+
+      .hello {
+        font-size: 32px;
+      }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-heading {
+        font-size: 26px;
+      }
+
+      .video-frame {
+        min-height: 280px;
+      }
+
+      .topbar,
+      .hero-card,
+      .admin-panel,
+      .section,
+      .side-panel,
+      .content-panel,
+      .viewer-card {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <div class="topbar">
+    <div class="topbar glass">
       <div class="brand">
         <img src="ava.jpg" alt="Logan Crypto">
         <div>
-          <div style="font-size:20px;font-weight:800;">Dashboard Logan Crypto</div>
-          <div class="muted" style="font-size:14px;">Landing để bán • Dashboard để học • Vimeo phát video</div>
+          <div class="brand-title">Dashboard Logan Crypto</div>
+          <div class="brand-sub">Học riêng theo quyền • Video phát qua Vimeo • Landing tách riêng để bán hàng</div>
         </div>
       </div>
 
@@ -243,62 +561,68 @@
       </div>
     </div>
 
-    <div class="panel" style="margin-bottom:18px;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;">
+    <div class="hero">
+      <div class="hero-card glass">
+        <h1 id="welcomeText" class="hello">Xin chào</h1>
+        <div id="userEmail" class="email"></div>
+        <div id="roleDescription" class="role-desc"></div>
+      </div>
+
+      <div class="admin-panel glass">
         <div>
-          <div id="welcomeText" style="font-size:24px;font-weight:800;margin-bottom:8px;">Xin chào</div>
-          <div id="userEmail" class="muted"></div>
-          <div id="roleDescription" class="muted" style="margin-top:12px;max-width:850px;"></div>
+          <div class="mini-title">Quản trị hệ thống</div>
+          <div class="big">Khu vực quản lý nội dung khóa học</div>
+          <div class="muted">Admin có thể tạo khóa học, thêm lesson, gắn role và dán link Vimeo trực tiếp vào hệ thống.</div>
         </div>
 
         <div id="adminTools" class="admin-tools">
-          <button class="btn-soft" onclick="window.location.href='./admin.html'">Vào trang quản trị</button>
+          <button class="btn" onclick="window.location.href='./admin.html'">Vào trang quản trị</button>
         </div>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-title">Danh sách khóa học</div>
+    <div class="section glass">
+      <div class="section-title">Danh sách khóa học</div>
       <div id="courseGrid" class="course-grid"></div>
     </div>
 
     <div class="layout">
-      <div class="panel">
-        <div class="panel-title">Danh sách bài học</div>
+      <div class="side-panel glass">
+        <div class="section-title">Danh sách bài học</div>
         <div id="lessonList" class="lesson-list">
           <div class="muted">Chọn một khóa học để hiển thị danh sách bài học.</div>
         </div>
       </div>
 
-      <div class="content-wrap">
-        <div class="panel">
-          <div class="meta-grid">
-            <div class="meta-card">
-              <div class="muted" style="font-size:13px;">Khóa học</div>
-              <div id="metaCourse" style="font-weight:700;margin-top:6px;">Chưa chọn</div>
-            </div>
-            <div class="meta-card">
-              <div class="muted" style="font-size:13px;">Vai trò hiện tại</div>
-              <div id="metaRole" style="font-weight:700;margin-top:6px;">free</div>
-            </div>
-            <div class="meta-card">
-              <div class="muted" style="font-size:13px;">Trạng thái</div>
-              <div id="metaStatus" style="font-weight:700;margin-top:6px;">Đang chờ chọn bài học</div>
-            </div>
+      <div class="content-panel">
+        <div class="meta-grid">
+          <div class="meta-card glass">
+            <div class="meta-label">Khóa học</div>
+            <div id="metaCourse" class="meta-value">Chưa chọn</div>
+          </div>
+
+          <div class="meta-card glass">
+            <div class="meta-label">Vai trò hiện tại</div>
+            <div id="metaRole" class="meta-value">free</div>
+          </div>
+
+          <div class="meta-card glass">
+            <div class="meta-label">Trạng thái</div>
+            <div id="metaStatus" class="meta-value">Đang chờ chọn</div>
           </div>
         </div>
 
-        <div class="panel">
+        <div class="viewer-card glass">
           <div id="lessonEmptyState" class="empty-state">
-            <h3 style="margin-top:0;">Chưa có bài học được chọn</h3>
+            <h3>Chưa có bài học được chọn</h3>
             <div class="muted">Hãy chọn một khóa học ở phía trên, sau đó chọn bài học ở cột trái để bắt đầu.</div>
           </div>
 
           <div id="lessonViewer" style="display:none;">
-            <h2 id="lessonTitle" style="margin-top:0;margin-bottom:8px;"></h2>
-            <p id="lessonSummary" class="muted" style="margin-bottom:16px;"></p>
+            <h2 id="lessonTitle" class="lesson-heading"></h2>
+            <p id="lessonSummary" class="lesson-summary"></p>
             <div id="lessonVideoWrap"></div>
-            <div id="lessonBody" class="muted" style="margin-top:16px;"></div>
+            <div id="lessonBody" class="lesson-body"></div>
           </div>
         </div>
       </div>
@@ -365,19 +689,19 @@
       userEmail.textContent = profile.email || "";
 
       if (role === "free") {
-        roleDescription.textContent = "Bạn đang ở tầng Free. Bạn vẫn ở trong hệ thống, vẫn xem được bài preview và các khóa được mở cho Free, nhưng nội dung Medium và Pro sẽ bị khóa.";
+        roleDescription.textContent = "Bạn đang ở tầng Free. Bạn vẫn ở trong hệ thống, vẫn xem được các phần mở và bài preview. Những bài thuộc tầng Medium và Pro sẽ hiển thị trong danh sách nhưng bị khóa ở phần nội dung.";
         adminTools.classList.remove("show");
       } else if (role === "medium") {
-        roleDescription.textContent = "Bạn đang ở tầng Medium. Bạn xem được toàn bộ nội dung Free và Medium. Các bài Pro vẫn bị khóa.";
+        roleDescription.textContent = "Bạn đang ở tầng Medium. Bạn xem được toàn bộ nội dung Free và Medium. Các bài ở tầng Pro vẫn bị khóa cho đến khi nâng cấp quyền.";
         adminTools.classList.remove("show");
       } else if (role === "pro") {
-        roleDescription.textContent = "Bạn đang ở tầng Pro. Bạn xem được toàn bộ nội dung Free, Medium và Pro.";
+        roleDescription.textContent = "Bạn đang ở tầng Pro. Bạn xem được toàn bộ nội dung Free, Medium và Pro trong dashboard.";
         adminTools.classList.remove("show");
       } else if (role === "admin") {
-        roleDescription.textContent = "Bạn đang ở tầng Admin. Bạn xem được toàn bộ nội dung và có quyền quản trị.";
+        roleDescription.textContent = "Bạn đang ở tầng Admin. Bạn xem được toàn bộ nội dung, có quyền kiểm tra khóa học, lesson và đi vào khu quản trị để cập nhật hệ thống.";
         adminTools.classList.add("show");
       } else {
-        roleDescription.textContent = "Không xác định role. Hệ thống sẽ tạm xem như Free.";
+        roleDescription.textContent = "Không xác định role. Hệ thống sẽ tạm xử lý như tài khoản Free.";
         adminTools.classList.remove("show");
       }
     }
@@ -385,7 +709,7 @@
     function showEmptyState() {
       lessonViewer.style.display = "none";
       lessonEmptyState.style.display = "block";
-      metaStatus.textContent = "Đang chờ chọn bài học";
+      metaStatus.textContent = "Đang chờ chọn";
       metaCourse.textContent = currentCourse ? currentCourse.title : "Chưa chọn";
     }
 
@@ -407,7 +731,7 @@
             src="${lesson.vimeoEmbedUrl || ''}"
             class="video-frame"
             width="100%"
-            height="520"
+            height="560"
             frameborder="0"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen>
@@ -417,8 +741,8 @@
         lessonVideoWrap.innerHTML = `
           <div class="locked-box">
             <h3>Bài học đang bị khóa</h3>
-            <div class="muted" style="margin-bottom:16px;">
-              Tài khoản hiện tại của bạn chưa đủ quyền để xem nội dung video này.
+            <div class="muted" style="margin-bottom:18px;">
+              Tài khoản hiện tại của bạn chưa đủ quyền để xem phần video và nội dung đầy đủ của bài học này.
             </div>
             <button class="btn">Nâng cấp để xem</button>
           </div>
@@ -439,12 +763,18 @@
         const canView = canViewLesson(profile.role, lesson);
         const item = document.createElement("button");
         item.type = "button";
-        item.className = "lesson-item" + (!canView ? " locked" : "") + (currentLessonId === lesson.id ? " active" : "");
+        item.className =
+          "lesson-item" +
+          (!canView ? " locked" : "") +
+          (currentLessonId === lesson.id ? " active" : "");
 
         item.innerHTML = `
           <div class="lesson-item-title">${lesson.title}</div>
           <div class="muted" style="font-size:13px;">
-            ${canView ? "Có thể xem" : "Bị khóa"} • yêu cầu: ${lesson.isPreview ? "preview" : (lesson.requiredRole || "free")}
+            ${lesson.summary || ""}
+          </div>
+          <div class="lesson-badge ${canView ? "open" : "locked"}">
+            ${canView ? "Có thể xem" : "Bị khóa"}
           </div>
         `;
 
@@ -476,13 +806,22 @@
         const canView = canViewRole(profile.role, course.requiredRole || "free");
 
         const card = document.createElement("div");
-        card.className = "course-card" + (!canView ? " locked" : "");
+        card.className =
+          "course-card" +
+          (!canView ? " locked" : "") +
+          (currentCourse && currentCourse.id === course.id ? " active" : "");
+
         card.innerHTML = `
-          <img src="${course.thumbnail || 'Bia logancrpto.jpg'}" alt="${course.title}">
+          <img class="course-cover" src="${course.thumbnail || 'Bia logancrpto.jpg'}" alt="${course.title}">
           <div class="course-body">
             <div class="course-title">${course.title || "Chưa có tiêu đề"}</div>
-            <div class="muted" style="font-size:13px; margin-bottom:10px;">${course.slug || ""}</div>
-            <div class="course-status">${canView ? "Vào học" : "Bị khóa"}</div>
+            <div class="course-slug">${course.slug || ""}</div>
+            <div class="course-foot">
+              <div class="course-status ${canView ? "status-open" : "status-locked"}">
+                ${canView ? "Vào học" : "Bị khóa"}
+              </div>
+              <div class="muted" style="font-size:12px;">${course.requiredRole || "free"}</div>
+            </div>
           </div>
         `;
 
@@ -490,6 +829,7 @@
           currentCourse = course;
           currentLessonId = null;
           metaCourse.textContent = course.title || "Chưa chọn";
+          renderCourseCards(profile, currentCourses);
           await loadLessons(profile, course.id);
         });
 
@@ -520,6 +860,7 @@
         if (currentCourses[0]) {
           currentCourse = currentCourses[0];
           metaCourse.textContent = currentCourses[0].title || "Chưa chọn";
+          renderCourseCards(profile, currentCourses);
           await loadLessons(profile, currentCourses[0].id);
         } else {
           showEmptyState();
@@ -547,7 +888,6 @@
         });
 
         currentLessons.sort((a, b) => (a.order || 0) - (b.order || 0));
-
         renderLessonList(profile, currentLessons);
       } catch (error) {
         console.error("Lỗi loadLessons:", error);
