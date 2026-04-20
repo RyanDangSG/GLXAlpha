@@ -79,7 +79,7 @@
         await registerUser(name, phone, email, password);
         msg.textContent = "Đăng ký thành công. Đang chuyển trang...";
         setTimeout(() => {
-          window.location.href = "./dashboard-free.html";
+          window.location.href = "./dashboard.html";
         }, 1000);
       } catch (error) {
         console.error(error);
