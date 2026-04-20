@@ -29,6 +29,7 @@
       --footer-bg: #04050a;
       --sticky-bg: rgba(4,5,10,.94);
     }
+
     body.light-theme {
       --dark-bg: #eef4f8;
       --panel: rgba(255,255,255,.84);
@@ -47,8 +48,10 @@
       --footer-bg: #edf3f7;
       --sticky-bg: rgba(255,255,255,.92);
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: 'Be Vietnam Pro', sans-serif;
@@ -58,38 +61,70 @@
       padding-bottom: 88px;
       transition: background .35s ease, color .35s ease;
     }
+
     .font-mono { font-family: 'Space Grotesk', monospace; }
+
     .bg-noise {
-      position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: .04;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      opacity: .04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
+
     body.light-theme .bg-noise { opacity: .018; filter: invert(1); }
+
     .hero-section { position: relative; overflow: hidden; display: flex; align-items: center; }
     .hero-bg-container {
-      position: absolute; inset: -5%; width: 110%; height: 110%;
+      position: absolute;
+      inset: -5%;
+      width: 110%;
+      height: 110%;
       background-image: url('Bia logancrpto.jpg');
-      background-size: cover; background-position: center; z-index: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
       transform: scale(1.02);
     }
+
     .hero-overlay {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
       background: linear-gradient(to right, var(--hero-left) 0%, var(--hero-mid) 48%, var(--hero-right) 100%);
       transition: background .35s ease;
     }
+
     .glass-nav {
-      background: var(--nav-bg); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.05);
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
       transition: background .35s ease;
     }
+
     body.light-theme .glass-nav { border-bottom-color: rgba(15,23,42,.08); }
+
     .glass-card {
-      background: var(--panel); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.07);
-      box-shadow: 0 10px 40px rgba(0,0,0,.38); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .35s ease;
+      background: var(--panel);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: 0 10px 40px rgba(0,0,0,.38);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .35s ease;
     }
+
     body.light-theme .glass-card {
       border-color: rgba(15,23,42,.08);
       box-shadow: 0 10px 30px rgba(15,23,42,.08);
     }
-    .glass-card:hover { transform: translateY(-4px); border-color: rgba(0,234,255,.24); box-shadow: 0 18px 50px rgba(0,0,0,.45); }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,234,255,.24);
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+
     .btn-zenith {
       background: linear-gradient(135deg, #00f0ff, #2dd4bf 45%, #38bdf8 100%);
       color: #02131a !important;
@@ -97,23 +132,34 @@
       box-shadow: 0 12px 28px rgba(0,240,255,.18);
       transition: .25s ease;
     }
-    .btn-zenith:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(0,240,255,.25); }
+
+    .btn-zenith:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(0,240,255,.25);
+    }
+
     .btn-soft {
       background: var(--soft-btn-bg);
       border: 1px solid var(--soft-btn-border);
       color: var(--text-main);
       transition: .25s ease;
     }
+
     .btn-soft:hover { background: rgba(255,255,255,.08); }
     body.light-theme .btn-soft:hover { background: rgba(15,23,42,.07); }
+
     .text-gradient {
       background: linear-gradient(90deg, #ffffff 0%, #9be8ff 45%, #00f0ff 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     body.light-theme .text-gradient {
       background: linear-gradient(90deg, #0f172a 0%, #0f172a 30%, #0891b2 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     .ticker-wrap {
       width: 100%;
       overflow: hidden;
@@ -122,11 +168,23 @@
       padding: 6px 0;
       margin-top: 64px;
     }
-    body.light-theme .ticker-wrap { background: rgba(255,255,255,.82); border-bottom-color: rgba(15,23,42,.08); }
-    .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 34s linear infinite; }
-    @keyframes ticker { 0% { transform: translate3d(0,0,0);} 100% { transform: translate3d(-50%,0,0);} }
-    .view-section { display: none; opacity: 0; transition: opacity .35s ease; }
-    .view-section.active { display: block; opacity: 1; }
+
+    body.light-theme .ticker-wrap {
+      background: rgba(255,255,255,.82);
+      border-bottom-color: rgba(15,23,42,.08);
+    }
+
+    .ticker-move {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker 34s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-50%,0,0); }
+    }
+
     .input-vip {
       background: var(--input-bg);
       border: 1px solid var(--input-border);
@@ -137,9 +195,17 @@
       outline: none;
       transition: .2s ease;
     }
+
     .input-vip::placeholder { color: var(--input-placeholder); }
-    .input-vip:focus { border-color: rgba(0,240,255,.7); box-shadow: 0 0 0 3px rgba(0,240,255,.12); background: rgba(255,255,255,.05); }
+
+    .input-vip:focus {
+      border-color: rgba(0,240,255,.7);
+      box-shadow: 0 0 0 3px rgba(0,240,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+
     body.light-theme .input-vip:focus { background: #fff; }
+
     .sticky-cta {
       position: fixed;
       bottom: 0;
@@ -153,9 +219,20 @@
       transform: translateY(100%);
       transition: transform .35s ease, background .35s ease;
     }
+
     body.light-theme .sticky-cta { border-top-color: rgba(15,23,42,.08); }
     .sticky-cta.show { transform: translateY(0); }
-    .float-actions { position: fixed; right: 16px; bottom: 92px; z-index: 85; display: flex; flex-direction: column; gap: 12px; }
+
+    .float-actions {
+      position: fixed;
+      right: 16px;
+      bottom: 92px;
+      z-index: 85;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .section-label {
       display: inline-block;
       color: var(--primary);
@@ -167,10 +244,27 @@
       font-size: 10px;
       font-weight: 800;
     }
-    #mobile-menu { transform: translateX(100%); transition: transform .35s ease; background: var(--nav-bg); backdrop-filter: blur(18px); }
+
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+    }
+
     #mobile-menu.open { transform: translateX(0); }
-    .modal-wrap { opacity: 0; pointer-events: none; transition: .35s ease; }
-    .modal-wrap.open { opacity: 1; pointer-events: auto; }
+
+    .modal-wrap {
+      opacity: 0;
+      pointer-events: none;
+      transition: .35s ease;
+    }
+
+    .modal-wrap.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .modal-box {
       transform: scale(.96);
       transition: .35s ease;
@@ -178,12 +272,28 @@
       border: 1px solid rgba(255,255,255,.08);
       box-shadow: 0 0 100px rgba(0,240,255,.08);
     }
-    body.light-theme .modal-box { border-color: rgba(15,23,42,.08); box-shadow: 0 20px 60px rgba(15,23,42,.12); }
+
+    body.light-theme .modal-box {
+      border-color: rgba(15,23,42,.08);
+      box-shadow: 0 20px 60px rgba(15,23,42,.12);
+    }
+
     .modal-wrap.open .modal-box { transform: scale(1); }
+
     .faq-answer { display: none; }
     .faq-answer.open { display: block; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: all .75s cubic-bezier(.2,.8,.2,1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all .75s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .theme-toggle {
       width: 42px;
       height: 42px;
@@ -196,13 +306,25 @@
       color: white;
       transition: .25s ease;
     }
+
     .theme-toggle:hover { transform: rotate(12deg); }
-    body.light-theme .theme-toggle { color: #0f172a; border-color: rgba(15,23,42,.12); background: rgba(255,255,255,.9); }
+
+    body.light-theme .theme-toggle {
+      color: #0f172a;
+      border-color: rgba(15,23,42,.12);
+      background: rgba(255,255,255,.9);
+    }
+
     body.light-theme .text-white { color: #0f172a !important; }
-    body.light-theme .text-slate-300, body.light-theme .text-slate-400, body.light-theme .text-slate-500, body.light-theme .text-slate-600 { color: #475569 !important; }
+    body.light-theme .text-slate-300,
+    body.light-theme .text-slate-400,
+    body.light-theme .text-slate-500,
+    body.light-theme .text-slate-600 { color: #475569 !important; }
+
     body.light-theme .bg-black\/30 { background-color: rgba(255,255,255,.72) !important; }
     body.light-theme .bg-\[\#060912\] { background-color: rgba(255,255,255,.42) !important; }
     body.light-theme .bg-\[\#04050a\] { background-color: var(--footer-bg) !important; }
+
     @media (min-width: 768px) {
       .ticker-wrap { margin-top: 80px; }
       .sticky-cta { padding: 16px 24px; }
@@ -220,7 +342,7 @@
 
   <header class="fixed top-0 w-full z-[100] glass-nav h-16 lg:h-20">
     <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
-      <button onclick="switchView('home-view')" class="flex items-center gap-3 text-left">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center gap-3 text-left">
         <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black shadow-[0_0_18px_rgba(0,240,255,.16)]">
           <img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
         </div>
@@ -230,11 +352,12 @@
         </div>
       </button>
 
-      <nav class="hidden lg:flex gap-8 text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
-        <button onclick="switchView('home-view')" class="hover:text-white transition">Trang Chủ</button>
-        <a href="#services-section" class="hover:text-white transition">Dịch Vụ</a>
-        <button onclick="switchView('about-view')" class="hover:text-white transition">Giới Thiệu</button>
-        <button onclick="switchView('reviews-view')" class="hover:text-white transition">Phản Hồi</button>
+      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-semibold text-slate-400">
+        <a href="#home" class="hover:text-white transition">Trang chủ</a>
+        <a href="#services-section" class="hover:text-white transition">Dịch vụ</a>
+        <a href="#about" class="hover:text-white transition">Giới thiệu</a>
+        <a href="#reviews" class="hover:text-white transition">Phản hồi</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -250,10 +373,11 @@
   <div id="mobile-menu" class="fixed inset-0 z-[95] pt-24 px-6 flex flex-col lg:hidden overflow-y-auto">
     <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
     <div class="flex-1 mt-4 space-y-2">
-      <button onclick="switchView('home-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-white font-bold uppercase tracking-widest text-sm">Trang Chủ</button>
-      <a href="#services-section" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Dịch Vụ</a>
-      <button onclick="switchView('about-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Giới Thiệu</button>
-      <button onclick="switchView('reviews-view'); toggleMobileMenu();" class="w-full text-left py-4 border-b border-white/5 text-slate-400 font-bold uppercase tracking-widest text-sm">Phản Hồi</button>
+      <a href="#home" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-white font-semibold text-base">Trang chủ</a>
+      <a href="#services-section" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Dịch vụ</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Giới thiệu</a>
+      <a href="#reviews" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Phản hồi</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">FAQ</a>
     </div>
     <a href="./login.html" class="mt-8 mb-10 btn-zenith py-4 rounded-2xl font-black uppercase text-xs tracking-[0.18em] text-center">Đăng nhập khóa học</a>
   </div>
@@ -268,7 +392,7 @@
     </div>
   </div>
 
-  <main id="home-view" class="view-section active">
+  <main id="home">
     <section class="hero-section min-h-[85vh] pt-24 pb-16 md:pb-20">
       <div class="hero-bg-container"></div>
       <div class="hero-overlay"></div>
@@ -396,7 +520,7 @@
       </div>
     </section>
 
-    <section id="about-view" class="py-20 md:py-24 bg-[#060912] border-y border-white/5 relative z-20">
+    <section id="about" class="py-20 md:py-24 bg-[#060912] border-y border-white/5 relative z-20">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-8 md:mb-12 reveal">
           <span class="section-label">Giá trị hệ thống</span>
@@ -411,14 +535,14 @@
       </div>
     </section>
 
-    <section id="reviews-view" class="pt-24 pb-40">
+    <section id="reviews" class="pt-24 pb-24">
       <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16 md:mb-24 reveal">
+        <div class="text-center mb-16 md:mb-20 reveal">
           <span class="section-label">Phản hồi khách hàng</span>
           <h2 class="text-4xl md:text-[68px] font-black text-white uppercase tracking-tighter mb-4 md:mb-6 leading-[1.05] mt-5">NHỮNG CẢM NHẬN ĐỦ THẬT<br><span class="text-cyan-300">ĐỂ NGƯỜI KHÁC CẢM NHẬN ĐƯỢC</span></h2>
           <p class="text-slate-400 font-light text-sm md:text-lg max-w-3xl mx-auto">Phản hồi không cần ồn ào. Chỉ cần đủ thật để người xem cảm nhận được đây là một hệ thống tạo ra trải nghiệm rõ ràng, có chiều sâu và đáng để đi cùng lâu hơn.</p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-16 md:mb-20">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
           <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
             <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">AT</div><div><h4 class="text-white font-bold text-sm md:text-base">Anh T.</h4><p class="text-[9px] text-slate-500 uppercase font-black tracking-widest">Dùng chỉ báo</p></div></div>
             <p class="text-slate-300 text-xs md:text-sm leading-loose flex-1 mb-6">“Điều tôi cảm nhận rõ nhất là cách hệ thống giúp tôi nhìn chart có trật tự hơn. Khi mọi thứ rõ hơn, tâm lý giao dịch cũng bớt rối hơn rất nhiều.”</p>
@@ -432,26 +556,26 @@
             <p class="text-slate-300 text-xs md:text-sm leading-loose flex-1 mb-6">“Sau khi đã đi cùng hệ thống một thời gian, tôi mới nhận ra mình cần học sâu hơn để nâng khả năng tự chủ. Lúc đó phần nâng cao xuất hiện rất đúng lúc.”</p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <section class="py-16 md:py-24 max-w-4xl mx-auto px-4 relative z-20">
-          <div class="text-center mb-12 reveal">
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tighter">Câu hỏi <span class="text-cyan-300">thường gặp</span></h2>
-          </div>
-          <div class="space-y-4 reveal">
-            <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(1)">
-              <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Tôi phù hợp với chỉ báo hay copytrade? <i id="faq-icon-1" class="fas fa-chevron-down text-slate-500"></i></h3>
-              <p id="faq-1" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Nếu bạn muốn chủ động quan sát và tự ra quyết định giao dịch, bộ chỉ báo sẽ là lựa chọn phù hợp hơn. Nếu bạn ưu tiên tiết kiệm thời gian và muốn đi cùng đội ngũ theo cách gọn hơn, copytrade là hướng nên cân nhắc.</p>
-            </div>
-            <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(2)">
-              <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Khóa học có nằm trên landing page không? <i id="faq-icon-2" class="fas fa-chevron-down text-slate-500"></i></h3>
-              <p id="faq-2" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Không. Landing page chỉ để bán. Toàn bộ khu học được tách riêng trong dashboard sau khi người dùng đăng nhập.</p>
-            </div>
-            <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(3)">
-              <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Role được phân quyền ở đâu? <i id="faq-icon-3" class="fas fa-chevron-down text-slate-500"></i></h3>
-              <p id="faq-3" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Role chỉ phân quyền trong dashboard học. Firebase quản lý user và role, còn video được phát qua Vimeo.</p>
-            </div>
-          </div>
-        </section>
+    <section id="faq" class="py-16 md:py-24 max-w-4xl mx-auto px-4 relative z-20">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-black text-white tracking-tighter">Câu hỏi <span class="text-cyan-300">thường gặp</span></h2>
+      </div>
+      <div class="space-y-4 reveal">
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(1)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Tôi phù hợp với chỉ báo hay copytrade? <i id="faq-icon-1" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-1" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Nếu bạn muốn chủ động quan sát và tự ra quyết định giao dịch, bộ chỉ báo sẽ là lựa chọn phù hợp hơn. Nếu bạn ưu tiên tiết kiệm thời gian và muốn đi cùng đội ngũ theo cách gọn hơn, copytrade là hướng nên cân nhắc.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(2)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Khóa học có nằm trên landing page không? <i id="faq-icon-2" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-2" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Không. Landing page chỉ để bán. Toàn bộ khu học được tách riêng trong dashboard sau khi người dùng đăng nhập.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(3)">
+          <h3 class="font-bold text-white text-sm md:text-base flex justify-between items-center">Role được phân quyền ở đâu? <i id="faq-icon-3" class="fas fa-chevron-down text-slate-500"></i></h3>
+          <p id="faq-3" class="faq-answer text-sm text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Role chỉ phân quyền trong dashboard học. Firebase quản lý user và role, còn video được phát qua Vimeo.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -461,7 +585,9 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16 md:mb-20">
         <div class="md:col-span-1 flex flex-col items-center md:items-start">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black"><img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover"></div>
+            <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black">
+              <img src="ava.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
+            </div>
             <span class="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">LOGAN CRYPTO</span>
           </div>
           <p class="text-slate-500 text-sm leading-relaxed max-w-xs">Nền tảng chỉ báo và giải pháp đồng hành dành cho nhà giao dịch muốn quan sát rõ hơn, vận hành gọn hơn và đi xa hơn theo một hệ thống có chiều sâu.</p>
@@ -503,17 +629,22 @@
         <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-2">Nhận <span class="text-cyan-300">tư vấn chỉ báo & copytrade</span></h3>
         <p class="text-slate-400 text-sm">Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn.</p>
       </div>
+
       <div class="flex justify-center gap-6 md:gap-8 border-b border-white/10 mb-6 md:mb-8">
         <button onclick="switchTab('register')" id="tab-register" class="font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300">Đăng Ký</button>
         <button onclick="switchTab('login')" id="tab-login" class="font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent">Đăng Nhập</button>
       </div>
+
       <form id="form-register" class="space-y-4">
         <input id="auth-name" type="text" placeholder="Họ Tên" class="input-vip" required>
         <input id="auth-phone" type="tel" placeholder="Số điện thoại" class="input-vip" required>
         <input id="auth-email" type="email" placeholder="Email" class="input-vip" required>
         <input id="auth-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
-        <button type="submit" class="w-full btn-zenith font-black py-4 rounded-2xl uppercase tracking-widest text-[10px] mt-2">Xác nhận đăng ký</button>
+        <button type="submit" class="w-full btn-zenith font-black py-4 rounded-2xl uppercase tracking-widest text-[10px] mt-2">
+          Xác nhận đăng ký
+        </button>
       </form>
+
       <form id="form-login" class="space-y-4 hidden">
         <input id="log-email" type="email" placeholder="Email" class="input-vip" required>
         <input id="log-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
@@ -523,15 +654,10 @@
   </div>
 
   <script>
-    function switchView(viewId) {
-      document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
-      const target = document.getElementById(viewId);
-      if (target) target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
     function toggleMobileMenu() {
       document.getElementById('mobile-menu').classList.toggle('open');
     }
+
     function toggleTheme() {
       document.body.classList.toggle('light-theme');
       const isLight = document.body.classList.contains('light-theme');
@@ -539,6 +665,7 @@
       const icon = document.getElementById('theme-icon');
       if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
     }
+
     function initTheme() {
       const savedTheme = localStorage.getItem('logan-theme');
       const shouldLight = savedTheme === 'light';
@@ -546,18 +673,22 @@
       const icon = document.getElementById('theme-icon');
       if (icon) icon.className = shouldLight ? 'fas fa-sun' : 'fas fa-moon';
     }
+
     function openAuthModal(tab = 'register') {
       switchTab(tab);
       document.getElementById('authModal').classList.add('open');
     }
+
     function closeAuthModal() {
       document.getElementById('authModal').classList.remove('open');
     }
+
     function switchTab(tab) {
       const reg = document.getElementById('form-register');
       const log = document.getElementById('form-login');
       const regTab = document.getElementById('tab-register');
       const logTab = document.getElementById('tab-login');
+
       if (tab === 'register') {
         reg.classList.remove('hidden');
         log.classList.add('hidden');
@@ -570,6 +701,7 @@
         logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
       }
     }
+
     function toggleFAQ(index) {
       const answer = document.getElementById(`faq-${index}`);
       const icon = document.getElementById(`faq-icon-${index}`);
@@ -577,13 +709,16 @@
       icon.classList.toggle('fa-chevron-down');
       icon.classList.toggle('fa-chevron-up');
     }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('active');
       });
     }, { threshold: 0.12 });
+
     initTheme();
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
     window.addEventListener('scroll', () => {
       const stickyBar = document.getElementById('stickyBar');
       if (window.scrollY > 500) stickyBar.classList.add('show');
@@ -592,32 +727,50 @@
   </script>
 
   <script type="module">
-  import { registerUser } from "./register.js";
+    import { registerUser } from "./register.js";
+    import { loginUser } from "./login.js";
+    import { redirectByRole } from "./redirect-by-role.js";
 
-  const form = document.getElementById("registerForm");
-  const msg = document.getElementById("registerMsg");
+    const leadForm = document.getElementById("leadForm");
+    const registerForm = document.getElementById("form-register");
+    const loginForm = document.getElementById("form-login");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    msg.textContent = "Đang xử lý...";
+    if (leadForm) {
+      leadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+        const name = document.getElementById("reg-name-home").value.trim();
+        const phone = document.getElementById("reg-phone-home").value.trim();
+        const email = document.getElementById("reg-email-home").value.trim();
 
-    try {
-      await registerUser(name, phone, email, password);
-      msg.textContent = "Đăng ký thành công. Đang chuyển trang...";
-      setTimeout(() => {
-        window.location.href = "./dashboard.html";
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      msg.textContent = "Lỗi: " + error.message;
+        document.getElementById("auth-name").value = name;
+        document.getElementById("auth-phone").value = phone;
+        document.getElementById("auth-email").value = email;
+
+        openAuthModal("register");
+        document.getElementById("auth-password").focus();
+      });
     }
-  });
-</script>
+
+    if (registerForm) {
+      registerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("auth-name").value.trim();
+        const phone = document.getElementById("auth-phone").value.trim();
+        const email = document.getElementById("auth-email").value.trim();
+        const password = document.getElementById("auth-password").value;
+
+        try {
+          await registerUser(name, phone, email, password);
+          alert("Đăng ký thành công.");
+          closeAuthModal();
+          window.location.href = "./dashboard.html";
+        } catch (error) {
+          console.error(error);
+          alert("Đăng ký thất bại: " + error.message);
+        }
+      });
     }
 
     if (loginForm) {
