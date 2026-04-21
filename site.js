@@ -1,23 +1,23 @@
-function applySavedTheme() {
+function initTheme() {
   const saved = localStorage.getItem("logan-theme");
-  if (saved === "light") {
-    document.body.classList.add("light-theme");
+  if (saved === "dark") {
+    document.body.classList.add("dark-theme");
   }
   const icon = document.getElementById("theme-icon");
   if (icon) {
-    icon.className = document.body.classList.contains("light-theme")
-      ? "fas fa-sun"
-      : "fas fa-moon";
+    icon.className = document.body.classList.contains("dark-theme")
+      ? "fas fa-moon"
+      : "fas fa-sun";
   }
 }
 
 function toggleTheme() {
-  document.body.classList.toggle("light-theme");
-  const isLight = document.body.classList.contains("light-theme");
-  localStorage.setItem("logan-theme", isLight ? "light" : "dark");
+  document.body.classList.toggle("dark-theme");
+  const isDark = document.body.classList.contains("dark-theme");
+  localStorage.setItem("logan-theme", isDark ? "dark" : "light");
   const icon = document.getElementById("theme-icon");
   if (icon) {
-    icon.className = isLight ? "fas fa-sun" : "fas fa-moon";
+    icon.className = isDark ? "fas fa-moon" : "fas fa-sun";
   }
 }
 
@@ -27,10 +27,9 @@ function toggleMenu() {
 }
 
 function openAuthModal(tab = "register") {
-  const modal = document.getElementById("authModal");
-  if (!modal) return;
   switchTab(tab);
-  modal.classList.add("open");
+  const modal = document.getElementById("authModal");
+  if (modal) modal.classList.add("open");
 }
 
 function closeAuthModal() {
@@ -41,36 +40,34 @@ function closeAuthModal() {
 function switchTab(tab) {
   const reg = document.getElementById("form-register");
   const log = document.getElementById("form-login");
-  const tabReg = document.getElementById("tab-register");
-  const tabLog = document.getElementById("tab-login");
+  const regBtn = document.getElementById("tab-register");
+  const logBtn = document.getElementById("tab-login");
 
-  if (!reg || !log || !tabReg || !tabLog) return;
+  if (!reg || !log || !regBtn || !logBtn) return;
 
   if (tab === "register") {
     reg.classList.remove("hidden");
     log.classList.add("hidden");
-    tabReg.classList.add("active");
-    tabLog.classList.remove("active");
+    regBtn.classList.add("active");
+    logBtn.classList.remove("active");
   } else {
     reg.classList.add("hidden");
     log.classList.remove("hidden");
-    tabReg.classList.remove("active");
-    tabLog.classList.add("active");
+    regBtn.classList.remove("active");
+    logBtn.classList.add("active");
   }
 }
 
 function toggleFaq(el) {
   el.classList.toggle("active");
-  const icon = el.querySelector(".faq-head i");
+  const icon = el.querySelector(".faq-icon");
   if (icon) {
     icon.classList.toggle("fa-chevron-down");
     icon.classList.toggle("fa-chevron-up");
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  applySavedTheme();
-
+function initReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add("active");
@@ -78,4 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.12 });
 
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  initReveal();
 });
+
+window.toggleTheme = toggleTheme;
+window.toggleMenu = toggleMenu;
+window.openAuthModal = openAuthModal;
+window.closeAuthModal = closeAuthModal;
+window.switchTab = switchTab;
+window.toggleFaq = toggleFaq;
