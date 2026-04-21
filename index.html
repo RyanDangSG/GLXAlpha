@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Trang chủ</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./site.css" />
+  <link rel="stylesheet" href="./site.css?v=clean1" />
 </head>
 <body>
   <header class="site-header">
-    <div class="site-wrap header-inner">
+    <div class="page-shell header-inner">
       <a href="./index.html" class="brand">
         <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
         <div class="brand-text">
@@ -34,28 +34,26 @@
     </div>
   </header>
 
-  <main class="home-main">
-    <!-- HERO FULL VIDEO -->
-    <section class="hero-video-section">
-      <video class="hero-bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="./1.jpg">
+  <main class="home-page">
+    <section class="hero-section">
+      <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="./7.jpg">
         <source src="./bg.mp4" type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ video.
       </video>
 
-      <div class="hero-video-overlay"></div>
+      <div class="hero-overlay"></div>
 
-      <div class="site-wrap hero-video-inner">
-        <div class="hero-panel">
+      <div class="page-shell hero-content-wrap">
+        <div class="hero-content-box">
           <p class="hero-kicker">HỆ THỐNG GIAO DỊCH</p>
 
-          <h1 class="hero-heading">
+          <h1 class="hero-title">
             GIÚP BẠN NHÌN<br />
             THỊ TRƯỜNG <span>RÕ HƠN</span><br />
             VÀ ĐI THEO MỘT LỘ TRÌNH<br />
             BÀI BẢN <span>HƠN</span>
           </h1>
 
-          <p class="hero-text">
+          <p class="hero-desc">
             Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
             giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
             và tự tin hơn trên mọi thị trường.
@@ -69,7 +67,7 @@
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="hero-stat-icon">✦</div>
-              <div class="hero-stat-content">
+              <div>
                 <strong>+1200</strong>
                 <span>Học viên tin tưởng</span>
               </div>
@@ -77,7 +75,7 @@
 
             <div class="hero-stat">
               <div class="hero-stat-icon">📈</div>
-              <div class="hero-stat-content">
+              <div>
                 <strong>+35%</strong>
                 <span>Hiệu suất trung bình</span>
               </div>
@@ -85,7 +83,7 @@
 
             <div class="hero-stat">
               <div class="hero-stat-icon">🕘</div>
-              <div class="hero-stat-content">
+              <div>
                 <strong>24/7</strong>
                 <span>Hỗ trợ chuyên sâu</span>
               </div>
@@ -95,106 +93,104 @@
       </div>
     </section>
 
-    <!-- GRID CARD -->
     <section class="cards-section">
-      <div class="site-wrap">
-        <div class="cards-grid-large">
-          <a href="./services.html" class="info-card large-card">
+      <div class="page-shell">
+        <div class="cards-grid">
+          <a href="./services.html" class="image-card">
             <img src="./1.jpg" alt="Phân tích chuyên sâu" />
-            <div class="card-overlay dark"></div>
-            <div class="card-content">
-              <h3>PHÂN TÍCH<br />CHUYÊN SÂU</h3>
-              <p>Hiểu rõ thị trường<br />Đón đầu xu hướng</p>
+            <div class="image-card-overlay dark"></div>
+            <div class="image-card-text white">
+              <h3>PHÂN TÍCH<br>CHUYÊN SÂU</h3>
+              <p>Hiểu rõ thị trường<br>Đón đầu xu hướng</p>
             </div>
           </a>
 
-          <a href="./services.html" class="info-card large-card">
+          <a href="./services.html" class="image-card">
             <img src="./2.jpg" alt="Giao dịch kỷ luật" />
-            <div class="card-overlay light"></div>
-            <div class="card-content dark-text">
-              <h3>GIAO DỊCH KỶ<br />LUẬT</h3>
-              <p>Chiến lược rõ ràng<br />Quản trị rủi ro tối ưu</p>
+            <div class="image-card-overlay light"></div>
+            <div class="image-card-text dark">
+              <h3>GIAO DỊCH KỶ<br>LUẬT</h3>
+              <p>Chiến lược rõ ràng<br>Quản trị rủi ro tối ưu</p>
             </div>
           </a>
 
-          <a href="./about.html" class="info-card large-card">
+          <a href="./about.html" class="image-card">
             <img src="./3.jpg" alt="Đồng hành cùng bạn" />
-            <div class="card-overlay light"></div>
-            <div class="card-content dark-text">
-              <h3>ĐỒNG HÀNH<br />CÙNG BẠN</h3>
-              <p>Trên mọi hành trình<br />chinh phục thị trường</p>
+            <div class="image-card-overlay light"></div>
+            <div class="image-card-text dark">
+              <h3>ĐỒNG HÀNH<br>CÙNG BẠN</h3>
+              <p>Trên mọi hành trình<br>chinh phục thị trường</p>
             </div>
           </a>
 
-          <a href="./about.html" class="info-card large-card">
+          <a href="./about.html" class="image-card">
             <img src="./4.jpg" alt="Kiến thức thực chiến" />
-            <div class="card-overlay light"></div>
-            <div class="card-content dark-text">
-              <h3>KIẾN THỨC<br />THỰC CHIẾN</h3>
-              <p>Học từ kinh nghiệm<br />– giao dịch tự tin</p>
+            <div class="image-card-overlay light"></div>
+            <div class="image-card-text dark">
+              <h3>KIẾN THỨC<br>THỰC CHIẾN</h3>
+              <p>Học từ kinh nghiệm<br>– giao dịch tự tin</p>
             </div>
           </a>
 
-          <a href="./reviews.html" class="info-card large-card">
+          <a href="./reviews.html" class="image-card">
             <img src="./5.jpg" alt="Cộng đồng chất lượng" />
-            <div class="card-overlay dark"></div>
-            <div class="card-content">
-              <h3>CỘNG ĐỒNG<br />CHẤT LƯỢNG</h3>
-              <p>Kết nối – Chia sẻ<br />Phát triển bền vững</p>
+            <div class="image-card-overlay dark"></div>
+            <div class="image-card-text white">
+              <h3>CỘNG ĐỒNG<br>CHẤT LƯỢNG</h3>
+              <p>Kết nối – Chia sẻ<br>Phát triển bền vững</p>
             </div>
           </a>
 
-          <a href="./faq.html" class="info-card large-card">
+          <a href="./faq.html" class="image-card">
             <img src="./6.jpg" alt="FAQ" />
-            <div class="card-overlay light"></div>
-            <div class="card-content dark-text">
+            <div class="image-card-overlay light"></div>
+            <div class="image-card-text dark">
               <h3>FAQ</h3>
-              <p>Giải đáp nhanh<br />những câu hỏi thường gặp</p>
+              <p>Giải đáp nhanh<br>những câu hỏi thường gặp</p>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- FEATURE ROW -->
-    <section class="benefits-section">
-      <div class="site-wrap">
-        <div class="benefits-row">
-          <div class="benefit-card">
-            <div class="benefit-icon">🛡️</div>
-            <div class="benefit-body">
+    <section class="features-section">
+      <div class="page-shell">
+        <div class="features-row">
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div>
               <h4>CHIẾN LƯỢC RÕ RÀNG</h4>
               <p>Hệ thống chiến lược bài bản, dễ hiểu, dễ áp dụng.</p>
             </div>
           </div>
 
-          <div class="benefit-card">
-            <div class="benefit-icon">📊</div>
-            <div class="benefit-body">
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div>
               <h4>PHÂN TÍCH CHUYÊN SÂU</h4>
               <p>Phân tích đa khung thời gian, tìm điểm vào lệnh tối ưu.</p>
             </div>
           </div>
 
-          <div class="benefit-card">
-            <div class="benefit-icon">✅</div>
-            <div class="benefit-body">
+          <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <div>
               <h4>QUẢN TRỊ RỦI RO</h4>
               <p>Kiểm soát vốn chặt chẽ, bảo vệ tài khoản hiệu quả.</p>
             </div>
           </div>
 
-          <div class="benefit-card">
-            <div class="benefit-icon">🎧</div>
-            <div class="benefit-body">
+          <div class="feature-card">
+            <div class="feature-icon">🎧</div>
+            <div>
               <h4>HỖ TRỢ 24/7</h4>
               <p>Đội ngũ hỗ trợ tận tâm, giải đáp mọi thắc mắc.</p>
             </div>
           </div>
 
-          <div class="benefit-card">
-            <div class="benefit-icon">👥</div>
-            <div class="benefit-body">
+          <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <div>
               <h4>CỘNG ĐỒNG UY TÍN</h4>
               <p>Môi trường giao lưu tích cực, cùng nhau phát triển.</p>
             </div>
@@ -213,25 +209,21 @@
     const savedTheme = localStorage.getItem("logan-theme");
     if (savedTheme === "dark") {
       body.classList.add("dark-theme");
-      if (themeToggle) themeToggle.textContent = "☾";
+      themeToggle.textContent = "☾";
     } else {
-      if (themeToggle) themeToggle.textContent = "☀";
+      themeToggle.textContent = "☀";
     }
 
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark-theme");
-        const isDark = body.classList.contains("dark-theme");
-        localStorage.setItem("logan-theme", isDark ? "dark" : "light");
-        themeToggle.textContent = isDark ? "☾" : "☀";
-      });
-    }
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark-theme");
+      const isDark = body.classList.contains("dark-theme");
+      localStorage.setItem("logan-theme", isDark ? "dark" : "light");
+      themeToggle.textContent = isDark ? "☾" : "☀";
+    });
 
-    if (menuToggle && mainNav) {
-      menuToggle.addEventListener("click", () => {
-        mainNav.classList.toggle("open");
-      });
-    }
+    menuToggle.addEventListener("click", () => {
+      mainNav.classList.toggle("open");
+    });
   </script>
 </body>
 </html>
