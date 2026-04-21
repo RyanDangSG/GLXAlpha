@@ -25,7 +25,7 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Times New Roman", Times, serif;
       color: var(--text);
       background:
         radial-gradient(circle at top left, rgba(53,224,255,0.08), transparent 28%),
@@ -35,7 +35,7 @@
     }
 
     .app {
-      max-width: 1420px;
+      max-width: 1460px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -70,6 +70,7 @@
       object-fit: cover;
       border: 1px solid rgba(255,255,255,.12);
       box-shadow: 0 8px 24px rgba(0,0,0,.35);
+      background: #fff;
     }
 
     .brand-title {
@@ -109,8 +110,7 @@
     }
 
     .btn,
-    .btn-soft,
-    .btn-danger {
+    .btn-soft {
       border: none;
       border-radius: 14px;
       padding: 12px 16px;
@@ -124,8 +124,7 @@
     }
 
     .btn:hover,
-    .btn-soft:hover,
-    .btn-danger:hover {
+    .btn-soft:hover {
       transform: translateY(-1px);
     }
 
@@ -226,50 +225,129 @@
     .course-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+      gap: 18px;
     }
 
     .course-card {
-      background: linear-gradient(180deg, rgba(14,24,42,.95) 0%, rgba(9,15,28,.96) 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(13, 22, 39, 0.98) 0%, rgba(8, 14, 27, 0.98) 100%);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
       overflow: hidden;
       cursor: pointer;
-      transition: .22s ease;
+      transition: .25s ease;
       position: relative;
+      box-shadow: 0 18px 38px rgba(0,0,0,.24);
+    }
+
+    .course-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), transparent 35%),
+        radial-gradient(circle at top right, rgba(53,224,255,.12), transparent 30%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .course-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-      box-shadow: 0 16px 36px rgba(0,0,0,.32);
+      transform: translateY(-4px);
+      border-color: rgba(74, 222, 255, 0.32);
+      box-shadow: 0 22px 46px rgba(0,0,0,.34);
     }
 
     .course-card.active {
       border-color: rgba(53,224,255,.38);
-      box-shadow: 0 0 0 1px rgba(53,224,255,.22) inset, 0 16px 36px rgba(0,0,0,.35);
+      box-shadow: 0 0 0 1px rgba(53,224,255,.18) inset, 0 22px 46px rgba(0,0,0,.36);
     }
 
     .course-card.locked {
-      opacity: .85;
-      border-style: dashed;
+      opacity: .92;
+    }
+
+    .course-cover-wrap {
+      position: relative;
+      z-index: 0;
     }
 
     .course-cover {
       width: 100%;
-      height: 148px;
+      height: 180px;
       object-fit: cover;
       display: block;
       background: #0c1322;
     }
 
+    .course-cover-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 70px;
+      background: linear-gradient(180deg, transparent, rgba(5,10,20,.88));
+      pointer-events: none;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+    }
+
+    .tier-silver {
+      background: linear-gradient(135deg, rgba(203,213,225,.22), rgba(148,163,184,.18));
+      color: #e2e8f0;
+    }
+
+    .tier-gold {
+      background: linear-gradient(135deg, rgba(245,158,11,.22), rgba(251,191,36,.18));
+      color: #fde68a;
+    }
+
+    .tier-diamond {
+      background: linear-gradient(135deg, rgba(56,189,248,.22), rgba(34,211,238,.18));
+      color: #a5f3fc;
+    }
+
+    .tier-admin {
+      background: linear-gradient(135deg, rgba(168,85,247,.22), rgba(217,70,239,.18));
+      color: #e9d5ff;
+    }
+
+    .tier-open-note {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(5,10,20,.55);
+      color: #dbeafe;
+      backdrop-filter: blur(8px);
+    }
+
     .course-body {
-      padding: 14px;
+      padding: 16px 16px 18px;
+      position: relative;
+      z-index: 2;
     }
 
     .course-title {
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 6px;
       line-height: 1.25;
     }
@@ -277,8 +355,16 @@
     .course-slug {
       color: var(--muted-2);
       font-size: 13px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       min-height: 18px;
+    }
+
+    .course-desc {
+      color: #d8e4f5;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 44px;
+      margin-bottom: 14px;
     }
 
     .course-foot {
@@ -290,7 +376,7 @@
 
     .course-status {
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .06em;
       text-transform: uppercase;
     }
@@ -538,10 +624,10 @@
   <div class="app">
     <div class="topbar glass">
       <div class="brand">
-        <img src="ava.jpg" alt="Logan Crypto">
+        <img src="logan-logo.jpg" alt="Logan Crypto">
         <div>
           <div class="brand-title">Dashboard Logan Crypto</div>
-          <div class="brand-sub">Học riêng theo quyền • Video phát qua Vimeo • Landing tách riêng để bán hàng</div>
+          <div class="brand-sub">Không gian học tập dành riêng cho khách hàng Logan Crypto</div>
         </div>
       </div>
 
@@ -562,7 +648,7 @@
         <div>
           <div class="mini-title">Quản trị hệ thống</div>
           <div class="big">Khu vực quản lý nội dung khóa học</div>
-          <div class="muted">Admin có thể tạo khóa học, thêm lesson, gắn role và dán link Vimeo trực tiếp vào hệ thống.</div>
+          <div class="muted">Khu vực dành cho admin để cập nhật khóa học, bài học và nội dung trong hệ thống.</div>
         </div>
 
         <div id="adminTools" class="admin-tools">
@@ -592,8 +678,8 @@
           </div>
 
           <div class="meta-card glass">
-            <div class="meta-label">Vai trò hiện tại</div>
-            <div id="metaRole" class="meta-value">free</div>
+            <div class="meta-label">Bậc hiện tại</div>
+            <div id="metaRole" class="meta-value">Silver</div>
           </div>
 
           <div class="meta-card glass">
@@ -658,6 +744,53 @@
     let currentCourse = null;
     let currentLessonId = null;
 
+    function getTierLabel(role) {
+      if (role === "free") return "🥈 Silver";
+      if (role === "medium") return "🥇 Gold";
+      if (role === "pro") return "💎 Diamond";
+      if (role === "admin") return "👑 Admin";
+      return "🥈 Silver";
+    }
+
+    function getTierShortLabel(role) {
+      if (role === "free") return "Silver";
+      if (role === "medium") return "Gold";
+      if (role === "pro") return "Diamond";
+      if (role === "admin") return "Admin";
+      return "Silver";
+    }
+
+    function getTierClass(role) {
+      if (role === "free") return "tier-silver";
+      if (role === "medium") return "tier-gold";
+      if (role === "pro") return "tier-diamond";
+      if (role === "admin") return "tier-admin";
+      return "tier-silver";
+    }
+
+    function getCourseDescription(course) {
+      const slug = (course.slug || "").toLowerCase();
+      const title = (course.title || "").toLowerCase();
+
+      if (slug.includes("smc") || title.includes("smc")) {
+        return "Nội dung chuyên sâu dành cho người muốn đào sâu hơn về cấu trúc và cách vận động của giá.";
+      }
+
+      if (slug.includes("cung-cau") || title.includes("cung cầu")) {
+        return "Lộ trình giúp bạn hiểu rõ hơn cách xác định vùng giá đáng chú ý và cách tiếp cận bài bản hơn.";
+      }
+
+      if (slug.includes("elliott") || title.includes("elliott")) {
+        return "Hệ thống nội dung dành cho người muốn tiếp cận sóng, cấu trúc và tư duy vận động của thị trường.";
+      }
+
+      if (slug.includes("price") || title.includes("price action")) {
+        return "Kho nội dung tập trung vào hành vi giá, cách quan sát thị trường và thực hành theo tư duy rõ ràng hơn.";
+      }
+
+      return "Kho nội dung được thiết kế để giúp bạn tiếp cận thị trường rõ hơn và hành động có cơ sở hơn.";
+    }
+
     function canViewRole(userRole, requiredRole) {
       if (requiredRole === "free") return true;
       if (requiredRole === "medium") return ["medium", "pro", "admin"].includes(userRole);
@@ -673,25 +806,25 @@
 
     function renderRoleUI(profile) {
       const role = profile.role || "free";
-      roleBadge.textContent = role;
-      metaRole.textContent = role;
+      roleBadge.textContent = getTierShortLabel(role);
+      metaRole.textContent = getTierLabel(role);
       welcomeText.textContent = `Xin chào ${profile.name || "bạn"}`;
       userEmail.textContent = profile.email || "";
 
       if (role === "free") {
-        roleDescription.textContent = "Bạn đang ở tầng Free. Bạn vẫn ở trong hệ thống, vẫn xem được các phần mở và bài preview. Những bài thuộc tầng Medium và Pro sẽ hiển thị trong danh sách nhưng bị khóa ở phần nội dung.";
+        roleDescription.textContent = "Bạn đang ở bậc Silver. Bạn có thể bắt đầu với các nội dung nền tảng và những bài học mở sẵn để làm quen với hệ thống.";
         adminTools.classList.remove("show");
       } else if (role === "medium") {
-        roleDescription.textContent = "Bạn đang ở tầng Medium. Bạn xem được toàn bộ nội dung Free và Medium. Các bài ở tầng Pro vẫn bị khóa cho đến khi nâng cấp quyền.";
+        roleDescription.textContent = "Bạn đang ở bậc Gold. Bạn đã mở thêm các nội dung có chiều sâu hơn, phù hợp với giai đoạn muốn nâng chất lượng quan sát và vận hành giao dịch.";
         adminTools.classList.remove("show");
       } else if (role === "pro") {
-        roleDescription.textContent = "Bạn đang ở tầng Pro. Bạn xem được toàn bộ nội dung Free, Medium và Pro trong dashboard.";
+        roleDescription.textContent = "Bạn đang ở bậc Diamond. Đây là khu vực dành cho khách hàng muốn đi sâu hơn vào tư duy, cấu trúc và chất lượng vận hành giao dịch.";
         adminTools.classList.remove("show");
       } else if (role === "admin") {
-        roleDescription.textContent = "Bạn đang ở tầng Admin. Bạn xem được toàn bộ nội dung, có quyền kiểm tra khóa học, lesson và đi vào khu quản trị để cập nhật hệ thống.";
+        roleDescription.textContent = "Bạn đang ở quyền Admin. Bạn có thể xem toàn bộ nội dung và cập nhật hệ thống quản trị khóa học.";
         adminTools.classList.add("show");
       } else {
-        roleDescription.textContent = "Không xác định role. Hệ thống sẽ tạm xử lý như tài khoản Free.";
+        roleDescription.textContent = "Hệ thống chưa xác định rõ cấp độ tài khoản. Tạm thời sẽ hiển thị như bậc Silver.";
         adminTools.classList.remove("show");
       }
     }
@@ -713,7 +846,7 @@
       lessonSummary.textContent = lesson.summary || "";
       lessonBody.innerHTML = lesson.contentHtml || "";
       metaCourse.textContent = currentCourse ? currentCourse.title : "Chưa chọn";
-      metaStatus.textContent = canView ? "Có thể xem" : "Bị khóa";
+      metaStatus.textContent = canView ? "Có thể xem" : "Cần nâng bậc để mở";
 
       if (canView) {
         lessonVideoWrap.innerHTML = `
@@ -730,11 +863,11 @@
       } else {
         lessonVideoWrap.innerHTML = `
           <div class="locked-box">
-            <h3>Bài học đang bị khóa</h3>
+            <h3>Nội dung này chưa mở ở bậc hiện tại</h3>
             <div class="muted" style="margin-bottom:18px;">
-              Tài khoản hiện tại của bạn chưa đủ quyền để xem phần video và nội dung đầy đủ của bài học này.
+              Bài học này dành cho khách hàng ở bậc cao hơn. Khi nâng cấp, bạn sẽ mở được toàn bộ phần video và nội dung chi tiết tương ứng.
             </div>
-            <button class="btn">Nâng cấp để xem</button>
+            <button class="btn">Mở rộng quyền truy cập</button>
           </div>
         `;
       }
@@ -764,7 +897,7 @@
             ${lesson.summary || ""}
           </div>
           <div class="lesson-badge ${canView ? "open" : "locked"}">
-            ${canView ? "Có thể xem" : "Bị khóa"}
+            ${canView ? "Đã mở" : "Chưa mở"}
           </div>
         `;
 
@@ -793,7 +926,12 @@
       }
 
       courses.forEach((course) => {
-        const canView = canViewRole(profile.role, course.requiredRole || "free");
+        const tierRole = course.requiredRole || "free";
+        const tierLabel = getTierLabel(tierRole);
+        const tierShortLabel = getTierShortLabel(tierRole);
+        const tierClass = getTierClass(tierRole);
+        const canView = canViewRole(profile.role, tierRole);
+        const courseDesc = getCourseDescription(course);
 
         const card = document.createElement("div");
         card.className =
@@ -802,15 +940,23 @@
           (currentCourse && currentCourse.id === course.id ? " active" : "");
 
         card.innerHTML = `
-          <img class="course-cover" src="${course.thumbnail || 'Bia logancrpto.jpg'}" alt="${course.title}">
+          <div class="tier-badge ${tierClass}">${tierLabel}</div>
+          <div class="tier-open-note">Mở ở bậc ${tierShortLabel}</div>
+
+          <div class="course-cover-wrap">
+            <img class="course-cover" src="${course.thumbnail || 'Bia logancrpto.jpg'}" alt="${course.title}">
+            <div class="course-cover-overlay"></div>
+          </div>
+
           <div class="course-body">
             <div class="course-title">${course.title || "Chưa có tiêu đề"}</div>
             <div class="course-slug">${course.slug || ""}</div>
+            <div class="course-desc">${courseDesc}</div>
             <div class="course-foot">
               <div class="course-status ${canView ? "status-open" : "status-locked"}">
-                ${canView ? "Vào học" : "Bị khóa"}
+                ${canView ? "Vào học" : "Cần nâng bậc"}
               </div>
-              <div class="muted" style="font-size:12px;">${course.requiredRole || "free"}</div>
+              <div class="muted" style="font-size:12px;">${tierLabel}</div>
             </div>
           </div>
         `;
