@@ -1,7 +1,7 @@
 :root{
   --background:#020617;
   --background-soft:#071224;
-  --panel:rgba(8, 18, 36, 0.78);
+  --panel:rgba(8, 18, 36, 0.76);
   --panel-strong:rgba(6, 14, 28, 0.88);
   --border:rgba(230, 237, 243, 0.08);
 
@@ -13,13 +13,13 @@
   --accent-strong:#00E5FF;
   --accent-soft:rgba(34, 211, 238, 0.12);
 
-  --header-bg:rgba(2, 6, 23, 0.82);
+  --header-bg:rgba(2, 6, 23, 0.78);
   --footer-bg:rgba(4, 11, 24, 0.88);
   --footer-card:rgba(230, 237, 243, 0.04);
 
-  --overlay-left:rgba(2, 6, 23, 0.56);
-  --overlay-mid:rgba(2, 6, 23, 0.14);
-  --overlay-right:rgba(2, 6, 23, 0.50);
+  --overlay-left:rgba(2, 6, 23, 0.50);
+  --overlay-mid:rgba(2, 6, 23, 0.10);
+  --overlay-right:rgba(2, 6, 23, 0.42);
 
   --shadow:0 16px 48px rgba(0,0,0,.28);
 }
@@ -27,7 +27,7 @@
 body.light-theme{
   --background:#F4F8FB;
   --background-soft:#EAF2F8;
-  --panel:rgba(255,255,255,.82);
+  --panel:rgba(255,255,255,.84);
   --panel-strong:rgba(255,255,255,.90);
   --border:rgba(15, 23, 42, 0.08);
 
@@ -43,9 +43,9 @@ body.light-theme{
   --footer-bg:#EDF4F8;
   --footer-card:rgba(15, 23, 42, 0.04);
 
-  --overlay-left:rgba(244, 248, 251, 0.40);
-  --overlay-mid:rgba(244, 248, 251, 0.06);
-  --overlay-right:rgba(244, 248, 251, 0.30);
+  --overlay-left:rgba(244, 248, 251, 0.24);
+  --overlay-mid:rgba(244, 248, 251, 0.02);
+  --overlay-right:rgba(244, 248, 251, 0.18);
 
   --shadow:0 12px 28px rgba(15,23,42,.08);
 }
@@ -71,19 +71,11 @@ body{
   position:relative;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:transparent;
-  z-index:0;
-  pointer-events:none;
-}
-
+/* ===== VIDEO NỀN FIX CHUẨN ===== */
 .video-bg{
   position:fixed;
   inset:0;
-  z-index:0;
+  z-index:-30;
   overflow:hidden;
   pointer-events:none;
 }
@@ -93,13 +85,14 @@ body::before{
   height:100%;
   object-fit:cover;
   display:block;
-  transform:scale(1.05);
+  transform:scale(1.03);
+  filter:saturate(1.02) contrast(1.02);
 }
 
 .video-overlay{
   position:fixed;
   inset:0;
-  z-index:1;
+  z-index:-20;
   pointer-events:none;
   background:
     radial-gradient(circle at 18% 28%, rgba(0,229,255,.10), transparent 24%),
@@ -107,13 +100,23 @@ body::before{
     linear-gradient(to right,var(--overlay-left) 0%,var(--overlay-mid) 48%,var(--overlay-right) 100%);
 }
 
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:transparent;
+  z-index:-10;
+  pointer-events:none;
+}
+
+/* Toàn bộ nội dung luôn nằm trên video */
 .glass-nav,
 .page,
 .footer-wrap,
 .mobile-menu,
 .modal-wrap{
   position:relative;
-  z-index:2;
+  z-index:10;
 }
 
 .container{
