@@ -1,24 +1,27 @@
-function initTheme() {
-  const saved = localStorage.getItem("logan-theme");
-  if (saved === "dark") {
-    document.body.classList.add("dark-theme");
-  }
+function applyTheme(theme) {
+  const body = document.body;
   const icon = document.getElementById("theme-icon");
-  if (icon) {
-    icon.className = document.body.classList.contains("dark-theme")
-      ? "fas fa-moon"
-      : "fas fa-sun";
+  if (!body) return;
+
+  if (theme === "dark") {
+    body.classList.add("dark-theme");
+    if (icon) icon.className = "fas fa-moon";
+  } else {
+    body.classList.remove("dark-theme");
+    if (icon) icon.className = "fas fa-sun";
   }
 }
 
+function initTheme() {
+  const saved = localStorage.getItem("logan-theme") || "light";
+  applyTheme(saved);
+}
+
 function toggleTheme() {
-  document.body.classList.toggle("dark-theme");
   const isDark = document.body.classList.contains("dark-theme");
-  localStorage.setItem("logan-theme", isDark ? "dark" : "light");
-  const icon = document.getElementById("theme-icon");
-  if (icon) {
-    icon.className = isDark ? "fas fa-moon" : "fas fa-sun";
-  }
+  const nextTheme = isDark ? "light" : "dark";
+  localStorage.setItem("logan-theme", nextTheme);
+  applyTheme(nextTheme);
 }
 
 function toggleMenu() {
