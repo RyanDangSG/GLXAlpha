@@ -1,134 +1,145 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | FAQ</title>
-  <link rel="icon" type="image/jpeg" href="./logan-logo.jpg">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="./site.css">
+  <link rel="icon" href="./logan-logo.jpg" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
-  <div class="video-bg">
-    <video autoplay muted loop playsinline preload="auto" poster="./logan-logo.jpg">
-      <source src="./hero-bg.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-overlay"></div>
-
-  <div class="site-wrap">
-    <header class="glass-nav">
-      <div class="container nav-inner">
-        <a href="./index.html" class="brand">
-          <div class="brand-logo"><img src="./logan-logo.jpg" alt="Logan Crypto"></div>
-          <div>
-            <div class="brand-title">LOGAN <span style="color:#38BDF8;">CRYPTO</span></div>
-            <div class="brand-sub">Trading Ecosystem</div>
-          </div>
-        </a>
-
-        <nav class="nav-links">
-          <a href="./index.html">Trang chủ</a>
-          <a href="./services.html">Dịch vụ</a>
-          <a href="./about.html">Giới thiệu</a>
-          <a href="./reviews.html">Phản hồi</a>
-          <a href="./faq.html" class="active">FAQ</a>
-        </nav>
-
-        <div class="nav-actions">
-          <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i></button>
-          <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
-          <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand">
+        <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
+        <div class="brand-text">
+          <div class="brand-title">LOGAN <span>CRYPTO</span></div>
+          <div class="brand-sub">TRADING ECOSYSTEM</div>
         </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="./index.html">Trang chủ</a>
+        <a href="./services.html">Dịch vụ</a>
+        <a href="./about.html">Giới thiệu</a>
+        <a href="./reviews.html">Phản hồi</a>
+        <a href="./faq.html" class="active">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">☀</button>
+        <a href="./login.html" class="btn btn-primary">Đăng nhập khóa học</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
       </div>
-    </header>
-
-    <div id="mobileMenu" class="mobile-menu">
-      <button class="mobile-close" onclick="toggleMenu()">&times;</button>
-      <a href="./index.html">Trang chủ</a>
-      <a href="./services.html">Dịch vụ</a>
-      <a href="./about.html">Giới thiệu</a>
-      <a href="./reviews.html">Phản hồi</a>
-      <a href="./faq.html" class="active">FAQ</a>
-      <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
     </div>
+  </header>
 
-    <main class="page">
-      <section class="section">
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="kicker">FAQ</span>
-            <h1 class="page-title">Những câu hỏi thường gặp để khách hàng nắm nhanh và rõ hơn</h1>
-            <p class="page-desc">
-              Trang này giúp khách hàng hiểu nhanh cách tham gia, cách sử dụng và cách tiếp cận hệ thống
-              mà không cần phải hỏi lại quá nhiều lần.
+  <main class="inner-page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-grid">
+          <div class="page-hero-copy">
+            <p class="page-label">FAQ</p>
+            <h1>Những câu hỏi thường gặp để khách hàng nắm nhanh và rõ hơn</h1>
+            <p>
+              Trang này giúp khách hàng hiểu nhanh cách tham gia,
+              cách sử dụng và cách tiếp cận hệ thống mà không cần hỏi lại quá nhiều lần.
             </p>
           </div>
 
-          <div class="reveal" style="display:grid;gap:16px;max-width:1100px;margin:0 auto;">
-            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-              <div class="faq-head">
-                <h3>Tôi phù hợp với chỉ báo hay copytrade?</h3>
-                <i class="faq-icon fas fa-chevron-down"></i>
-              </div>
-              <div class="faq-answer">
-                Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ phù hợp hơn.
-                Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn,
-                copytrade sẽ là hướng đáng cân nhắc.
-              </div>
-            </div>
-
-            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-              <div class="faq-head">
-                <h3>Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</h3>
-                <i class="faq-icon fas fa-chevron-down"></i>
-              </div>
-              <div class="faq-answer">
-                Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập khu vực nội dung phù hợp.
-                Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.
-              </div>
-            </div>
-
-            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-              <div class="faq-head">
-                <h3>Nội dung học có giống nhau cho tất cả khách hàng không?</h3>
-                <i class="faq-icon fas fa-chevron-down"></i>
-              </div>
-              <div class="faq-answer">
-                Nội dung và lộ trình có thể khác nhau tùy theo giai đoạn tham gia và nhóm giải pháp mà khách hàng đang sử dụng,
-                nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn.
-              </div>
-            </div>
+          <div class="page-hero-media">
+            <img src="./4.jpg" alt="FAQ Logan Crypto">
           </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer-wrap">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#ffe4e6;color:#ef4444;"><i class="fas fa-phone-alt"></i></div>
-            <div><div class="footer-label">HOTLINE</div><div class="footer-value">0899.125.048</div></div>
-          </div>
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#cffafe;color:#0891b2;"><i class="far fa-envelope"></i></div>
-            <div><div class="footer-label">GMAIL</div><div class="footer-value">logan27xx@gmail.com</div></div>
-          </div>
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#ede9fe;color:#7c3aed;"><i class="far fa-clock"></i></div>
-            <div><div class="footer-label">HỖ TRỢ</div><div class="footer-value">24/7 Online</div></div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-          <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="faq-list-section">
+      <div class="container">
+        <div class="faq-list">
+          <details class="faq-box" open>
+            <summary>Tôi phù hợp với chỉ báo hay copytrade?</summary>
+            <p>
+              Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch,
+              bộ chỉ báo sẽ phù hợp hơn. Nếu bạn ưu tiên sự gọn gàng và muốn đi cùng đội ngũ
+              theo hướng có sẵn lộ trình, copytrade sẽ là lựa chọn đáng cân nhắc.
+            </p>
+          </details>
+
+          <details class="faq-box">
+            <summary>Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</summary>
+            <p>
+              Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập
+              khu vực nội dung phù hợp. Tại đó, bài học và tài liệu được sắp xếp
+              theo lộ trình rõ ràng để theo dõi thuận tiện hơn.
+            </p>
+          </details>
+
+          <details class="faq-box">
+            <summary>Nội dung học có giống nhau cho tất cả khách hàng không?</summary>
+            <p>
+              Không hoàn toàn giống nhau. Nội dung và lộ trình có thể khác nhau
+              tùy theo giai đoạn tham gia và nhóm giải pháp mà khách hàng đang sử dụng.
+            </p>
+          </details>
+
+          <details class="faq-box">
+            <summary>Tôi có thể bắt đầu ngay cả khi chưa có nhiều kinh nghiệm không?</summary>
+            <p>
+              Có. Hệ thống được thiết kế để cả người mới lẫn người đã có trải nghiệm
+              đều có thể bắt đầu ở phần phù hợp với mình, sau đó đi tiếp theo lộ trình rõ ràng hơn.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div class="container">
+        <div class="feature-row">
+          <div class="feature-pill">
+            <div class="feature-pill-icon">❓</div>
+            <div>
+              <h4>HỎI NHANH</h4>
+              <p>Giúp khách hàng nắm nhanh thông tin quan trọng nhất</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🧭</div>
+            <div>
+              <h4>RÕ CÁCH THAM GIA</h4>
+              <p>Hiểu nhanh nên bắt đầu từ đâu và theo hướng nào</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">📘</div>
+            <div>
+              <h4>RÕ CÁCH HỌC</h4>
+              <p>Nội dung được tiếp cận theo lộ trình hợp lý hơn</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🛠</div>
+            <div>
+              <h4>RÕ CÁCH DÙNG</h4>
+              <p>Hiểu cách sử dụng hệ thống và công cụ tốt hơn</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🤝</div>
+            <div>
+              <h4>RÕ HỖ TRỢ</h4>
+              <p>Biết khi nào cần hỏi và đội ngũ sẽ hỗ trợ ra sao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <script src="./site.js"></script>
 </body>
