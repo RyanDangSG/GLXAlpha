@@ -1,154 +1,148 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Giới thiệu</title>
-  <link rel="icon" type="image/jpeg" href="./logan-logo.jpg">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="./site.css">
+  <link rel="icon" href="./logan-logo.jpg" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
-  <div class="video-bg">
-    <video autoplay muted loop playsinline preload="auto" poster="./logan-logo.jpg">
-      <source src="./hero-bg.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-overlay"></div>
-
-  <header class="glass-nav">
-    <div class="container nav-inner">
+  <header class="site-header">
+    <div class="container header-inner">
       <a href="./index.html" class="brand">
-        <div class="brand-logo"><img src="./logan-logo.jpg" alt="Logan Crypto"></div>
-        <div><div class="brand-title">LOGAN <span style="color:#67e8f9;">CRYPTO</span></div><div class="brand-sub">Trading Ecosystem</div></div>
+        <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
+        <div class="brand-text">
+          <div class="brand-title">LOGAN <span>CRYPTO</span></div>
+          <div class="brand-sub">TRADING ECOSYSTEM</div>
+        </div>
       </a>
-      <nav class="nav-links">
+
+      <nav class="main-nav" id="mainNav">
         <a href="./index.html">Trang chủ</a>
         <a href="./services.html">Dịch vụ</a>
         <a href="./about.html" class="active">Giới thiệu</a>
         <a href="./reviews.html">Phản hồi</a>
         <a href="./faq.html">FAQ</a>
       </nav>
-      <div class="nav-actions">
-        <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-moon"></i></button>
-        <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
-        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">☀</button>
+        <a href="./login.html" class="btn btn-primary">Đăng nhập khóa học</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
       </div>
     </div>
   </header>
 
-  <div id="mobileMenu" class="mobile-menu">
-    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
-    <a href="./index.html">Trang chủ</a>
-    <a href="./services.html">Dịch vụ</a>
-    <a href="./about.html" class="active">Giới thiệu</a>
-    <a href="./reviews.html">Phản hồi</a>
-    <a href="./faq.html">FAQ</a>
-    <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
-  </div>
-
-  <main class="page">
-    <section class="section">
+  <main class="inner-page">
+    <section class="page-hero">
       <div class="container">
-        <div class="reveal" style="text-align:center;">
-          <span class="kicker">Giới thiệu</span>
-          <h1 class="page-title">Một hệ sinh thái được xây ra để tạo giá trị thật cho người giao dịch</h1>
-          <p class="page-desc">
-            Logan Crypto không đi theo hướng phô diễn quá nhiều.
-            Điều được ưu tiên là làm sao để khách hàng thấy rõ giá trị, cảm nhận rõ định hướng và đi lâu dài hơn cùng hệ thống.
-          </p>
-        </div>
-
-        <div class="grid-2 reveal" style="margin-top:28px;">
-          <div class="panel panel-pad">
-            <div style="color:#67e8f9;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;">Câu chuyện thương hiệu</div>
-            <h2 style="margin:16px 0 0;font-size:56px;line-height:1.08;font-weight:900;">Từ nhu cầu thực tế đến một hệ thống rõ vai trò, rõ cấu trúc</h2>
-            <p class="card-text">
-              Logan Crypto được xây theo triết lý rất rõ: nếu đã tạo ra một hệ thống cho trader,
-              thì từng phần trong hệ thống đó phải thực sự phục vụ cho hành trình của họ.
-            </p>
-            <p class="card-text">
-              Vì vậy, trang chủ tập trung cho việc giới thiệu và tư vấn, dashboard được tách riêng cho việc học,
-              và toàn bộ trải nghiệm được giữ nhất quán để khách nhìn chuyên nghiệp hơn ngay từ đầu.
+        <div class="page-hero-grid">
+          <div class="page-hero-copy">
+            <p class="page-label">GIỚI THIỆU</p>
+            <h1>Một hệ sinh thái được xây ra để tạo giá trị thật cho người giao dịch</h1>
+            <p>
+              Logan Crypto được xây theo định hướng rõ ràng:
+              tạo ra một hệ thống mà người dùng có thể nhìn được giá trị,
+              cảm nhận được định hướng và đi được đường dài hơn.
             </p>
           </div>
 
-          <div class="panel panel-pad">
-            <h2 style="margin:0;font-size:44px;line-height:1.1;font-weight:900;">3 điều Logan Crypto muốn khách hàng cảm nhận rõ</h2>
-            <div style="display:grid;gap:14px;margin-top:20px;">
-              <div class="panel" style="padding:18px 20px;">
-                <div style="font-size:34px;font-weight:900;">Rõ giá trị</div>
-                <div class="card-text" style="margin-top:8px;">Mỗi thành phần xuất hiện trong hệ thống đều phải mang lại giá trị có thể cảm nhận được ngay trong quá trình sử dụng.</div>
-              </div>
-              <div class="panel" style="padding:18px 20px;">
-                <div style="font-size:34px;font-weight:900;color:#67e8f9;">Rõ định hướng</div>
-                <div class="card-text" style="margin-top:8px;">Khách hàng cần được dẫn dắt theo lộ trình hợp lý, thay vì bị ngợp trong một mớ thông tin rời rạc.</div>
-              </div>
-              <div class="panel" style="padding:18px 20px;">
-                <div style="font-size:34px;font-weight:900;color:#86efac;">Rõ chiều sâu</div>
-                <div class="card-text" style="margin-top:8px;">Logan Crypto hướng tới sự đồng hành lâu dài để khách hàng từng bước nâng chất lượng giao dịch của mình.</div>
-              </div>
+          <div class="page-hero-media">
+            <img src="./2.jpg" alt="Giới thiệu Logan Crypto">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="spotlight-grid">
+      <div class="container">
+        <div class="spotlight-row three-col">
+          <article class="spotlight-card">
+            <img src="./2.jpg" alt="Câu chuyện thương hiệu">
+            <div class="spotlight-body">
+              <div class="spotlight-icon">🏛</div>
+              <h3>CÂU CHUYỆN THƯƠNG HIỆU</h3>
+              <p>
+                Logan Crypto ra đời với mong muốn tạo ra một môi trường giao dịch
+                vừa rõ ràng, vừa có chiều sâu, vừa đủ thực chiến để dùng được lâu dài.
+              </p>
+            </div>
+          </article>
+
+          <article class="spotlight-card">
+            <img src="./5.jpg" alt="Giá trị cốt lõi">
+            <div class="spotlight-body">
+              <div class="spotlight-icon">💎</div>
+              <h3>GIÁ TRỊ CỐT LÕI</h3>
+              <p>
+                Mọi phần trong hệ thống đều hướng đến 3 điều:
+                rõ giá trị, rõ định hướng và rõ lộ trình phát triển cho người dùng.
+              </p>
+            </div>
+          </article>
+
+          <article class="spotlight-card">
+            <img src="./3.jpg" alt="Tầm nhìn">
+            <div class="spotlight-body">
+              <div class="spotlight-icon">🌟</div>
+              <h3>TẦM NHÌN</h3>
+              <p>
+                Xây dựng một hệ sinh thái trader hiện đại, sạch, tinh gọn
+                và đủ sâu để đồng hành cùng người dùng ở nhiều cấp độ khác nhau.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div class="container">
+        <div class="feature-row">
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🧭</div>
+            <div>
+              <h4>RÕ ĐỊNH HƯỚNG</h4>
+              <p>Không làm người dùng bị ngợp trong một mớ thông tin rời rạc</p>
             </div>
           </div>
-        </div>
 
-        <div class="grid-3 reveal" style="margin-top:28px;">
-          <div class="panel panel-pad">
-            <div class="icon-box icon-cyan"><i class="fas fa-compass"></i></div>
-            <div class="card-title">Triết lý</div>
-            <div class="card-text">Làm mọi thứ đơn giản hơn cho khách hàng, nhưng vẫn đủ sâu để tạo ra thay đổi thật trong cách họ nhìn thị trường và hành động.</div>
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🏗</div>
+            <div>
+              <h4>RÕ CẤU TRÚC</h4>
+              <p>Mỗi phần trong hệ thống đều có vai trò tách bạch</p>
+            </div>
           </div>
 
-          <div class="panel panel-pad">
-            <div class="icon-box icon-purple"><i class="fas fa-sitemap"></i></div>
-            <div class="card-title">Cấu trúc</div>
-            <div class="card-text">Từng phần trong hệ thống được tách vai trò đủ rõ để trải nghiệm vừa sạch, vừa đẹp, vừa dễ vận hành lâu dài hơn.</div>
+          <div class="feature-pill">
+            <div class="feature-pill-icon">📚</div>
+            <div>
+              <h4>RÕ CHIỀU SÂU</h4>
+              <p>Hướng đến giá trị sử dụng thực tế chứ không chỉ bề ngoài</p>
+            </div>
           </div>
 
-          <div class="panel panel-pad">
-            <div class="icon-box icon-green"><i class="fas fa-handshake-angle"></i></div>
-            <div class="card-title">Đồng hành</div>
-            <div class="card-text">Giá trị không đến từ một công cụ đơn lẻ, mà từ cảm giác có người đồng hành, có định hướng và có hệ thống đủ rõ.</div>
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🤝</div>
+            <div>
+              <h4>RÕ ĐỒNG HÀNH</h4>
+              <p>Không để khách hàng đi một mình trong hành trình học và dùng</p>
+            </div>
           </div>
-        </div>
 
-        <div class="panel panel-pad reveal" style="margin-top:28px;text-align:center;border-radius:34px;">
-          <h2 style="margin:0;font-size:54px;line-height:1.1;font-weight:900;">Muốn hiểu Logan Crypto rõ hơn bằng trải nghiệm thực tế?</h2>
-          <p class="card-text" style="max-width:980px;margin-left:auto;margin-right:auto;">
-            Hãy bắt đầu từ phần dịch vụ hoặc để lại thông tin để đội ngũ định hướng giải pháp phù hợp hơn với mục tiêu hiện tại của bạn.
-          </p>
-          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
-            <a href="./services.html" class="btn-primary">Xem dịch vụ</a>
-            <a href="./index.html#leadFormSection" class="btn-secondary">Nhận tư vấn</a>
+          <div class="feature-pill">
+            <div class="feature-pill-icon">📈</div>
+            <div>
+              <h4>RÕ TĂNG TRƯỞNG</h4>
+              <p>Giúp người dùng từng bước nâng chất lượng giao dịch của mình</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
-
-  <footer class="footer-wrap">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#4b2230;color:#ff8a8a;"><i class="fas fa-phone-alt"></i></div>
-          <div><div class="footer-label">HOTLINE</div><div class="footer-value">0899.125.048</div></div>
-        </div>
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#153b46;color:#62e6d9;"><i class="far fa-envelope"></i></div>
-          <div><div class="footer-label">GMAIL</div><div class="footer-value">logan27xx@gmail.com</div></div>
-        </div>
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#37205c;color:#c58cff;"><i class="far fa-clock"></i></div>
-          <div><div class="footer-label">HỖ TRỢ</div><div class="footer-value">24/7 Online</div></div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-        <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
-      </div>
-    </div>
-  </footer>
 
   <script src="./site.js"></script>
 </body>
