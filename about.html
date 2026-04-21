@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logan Crypto | Giới thiệu</title>
+  <link rel="icon" type="image/jpeg" href="logan-logo.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#04050a; --panel:rgba(10,15,28,.72); --border:rgba(255,255,255,.08); --text:#eef5ff; --soft:#94a3b8;
+      --header:rgba(4,5,10,.82); --overlay-left:rgba(4,5,10,.82); --overlay-mid:rgba(4,5,10,.36); --overlay-right:rgba(4,5,10,.76);
+      --footer:#06101d; --footer-card:rgba(255,255,255,.04);
+    }
+    body.light-theme{
+      --bg:#edf3f7; --panel:rgba(255,255,255,.82); --border:rgba(15,23,42,.08); --text:#0f172a; --soft:#475569;
+      --header:rgba(255,255,255,.90); --overlay-left:rgba(237,243,247,.68); --overlay-mid:rgba(237,243,247,.18); --overlay-right:rgba(237,243,247,.58);
+      --footer:#edf3f7; --footer-card:rgba(15,23,42,.04);
+    }
+    html,body{margin:0;padding:0;min-height:100%;background:var(--bg)!important;overflow-x:hidden;scroll-behavior:smooth}
+    *{box-sizing:border-box;font-family:"Times New Roman", Times, serif}
+    body{color:var(--text)}
+    .video-bg{position:fixed;inset:0;z-index:-3}.video-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
+    .video-overlay{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 18% 30%, rgba(0,234,255,.10), transparent 24%),radial-gradient(circle at 85% 70%, rgba(56,189,248,.10), transparent 28%),linear-gradient(to right,var(--overlay-left) 0%,var(--overlay-mid) 48%,var(--overlay-right) 100%)}
+    body::before{content:"";position:fixed;inset:0;background:var(--bg);opacity:.14;z-index:-1}
+    .glass-nav{background:var(--header);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .panel{background:var(--panel);border:1px solid var(--border);backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.28)}
+    .panel:hover{transform:translateY(-4px);transition:.28s ease;border-color:rgba(0,234,255,.18)}
+    .btn-primary{background:linear-gradient(135deg,#00f0ff,#2dd4bf 45%,#38bdf8 100%);color:#03131b!important;box-shadow:0 12px 28px rgba(0,240,255,.18)}
+    .btn-secondary{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text)}
+    body.light-theme .btn-secondary{background:rgba(255,255,255,.78)}
+    .section-kicker{display:inline-block;color:#00eaff;border:1px solid rgba(0,234,255,.25);padding:8px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:700}
+    .theme-toggle{width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--text)}
+    .mobile-menu{transform:translateX(100%);transition:.35s ease;background:var(--header);backdrop-filter:blur(18px)} .mobile-menu.open{transform:translateX(0)}
+    .footer-wrap{background:var(--footer);border-top:1px solid var(--border)}
+    .footer-card{background:var(--footer-card);border:1px solid var(--border)}
+    .text-soft{color:var(--soft)}
+    body.light-theme .force-white{color:#0f172a!important}
+    @media(max-width:1024px){.desktop-nav{display:none}} @media(min-width:1025px){.menu-btn{display:none}}
+  </style>
+</head>
+<body>
+  <div class="video-bg"><video autoplay muted loop playsinline preload="auto"><source src="hero-bg.mp4" type="video/mp4"></video></div>
+  <div class="video-overlay"></div>
+
+  <header class="glass-nav fixed top-0 left-0 w-full z-[100] h-16 lg:h-20">
+    <div class="max-w-[1600px] mx-auto px-6 xl:px-10 h-full flex items-center justify-between">
+      <a href="./index.html" class="flex items-center gap-3">
+        <div class="w-11 h-11 lg:w-12 lg:h-12 rounded-xl overflow-hidden bg-white border border-cyan-300/30"><img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-contain"></div>
+        <div><div class="text-lg lg:text-xl font-black uppercase tracking-tight force-white">LOGAN <span class="text-cyan-300">CRYPTO</span></div><div class="text-[10px] uppercase tracking-[.18em] text-soft">Trading Ecosystem</div></div>
+      </a>
+      <nav class="desktop-nav flex items-center gap-8 text-[16px] font-semibold">
+        <a href="./index.html" class="text-soft hover:text-white transition">Trang chủ</a>
+        <a href="./services.html" class="text-soft hover:text-white transition">Dịch vụ</a>
+        <a href="./about.html" class="text-cyan-300">Giới thiệu</a>
+        <a href="./reviews.html" class="text-soft hover:text-white transition">Phản hồi</a>
+        <a href="./faq.html" class="text-soft hover:text-white transition">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="theme-toggle"><i id="theme-icon" class="fas fa-moon"></i></button>
+        <a href="./login.html" class="hidden lg:inline-flex btn-primary px-6 py-2.5 rounded-full font-bold text-[12px] uppercase items-center justify-center">Đăng nhập khóa học</a>
+        <button onclick="toggleMenu()" class="menu-btn text-2xl force-white"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[95] pt-24 px-6 lg:hidden">
+    <button onclick="toggleMenu()" class="absolute top-5 right-6 text-3xl force-white">&times;</button>
+    <div class="space-y-2">
+      <a href="./index.html" class="block py-4 border-b border-white/10 force-white font-bold">Trang chủ</a>
+      <a href="./services.html" class="block py-4 border-b border-white/10 force-white">Dịch vụ</a>
+      <a href="./about.html" class="block py-4 border-b border-white/10 text-cyan-300 font-bold">Giới thiệu</a>
+      <a href="./reviews.html" class="block py-4 border-b border-white/10 force-white">Phản hồi</a>
+      <a href="./faq.html" class="block py-4 border-b border-white/10 force-white">FAQ</a>
+      <a href="./login.html" class="block mt-6 btn-primary text-center py-4 rounded-2xl font-bold uppercase text-[12px]">Đăng nhập khóa học</a>
+    </div>
+  </div>
+
+  <main class="pt-28 lg:pt-32">
+    <section class="max-w-[1500px] mx-auto px-6 xl:px-10 py-14 text-center">
+      <span class="section-kicker">Giới thiệu</span>
+      <h1 class="mt-5 text-4xl md:text-6xl xl:text-[74px] font-black leading-[1.04] tracking-tight force-white">
+        Một hệ sinh thái được xây ra<br><span class="text-cyan-300">để tạo giá trị thật cho người giao dịch</span>
+      </h1>
+      <p class="mt-6 text-soft max-w-4xl mx-auto text-lg md:text-[22px] leading-relaxed">
+        Logan Crypto không đi theo hướng phô diễn quá nhiều. Điều được ưu tiên là
+        làm sao để khách hàng thấy rõ giá trị, cảm nhận rõ định hướng và đi lâu dài hơn cùng hệ thống.
+      </p>
+    </section>
+
+    <section class="max-w-[1600px] mx-auto px-6 xl:px-10 pb-8">
+      <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-6">
+        <div class="panel rounded-[34px] p-8 md:p-10">
+          <div class="text-cyan-300 uppercase tracking-[.2em] text-[11px] font-bold">Câu chuyện thương hiệu</div>
+          <h2 class="mt-4 text-4xl md:text-5xl font-black force-white">Từ nhu cầu thực tế đến một hệ thống rõ vai trò, rõ cấu trúc</h2>
+          <p class="mt-5 text-soft text-lg leading-relaxed">
+            Logan Crypto được xây theo triết lý rất rõ: nếu đã tạo ra một hệ thống cho trader,
+            thì từng phần trong hệ thống đó phải thực sự phục vụ cho hành trình của họ.
+            Không chỉ là công cụ, mà còn là trải nghiệm, định hướng và khả năng đi đường dài.
+          </p>
+          <p class="mt-4 text-soft text-lg leading-relaxed">
+            Vì vậy, landing page được tối ưu cho việc giới thiệu và chuyển đổi. Dashboard được tách riêng cho việc học.
+            Nội dung được quản trị theo role. Và toàn bộ trải nghiệm được giữ nhất quán để nhìn chuyên nghiệp hơn.
+          </p>
+        </div>
+
+        <div class="panel rounded-[34px] p-8 md:p-10">
+          <h3 class="text-3xl font-black force-white">3 điều Logan Crypto muốn khách hàng cảm nhận rõ</h3>
+          <div class="mt-6 space-y-4">
+            <div class="panel rounded-3xl p-5">
+              <div class="text-2xl font-black force-white">Rõ giá trị</div>
+              <p class="mt-2 text-soft leading-relaxed">Mỗi thành phần xuất hiện trong hệ thống đều phải mang lại giá trị có thể cảm nhận được ngay trong quá trình sử dụng.</p>
+            </div>
+            <div class="panel rounded-3xl p-5">
+              <div class="text-2xl font-black text-cyan-300">Rõ định hướng</div>
+              <p class="mt-2 text-soft leading-relaxed">Khách hàng cần được dẫn dắt theo lộ trình hợp lý, thay vì bị ngợp trong một mớ thông tin rời rạc.</p>
+            </div>
+            <div class="panel rounded-3xl p-5">
+              <div class="text-2xl font-black text-green-300">Rõ chiều sâu</div>
+              <p class="mt-2 text-soft leading-relaxed">Logan Crypto hướng tới sự đồng hành lâu dài để khách hàng từng bước nâng chất lượng giao dịch của mình.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-[1600px] mx-auto px-6 xl:px-10 py-14">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="panel rounded-[30px] p-7">
+          <div class="w-16 h-16 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 text-cyan-300 text-3xl flex items-center justify-center">
+            <i class="fas fa-compass"></i>
+          </div>
+          <h3 class="mt-5 text-3xl font-black force-white">Triết lý</h3>
+          <p class="mt-4 text-soft text-lg leading-relaxed">Làm mọi thứ đơn giản hơn cho khách hàng, nhưng vẫn đủ sâu để tạo ra thay đổi thật trong cách họ nhìn thị trường và hành động.</p>
+        </div>
+
+        <div class="panel rounded-[30px] p-7">
+          <div class="w-16 h-16 rounded-2xl bg-purple-400/15 border border-purple-300/20 text-purple-300 text-3xl flex items-center justify-center">
+            <i class="fas fa-sitemap"></i>
+          </div>
+          <h3 class="mt-5 text-3xl font-black force-white">Cấu trúc</h3>
+          <p class="mt-4 text-soft text-lg leading-relaxed">Landing để bán hàng, dashboard để học, admin để quản trị. Cấu trúc này giúp hệ thống sạch, dễ vận hành và dễ mở rộng hơn về sau.</p>
+        </div>
+
+        <div class="panel rounded-[30px] p-7">
+          <div class="w-16 h-16 rounded-2xl bg-green-400/15 border border-green-300/20 text-green-300 text-3xl flex items-center justify-center">
+            <i class="fas fa-handshake-angle"></i>
+          </div>
+          <h3 class="mt-5 text-3xl font-black force-white">Đồng hành</h3>
+          <p class="mt-4 text-soft text-lg leading-relaxed">Giá trị không đến từ một công cụ đơn lẻ, mà từ việc khách hàng cảm thấy có người đồng hành, có định hướng và có hệ thống đủ rõ.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-[1300px] mx-auto px-6 xl:px-10 pb-20">
+      <div class="panel rounded-[34px] p-8 md:p-12 text-center">
+        <h2 class="text-3xl md:text-5xl font-black force-white">Muốn hiểu Logan Crypto rõ hơn bằng trải nghiệm thực tế?</h2>
+        <p class="mt-4 text-soft text-lg max-w-3xl mx-auto leading-relaxed">
+          Hãy bắt đầu từ phần dịch vụ hoặc để lại thông tin để đội ngũ định hướng giải pháp phù hợp hơn với mục tiêu hiện tại của bạn.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="./services.html" class="btn-primary px-8 py-4 rounded-2xl font-bold uppercase text-[13px]">Xem dịch vụ</a>
+          <a href="./index.html#leadFormSection" class="btn-secondary px-8 py-4 rounded-2xl font-bold uppercase text-[13px] text-center">Nhận tư vấn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-wrap pt-20 pb-14">
+    <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#4b2230] text-[#ff8a8a] flex items-center justify-center text-2xl"><i class="fas fa-phone-alt"></i></div>
+          <div><div class="font-black uppercase force-white text-[15px]">HOTLINE</div><div class="text-soft text-[24px] font-bold">0899.125.048</div></div>
+        </div>
+        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#153b46] text-[#62e6d9] flex items-center justify-center text-2xl"><i class="far fa-envelope"></i></div>
+          <div><div class="font-black uppercase force-white text-[15px]">GMAIL</div><div class="text-soft text-[24px] font-bold">logan27xx@gmail.com</div></div>
+        </div>
+        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#37205c] text-[#c58cff] flex items-center justify-center text-2xl"><i class="far fa-clock"></i></div>
+          <div><div class="font-black uppercase force-white text-[15px]">HỖ TRỢ</div><div class="text-soft text-[24px] font-bold">24/7 Online</div></div>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-soft text-[15px] border-t border-white/10 pt-6">
+        <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
+        <div><a href="./index.html" class="hover:text-cyan-300">Trang chủ</a> | <a href="./login.html" class="hover:text-cyan-300">Khóa học</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+    function toggleTheme(){
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('logan-theme', isLight ? 'light' : 'dark');
+      document.getElementById('theme-icon').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    (function(){
+      const saved = localStorage.getItem('logan-theme');
+      if(saved === 'light') document.body.classList.add('light-theme');
+      document.getElementById('theme-icon').className = document.body.classList.contains('light-theme') ? 'fas fa-sun' : 'fas fa-moon';
+    })();
+  </script>
+</body>
+</html>
