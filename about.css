@@ -56,7 +56,16 @@ body.about-page.dark-theme .menu-toggle {
 }
 
 .about-main {
-  padding: 24px 0 40px;
+  padding: 22px 0 40px;
+}
+
+/* KHUNG NGOÀI RỘNG RA */
+.about-main .page-shell {
+  width: 100%;
+  max-width: 1820px;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
 }
 
 .about-hero-box {
@@ -89,7 +98,7 @@ body.about-page.dark-theme .about-label {
 .about-hero h1 {
   margin: 0;
   text-align: center;
-  font-size: clamp(54px, 7vw, 110px);
+  font-size: clamp(54px, 6vw, 110px);
   line-height: .95;
   font-weight: 900;
   color: #0f3a8d;
@@ -100,11 +109,11 @@ body.about-page.dark-theme .about-hero h1 {
 }
 
 .about-intro {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 20px auto 34px;
   text-align: center;
-  font-size: clamp(18px, 2vw, 28px);
-  line-height: 1.65;
+  font-size: clamp(18px, 1.55vw, 28px);
+  line-height: 1.7;
   color: #31415d;
 }
 
@@ -120,16 +129,18 @@ body.about-page.dark-theme .about-intro strong {
   color: #58cfff;
 }
 
+/* GRID 3 CỘT RỘNG HƠN */
 .about-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 22px;
+  align-items: stretch;
 }
 
 .about-card {
   position: relative;
   overflow: hidden;
-  min-height: 820px;
+  min-height: 880px;
   border-radius: 24px;
   border: 1px solid rgba(211, 220, 233, 0.95);
   background: linear-gradient(180deg, #f6f9ff 0%, #edf3fb 100%);
@@ -144,10 +155,10 @@ body.about-page.dark-theme .about-card {
 
 .about-card-number {
   position: absolute;
-  top: 28px;
+  top: 24px;
   left: 50%;
-  transform: translateX(-10%);
-  font-size: 220px;
+  transform: translateX(-8%);
+  font-size: 210px;
   line-height: 1;
   font-weight: 900;
   color: rgba(37, 99, 235, 0.08);
@@ -161,33 +172,37 @@ body.about-page.dark-theme .about-card-number {
 
 .about-card-icon {
   position: absolute;
-  top: 34px;
-  left: 34px;
-  width: 104px;
-  height: 104px;
+  top: 28px;
+  left: 28px;
+  width: 98px;
+  height: 98px;
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-size: 46px;
+  font-size: 42px;
   background: linear-gradient(180deg, #4f8cff 0%, #1459ea 100%);
   color: #ffffff;
   box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
   z-index: 3;
 }
 
+/* CONTENT KHÔNG BỊ ĐÈ */
 .about-card-content {
   position: relative;
   z-index: 3;
-  padding: 210px 42px 34px;
-  max-width: 62%;
+  padding: 190px 28px 30px;
+  width: 58%;
+  max-width: 58%;
+  min-width: 58%;
 }
 
 .about-card-content h3 {
   margin: 0;
-  font-size: clamp(36px, 3vw, 62px);
-  line-height: 1.03;
+  font-size: clamp(34px, 2.3vw, 60px);
+  line-height: 1.02;
   color: #1459ea;
   font-weight: 900;
+  word-break: keep-all;
 }
 
 body.about-page.dark-theme .about-card-content h3 {
@@ -196,11 +211,11 @@ body.about-page.dark-theme .about-card-content h3 {
 
 .about-line {
   display: block;
-  width: 60px;
+  width: 58px;
   height: 6px;
   background: #2563eb;
   border-radius: 999px;
-  margin: 18px 0 26px;
+  margin: 16px 0 22px;
 }
 
 body.about-page.dark-theme .about-line {
@@ -209,7 +224,7 @@ body.about-page.dark-theme .about-line {
 
 .about-card-content p {
   margin: 0;
-  font-size: clamp(16px, 1.2vw, 22px);
+  font-size: clamp(15px, 1.05vw, 22px);
   line-height: 1.95;
   color: #2e3e59;
 }
@@ -218,11 +233,12 @@ body.about-page.dark-theme .about-card-content p {
   color: #d5e4f9;
 }
 
+/* ẢNH CHIẾM BÊN PHẢI, KHÔNG ÉP ĐÈ CHỮ */
 .about-card-image {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 64%;
+  width: 52%;
   height: 100%;
   display: flex;
   align-items: flex-end;
@@ -238,22 +254,22 @@ body.about-page.dark-theme .about-card-content p {
   object-position: center bottom;
 }
 
-/* card 3 */
+/* CARD 3 */
 .core-list {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .core-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
 }
 
 .core-check {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
   display: grid;
   place-items: center;
@@ -261,7 +277,7 @@ body.about-page.dark-theme .about-card-content p {
   color: #ffffff;
   font-weight: 900;
   flex-shrink: 0;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 body.about-page.dark-theme .core-check {
@@ -270,15 +286,15 @@ body.about-page.dark-theme .core-check {
 }
 
 .core-item h4 {
-  margin: 0 0 8px;
-  font-size: clamp(22px, 1.6vw, 34px);
+  margin: 0 0 6px;
+  font-size: clamp(22px, 1.35vw, 32px);
   color: #1459ea;
   font-weight: 900;
 }
 
 .core-item p {
   margin: 0;
-  font-size: clamp(15px, 1.1vw, 21px);
+  font-size: clamp(15px, 1vw, 21px);
   line-height: 1.8;
 }
 
@@ -286,8 +302,29 @@ body.about-page.dark-theme .core-item h4 {
   color: #58cfff;
 }
 
-/* responsive */
-@media (max-width: 1400px) {
+/* RESPONSIVE */
+@media (max-width: 1600px) {
+  .about-main .page-shell {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .about-card {
+    min-height: 820px;
+  }
+
+  .about-card-content {
+    width: 56%;
+    max-width: 56%;
+    min-width: 56%;
+  }
+
+  .about-card-image {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1300px) {
   .about-card-grid {
     grid-template-columns: 1fr;
   }
@@ -297,11 +334,13 @@ body.about-page.dark-theme .core-item h4 {
   }
 
   .about-card-content {
+    width: 55%;
     max-width: 55%;
+    min-width: 55%;
   }
 
   .about-card-image {
-    width: 52%;
+    width: 45%;
   }
 }
 
@@ -319,25 +358,27 @@ body.about-page.dark-theme .core-item h4 {
   }
 
   .about-card-number {
-    font-size: 160px;
-    top: 30px;
+    font-size: 150px;
+    top: 24px;
   }
 
   .about-card-icon {
-    width: 84px;
-    height: 84px;
-    font-size: 36px;
-    top: 24px;
-    left: 24px;
+    width: 78px;
+    height: 78px;
+    font-size: 32px;
+    top: 20px;
+    left: 20px;
   }
 
   .about-card-content {
-    padding: 150px 24px 24px;
+    padding: 130px 20px 20px;
+    width: 56%;
     max-width: 56%;
+    min-width: 56%;
   }
 
   .about-card-image {
-    width: 52%;
+    width: 44%;
   }
 }
 
@@ -353,34 +394,37 @@ body.about-page.dark-theme .core-item h4 {
   }
 
   .about-card-number {
-    font-size: 110px;
-    top: 18px;
+    font-size: 96px;
+    top: 16px;
     left: 52%;
+    transform: translateX(-10%);
   }
 
   .about-card-icon {
-    width: 72px;
-    height: 72px;
-    font-size: 30px;
-    top: 18px;
-    left: 18px;
+    width: 66px;
+    height: 66px;
+    font-size: 26px;
+    top: 16px;
+    left: 16px;
   }
 
   .about-card-content {
+    width: 100%;
     max-width: 100%;
-    padding: 120px 20px 18px;
+    min-width: 100%;
+    padding: 106px 18px 16px;
   }
 
   .about-card-image {
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 340px;
+    min-height: 320px;
   }
 
   .about-card-image img {
     width: 100%;
-    height: 340px;
+    height: 320px;
     object-fit: cover;
     object-position: center;
   }
