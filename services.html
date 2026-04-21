@@ -5,161 +5,349 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Dịch vụ</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./site.css" />
+  <link rel="stylesheet" href="./site.css?v=services1" />
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
+<body class="services-page">
+  <header class="site-header service-header">
+    <div class="page-shell header-inner">
       <a href="./index.html" class="brand">
         <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
         <div class="brand-text">
           <div class="brand-title">LOGAN <span>CRYPTO</span></div>
-          <div class="brand-sub">TRADING ECOSYSTEM</div>
+          <div class="brand-sub">TRADE SMART - TRADE LIKE A PRO</div>
         </div>
       </a>
 
       <nav class="main-nav" id="mainNav">
         <a href="./index.html">Trang chủ</a>
         <a href="./services.html" class="active">Dịch vụ</a>
-        <a href="./about.html">Giới thiệu</a>
-        <a href="./reviews.html">Phản hồi</a>
-        <a href="./faq.html">FAQ</a>
+        <a href="./about.html">Kiến thức</a>
+        <a href="./reviews.html">Cộng đồng</a>
+        <a href="./faq.html">Về chúng tôi</a>
       </nav>
 
       <div class="header-actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">☀</button>
-        <a href="./login.html" class="btn btn-primary">Đăng nhập khóa học</a>
-        <button class="menu-toggle" id="menuToggle">☰</button>
+        <a href="./login.html" class="btn btn-primary login-btn">Đăng ký / Đăng nhập</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
       </div>
     </div>
   </header>
 
-  <main class="inner-page">
-    <section class="page-hero">
-      <div class="container">
-        <div class="page-hero-grid">
-          <div class="page-hero-copy">
-            <p class="page-label">DỊCH VỤ</p>
-            <h1>Những giải pháp được xây để phục vụ hành trình giao dịch rõ ràng hơn</h1>
+  <main class="services-main">
+    <!-- HERO -->
+    <section class="service-hero">
+      <div class="service-hero-bg"></div>
+      <div class="page-shell service-hero-grid">
+        <div class="service-hero-copy">
+          <div class="service-chip">DỊCH VỤ CỦA CHÚNG TÔI</div>
+
+          <h1>
+            GIẢI PHÁP GIAO DỊCH<br />
+            GIÚP BẠN TRÁNH BỊ<br />
+            QUÉT <span>STOPLOSS</span>
+          </h1>
+
+          <p class="service-hero-desc">
+            Không cần đoán thị trường — chỉ cần đi theo dòng tiền
+          </p>
+
+          <div class="service-mini-features">
+            <div class="service-mini-item">
+              <span class="mini-icon">🛡</span>
+              <span>Xác định vùng vào<br />lệnh chuẩn xác</span>
+            </div>
+
+            <div class="service-mini-item">
+              <span class="mini-icon">📉</span>
+              <span>Giảm thiểu rủi ro<br />Stop Hunt</span>
+            </div>
+
+            <div class="service-mini-item">
+              <span class="mini-icon">⚙</span>
+              <span>Tối ưu lợi nhuận<br />& Quản trị vốn</span>
+            </div>
+          </div>
+
+          <div class="service-hero-actions">
+            <a href="./register.html" class="btn btn-primary">Dùng thử miễn phí</a>
+            <a href="#service-solution" class="btn btn-dark-outline">Xem demo chỉ báo</a>
+          </div>
+        </div>
+
+        <div class="service-hero-media">
+          <img src="./services-hero.png" alt="Hero dịch vụ Logan Crypto" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="service-section section-problem">
+      <div class="page-shell">
+        <h2 class="section-title">BẠN ĐANG GẶP PHẢI?</h2>
+
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">🎯</div>
+            <h3>Vào lệnh xong<br />là bị quét SL</h3>
+            <p>Thị trường biến động mạnh, stoploss của bạn bị săn liên tục.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon">❓</div>
+            <h3>Không biết đâu là<br />vùng vào lệnh chuẩn</h3>
+            <p>Thiếu công cụ xác định POI, FVG, Orderflow chính xác.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon">🧠</div>
+            <h3>Trade theo cảm xúc<br />cháy tài khoản</h3>
+            <p>Không có hệ thống rõ ràng, quản lý vốn kém, tâm lý không ổn định.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon">📉</div>
+            <h3>Không có hệ thống<br />giao dịch rõ ràng</h3>
+            <p>Thiếu chiến lược cụ thể, không biết khi nào nên vào lệnh và thoát lệnh.</p>
+          </div>
+        </div>
+
+        <p class="problem-note">
+          Bạn không sai – bạn chỉ thiếu công cụ & hệ thống đúng.
+        </p>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="service-section section-solution" id="service-solution">
+      <div class="page-shell">
+        <h2 class="section-title">GIẢI PHÁP CỦA LOGAN <span>CRYPTO</span></h2>
+
+        <div class="solution-grid">
+          <div class="solution-list">
+            <div class="solution-item">
+              <span class="solution-check">✔</span>
+              <div>
+                <h4>Xác định vùng vào lệnh chuẩn (POI / FVG)</h4>
+                <p>Tự động hiển thị các vùng có xác suất cao.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <span class="solution-check">✔</span>
+              <div>
+                <h4>Tự động hiển thị vùng Buy / Sell</h4>
+                <p>Dễ nhìn – Dễ hiểu – Dễ sử dụng.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <span class="solution-check">✔</span>
+              <div>
+                <h4>Hạn chế Stop Hunt tối đa</h4>
+                <p>Sử dụng ATR + Liquidity để lọc nhiễu.</p>
+              </div>
+            </div>
+
+            <div class="solution-item">
+              <span class="solution-check">✔</span>
+              <div>
+                <h4>Dùng được trên mọi thiết bị</h4>
+                <p>TradingView, PC, Tablet, Mobile đều mượt mà.</p>
+              </div>
+            </div>
+
+            <div class="solution-action">
+              <a href="./register.html" class="btn btn-primary">Xem demo trực tiếp</a>
+            </div>
+          </div>
+
+          <div class="solution-media">
+            <img src="./services-solution-screen.png" alt="Màn hình giải pháp Logan Crypto" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="service-section section-pricing">
+      <div class="page-shell">
+        <h2 class="section-title">GÓI DỊCH VỤ</h2>
+
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>FREE</h3>
+            <div class="pricing-sub">Dành cho người mới bắt đầu</div>
+            <div class="pricing-price">0đ <span>/ vĩnh viễn</span></div>
+
+            <ul>
+              <li>Kho code chỉ báo cơ bản</li>
+              <li>Hướng dẫn cài đặt</li>
+              <li>Tham gia cộng đồng</li>
+              <li>Hỗ trợ trong cộng đồng</li>
+            </ul>
+
+            <a href="./register.html" class="btn btn-dark-outline pricing-btn">Nhận miễn phí</a>
+          </div>
+
+          <div class="pricing-card popular">
+            <div class="popular-badge">MOST POPULAR</div>
+            <h3>MEDIUM</h3>
+            <div class="pricing-sub">Dành cho trader nghiêm túc</div>
+            <div class="pricing-price">499.000đ <span>/ tháng</span></div>
+
+            <ul>
+              <li>Full chỉ báo đã fix</li>
+              <li>Setup Entry + SL + TP</li>
+              <li>Hướng dẫn chiến lược</li>
+              <li>Hỗ trợ cơ bản</li>
+            </ul>
+
+            <a href="./register.html" class="btn btn-primary pricing-btn">Bắt đầu ngay</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>PRO</h3>
+            <div class="pricing-sub">Dành cho trader chuyên nghiệp</div>
+            <div class="pricing-price">1.299.000đ <span>/ tháng</span></div>
+
+            <ul>
+              <li>Full hệ thống Galaxy</li>
+              <li>Chiến lược nâng cao</li>
+              <li>Copy Trade / Tín hiệu VIP</li>
+              <li>Mentor 1-1 & cộng đồng VIP</li>
+            </ul>
+
+            <a href="./register.html" class="btn btn-purple pricing-btn">Nâng cấp tài khoản</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="service-section section-result">
+      <div class="page-shell">
+        <h2 class="section-title">KẾT QUẢ THỰC TẾ</h2>
+
+        <div class="result-grid">
+          <div class="result-small before-box">
+            <h3>TRƯỚC</h3>
+            <ul>
+              <li>Trade cảm tính</li>
+              <li>Bị quét SL liên tục</li>
+              <li>Lợi nhuận bấp bênh</li>
+              <li>RR thấp, winrate thấp</li>
+            </ul>
+          </div>
+
+          <div class="result-small after-box">
+            <h3>SAU</h3>
+            <ul>
+              <li>Trade theo hệ thống</li>
+              <li>Vào lệnh đúng vùng</li>
+              <li>Hạn chế quét SL</li>
+              <li>RR cao, winrate tốt</li>
+            </ul>
+          </div>
+
+          <div class="result-large">
+            <div class="result-stats">
+              <div><strong>62.7%</strong><span>WINRATE</span></div>
+              <div><strong>1:2.8</strong><span>RISK : REWARD</span></div>
+              <div><strong>+214.6%</strong><span>TOTAL PROFIT</span></div>
+            </div>
+            <img src="./services-result-chart.png" alt="Kết quả giao dịch thực tế" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="service-section section-process">
+      <div class="page-shell">
+        <h2 class="section-title">QUY TRÌNH HOẠT ĐỘNG</h2>
+
+        <div class="process-row">
+          <div class="process-card">
+            <div class="step-number">1</div>
+            <div class="process-icon">☁</div>
+            <h4>Nhận chỉ báo</h4>
+            <p>Gửi đến nhanh chóng trên TradingView.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">2</div>
+            <div class="process-icon">🔎</div>
+            <h4>Xem vùng entry</h4>
+            <p>Chỉ báo hiển thị vùng vào lệnh tiềm năng.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">3</div>
+            <div class="process-icon">🛡</div>
+            <h4>Đặt SL theo ATR</h4>
+            <p>Tự động tính SL hợp lý, hạn chế rủi ro.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">4</div>
+            <div class="process-icon">📊</div>
+            <h4>Hold theo plan</h4>
+            <p>Quản trị vốn & chốt lời theo kế hoạch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="service-section section-cta">
+      <div class="page-shell">
+        <div class="cta-box">
+          <div class="cta-left">
+            <img src="./services-cta-wolf.png" alt="CTA Logan Crypto" />
+          </div>
+
+          <div class="cta-center">
+            <h3>BẠN MUỐN TRADE DỄ HƠN<br />HAY TIẾP TỤC ĐOÁN?</h3>
             <p>
-              Logan Crypto tập trung vào các giải pháp có tính ứng dụng thực tế,
-              giúp người dùng hiểu thị trường rõ hơn, hành động kỷ luật hơn
-              và có lộ trình phát triển bài bản hơn.
+              Tham gia cộng đồng của Logan Crypto để nhận chỉ báo,
+              chiến lược và sự hỗ trợ tốt nhất.
             </p>
-            <div class="page-hero-actions">
-              <a href="./register.html" class="btn btn-primary">Nhận tư vấn ngay</a>
-              <a href="./login.html" class="btn btn-outline">Đăng nhập khóa học</a>
-            </div>
           </div>
 
-          <div class="page-hero-media">
-            <img src="./1.jpg" alt="Dịch vụ Logan Crypto">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="spotlight-grid">
-      <div class="container">
-        <div class="spotlight-row four-col">
-          <article class="spotlight-card">
-            <img src="./1.jpg" alt="Chỉ báo giao dịch">
-            <div class="spotlight-body">
-              <div class="spotlight-icon">📈</div>
-              <h3>CHỈ BÁO GIAO DỊCH</h3>
-              <p>
-                Hỗ trợ quan sát cấu trúc giá, vùng phản ứng và hành vi thị trường
-                theo hướng trực quan, rõ ràng và dễ áp dụng hơn.
-              </p>
-            </div>
-          </article>
-
-          <article class="spotlight-card">
-            <img src="./2.jpg" alt="Định hướng chiến lược">
-            <div class="spotlight-body">
-              <div class="spotlight-icon">🎯</div>
-              <h3>ĐỊNH HƯỚNG CHIẾN LƯỢC</h3>
-              <p>
-                Giúp người dùng hiểu mình đang ở đâu, phù hợp với phong cách nào
-                và nên đi theo giải pháp nào cho đúng giai đoạn.
-              </p>
-            </div>
-          </article>
-
-          <article class="spotlight-card">
-            <img src="./4.jpg" alt="Kiến thức thực chiến">
-            <div class="spotlight-body">
-              <div class="spotlight-icon">📘</div>
-              <h3>KIẾN THỨC THỰC CHIẾN</h3>
-              <p>
-                Nội dung được xây theo hướng dùng được trong thực tế,
-                không lan man, không phức tạp hóa những gì cần rõ ràng.
-              </p>
-            </div>
-          </article>
-
-          <article class="spotlight-card">
-            <img src="./6.jpg" alt="Công cụ hiện đại">
-            <div class="spotlight-body">
-              <div class="spotlight-icon">💻</div>
-              <h3>CÔNG CỤ HIỆN ĐẠI</h3>
-              <p>
-                Tối ưu trải nghiệm theo dõi, phân tích và ra quyết định
-                với bộ công cụ hỗ trợ gọn hơn và hiệu quả hơn.
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-strip">
-      <div class="container">
-        <div class="feature-row">
-          <div class="feature-pill">
-            <div class="feature-pill-icon">🛡</div>
-            <div>
-              <h4>RÕ VAI TRÒ</h4>
-              <p>Mỗi giải pháp trong hệ thống đều có chức năng rõ ràng</p>
-            </div>
-          </div>
-
-          <div class="feature-pill">
-            <div class="feature-pill-icon">📊</div>
-            <div>
-              <h4>RÕ THỊ TRƯỜNG</h4>
-              <p>Giúp quan sát và đánh giá thị trường rõ ràng hơn</p>
-            </div>
-          </div>
-
-          <div class="feature-pill">
-            <div class="feature-pill-icon">⚙</div>
-            <div>
-              <h4>RÕ HÀNH ĐỘNG</h4>
-              <p>Hướng đến hành động có cơ sở và kỷ luật hơn</p>
-            </div>
-          </div>
-
-          <div class="feature-pill">
-            <div class="feature-pill-icon">🎧</div>
-            <div>
-              <h4>ĐỒNG HÀNH</h4>
-              <p>Có hỗ trợ và định hướng xuyên suốt khi cần thiết</p>
-            </div>
-          </div>
-
-          <div class="feature-pill">
-            <div class="feature-pill-icon">🚀</div>
-            <div>
-              <h4>PHÁT TRIỂN DÀI HẠN</h4>
-              <p>Không chỉ dùng công cụ, mà còn nâng tư duy giao dịch</p>
-            </div>
+          <div class="cta-right">
+            <a href="./register.html" class="btn btn-primary cta-btn">Nhận chỉ báo miễn phí</a>
+            <a href="./reviews.html" class="btn btn-dark-outline cta-btn">Tham gia cộng đồng</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="./site.js"></script>
+  <script>
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+
+    const savedTheme = localStorage.getItem("logan-theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark-theme");
+      themeToggle.textContent = "☾";
+    } else {
+      themeToggle.textContent = "☀";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark-theme");
+      const isDark = body.classList.contains("dark-theme");
+      localStorage.setItem("logan-theme", isDark ? "dark" : "light");
+      themeToggle.textContent = isDark ? "☾" : "☀";
+    });
+
+    menuToggle.addEventListener("click", () => {
+      mainNav.classList.toggle("open");
+    });
+  </script>
 </body>
 </html>
