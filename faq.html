@@ -17,154 +17,118 @@
   </div>
   <div class="video-overlay"></div>
 
-  <header class="glass-nav">
-    <div class="container nav-inner">
-      <a href="./index.html" class="brand">
-        <div class="brand-logo"><img src="./logan-logo.jpg" alt="Logan Crypto"></div>
-        <div><div class="brand-title">LOGAN <span style="color:#67e8f9;">CRYPTO</span></div><div class="brand-sub">Trading Ecosystem</div></div>
-      </a>
-      <nav class="nav-links">
-        <a href="./index.html">Trang chủ</a>
-        <a href="./services.html">Dịch vụ</a>
-        <a href="./about.html">Giới thiệu</a>
-        <a href="./reviews.html">Phản hồi</a>
-        <a href="./faq.html" class="active">FAQ</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-moon"></i></button>
-        <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
-        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <div class="site-wrap">
+    <header class="glass-nav">
+      <div class="container nav-inner">
+        <a href="./index.html" class="brand">
+          <div class="brand-logo"><img src="./logan-logo.jpg" alt="Logan Crypto"></div>
+          <div>
+            <div class="brand-title">LOGAN <span style="color:#38BDF8;">CRYPTO</span></div>
+            <div class="brand-sub">Trading Ecosystem</div>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="./index.html">Trang chủ</a>
+          <a href="./services.html">Dịch vụ</a>
+          <a href="./about.html">Giới thiệu</a>
+          <a href="./reviews.html">Phản hồi</a>
+          <a href="./faq.html" class="active">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-sun"></i></button>
+          <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
+          <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
       </div>
+    </header>
+
+    <div id="mobileMenu" class="mobile-menu">
+      <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+      <a href="./index.html">Trang chủ</a>
+      <a href="./services.html">Dịch vụ</a>
+      <a href="./about.html">Giới thiệu</a>
+      <a href="./reviews.html">Phản hồi</a>
+      <a href="./faq.html" class="active">FAQ</a>
+      <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
     </div>
-  </header>
 
-  <div id="mobileMenu" class="mobile-menu">
-    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
-    <a href="./index.html">Trang chủ</a>
-    <a href="./services.html">Dịch vụ</a>
-    <a href="./about.html">Giới thiệu</a>
-    <a href="./reviews.html">Phản hồi</a>
-    <a href="./faq.html" class="active">FAQ</a>
-    <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
-  </div>
+    <main class="page">
+      <section class="section">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">FAQ</span>
+            <h1 class="page-title">Những câu hỏi thường gặp để khách hàng nắm nhanh và rõ hơn</h1>
+            <p class="page-desc">
+              Trang này giúp khách hàng hiểu nhanh cách tham gia, cách sử dụng và cách tiếp cận hệ thống
+              mà không cần phải hỏi lại quá nhiều lần.
+            </p>
+          </div>
 
-  <main class="page">
-    <section class="section">
+          <div class="reveal" style="display:grid;gap:16px;max-width:1100px;margin:0 auto;">
+            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+              <div class="faq-head">
+                <h3>Tôi phù hợp với chỉ báo hay copytrade?</h3>
+                <i class="faq-icon fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ phù hợp hơn.
+                Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn,
+                copytrade sẽ là hướng đáng cân nhắc.
+              </div>
+            </div>
+
+            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+              <div class="faq-head">
+                <h3>Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</h3>
+                <i class="faq-icon fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập khu vực nội dung phù hợp.
+                Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.
+              </div>
+            </div>
+
+            <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+              <div class="faq-head">
+                <h3>Nội dung học có giống nhau cho tất cả khách hàng không?</h3>
+                <i class="faq-icon fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Nội dung và lộ trình có thể khác nhau tùy theo giai đoạn tham gia và nhóm giải pháp mà khách hàng đang sử dụng,
+                nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-wrap">
       <div class="container">
-        <div class="reveal" style="text-align:center;">
-          <span class="kicker">FAQ</span>
-          <h1 class="page-title">Những câu hỏi thường gặp để khách hàng nắm nhanh và rõ hơn</h1>
-          <p class="page-desc">
-            Trang này giúp khách hàng hiểu nhanh cách tham gia, cách sử dụng và cách tiếp cận hệ thống
-            mà không cần phải hỏi lại quá nhiều lần.
-          </p>
-        </div>
-
-        <div class="reveal" style="max-width:1100px;margin:28px auto 0;display:grid;gap:14px;">
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Tôi phù hợp với chỉ báo hay copytrade?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ phù hợp hơn.
-              Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn,
-              copytrade sẽ là hướng đáng cân nhắc.
-            </div>
+        <div class="footer-grid">
+          <div class="footer-card">
+            <div class="footer-icon" style="background:#ffe4e6;color:#ef4444;"><i class="fas fa-phone-alt"></i></div>
+            <div><div class="footer-label">HOTLINE</div><div class="footer-value">0899.125.048</div></div>
           </div>
-
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập khu vực nội dung phù hợp.
-              Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.
-            </div>
+          <div class="footer-card">
+            <div class="footer-icon" style="background:#cffafe;color:#0891b2;"><i class="far fa-envelope"></i></div>
+            <div><div class="footer-label">GMAIL</div><div class="footer-value">logan27xx@gmail.com</div></div>
           </div>
-
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Nội dung học có giống nhau cho tất cả khách hàng không?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Không hoàn toàn giống nhau. Nội dung và lộ trình có thể khác nhau tùy theo giai đoạn tham gia
-              và nhóm giải pháp mà khách hàng đang sử dụng, nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn.
-            </div>
-          </div>
-
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Trang chủ, dashboard và khóa học khác nhau ở điểm nào?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Trang chủ được dùng để giới thiệu và tư vấn giải pháp. Dashboard là khu vực riêng sau đăng nhập.
-              Tại dashboard, khách hàng sẽ xem các khóa học và bài học tương ứng với cấp độ tài khoản của mình.
-            </div>
-          </div>
-
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Tôi có thể bắt đầu ngay cả khi chưa có nhiều kinh nghiệm không?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Có. Hệ thống được thiết kế để cả người mới lẫn người đã có trải nghiệm đều có thể bắt đầu ở phần phù hợp với mình,
-              sau đó đi tiếp theo lộ trình rõ ràng hơn.
-            </div>
-          </div>
-
-          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <h3>Nếu tôi muốn được tư vấn trực tiếp thì làm thế nào?</h3>
-              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
-            </div>
-            <div class="faq-answer">
-              Bạn chỉ cần để lại thông tin ở trang chủ, hệ thống sẽ ghi nhận và đội ngũ sẽ liên hệ để định hướng
-              giải pháp phù hợp hơn với mục tiêu hiện tại của bạn.
-            </div>
+          <div class="footer-card">
+            <div class="footer-icon" style="background:#ede9fe;color:#7c3aed;"><i class="far fa-clock"></i></div>
+            <div><div class="footer-label">HỖ TRỢ</div><div class="footer-value">24/7 Online</div></div>
           </div>
         </div>
 
-        <div class="panel panel-pad reveal" style="margin-top:28px;text-align:center;border-radius:34px;">
-          <h2 style="margin:0;font-size:54px;line-height:1.1;font-weight:900;">Vẫn còn câu hỏi riêng cho trường hợp của bạn?</h2>
-          <p class="card-text" style="max-width:980px;margin-left:auto;margin-right:auto;">
-            Hãy để lại thông tin hoặc xem tiếp trang dịch vụ để đội ngũ có thể định hướng nhanh hơn cho bạn.
-          </p>
-          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
-            <a href="./index.html#leadFormSection" class="btn-primary">Nhận tư vấn</a>
-            <a href="./services.html" class="btn-secondary">Xem dịch vụ</a>
-          </div>
+        <div class="footer-bottom">
+          <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
+          <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer class="footer-wrap">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#4b2230;color:#ff8a8a;"><i class="fas fa-phone-alt"></i></div>
-          <div><div class="footer-label">HOTLINE</div><div class="footer-value">0899.125.048</div></div>
-        </div>
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#153b46;color:#62e6d9;"><i class="far fa-envelope"></i></div>
-          <div><div class="footer-label">GMAIL</div><div class="footer-value">logan27xx@gmail.com</div></div>
-        </div>
-        <div class="footer-card">
-          <div class="footer-icon" style="background:#37205c;color:#c58cff;"><i class="far fa-clock"></i></div>
-          <div><div class="footer-label">HỖ TRỢ</div><div class="footer-value">24/7 Online</div></div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-        <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script src="./site.js"></script>
 </body>
