@@ -3,29 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-  <title>LOGAN CRYPTO | Chỉ Báo VIP & Copytrade Thực Chiến</title>
+  <title>Logan Crypto | Chỉ Báo & Copytrade</title>
+  <link rel="icon" type="image/jpeg" href="logan-logo.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="icon" type="image/jpeg" href="logan-logo.jpg">
   <style>
     :root {
       --primary: #00eaff;
+      --primary-2: #38bdf8;
       --dark-bg: #04050a;
       --panel: rgba(11, 15, 26, 0.74);
       --text-main: #e2e8f0;
       --text-soft: #94a3b8;
       --nav-bg: rgba(4,5,10,.84);
       --modal-bg: #0a0d14;
-      --hero-left: rgba(4,5,10,.82);
-      --hero-mid: rgba(4,5,10,.42);
+      --hero-left: rgba(4,5,10,.84);
+      --hero-mid: rgba(4,5,10,.34);
       --hero-right: rgba(4,5,10,.78);
       --soft-btn-bg: rgba(255,255,255,.04);
       --soft-btn-border: rgba(255,255,255,.1);
       --input-bg: rgba(255,255,255,.03);
       --input-border: rgba(255,255,255,.09);
       --input-placeholder: rgba(255,255,255,.45);
-      --footer-bg: #04050a;
       --sticky-bg: rgba(4,5,10,.94);
+      --site-bg: #04050a;
     }
 
     body.light-theme {
@@ -35,16 +36,25 @@
       --text-soft: #475569;
       --nav-bg: rgba(255,255,255,.9);
       --modal-bg: #ffffff;
-      --hero-left: rgba(238,244,248,.48);
-      --hero-mid: rgba(238,244,248,.18);
-      --hero-right: rgba(238,244,248,.42);
+      --hero-left: rgba(238,244,248,.52);
+      --hero-mid: rgba(238,244,248,.14);
+      --hero-right: rgba(238,244,248,.46);
       --soft-btn-bg: rgba(15,23,42,.04);
       --soft-btn-border: rgba(15,23,42,.12);
       --input-bg: rgba(255,255,255,.92);
       --input-border: rgba(148,163,184,.45);
       --input-placeholder: rgba(71,85,105,.78);
-      --er-bg: #edf3f7;
       --sticky-bg: rgba(255,255,255,.92);
+      --site-bg: #edf3f7;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--site-bg) !important;
+      overflow-x: hidden;
     }
 
     * {
@@ -55,12 +65,24 @@
     html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      background: var(--dark-bg);
       color: var(--text-main);
-      overflow-x: hidden;
       padding-bottom: 88px;
       transition: background .35s ease, color .35s ease;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: var(--site-bg);
+      z-index: -9999;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+      background: var(--site-bg);
+      position: relative;
     }
 
     .bg-noise {
@@ -98,6 +120,13 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transform: scale(1.04);
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to { transform: scale(1.09); }
     }
 
     .hero-overlay {
@@ -105,7 +134,10 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: linear-gradient(to right, var(--hero-left) 0%, var(--hero-mid) 48%, var(--hero-right) 100%);
+      background:
+        radial-gradient(circle at 18% 35%, rgba(0,234,255,.08), transparent 25%),
+        radial-gradient(circle at 78% 65%, rgba(56,189,248,.09), transparent 28%),
+        linear-gradient(to right, var(--hero-left) 0%, var(--hero-mid) 48%, var(--hero-right) 100%);
       transition: background .35s ease;
     }
 
@@ -125,7 +157,21 @@
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,.07);
       box-shadow: 0 10px 40px rgba(0,0,0,.38);
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .35s ease;
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease, background .35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,234,255,.10), transparent 62%);
+      pointer-events: none;
+      opacity: .8;
     }
 
     body.light-theme .glass-card {
@@ -134,9 +180,9 @@
     }
 
     .glass-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       border-color: rgba(0,234,255,.24);
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      box-shadow: 0 20px 54px rgba(0,0,0,.36);
     }
 
     .btn-zenith {
@@ -149,7 +195,8 @@
 
     .btn-zenith:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 34px rgba(0,240,255,.25);
+      box-shadow: 0 18px 34px rgba(0,240,255,.28);
+      filter: brightness(1.02);
     }
 
     .btn-soft {
@@ -161,6 +208,7 @@
 
     .btn-soft:hover {
       background: rgba(255,255,255,.08);
+      transform: translateY(-1px);
     }
 
     body.light-theme .btn-soft:hover {
@@ -271,6 +319,7 @@
       letter-spacing: .2em;
       font-size: 11px;
       font-weight: 700;
+      box-shadow: 0 0 18px rgba(0,234,255,.08);
     }
 
     #mobile-menu {
@@ -317,8 +366,8 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: all .75s cubic-bezier(.2,.8,.2,1);
+      transform: translateY(28px);
+      transition: all .82s cubic-bezier(.2,.8,.2,1);
     }
 
     .reveal.active {
@@ -353,11 +402,70 @@
     body.light-theme .text-slate-300,
     body.light-theme .text-slate-400,
     body.light-theme .text-slate-500,
-    body.light-theme .text-slate-600 { color: #475569 !important; }
+    body.light-theme .text-slate-600 {
+      color: #475569 !important;
+    }
 
-    body.light-theme .bg-black\/30 { background-color: rgba(255,255,255,.72) !important; }
-    body.light-theme .bg-\[\#060912\] { background-color: rgba(255,255,255,.42) !important; }
-    body.light-theme .bg-\[\#04050a\] { background-color: var(--footer-bg) !important; }
+    .site-footer {
+      background: #06101d;
+      border-top: 1px solid rgba(255,255,255,.05);
+      transition: background .35s ease, border-color .35s ease;
+    }
+
+    .footer-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .35s ease;
+    }
+
+    .footer-input-wrap {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: .35s ease;
+    }
+
+    .footer-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+    }
+
+    .footer-input::placeholder {
+      color: #94a3b8;
+    }
+
+    body.light-theme .site-footer {
+      background: #edf3f7;
+      border-top: 1px solid rgba(15,23,42,.08);
+    }
+
+    body.light-theme .site-footer .text-white {
+      color: #0f172a !important;
+    }
+
+    body.light-theme .site-footer .text-slate-400,
+    body.light-theme .site-footer .text-slate-500 {
+      color: #475569 !important;
+    }
+
+    body.light-theme .footer-card {
+      background: rgba(15,23,42,.04);
+      border: 1px solid rgba(15,23,42,.10);
+    }
+
+    body.light-theme .footer-input-wrap {
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(148,163,184,.35);
+    }
+
+    body.light-theme .footer-input {
+      color: #0f172a;
+    }
+
+    body.light-theme .footer-input::placeholder {
+      color: #64748b;
+    }
 
     @media (min-width: 1600px) {
       .max-w-\[1700px\] { max-width: 1700px; }
@@ -372,573 +480,570 @@
   </style>
 </head>
 <body>
-  <div class="bg-noise"></div>
+  <div class="site-shell">
+    <div class="bg-noise"></div>
 
-  <div class="float-actions">
-    <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0068FF] text-white flex items-center justify-center text-2xl border border-white/20 shadow-[0_0_20px_rgba(0,104,255,0.5)] hover:scale-110 transition"><b>Z</b></a>
-    <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-500 text-white flex items-center justify-center text-xl border border-white/20 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:scale-110 transition"><i class="fas fa-phone-alt"></i></a>
-  </div>
-
-  <header class="fixed top-0 w-full z-[100] glass-nav h-16 lg:h-20">
-    <div class="max-w-[1600px] mx-auto px-6 xl:px-10 h-full flex items-center justify-between">
-      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center gap-3 text-left">
-        <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black shadow-[0_0_18px_rgba(0,240,255,.16)]">
-          <img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
-        </div>
-        <div>
-          <div class="text-lg lg:text-xl font-black tracking-tight uppercase text-white">LOGAN <span class="text-cyan-300">CRYPTO</span></div>
-          <div class="hidden lg:block text-[9px] text-slate-500 tracking-[0.2em] mt-1 uppercase">Kỉ Luật - Logic</div>
-        </div>
-      </button>
-
-      <nav class="hidden lg:flex items-center gap-8 text-[16px] font-semibold text-slate-400">
-        <a href="#home" class="hover:text-white transition">Trang chủ</a>
-        <a href="#services-section" class="hover:text-white transition">Dịch vụ</a>
-        <a href="#about" class="hover:text-white transition">Giới thiệu</a>
-        <a href="#reviews" class="hover:text-white transition">Phản hồi</a>
-        <a href="#faq" class="hover:text-white transition">FAQ</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button onclick="toggleTheme()" class="theme-toggle" aria-label="Đổi chế độ sáng tối">
-          <i id="theme-icon" class="fas fa-moon"></i>
-        </button>
-        <a href="./login.html" class="hidden lg:flex btn-zenith px-6 py-2.5 rounded-full font-bold text-[12px] uppercase items-center gap-2">Đăng nhập khóa học</a>
-        <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl p-2"><i class="fas fa-bars"></i></button>
-      </div>
+    <div class="float-actions">
+      <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0068FF] text-white flex items-center justify-center text-2xl border border-white/20 shadow-[0_0_20px_rgba(0,104,255,0.5)] hover:scale-110 transition"><b>Z</b></a>
+      <a href="#dang-ky-form" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-500 text-white flex items-center justify-center text-xl border border-white/20 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:scale-110 transition"><i class="fas fa-phone-alt"></i></a>
     </div>
-  </header>
 
-  <div id="mobile-menu" class="fixed inset-0 z-[95] pt-24 px-6 flex flex-col lg:hidden overflow-y-auto">
-    <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
-    <div class="flex-1 mt-4 space-y-2">
-      <a href="#home" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-white font-semibold text-base">Trang chủ</a>
-      <a href="#services-section" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Dịch vụ</a>
-      <a href="#about" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Giới thiệu</a>
-      <a href="#reviews" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Phản hồi</a>
-      <a href="#faq" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">FAQ</a>
-    </div>
-    <a href="./login.html" class="mt-8 mb-10 btn-zenith py-4 rounded-2xl font-bold uppercase text-xs text-center">Đăng nhập khóa học</a>
-  </div>
-
-  <div class="ticker-wrap">
-    <div class="ticker-move text-[10px] text-slate-500 font-bold tracking-widest uppercase">
-      <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
-      <span class="mx-8"><span class="text-cyan-400">Order Flow:</span> đọc phản ứng giá và dòng tiền</span>
-      <span class="mx-8"><span class="text-green-400">Copytrade:</span> đồng hành giao dịch theo hệ thống</span>
-      <span class="mx-8"><span class="text-yellow-400">Dashboard:</span> học riêng sau đăng nhập</span>
-      <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
-    </div>
-  </div>
-
-  <main id="home">
-    <section class="hero-section min-h-screen pt-24 pb-16 md:pb-20">
-      <div class="hero-bg-container">
-        <video class="hero-video" autoplay muted loop playsinline>
-          <source src="hero-bg.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="hero-overlay"></div>
-
-      <div class="max-w-[1700px] mx-auto px-6 xl:px-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-20 items-center w-full relative z-10 text-center lg:text-left">
-        <div class="reveal">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-300/10 border border-cyan-300/25 text-cyan-300 text-[10px] font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,240,255,0.12)]">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-ping"></span> Chỉ báo VIP & Copytrade thực chiến
-          </div>
-
-          <h1 class="text-4xl md:text-6xl lg:text-[86px] font-black mb-6 leading-[1.02] text-white tracking-tight">
-            Bí quyết làm giàu  ,  <span class="text-gradient"> chia sẻ chiến lược giao dịch</span>.<br>
-            Phân tích kỹ thuật <span class="text-gradient"> và tín hiệu thị trường Crypto</span>.
-          </h1>
-
-          <p class="text-slate-300 text-base md:text-lg lg:text-[22px] mb-8 leading-relaxed max-w-3xl mx-auto lg:mx-0">
-            Cập nhật liên tục 24/7,
-            <b>đồng hành cùng trader Việt</b>, <b>tối đa hóa lợi nhuận</b>
-            và x10 hiệu quả đầu tư!
-          </p>
-
-          <div class="grid sm:grid-cols-3 gap-4 mb-8 max-w-5xl">
-            <div class="glass-card rounded-2xl p-5 text-[17px]">Bộ chỉ báo hỗ trợ lọc setup, vùng chờ và điểm hành động có cơ sở hơn</div>
-            <div class="glass-card rounded-2xl p-5 text-[17px]">Copytrade dành cho khách hàng muốn đi cùng đội ngũ theo cách gọn hơn và thực chiến hơn</div>
-            <div class="glass-card rounded-2xl p-5 text-[17px]">Dashboard học tập riêng, role chỉ phân quyền trong khu vực học</div>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-4 mb-6 justify-center lg:justify-start">
-            <button onclick="openAuthModal('register')" class="btn-zenith px-10 py-4 rounded-2xl font-bold text-sm md:text-base uppercase">Nhận tư vấn chỉ báo & copytrade</button>
-            <a href="./login.html" class="btn-soft px-10 py-4 rounded-2xl font-bold text-sm md:text-base uppercase text-center">Đăng nhập khóa học</a>
-          </div>
-        </div>
-
-        <div class="lg:pl-6 reveal">
-          <div id="dang-ky-form" class="glass-card p-6 md:p-8 rounded-[34px] border-cyan-300/15 shadow-[0_0_70px_rgba(0,240,255,.08)]">
-            <div class="text-cyan-300 tracking-[0.26em] text-[11px] uppercase mb-4">Bắt đầu với hệ thống phù hợp</div>
-            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">Đăng ký nhận tư vấn chỉ báo & copytrade</h2>
-            <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
-              Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn,
-              từ bộ chỉ báo hỗ trợ giao dịch đến hình thức đồng hành phù hợp hơn với quỹ thời gian và phong cách đầu tư.
-            </p>
-
-            <form class="space-y-4" id="leadForm">
-              <input id="reg-name-home" type="text" placeholder="Họ và Tên" class="input-vip" required>
-              <input id="reg-phone-home" type="tel" placeholder="Số điện thoại" class="input-vip" required>
-              <input id="reg-email-home" type="email" placeholder="Email nhận tư vấn" class="input-vip" required>
-              <button type="submit" class="w-full btn-zenith font-bold py-5 rounded-2xl uppercase text-[12px]">Tiếp tục đăng ký</button>
-            </form>
-
-            <p class="text-slate-500 text-sm mt-5 leading-relaxed">Đội ngũ sẽ liên hệ để định hướng lộ trình phù hợp. Không thu phí ở bước đăng ký ban đầu.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services-section" class="py-20 md:py-28 relative z-20">
-      <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
-        <div class="text-center mb-12 md:mb-16 reveal">
-          <span class="section-label">Dịch vụ</span>
-          <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight mt-5 mb-4">
-            GIẢI PHÁP TOÀN DIỆN<br><span class="text-cyan-300">CHO NHÀ GIAO DỊCH</span>
-          </h2>
-          <p class="text-slate-400 max-w-4xl mx-auto text-base md:text-xl leading-relaxed">
-            Logan Crypto xây dựng hệ sinh thái dịch vụ theo hướng rõ vai trò, rõ giá trị và dễ lựa chọn hơn:
-            từ chỉ báo, giải pháp đồng hành cho tới khu học tập riêng dành cho khách hàng đã đăng nhập.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 reveal">
-          <div class="glass-card rounded-[28px] p-5 md:p-6">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
-              <img src="Orderflow.png" alt="Order Flow" class="w-full h-52 object-cover">
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">CHỈ BÁO ORDER FLOW</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Hỗ trợ đọc phản ứng giá và dòng tiền để quan sát thị trường rõ hơn, chọn setup có cơ sở hơn và hạn chế các quyết định quá cảm tính.</p>
-            <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
-          </div>
-
-          <div class="glass-card rounded-[28px] p-5 md:p-6">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
-              <img src="DravasBox.png" alt="Darvas DCA" class="w-full h-52 object-cover">
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">DARVAS DCA</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Công cụ hỗ trợ nhận diện vùng tích lũy, các pha mở rộng theo xu hướng và khu vực giá có động lượng tốt hơn để người dùng bám thị trường theo cách có khuôn khổ hơn.</p>
-            <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
-          </div>
-
-          <div class="glass-card rounded-[28px] p-5 md:p-6">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-purple-500/15 to-transparent h-52 flex items-center justify-center">
-              <div class="w-24 h-24 rounded-[28px] bg-purple-500/20 border border-purple-300/20 flex items-center justify-center">
-                <i class="fas fa-people-arrows-left-right text-[42px] text-purple-300"></i>
-              </div>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">COPYTRADE</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Giải pháp đồng hành phù hợp với người muốn đi cùng đội ngũ theo cách gọn hơn, tối ưu quỹ thời gian hơn và tham gia vào một hệ thống có định hướng rõ ràng hơn.</p>
-            <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
-          </div>
-
-          <div class="glass-card rounded-[28px] p-5 md:p-6">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
-              <img src="ICT.png" alt="ICT SMC PRO" class="w-full h-52 object-cover">
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">ICT SMC PRO</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Bộ lọc cấu trúc và thanh khoản giúp tăng độ sắc bén trước khi vào lệnh, phù hợp với người muốn đào sâu hơn vào logic vận động của giá.</p>
-            <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
-          </div>
-
-          <div class="glass-card rounded-[28px] p-5 md:p-6">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-cyan-400/15 to-transparent h-52 flex items-center justify-center">
-              <div class="text-center px-4">
-                <div class="text-cyan-300 text-[12px] uppercase tracking-[0.25em] font-bold mb-2">Hệ sinh thái</div>
-                <div class="text-3xl md:text-4xl font-black text-white">GROUP / HỖ TRỢ / CỘNG ĐỒNG</div>
-              </div>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">CỘNG ĐỒNG & HỖ TRỢ</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Khu vực hỗ trợ định hướng, kết nối và đồng hành để người dùng không phải tự xoay sở một mình khi bắt đầu tiếp cận hệ thống.</p>
-            <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Tìm hiểu thêm</button>
-          </div>
-
-          <div class="glass-card rounded-[28px] p-5 md:p-6 border-cyan-300/20 shadow-[0_0_35px_rgba(0,234,255,.08)]">
-            <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-cyan-400/15 to-blue-500/10 h-52 flex items-center justify-center">
-              <div class="text-center px-4">
-                <div class="text-cyan-300 text-[12px] uppercase tracking-[0.25em] font-bold mb-2">Dashboard học tập</div>
-                <div class="text-3xl md:text-4xl font-black text-white">KHÓA HỌC</div>
-              </div>
-            </div>
-            <h3 class="text-2xl font-black text-white mb-3">KHU VỰC HỌC RIÊNG</h3>
-            <p class="text-slate-400 text-base leading-loose mb-5">Khu học tập tách riêng khỏi landing page, chỉ dành cho người dùng đã đăng nhập. Nội dung khóa học được hiển thị theo role ngay trong dashboard.</p>
-            <a href="./login.html" class="block w-full btn-zenith py-3 rounded-xl font-bold uppercase text-[12px] text-center">Đăng nhập khóa học</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="py-20 md:py-24 bg-[#060912] border-y border-white/5 relative z-20">
-      <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
-        <div class="text-center mb-8 md:mb-12 reveal">
-          <span class="section-label">Giá trị hệ thống</span>
-          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight mt-5">Một nền tảng được tạo ra để giao dịch thật, không chỉ để nhìn cho đẹp</h2>
-          <p class="text-slate-400 mt-4 max-w-4xl mx-auto text-base md:text-xl">Logan Crypto được xây theo một triết lý rất rõ: mọi thứ xuất hiện trên hệ thống đều phải phục vụ cho trải nghiệm giao dịch thật. Không chạy theo cảm giác phô diễn, không cố làm mọi thứ trở nên rối hơn cần thiết.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-5 reveal">
-          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-white mb-3">Rõ giá trị</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Mỗi thành phần trong hệ thống đều mang một vai trò đủ rõ để khách hàng cảm nhận được giá trị ngay từ lần tiếp cận đầu tiên.</p></div>
-          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-cyan-300 mb-3">Rõ định hướng</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Người dùng không bị ném vào một mớ thông tin hỗn tạp, mà được dẫn đi trong một cấu trúc có thứ tự, có logic và có mục tiêu.</p></div>
-          <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-green-400 mb-3">Rõ chiều sâu</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Landing page chỉ để bán, dashboard chỉ để học, và role chỉ phân quyền trong khu vực học.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="reviews" class="pt-24 pb-24">
-      <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
-        <div class="text-center mb-16 md:mb-20 reveal">
-          <span class="section-label">Phản hồi khách hàng</span>
-          <h2 class="text-4xl md:text-[68px] font-black text-white uppercase tracking-tight mb-4 md:mb-6 leading-[1.05] mt-5">Những phản hồi dưới đây<br><span class="text-cyan-300">cảm nhận thực tế từ khách hàng sau khi trải nghiệm hệ thống chỉ báo và giải pháp đồng hành của Logan Crypto.</span></h2>
-          <p class="text-slate-400 font-light text-base md:text-lg max-w-4xl mx-auto">Phản hồi không cần ồn ào. Chỉ cần đủ thật để người xem cảm nhận được đây là một hệ thống tạo ra trải nghiệm rõ ràng, có chiều sâu và đáng để đi cùng lâu hơn.</p>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
-          <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
-            <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">AT</div><div><h4 class="text-white font-bold text-sm md:text-base">Anh T.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Dùng chỉ báo</p></div></div>
-            <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Điều tôi cảm nhận rõ nhất là cách hệ thống giúp tôi nhìn chart có trật tự hơn. Khi mọi thứ rõ hơn, tâm lý giao dịch cũng bớt rối hơn rất nhiều.”</p>
-          </div>
-          <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
-            <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">NL</div><div><h4 class="text-white font-bold text-sm md:text-base">Ngọc L.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Copytrade</p></div></div>
-            <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Tôi không có nhiều thời gian để theo sát thị trường, nên điều tôi cần nhất là một giải pháp khiến mình yên tâm hơn khi đi cùng đội ngũ có định hướng rõ ràng.”</p>
-          </div>
-          <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
-            <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">VH</div><div><h4 class="text-white font-bold text-sm md:text-base">Văn H.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Khách nâng cao</p></div></div>
-            <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Sau khi đã đi cùng hệ thống một thời gian, tôi mới nhận ra mình cần học sâu hơn để nâng khả năng tự chủ. Lúc đó phần nâng cao xuất hiện rất đúng lúc.”</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="py-16 md:py-24 max-w-4xl mx-auto px-6 relative z-20">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Câu hỏi <span class="text-cyan-300">thường gặp</span></h2>
-      </div>
-      <div class="space-y-4 reveal">
-        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(1)">
-          <h3 class="font-bold text-white text-base flex justify-between items-center">Tôi phù hợp với chỉ báo hay copytrade? <i id="faq-icon-1" class="fas fa-chevron-down text-slate-500"></i></h3>
-          <p id="faq-1" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Nếu bạn muốn chủ động quan sát và tự ra quyết định giao dịch, bộ chỉ báo sẽ là lựa chọn phù hợp hơn. Nếu bạn ưu tiên tiết kiệm thời gian và muốn đi cùng đội ngũ theo cách gọn hơn, copytrade là hướng nên cân nhắc.</p>
-        </div>
-        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(2)">
-          <h3 class="font-bold text-white text-base flex justify-between items-center">Khóa học có nằm trên landing page không? <i id="faq-icon-2" class="fas fa-chevron-down text-slate-500"></i></h3>
-          <p id="faq-2" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Không. Landing page chỉ để bán. Toàn bộ khu học được tách riêng trong dashboard sau khi người dùng đăng nhập.</p>
-        </div>
-        <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(3)">
-          <h3 class="font-bold text-white text-base flex justify-between items-center">Role được phân quyền ở đâu? <i id="faq-icon-3" class="fas fa-chevron-down text-slate-500"></i></h3>
-          <p id="faq-3" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Role chỉ phân quyền trong dashboard học. Firebase quản lý user và role, còn video được phát qua Vimeo.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-[#06101d] pt-20 md:pt-24 pb-24 md:pb-14 border-t border-white/5 relative z-10">
-  <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 md:gap-12 mb-14">
-      
-      <!-- Cột 1 -->
-      <div>
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-14 h-14 rounded-2xl overflow-hidden border border-cyan-300/30 bg-white shadow-[0_0_18px_rgba(0,240,255,.12)]">
+    <header class="fixed top-0 w-full z-[100] glass-nav h-16 lg:h-20">
+      <div class="max-w-[1600px] mx-auto px-6 xl:px-10 h-full flex items-center justify-between">
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center gap-3 text-left">
+          <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-white shadow-[0_0_18px_rgba(0,240,255,.16)]">
             <img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-contain">
           </div>
           <div>
-            <div class="text-white text-2xl font-black uppercase leading-none">LOGAN CRYPTO</div>
-            <div class="text-slate-500 text-[11px] uppercase tracking-[0.18em] mt-1">Trading Ecosystem</div>
+            <div class="text-lg lg:text-xl font-black tracking-tight uppercase text-white">LOGAN <span class="text-cyan-300">CRYPTO</span></div>
+            <div class="hidden lg:block text-[9px] text-slate-500 tracking-[0.2em] mt-1 uppercase">Trading Ecosystem</div>
           </div>
-        </div>
-
-        <p class="text-slate-400 text-[18px] leading-relaxed max-w-sm mb-6">
-          Logan Crypto xây dựng hệ sinh thái dành cho trader muốn giao dịch bài bản hơn, nhìn thị trường rõ hơn và phát triển theo lộ trình có chiều sâu hơn.
-        </p>
-
-        <div class="flex gap-3 flex-wrap">
-          <a href="#" class="w-12 h-12 rounded-xl bg-[#1877F2] text-white flex items-center justify-center text-xl hover:scale-105 transition">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="w-12 h-12 rounded-xl bg-[#0068FF] text-white flex items-center justify-center text-lg font-black hover:scale-105 transition">
-            Z
-          </a>
-          <a href="#" class="w-12 h-12 rounded-xl bg-[#229ED9] text-white flex items-center justify-center text-xl hover:scale-105 transition">
-            <i class="fab fa-telegram-plane"></i>
-          </a>
-          <a href="#" class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center text-xl hover:scale-105 transition">
-            <i class="fab fa-tiktok"></i>
-          </a>
-          <a href="#" class="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center text-xl hover:scale-105 transition">
-            <i class="fab fa-youtube"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Cột 2 -->
-      <div>
-        <h4 class="text-white text-2xl font-black mb-6">Liên Kết Nhanh</h4>
-        <div class="space-y-4 text-slate-400 text-[18px]">
-          <a href="#home" class="block hover:text-cyan-300 transition">Trang Chủ</a>
-          <a href="#about" class="block hover:text-cyan-300 transition">Giới Thiệu</a>
-          <a href="#reviews" class="block hover:text-cyan-300 transition">Phản Hồi</a>
-          <a href="#services-section" class="block hover:text-cyan-300 transition">Dịch Vụ</a>
-          <a href="./login.html" class="block hover:text-cyan-300 transition">Khóa Học</a>
-        </div>
-      </div>
-
-      <!-- Cột 3 -->
-      <div>
-        <h4 class="text-white text-2xl font-black mb-6">Dịch Vụ</h4>
-        <div class="space-y-4 text-slate-400 text-[18px]">
-          <div>Chỉ Báo Giao Dịch</div>
-          <div>Phân Tích Thị Trường</div>
-          <div>Copytrade</div>
-          <div>Tư Vấn 1:1</div>
-        </div>
-      </div>
-
-      <!-- Cột 4 -->
-      <div>
-        <h4 class="text-white text-2xl font-black mb-6">Nhận Tư Vấn Giao Dịch</h4>
-        <p class="text-slate-400 text-[18px] leading-relaxed mb-5">
-          Đăng ký email để nhận thông tin mới nhất về chỉ báo, chiến lược và các cập nhật từ Logan Crypto.
-        </p>
-
-        <div class="space-y-4">
-          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-            <i class="far fa-envelope text-slate-400 text-lg"></i>
-            <input type="email" placeholder="Nhập địa chỉ Gmail của bạn" class="bg-transparent outline-none border-none text-white placeholder:text-slate-500 w-full text-[17px]">
-          </div>
-
-          <button class="w-full rounded-2xl py-4 font-black text-[18px] btn-zenith">
-            ĐĂNG KÝ NGAY
-          </button>
-
-          <div class="text-green-400 text-[16px] flex items-center gap-2">
-            <i class="fas fa-check"></i>
-            <span>Miễn phí, có thể hủy bất kỳ lúc nào</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Thanh dưới -->
-    <div class="border-t border-white/10 pt-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-
-        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#4b2230] text-[#ff8a8a] flex items-center justify-center text-2xl">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <div>
-            <div class="text-white text-[15px] font-black uppercase">HOTLINE</div>
-            <div class="text-slate-400 text-[24px] font-bold">0899.125.048</div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#153b46] text-[#62e6d9] flex items-center justify-center text-2xl">
-            <i class="far fa-envelope"></i>
-          </div>
-          <div>
-            <div class="text-white text-[15px] font-black uppercase">GMAIL</div>
-            <div class="text-slate-400 text-[24px] font-bold">logan27xx@gmail.com</div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#37205c] text-[#c58cff] flex items-center justify-center text-2xl">
-            <i class="far fa-clock"></i>
-          </div>
-          <div>
-            <div class="text-white text-[15px] font-black uppercase">HỖ TRỢ</div>
-            <div class="text-slate-400 text-[24px] font-bold">24/7 Online</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-[15px]">
-        <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-        <div>Điều Khoản | Bảo Mật</div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-  <div id="stickyBar" class="sticky-cta flex justify-between items-center z-[80]">
-    <div class="hidden md:flex flex-col">
-      <span class="text-white font-black uppercase tracking-widest text-sm">LOGAN CRYPTO</span>
-      <span class="text-cyan-300 text-[9px] uppercase tracking-[0.2em] font-bold mt-1">Chỉ báo VIP & Copytrade thực chiến</span>
-    </div>
-    <a href="./login.html" class="w-full md:w-auto btn-zenith px-6 md:px-10 py-4 rounded-xl font-bold uppercase text-[10px] text-center">Đăng nhập khóa học</a>
-  </div>
-
-  <div id="authModal" class="modal-wrap fixed inset-0 z-[210] flex items-center justify-center p-4 md:p-0">
-    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeAuthModal()"></div>
-    <div class="modal-box relative rounded-[30px] md:rounded-[40px] p-6 md:p-12 max-w-md w-full max-h-[85vh] overflow-y-auto">
-      <button onclick="closeAuthModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition"><i class="fas fa-times text-xl md:text-2xl"></i></button>
-      <div class="text-center mb-6 md:mb-8 mt-2">
-        <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-2">Nhận <span class="text-cyan-300">tư vấn chỉ báo & copytrade</span></h3>
-        <p class="text-slate-400 text-sm">Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn.</p>
-      </div>
-
-      <div class="flex justify-center gap-6 md:gap-8 border-b border-white/10 mb-6 md:mb-8">
-        <button onclick="switchTab('register')" id="tab-register" class="font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300">Đăng Ký</button>
-        <button onclick="switchTab('login')" id="tab-login" class="font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent">Đăng Nhập</button>
-      </div>
-
-      <form id="form-register" class="space-y-4">
-        <input id="auth-name" type="text" placeholder="Họ Tên" class="input-vip" required>
-        <input id="auth-phone" type="tel" placeholder="Số điện thoại" class="input-vip" required>
-        <input id="auth-email" type="email" placeholder="Email" class="input-vip" required>
-        <input id="auth-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
-        <button type="submit" class="w-full btn-zenith font-bold py-4 rounded-2xl uppercase text-[12px] mt-2">
-          Xác nhận đăng ký
         </button>
-      </form>
 
-      <form id="form-login" class="space-y-4 hidden">
-        <input id="log-email" type="email" placeholder="Email" class="input-vip" required>
-        <input id="log-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
-        <button type="submit" class="w-full btn-soft font-bold py-4 rounded-2xl uppercase text-[12px] mt-2">Đăng nhập</button>
-      </form>
+        <nav class="hidden lg:flex items-center gap-8 text-[16px] font-semibold text-slate-400">
+          <a href="#home" class="hover:text-white transition">Trang chủ</a>
+          <a href="#services-section" class="hover:text-white transition">Dịch vụ</a>
+          <a href="#about" class="hover:text-white transition">Giới thiệu</a>
+          <a href="#reviews" class="hover:text-white transition">Phản hồi</a>
+          <a href="#faq" class="hover:text-white transition">FAQ</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTheme()" class="theme-toggle" aria-label="Đổi chế độ sáng tối">
+            <i id="theme-icon" class="fas fa-moon"></i>
+          </button>
+          <a href="./login.html" class="hidden lg:flex btn-zenith px-6 py-2.5 rounded-full font-bold text-[12px] uppercase items-center gap-2">Đăng nhập khóa học</a>
+          <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl p-2"><i class="fas fa-bars"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-[95] pt-24 px-6 flex flex-col lg:hidden overflow-y-auto">
+      <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+      <div class="flex-1 mt-4 space-y-2">
+        <a href="#home" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-white font-semibold text-base">Trang chủ</a>
+        <a href="#services-section" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Dịch vụ</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Giới thiệu</a>
+        <a href="#reviews" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">Phản hồi</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="block w-full text-left py-4 border-b border-white/5 text-slate-400 font-semibold text-base">FAQ</a>
+      </div>
+      <a href="./login.html" class="mt-8 mb-10 btn-zenith py-4 rounded-2xl font-bold uppercase text-xs text-center">Đăng nhập khóa học</a>
     </div>
-  </div>
 
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu').classList.toggle('open');
-    }
+    <div class="ticker-wrap">
+      <div class="ticker-move text-[10px] text-slate-500 font-bold tracking-widest uppercase">
+        <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
+        <span class="mx-8"><span class="text-cyan-400">Order Flow:</span> đọc phản ứng giá và dòng tiền</span>
+        <span class="mx-8"><span class="text-green-400">Copytrade:</span> đồng hành giao dịch theo hệ thống</span>
+        <span class="mx-8"><span class="text-yellow-400">Dashboard:</span> học riêng sau đăng nhập</span>
+        <span class="mx-8"><span class="text-cyan-300">•</span> Logan Crypto Online</span>
+      </div>
+    </div>
 
-    function toggleTheme() {
-      document.body.classList.toggle('light-theme');
-      const isLight = document.body.classList.contains('light-theme');
-      localStorage.setItem('logan-theme', isLight ? 'light' : 'dark');
-      const icon = document.getElementById('theme-icon');
-      if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-    }
+    <main id="home">
+      <section class="hero-section min-h-screen pt-24 pb-16 md:pb-20">
+        <div class="hero-bg-container">
+          <video class="hero-video" autoplay muted loop playsinline preload="auto">
+            <source src="hero-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-overlay"></div>
 
-    function initTheme() {
-      const savedTheme = localStorage.getItem('logan-theme');
-      const shouldLight = savedTheme === 'light';
-      if (shouldLight) document.body.classList.add('light-theme');
-      const icon = document.getElementById('theme-icon');
-      if (icon) icon.className = shouldLight ? 'fas fa-sun' : 'fas fa-moon';
-    }
+        <div class="max-w-[1700px] mx-auto px-6 xl:px-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-20 items-center w-full relative z-10 text-center lg:text-left">
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-300/10 border border-cyan-300/25 text-cyan-300 text-[10px] font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,240,255,0.12)]">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-ping"></span> Chỉ báo VIP & Copytrade thực chiến
+            </div>
 
-    function openAuthModal(tab = 'register') {
-      switchTab(tab);
-      document.getElementById('authModal').classList.add('open');
-    }
+            <h1 class="text-4xl md:text-6xl lg:text-[86px] font-black mb-6 leading-[1.02] text-white tracking-tight">
+              Hệ thống giao dịch được thiết kế để <span class="text-gradient">nhìn rõ hơn</span>.<br>
+              Và vận hành theo cách <span class="text-gradient">bài bản hơn</span>.
+            </h1>
 
-    function closeAuthModal() {
-      document.getElementById('authModal').classList.remove('open');
-    }
+            <p class="text-slate-300 text-base md:text-lg lg:text-[22px] mb-8 leading-relaxed max-w-3xl mx-auto lg:mx-0">
+              Logan Crypto tập trung vào những gì tạo ra khác biệt thật sự cho người giao dịch:
+              <b>bộ chỉ báo đủ sắc để nhìn thị trường rõ hơn</b>, <b>copytrade đủ bài bản để đồng hành tăng trưởng</b>,
+              và một dashboard học tập riêng dành cho người dùng đã đăng nhập.
+            </p>
 
-    function switchTab(tab) {
-      const reg = document.getElementById('form-register');
-      const log = document.getElementById('form-login');
-      const regTab = document.getElementById('tab-register');
-      const logTab = document.getElementById('tab-login');
+            <div class="grid sm:grid-cols-3 gap-4 mb-8 max-w-5xl">
+              <div class="glass-card rounded-2xl p-5 text-[17px]">Bộ chỉ báo hỗ trợ lọc setup, vùng chờ và điểm hành động có cơ sở hơn</div>
+              <div class="glass-card rounded-2xl p-5 text-[17px]">Copytrade dành cho khách hàng muốn đi cùng đội ngũ theo cách gọn hơn và thực chiến hơn</div>
+              <div class="glass-card rounded-2xl p-5 text-[17px]">Dashboard học tập riêng, nội dung được sắp xếp theo lộ trình rõ ràng hơn</div>
+            </div>
 
-      if (tab === 'register') {
-        reg.classList.remove('hidden');
-        log.classList.add('hidden');
-        regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
-        logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
-      } else {
-        reg.classList.add('hidden');
-        log.className = 'space-y-4';
-        regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
-        logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
+            <div class="flex flex-col sm:flex-row gap-4 mb-6 justify-center lg:justify-start">
+              <button onclick="openAuthModal('register')" class="btn-zenith px-10 py-4 rounded-2xl font-bold text-sm md:text-base uppercase">Nhận tư vấn chỉ báo & copytrade</button>
+              <a href="./login.html" class="btn-soft px-10 py-4 rounded-2xl font-bold text-sm md:text-base uppercase text-center">Đăng nhập khóa học</a>
+            </div>
+          </div>
+
+          <div class="lg:pl-6 reveal">
+            <div id="dang-ky-form" class="glass-card p-6 md:p-8 rounded-[34px] border-cyan-300/15 shadow-[0_0_70px_rgba(0,240,255,.08)]">
+              <div class="text-cyan-300 tracking-[0.26em] text-[11px] uppercase mb-4">Bắt đầu với hệ thống phù hợp</div>
+              <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">Đăng ký nhận tư vấn chỉ báo & copytrade</h2>
+              <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
+                Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn,
+                từ bộ chỉ báo hỗ trợ giao dịch đến hình thức đồng hành phù hợp hơn với quỹ thời gian và phong cách đầu tư.
+              </p>
+
+              <form class="space-y-4" id="leadForm">
+                <input id="reg-name-home" type="text" placeholder="Họ và Tên" class="input-vip" required>
+                <input id="reg-phone-home" type="tel" placeholder="Số điện thoại" class="input-vip" required>
+                <input id="reg-email-home" type="email" placeholder="Email nhận tư vấn" class="input-vip" required>
+                <button type="submit" class="w-full btn-zenith font-bold py-5 rounded-2xl uppercase text-[12px]">Tiếp tục đăng ký</button>
+              </form>
+
+              <p class="text-slate-500 text-sm mt-5 leading-relaxed">Đội ngũ sẽ liên hệ để định hướng lộ trình phù hợp. Không thu phí ở bước đăng ký ban đầu.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services-section" class="py-20 md:py-28 relative z-20">
+        <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+          <div class="text-center mb-12 md:mb-16 reveal">
+            <span class="section-label">Dịch vụ</span>
+            <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight mt-5 mb-4">
+              GIẢI PHÁP TOÀN DIỆN<br><span class="text-cyan-300">CHO NHÀ GIAO DỊCH</span>
+            </h2>
+            <p class="text-slate-400 max-w-4xl mx-auto text-base md:text-xl leading-relaxed">
+              Logan Crypto xây dựng hệ sinh thái dịch vụ theo hướng rõ vai trò, rõ giá trị và dễ lựa chọn hơn:
+              từ chỉ báo, giải pháp đồng hành cho tới khu học tập riêng dành cho khách hàng đã đăng nhập.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 reveal">
+            <div class="glass-card rounded-[28px] p-5 md:p-6">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
+                <img src="Orderflow.png" alt="Order Flow" class="w-full h-52 object-cover">
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">CHỈ BÁO ORDER FLOW</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Hỗ trợ đọc phản ứng giá và dòng tiền để quan sát thị trường rõ hơn, chọn setup có cơ sở hơn và hạn chế các quyết định quá cảm tính.</p>
+              <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
+            </div>
+
+            <div class="glass-card rounded-[28px] p-5 md:p-6">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
+                <img src="DravasBox.png" alt="Darvas DCA" class="w-full h-52 object-cover">
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">DARVAS DCA</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Công cụ hỗ trợ nhận diện vùng tích lũy, các pha mở rộng theo xu hướng và khu vực giá có động lượng tốt hơn để người dùng bám thị trường theo cách có khuôn khổ hơn.</p>
+              <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
+            </div>
+
+            <div class="glass-card rounded-[28px] p-5 md:p-6">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-purple-500/15 to-transparent h-52 flex items-center justify-center">
+                <div class="w-24 h-24 rounded-[28px] bg-purple-500/20 border border-purple-300/20 flex items-center justify-center">
+                  <i class="fas fa-people-arrows-left-right text-[42px] text-purple-300"></i>
+                </div>
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">COPYTRADE</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Giải pháp đồng hành phù hợp với người muốn đi cùng đội ngũ theo cách gọn hơn, tối ưu quỹ thời gian hơn và tham gia vào một hệ thống có định hướng rõ ràng hơn.</p>
+              <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
+            </div>
+
+            <div class="glass-card rounded-[28px] p-5 md:p-6">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5">
+                <img src="ICT.png" alt="ICT SMC PRO" class="w-full h-52 object-cover">
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">ICT SMC PRO</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Bộ lọc cấu trúc và thanh khoản giúp tăng độ sắc bén trước khi vào lệnh, phù hợp với người muốn đào sâu hơn vào logic vận động của giá.</p>
+              <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Nhận tư vấn</button>
+            </div>
+
+            <div class="glass-card rounded-[28px] p-5 md:p-6">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-cyan-400/15 to-transparent h-52 flex items-center justify-center">
+                <div class="text-center px-4">
+                  <div class="text-cyan-300 text-[12px] uppercase tracking-[0.25em] font-bold mb-2">Hệ sinh thái</div>
+                  <div class="text-3xl md:text-4xl font-black text-white">GROUP / HỖ TRỢ / CỘNG ĐỒNG</div>
+                </div>
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">CỘNG ĐỒNG & HỖ TRỢ</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Khu vực hỗ trợ định hướng, kết nối và đồng hành để người dùng không phải tự xoay sở một mình khi bắt đầu tiếp cận hệ thống.</p>
+              <button onclick="openAuthModal('register')" class="w-full btn-soft py-3 rounded-xl font-bold uppercase text-[12px]">Tìm hiểu thêm</button>
+            </div>
+
+            <div class="glass-card rounded-[28px] p-5 md:p-6 border-cyan-300/20 shadow-[0_0_35px_rgba(0,234,255,.08)]">
+              <div class="rounded-[20px] overflow-hidden border border-white/10 mb-5 bg-gradient-to-br from-cyan-400/15 to-blue-500/10 h-52 flex items-center justify-center">
+                <div class="text-center px-4">
+                  <div class="text-cyan-300 text-[12px] uppercase tracking-[0.25em] font-bold mb-2">Trung tâm nội dung</div>
+                  <div class="text-3xl md:text-4xl font-black text-white">KHÓA HỌC</div>
+                </div>
+              </div>
+              <h3 class="text-2xl font-black text-white mb-3">KHU VỰC HỌC RIÊNG</h3>
+              <p class="text-slate-400 text-base leading-loose mb-5">Không gian học tập được xây riêng cho khách hàng trong hệ sinh thái Logan Crypto, nơi bạn có thể tiếp cận bài học, tư duy và tài liệu theo lộ trình phù hợp hơn với cấp độ hiện tại của mình.</p>
+              <a href="./login.html" class="block w-full btn-zenith py-3 rounded-xl font-bold uppercase text-[12px] text-center">Đăng nhập khóa học</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="py-20 md:py-24 bg-[#060912] border-y border-white/5 relative z-20">
+        <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+          <div class="text-center mb-8 md:mb-12 reveal">
+            <span class="section-label">Giá trị hệ thống</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight mt-5">Một nền tảng được tạo ra để giao dịch thật, không chỉ để nhìn cho đẹp</h2>
+            <p class="text-slate-400 mt-4 max-w-4xl mx-auto text-base md:text-xl">Logan Crypto được xây theo một triết lý rất rõ: mọi thứ xuất hiện trên hệ thống đều phải phục vụ cho trải nghiệm giao dịch thật. Không chạy theo cảm giác phô diễn, không cố làm mọi thứ trở nên rối hơn cần thiết.</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-5 reveal">
+            <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-white mb-3">Rõ giá trị</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Mỗi thành phần trong hệ thống đều được xây để mang lại giá trị có thể cảm nhận được ngay trong quá trình sử dụng, từ cách nhìn thị trường rõ hơn cho tới cách hành động tự tin và có cơ sở hơn.</p></div>
+            <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-cyan-300 mb-3">Rõ định hướng</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Khách hàng không bị ngợp trong một mớ thông tin rời rạc, mà được dẫn dắt theo một lộ trình rõ ràng hơn, dễ tiếp cận hơn và phù hợp hơn với từng giai đoạn phát triển.</p></div>
+            <div class="glass-card rounded-3xl p-6 md:p-7"><div class="text-3xl md:text-4xl font-black text-green-400 mb-3">Rõ chiều sâu</div><p class="text-slate-300 leading-relaxed text-base md:text-lg">Logan Crypto không chỉ dừng lại ở việc hỗ trợ quan sát thị trường, mà còn hướng tới việc đồng hành lâu dài để khách hàng từng bước nâng chất lượng giao dịch và mở rộng năng lực của mình.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" class="pt-24 pb-24">
+        <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+          <div class="text-center mb-16 md:mb-20 reveal">
+            <span class="section-label">Phản hồi khách hàng</span>
+            <h2 class="text-4xl md:text-[68px] font-black text-white uppercase tracking-tight mb-4 md:mb-6 leading-[1.05] mt-5">NHỮNG CẢM NHẬN ĐỦ THẬT<br><span class="text-cyan-300">ĐỂ NGƯỜI KHÁC CẢM NHẬN ĐƯỢC</span></h2>
+            <p class="text-slate-400 font-light text-base md:text-lg max-w-4xl mx-auto">Những phản hồi dưới đây là cảm nhận thực tế từ khách hàng sau khi trải nghiệm hệ thống chỉ báo và giải pháp đồng hành của Logan Crypto. Không cần phô trương quá nhiều, chính trải nghiệm rõ ràng và sự đồng hành đúng hướng mới là điều khiến khách hàng quyết định đi lâu dài.</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+            <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+              <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">AT</div><div><h4 class="text-white font-bold text-sm md:text-base">Anh T.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Dùng chỉ báo</p></div></div>
+              <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Điều tôi cảm nhận rõ nhất là cách hệ thống giúp tôi nhìn chart có trật tự hơn. Khi mọi thứ rõ hơn, tâm lý giao dịch cũng bớt rối hơn rất nhiều.”</p>
+            </div>
+            <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+              <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">NL</div><div><h4 class="text-white font-bold text-sm md:text-base">Ngọc L.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Copytrade</p></div></div>
+              <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Tôi không có nhiều thời gian để theo sát thị trường, nên điều tôi cần nhất là một giải pháp khiến mình yên tâm hơn khi đi cùng đội ngũ có định hướng rõ ràng.”</p>
+            </div>
+            <div class="glass-card p-8 md:p-10 rounded-[35px] md:rounded-[45px] flex flex-col h-full reveal">
+              <div class="flex items-center gap-4 mb-6 md:mb-8"><div class="w-12 h-12 rounded-full bg-[#1c2130] flex items-center justify-center text-slate-500 text-lg font-bold shrink-0">VH</div><div><h4 class="text-white font-bold text-sm md:text-base">Văn H.</h4><p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Khách nâng cao</p></div></div>
+              <p class="text-slate-300 text-base leading-loose flex-1 mb-6">“Sau khi đã đi cùng hệ thống một thời gian, tôi mới nhận ra mình cần học sâu hơn để nâng khả năng tự chủ. Lúc đó phần nâng cao xuất hiện rất đúng lúc.”</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="py-16 md:py-24 max-w-4xl mx-auto px-6 relative z-20">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Câu hỏi <span class="text-cyan-300">thường gặp</span></h2>
+        </div>
+        <div class="space-y-4 reveal">
+          <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(1)">
+            <h3 class="font-bold text-white text-base flex justify-between items-center">Tôi phù hợp với chỉ báo hay copytrade? <i id="faq-icon-1" class="fas fa-chevron-down text-slate-500"></i></h3>
+            <p id="faq-1" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ là lựa chọn phù hợp hơn. Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn, copytrade sẽ là hướng đáng cân nhắc.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(2)">
+            <h3 class="font-bold text-white text-base flex justify-between items-center">Sau khi tham gia, tôi sẽ được tiếp cận nội dung như thế nào? <i id="faq-icon-2" class="fas fa-chevron-down text-slate-500"></i></h3>
+            <p id="faq-2" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập vào khu vực nội dung phù hợp. Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl cursor-pointer" onclick="toggleFAQ(3)">
+            <h3 class="font-bold text-white text-base flex justify-between items-center">Nội dung học có giống nhau cho tất cả khách hàng không? <i id="faq-icon-3" class="fas fa-chevron-down text-slate-500"></i></h3>
+            <p id="faq-3" class="faq-answer text-base text-slate-400 mt-4 leading-loose border-t border-white/10 pt-4">Lộ trình và nội dung có thể khác nhau tùy theo giai đoạn tham gia và nhóm giải pháp mà khách hàng đang sử dụng, nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn thay vì bị dàn trải quá nhiều.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer pt-20 md:pt-24 pb-24 md:pb-14 relative z-10">
+      <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 md:gap-12 mb-14">
+          
+          <div>
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-14 h-14 rounded-2xl overflow-hidden border border-cyan-300/30 bg-white shadow-[0_0_18px_rgba(0,240,255,.12)]">
+                <img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-contain">
+              </div>
+              <div>
+                <div class="text-white text-2xl font-black uppercase leading-none">LOGAN CRYPTO</div>
+                <div class="text-slate-500 text-[11px] uppercase tracking-[0.18em] mt-1">Trading Ecosystem</div>
+              </div>
+            </div>
+
+            <p class="text-slate-400 text-[18px] leading-relaxed max-w-sm mb-6">
+              Logan Crypto xây dựng hệ sinh thái dành cho trader muốn giao dịch bài bản hơn, nhìn thị trường rõ hơn và phát triển theo lộ trình có chiều sâu hơn.
+            </p>
+
+            <div class="flex gap-3 flex-wrap">
+              <a href="#" class="w-12 h-12 rounded-xl bg-[#1877F2] text-white flex items-center justify-center text-xl hover:scale-105 transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-xl bg-[#0068FF] text-white flex items-center justify-center text-lg font-black hover:scale-105 transition">
+                Z
+              </a>
+              <a href="#" class="w-12 h-12 rounded-xl bg-[#229ED9] text-white flex items-center justify-center text-xl hover:scale-105 transition">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center text-xl hover:scale-105 transition">
+                <i class="fab fa-tiktok"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center text-xl hover:scale-105 transition">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-white text-2xl font-black mb-6">Liên Kết Nhanh</h4>
+            <div class="space-y-4 text-slate-400 text-[18px]">
+              <a href="#home" class="block hover:text-cyan-300 transition">Trang Chủ</a>
+              <a href="#about" class="block hover:text-cyan-300 transition">Giới Thiệu</a>
+              <a href="#reviews" class="block hover:text-cyan-300 transition">Phản Hồi</a>
+              <a href="#services-section" class="block hover:text-cyan-300 transition">Dịch Vụ</a>
+              <a href="./login.html" class="block hover:text-cyan-300 transition">Khóa Học</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-white text-2xl font-black mb-6">Dịch Vụ</h4>
+            <div class="space-y-4 text-slate-400 text-[18px]">
+              <div>Chỉ Báo Giao Dịch</div>
+              <div>Phân Tích Thị Trường</div>
+              <div>Copytrade</div>
+              <div>Tư Vấn 1:1</div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-white text-2xl font-black mb-6">Nhận Tư Vấn Giao Dịch</h4>
+            <p class="text-slate-400 text-[18px] leading-relaxed mb-5">
+              Đăng ký email để nhận thông tin mới nhất về chỉ báo, chiến lược và các cập nhật từ Logan Crypto.
+            </p>
+
+            <div class="space-y-4">
+              <div class="footer-input-wrap flex items-center gap-3 rounded-2xl px-4 py-4">
+                <i class="far fa-envelope text-slate-400 text-lg"></i>
+                <input type="email" placeholder="Nhập địa chỉ Gmail của bạn" class="footer-input w-full text-[17px]">
+              </div>
+
+              <button class="w-full rounded-2xl py-4 font-black text-[18px] btn-zenith">
+                ĐĂNG KÝ NGAY
+              </button>
+
+              <div class="text-green-400 text-[16px] flex items-center gap-2">
+                <i class="fas fa-check"></i>
+                <span>Miễn phí, có thể hủy bất kỳ lúc nào</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+
+            <div class="footer-card flex items-center gap-4 rounded-2xl px-5 py-4">
+              <div class="w-14 h-14 rounded-2xl bg-[#4b2230] text-[#ff8a8a] flex items-center justify-center text-2xl">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <div class="text-white text-[15px] font-black uppercase">HOTLINE</div>
+                <div class="text-slate-400 text-[24px] font-bold">0899.125.048</div>
+              </div>
+            </div>
+
+            <div class="footer-card flex items-center gap-4 rounded-2xl px-5 py-4">
+              <div class="w-14 h-14 rounded-2xl bg-[#153b46] text-[#62e6d9] flex items-center justify-center text-2xl">
+                <i class="far fa-envelope"></i>
+              </div>
+              <div>
+                <div class="text-white text-[15px] font-black uppercase">GMAIL</div>
+                <div class="text-slate-400 text-[24px] font-bold">logan27xx@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="footer-card flex items-center gap-4 rounded-2xl px-5 py-4">
+              <div class="w-14 h-14 rounded-2xl bg-[#37205c] text-[#c58cff] flex items-center justify-center text-2xl">
+                <i class="far fa-clock"></i>
+              </div>
+              <div>
+                <div class="text-white text-[15px] font-black uppercase">HỖ TRỢ</div>
+                <div class="text-slate-400 text-[24px] font-bold">24/7 Online</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-[15px]">
+            <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
+            <div>Điều Khoản | Bảo Mật</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="stickyBar" class="sticky-cta flex justify-between items-center z-[80]">
+      <div class="hidden md:flex flex-col">
+        <span class="text-white font-black uppercase tracking-widest text-sm">LOGAN CRYPTO</span>
+        <span class="text-cyan-300 text-[9px] uppercase tracking-[0.2em] font-bold mt-1">Chỉ báo VIP & Copytrade thực chiến</span>
+      </div>
+      <a href="./login.html" class="w-full md:w-auto btn-zenith px-6 md:px-10 py-4 rounded-xl font-bold uppercase text-[10px] text-center">Đăng nhập khóa học</a>
+    </div>
+
+    <div id="authModal" class="modal-wrap fixed inset-0 z-[210] flex items-center justify-center p-4 md:p-0">
+      <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeAuthModal()"></div>
+      <div class="modal-box relative rounded-[30px] md:rounded-[40px] p-6 md:p-12 max-w-md w-full max-h-[85vh] overflow-y-auto">
+        <button onclick="closeAuthModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-500 hover:text-white transition"><i class="fas fa-times text-xl md:text-2xl"></i></button>
+        <div class="text-center mb-6 md:mb-8 mt-2">
+          <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-2">Nhận <span class="text-cyan-300">tư vấn chỉ báo & copytrade</span></h3>
+          <p class="text-slate-400 text-sm">Điền thông tin để đội ngũ tư vấn giải pháp phù hợp với mục tiêu hiện tại của bạn.</p>
+        </div>
+
+        <div class="flex justify-center gap-6 md:gap-8 border-b border-white/10 mb-6 md:mb-8">
+          <button onclick="switchTab('register')" id="tab-register" class="font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300">Đăng Ký</button>
+          <button onclick="switchTab('login')" id="tab-login" class="font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent">Đăng Nhập</button>
+        </div>
+
+        <form id="form-register" class="space-y-4">
+          <input id="auth-name" type="text" placeholder="Họ Tên" class="input-vip" required>
+          <input id="auth-phone" type="tel" placeholder="Số điện thoại" class="input-vip" required>
+          <input id="auth-email" type="email" placeholder="Email" class="input-vip" required>
+          <input id="auth-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
+          <button type="submit" class="w-full btn-zenith font-bold py-4 rounded-2xl uppercase text-[12px] mt-2">
+            Xác nhận đăng ký
+          </button>
+        </form>
+
+        <form id="form-login" class="space-y-4 hidden">
+          <input id="log-email" type="email" placeholder="Email" class="input-vip" required>
+          <input id="log-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
+          <button type="submit" class="w-full btn-soft font-bold py-4 rounded-2xl uppercase text-[12px] mt-2">Đăng nhập</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function toggleMobileMenu() {
+        document.getElementById('mobile-menu').classList.toggle('open');
       }
-    }
 
-    function toggleFAQ(index) {
-      const answer = document.getElementById(`faq-${index}`);
-      const icon = document.getElementById(`faq-icon-${index}`);
-      answer.classList.toggle('open');
-      icon.classList.toggle('fa-chevron-down');
-      icon.classList.toggle('fa-chevron-up');
-    }
+      function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        localStorage.setItem('logan-theme', isLight ? 'light' : 'dark');
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+      }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
-    }, { threshold: 0.12 });
+      function initTheme() {
+        const savedTheme = localStorage.getItem('logan-theme');
+        const shouldLight = savedTheme === 'light';
+        if (shouldLight) document.body.classList.add('light-theme');
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.className = shouldLight ? 'fas fa-sun' : 'fas fa-moon';
+      }
 
-    initTheme();
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      function openAuthModal(tab = 'register') {
+        switchTab(tab);
+        document.getElementById('authModal').classList.add('open');
+      }
 
-    window.addEventListener('scroll', () => {
-      const stickyBar = document.getElementById('stickyBar');
-      if (window.scrollY > 500) stickyBar.classList.add('show');
-      else stickyBar.classList.remove('show');
-    });
-  </script>
+      function closeAuthModal() {
+        document.getElementById('authModal').classList.remove('open');
+      }
 
-  <script type="module">
-    import { registerUser } from "./register.js";
-    import { loginUser } from "./login.js";
-    import { redirectByRole } from "./redirect-by-role.js";
+      function switchTab(tab) {
+        const reg = document.getElementById('form-register');
+        const log = document.getElementById('form-login');
+        const regTab = document.getElementById('tab-register');
+        const logTab = document.getElementById('tab-login');
 
-    const leadForm = document.getElementById("leadForm");
-    const registerForm = document.getElementById("form-register");
-    const loginForm = document.getElementById("form-login");
-
-    if (leadForm) {
-      leadForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("reg-name-home").value.trim();
-        const phone = document.getElementById("reg-phone-home").value.trim();
-        const email = document.getElementById("reg-email-home").value.trim();
-
-        document.getElementById("auth-name").value = name;
-        document.getElementById("auth-phone").value = phone;
-        document.getElementById("auth-email").value = email;
-
-        openAuthModal("register");
-        document.getElementById("auth-password").focus();
-      });
-    }
-
-    if (registerForm) {
-      registerForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("auth-name").value.trim();
-        const phone = document.getElementById("auth-phone").value.trim();
-        const email = document.getElementById("auth-email").value.trim();
-        const password = document.getElementById("auth-password").value;
-
-        try {
-          await registerUser(name, phone, email, password);
-          alert("Đăng ký thành công.");
-          closeAuthModal();
-          window.location.href = "./dashboard.html";
-        } catch (error) {
-          console.error(error);
-          alert("Đăng ký thất bại: " + error.message);
+        if (tab === 'register') {
+          reg.classList.remove('hidden');
+          log.classList.add('hidden');
+          regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
+          logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
+        } else {
+          reg.classList.add('hidden');
+          log.className = 'space-y-4';
+          regTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-slate-500 border-b-2 border-transparent';
+          logTab.className = 'font-black tracking-widest text-[10px] pb-3 uppercase text-white border-b-2 border-cyan-300';
         }
+      }
+
+      function toggleFAQ(index) {
+        const answer = document.getElementById(`faq-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        answer.classList.toggle('open');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+      }, { threshold: 0.12 });
+
+      initTheme();
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      window.addEventListener('scroll', () => {
+        const stickyBar = document.getElementById('stickyBar');
+        if (window.scrollY > 500) stickyBar.classList.add('show');
+        else stickyBar.classList.remove('show');
       });
-    }
+    </script>
 
-    if (loginForm) {
-      loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    <script type="module">
+      import { registerUser } from "./register.js";
+      import { loginUser } from "./login.js";
+      import { redirectByRole } from "./redirect-by-role.js";
 
-        const email = document.getElementById("log-email").value.trim();
-        const password = document.getElementById("log-password").value;
+      const leadForm = document.getElementById("leadForm");
+      const registerForm = document.getElementById("form-register");
+      const loginForm = document.getElementById("form-login");
 
-        try {
-          const result = await loginUser(email, password);
-          alert("Đăng nhập thành công.");
-          closeAuthModal();
-          redirectByRole(result.profile);
-        } catch (error) {
-          console.error(error);
-          alert("Đăng nhập thất bại: " + error.message);
-        }
-      });
-    }
-  </script>
+      if (leadForm) {
+        leadForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("reg-name-home").value.trim();
+          const phone = document.getElementById("reg-phone-home").value.trim();
+          const email = document.getElementById("reg-email-home").value.trim();
+
+          document.getElementById("auth-name").value = name;
+          document.getElementById("auth-phone").value = phone;
+          document.getElementById("auth-email").value = email;
+
+          openAuthModal("register");
+          document.getElementById("auth-password").focus();
+        });
+      }
+
+      if (registerForm) {
+        registerForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("auth-name").value.trim();
+          const phone = document.getElementById("auth-phone").value.trim();
+          const email = document.getElementById("auth-email").value.trim();
+          const password = document.getElementById("auth-password").value;
+
+          try {
+            await registerUser(name, phone, email, password);
+            alert("Đăng ký thành công.");
+            closeAuthModal();
+            window.location.href = "./dashboard.html";
+          } catch (error) {
+            console.error(error);
+            alert("Đăng ký thất bại: " + error.message);
+          }
+        });
+      }
+
+      if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("log-email").value.trim();
+          const password = document.getElementById("log-password").value;
+
+          try {
+            const result = await loginUser(email, password);
+            alert("Đăng nhập thành công.");
+            closeAuthModal();
+            redirectByRole(result.profile);
+          } catch (error) {
+            console.error(error);
+            alert("Đăng nhập thất bại: " + error.message);
+          }
+        });
+      }
+    </script>
+  </div>
 </body>
 </html>
