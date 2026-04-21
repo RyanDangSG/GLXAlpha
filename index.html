@@ -1,333 +1,202 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Trang chủ</title>
-  <link rel="icon" type="image/jpeg" href="./logan-logo.jpg">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="./site.css?v=3">
+  <link rel="icon" href="./logan-logo.jpg" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
-  <div class="video-bg">
-    <video autoplay muted loop playsinline preload="auto" poster="./nen.jpg">
-      <source src="./hero-bg.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-overlay"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand">
+        <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
+        <div class="brand-text">
+          <div class="brand-title">LOGAN <span>CRYPTO</span></div>
+          <div class="brand-sub">TRADING ECOSYSTEM</div>
+        </div>
+      </a>
 
-  <div class="site-wrap">
-    <header class="glass-nav">
-      <div class="container nav-inner">
-        <a href="./index.html" class="brand">
-          <div class="brand-logo">
-            <img src="./logan-logo.jpg" alt="Logan Crypto">
+      <nav class="main-nav" id="mainNav">
+        <a href="./index.html" class="active">Trang chủ</a>
+        <a href="./services.html">Dịch vụ</a>
+        <a href="./about.html">Giới thiệu</a>
+        <a href="./reviews.html">Phản hồi</a>
+        <a href="./faq.html">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">
+          ☀
+        </button>
+        <a href="./login.html" class="btn btn-primary">Đăng nhập khóa học</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-light">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-label">HỆ THỐNG GIAO DỊCH</p>
+
+          <h1 class="hero-title">
+            GIÚP BẠN NHÌN<br />
+            THỊ TRƯỜNG <span>RÕ HƠN</span><br />
+            VÀ ĐI THEO MỘT LỘ TRÌNH<br />
+            BÀI BẢN <span>HƠN</span>
+          </h1>
+
+          <p class="hero-desc">
+            Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
+            giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
+            và tự tin hơn trên mọi thị trường.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="./register.html" class="btn btn-primary">Nhận tư vấn ngay</a>
+            <a href="./services.html" class="btn btn-outline">Xem dịch vụ</a>
           </div>
-          <div>
-            <div class="brand-title">LOGAN <span style="color:#38BDF8;">CRYPTO</span></div>
-            <div class="brand-sub">Trading Ecosystem</div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-icon">✦</div>
+              <div class="stat-content">
+                <strong>+1200</strong>
+                <span>Học viên tin tưởng</span>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon">📈</div>
+              <div class="stat-content">
+                <strong>+35%</strong>
+                <span>Hiệu suất trung bình</span>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon">🕘</div>
+              <div class="stat-content">
+                <strong>24/7</strong>
+                <span>Hỗ trợ chuyên sâu</span>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <nav class="nav-links">
-          <a href="./index.html" class="active">Trang chủ</a>
-          <a href="./services.html">Dịch vụ</a>
-          <a href="./about.html">Giới thiệu</a>
-          <a href="./reviews.html">Phản hồi</a>
-          <a href="./faq.html">FAQ</a>
-        </nav>
-
-        <div class="nav-actions">
-          <button class="theme-toggle" onclick="toggleTheme()">
-            <i id="theme-icon" class="fas fa-sun"></i>
-          </button>
-          <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
-          <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <div class="hero-media">
+          <img src="./7.jpg" alt="Logan Crypto Hero" />
         </div>
       </div>
-    </header>
+    </section>
 
-    <div id="mobileMenu" class="mobile-menu">
-      <button class="mobile-close" onclick="toggleMenu()">&times;</button>
-      <a href="./index.html" class="active">Trang chủ</a>
-      <a href="./services.html">Dịch vụ</a>
-      <a href="./about.html">Giới thiệu</a>
-      <a href="./reviews.html">Phản hồi</a>
-      <a href="./faq.html">FAQ</a>
-      <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
-    </div>
-
-    <main class="page">
-      <section class="hero">
-        <div class="container-wide">
-          <div class="hero-bg-shell">
-            <div class="hero-bg-image">
-              <img src="./nen.jpg" alt="Background Logan Crypto">
-            </div>
-            <div class="hero-bg-mask"></div>
-
-            <div class="hero-content-wrap">
-              <div class="hero-main-grid">
-                <div class="hero-left reveal">
-                  <span class="kicker">Hệ thống giao dịch</span>
-
-                  <h1 class="hero-title">
-                    Giúp bạn nhìn<br>
-                    thị trường <span class="text-gradient">rõ hơn</span><br>
-                    và đi theo một lộ trình<br>
-                    bài bản <span class="text-gradient">hơn</span>
-                  </h1>
-
-                  <p class="hero-desc">
-                    Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu, giúp bạn nâng cao kỹ năng,
-                    tối ưu lợi nhuận và tự tin hơn trên hành trình phát triển của mình.
-                  </p>
-
-                  <div class="hero-actions">
-                    <button onclick="openAuthModal('register')" class="btn-primary">Nhận tư vấn ngay</button>
-                    <a href="./services.html" class="btn-secondary">Xem dịch vụ</a>
-                  </div>
-
-                  <div class="hero-stats">
-                    <div class="hero-stat">
-                      <div class="hero-stat-icon"><i class="fas fa-shield-alt"></i></div>
-                      <div>
-                        <strong>+1200</strong>
-                        <span>Học viên tin tưởng</span>
-                      </div>
-                    </div>
-
-                    <div class="hero-stat">
-                      <div class="hero-stat-icon"><i class="fas fa-chart-line"></i></div>
-                      <div>
-                        <strong>+35%</strong>
-                        <span>Hiệu suất trung bình</span>
-                      </div>
-                    </div>
-
-                    <div class="hero-stat">
-                      <div class="hero-stat-icon"><i class="fas fa-headset"></i></div>
-                      <div>
-                        <strong>24/7</strong>
-                        <span>Hỗ trợ chuyên sâu</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="hero-right reveal">
-                  <img src="./7.jpg" alt="Hero Logan Crypto">
-                </div>
-              </div>
-
-              <div class="hero-bottom-grid reveal">
-                <div class="mini-card">
-                  <img src="./1.jpg" alt="Visual 1">
-                </div>
-                <div class="mini-card">
-                  <img src="./2.jpg" alt="Visual 2">
-                </div>
-                <div class="mini-card">
-                  <img src="./4.jpg" alt="Visual 3">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container-wide">
-          <div class="feature-row reveal">
-            <div class="panel panel-pad">
-              <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
-              <div class="card-title">Chiến lược rõ ràng</div>
-              <div class="card-text">Hệ thống chiến lược bài bản, dễ hiểu, dễ áp dụng và phù hợp với nhiều giai đoạn phát triển.</div>
-            </div>
-
-            <div class="panel panel-pad">
-              <div class="icon-box"><i class="fas fa-chart-bar"></i></div>
-              <div class="card-title">Phân tích chuyên sâu</div>
-              <div class="card-text">Phân tích đa khung thời gian, tìm điểm vào lệnh tối ưu và tăng độ chủ động trong giao dịch.</div>
-            </div>
-
-            <div class="panel panel-pad">
-              <div class="icon-box"><i class="fas fa-badge-check"></i></div>
-              <div class="card-title">Quản trị rủi ro</div>
-              <div class="card-text">Kiểm soát vốn chặt chẽ, bảo vệ tài khoản hiệu quả và giữ được nhịp giao dịch ổn định hơn.</div>
-            </div>
-
-            <div class="panel panel-pad">
-              <div class="icon-box"><i class="fas fa-headset"></i></div>
-              <div class="card-title">Hỗ trợ 24/7</div>
-              <div class="card-text">Đội ngũ hỗ trợ tận tâm, giải đáp thắc mắc và đồng hành xuyên suốt quá trình sử dụng hệ thống.</div>
-            </div>
-
-            <div class="panel panel-pad">
-              <div class="icon-box"><i class="fas fa-users"></i></div>
-              <div class="card-title">Cộng đồng uy tín</div>
-              <div class="card-text">Môi trường giao lưu tích cực, học hỏi lẫn nhau và cùng phát triển bền vững trong giao dịch.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="leadFormSection">
-        <div class="container">
-          <div class="panel panel-pad reveal" style="border-radius:28px;">
-            <div style="text-align:center;max-width:920px;margin:0 auto 20px;">
-              <span class="kicker">Tư vấn</span>
-              <h2 class="card-title" style="font-size:46px;margin-top:16px;">Để đội ngũ định hướng giải pháp phù hợp hơn với bạn</h2>
-              <div class="card-text" style="font-size:18px;">
-                Bạn chỉ cần để lại thông tin, hệ thống sẽ ghi nhận và đội ngũ sẽ liên hệ để tư vấn
-                giữa chỉ báo, copytrade và lộ trình phù hợp với mục tiêu hiện tại của bạn.
-              </div>
-            </div>
-
-            <form id="leadForm" style="display:grid;gap:14px;max-width:760px;margin:0 auto;">
-              <input id="reg-name-home" type="text" placeholder="Họ và tên" class="input-vip" required>
-              <input id="reg-phone-home" type="tel" placeholder="Số điện thoại" class="input-vip" required>
-              <input id="reg-email-home" type="email" placeholder="Email" class="input-vip" required>
-              <button type="submit" class="btn-primary" style="width:100%;">Tiếp tục đăng ký</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer-wrap">
+    <!-- IMAGE GRID -->
+    <section class="visual-grid-section">
       <div class="container">
-        <div class="footer-grid">
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#ffe4e6;color:#ef4444;"><i class="fas fa-phone-alt"></i></div>
-            <div>
-              <div class="footer-label">HOTLINE</div>
-              <div class="footer-value">0899.125.048</div>
+        <div class="visual-grid">
+          <article class="visual-card large">
+            <img src="./1.jpg" alt="Phân tích chuyên sâu" />
+            <div class="visual-overlay dark">
+              <h3>PHÂN TÍCH<br />CHUYÊN SÂU</h3>
+              <p>Hiểu rõ thị trường<br />Đón đầu xu hướng</p>
             </div>
-          </div>
+          </article>
 
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#cffafe;color:#0891b2;"><i class="far fa-envelope"></i></div>
-            <div>
-              <div class="footer-label">GMAIL</div>
-              <div class="footer-value">logan27xx@gmail.com</div>
+          <article class="visual-card">
+            <img src="./2.jpg" alt="Giao dịch kỷ luật" />
+            <div class="visual-overlay light">
+              <h3>GIAO DỊCH KỶ LUẬT</h3>
+              <p>Chiến lược rõ ràng<br />Quản trị rủi ro tối ưu</p>
             </div>
-          </div>
+          </article>
 
-          <div class="footer-card">
-            <div class="footer-icon" style="background:#ede9fe;color:#7c3aed;"><i class="far fa-clock"></i></div>
-            <div>
-              <div class="footer-label">HỖ TRỢ</div>
-              <div class="footer-value">24/7 Online</div>
+          <article class="visual-card">
+            <img src="./3.jpg" alt="Đồng hành cùng bạn" />
+            <div class="visual-overlay light">
+              <h3>ĐỒNG HÀNH CÙNG BẠN</h3>
+              <p>Trên mọi hành trình<br />chinh phục thị trường</p>
             </div>
-          </div>
-        </div>
+          </article>
 
-        <div class="footer-bottom">
-          <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-          <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
+          <article class="visual-card">
+            <img src="./4.jpg" alt="Kiến thức thực chiến" />
+            <div class="visual-overlay light">
+              <h3>KIẾN THỨC<br />THỰC CHIẾN</h3>
+              <p>Học từ kinh nghiệm<br />– giao dịch tự tin</p>
+            </div>
+          </article>
+
+          <article class="visual-card">
+            <img src="./5.jpg" alt="Cộng đồng chất lượng" />
+            <div class="visual-overlay dark">
+              <h3>CỘNG ĐỒNG<br />CHẤT LƯỢNG</h3>
+              <p>Kết nối – Chia sẻ<br />Phát triển bền vững</p>
+            </div>
+          </article>
+
+          <article class="visual-card">
+            <img src="./6.jpg" alt="Công cụ hiện đại" />
+            <div class="visual-overlay light">
+              <h3>CÔNG CỤ HIỆN ĐẠI</h3>
+              <p>Hỗ trợ phân tích<br />và giao dịch hiệu quả</p>
+            </div>
+          </article>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <div id="authModal" class="modal-wrap">
-      <div class="modal-backdrop" onclick="closeAuthModal()"></div>
-      <div class="modal-box">
-        <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+    <!-- FEATURE STRIP -->
+    <section class="feature-strip">
+      <div class="container">
+        <div class="feature-row">
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🛡</div>
+            <div>
+              <h4>CHIẾN LƯỢC RÕ RÀNG</h4>
+              <p>Hệ thống chiến lược bài bản, dễ hiểu, dễ áp dụng</p>
+            </div>
+          </div>
 
-        <div style="text-align:center;margin-bottom:20px;">
-          <h3 style="margin:0;font-size:34px;font-weight:900;text-transform:uppercase;">Đăng ký / Đăng nhập</h3>
-          <p class="card-text" style="margin-top:8px;">Tiếp tục để hệ thống ghi nhận tài khoản của bạn.</p>
+          <div class="feature-pill">
+            <div class="feature-pill-icon">📊</div>
+            <div>
+              <h4>PHÂN TÍCH CHUYÊN SÂU</h4>
+              <p>Phân tích đa khung thời gian, tìm điểm vào lệnh tối ưu</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">✅</div>
+            <div>
+              <h4>QUẢN TRỊ RỦI RO</h4>
+              <p>Kiểm soát vốn chặt chẽ, bảo vệ tài khoản hiệu quả</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">🎧</div>
+            <div>
+              <h4>HỖ TRỢ 24/7</h4>
+              <p>Đội ngũ hỗ trợ tận tâm, giải đáp mọi thắc mắc</p>
+            </div>
+          </div>
+
+          <div class="feature-pill">
+            <div class="feature-pill-icon">👥</div>
+            <div>
+              <h4>CỘNG ĐỒNG UY TÍN</h4>
+              <p>Môi trường giao lưu tích cực, cùng nhau phát triển</p>
+            </div>
+          </div>
         </div>
-
-        <div class="tab-row">
-          <button id="tab-register" class="tab-btn active" onclick="switchTab('register')">Đăng ký</button>
-          <button id="tab-login" class="tab-btn" onclick="switchTab('login')">Đăng nhập</button>
-        </div>
-
-        <form id="form-register" style="display:grid;gap:14px;">
-          <input id="auth-name" type="text" placeholder="Họ và tên" class="input-vip" required>
-          <input id="auth-phone" type="tel" placeholder="Số điện thoại" class="input-vip" required>
-          <input id="auth-email" type="email" placeholder="Email" class="input-vip" required>
-          <input id="auth-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
-          <button type="submit" class="btn-primary" style="width:100%;">Xác nhận đăng ký</button>
-        </form>
-
-        <form id="form-login" class="hidden" style="display:grid;gap:14px;">
-          <input id="log-email" type="email" placeholder="Email" class="input-vip" required>
-          <input id="log-password" type="password" placeholder="Mật khẩu" class="input-vip" required>
-          <button type="submit" class="btn-secondary" style="width:100%;">Đăng nhập</button>
-        </form>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <script src="./site.js?v=2"></script>
-  <script type="module">
-    import { registerUser } from "./register.js";
-    import { loginUser } from "./login.js";
-    import { redirectByRole } from "./redirect-by-role.js";
-
-    const leadForm = document.getElementById("leadForm");
-    const registerForm = document.getElementById("form-register");
-    const loginForm = document.getElementById("form-login");
-
-    if (leadForm) {
-      leadForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = document.getElementById("reg-name-home").value.trim();
-        const phone = document.getElementById("reg-phone-home").value.trim();
-        const email = document.getElementById("reg-email-home").value.trim();
-
-        document.getElementById("auth-name").value = name;
-        document.getElementById("auth-phone").value = phone;
-        document.getElementById("auth-email").value = email;
-
-        openAuthModal("register");
-        document.getElementById("auth-password").focus();
-      });
-    }
-
-    if (registerForm) {
-      registerForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("auth-name").value.trim();
-        const phone = document.getElementById("auth-phone").value.trim();
-        const email = document.getElementById("auth-email").value.trim();
-        const password = document.getElementById("auth-password").value;
-
-        try {
-          await registerUser(name, phone, email, password);
-          alert("Đăng ký thành công.");
-          closeAuthModal();
-          window.location.href = "./dashboard.html";
-        } catch (error) {
-          console.error(error);
-          alert("Đăng ký thất bại: " + error.message);
-        }
-      });
-    }
-
-    if (loginForm) {
-      loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById("log-email").value.trim();
-        const password = document.getElementById("log-password").value;
-
-        try {
-          const result = await loginUser(email, password);
-          alert("Đăng nhập thành công.");
-          closeAuthModal();
-          redirectByRole(result.profile);
-        } catch (error) {
-          console.error(error);
-          alert("Đăng nhập thất bại: " + error.message);
-        }
-      });
-    }
-  </script>
+  <script src="./site.js"></script>
 </body>
 </html>
