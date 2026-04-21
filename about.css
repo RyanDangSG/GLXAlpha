@@ -1,163 +1,100 @@
-.about-page {
-  background: #eef3fb;
-  color: #13203a;
+.about-page .about-main {
+  padding: 22px 0 28px;
 }
 
-body.about-page.dark-theme {
-  background: linear-gradient(180deg, #041327 0%, #071a33 100%);
-  color: #e9f2ff;
-}
-
-.about-page .site-header {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid rgba(180, 195, 220, 0.35);
-  backdrop-filter: blur(10px);
-}
-
-body.about-page.dark-theme .site-header {
-  background: rgba(3, 12, 30, 0.78);
-  border-bottom: 1px solid rgba(90, 129, 196, 0.18);
-}
-
-.about-page .brand-sub,
-.about-page .main-nav a,
-.about-page .theme-toggle {
-  color: #64748b;
-}
-
-body.about-page.dark-theme .brand-sub,
-body.about-page.dark-theme .main-nav a,
-body.about-page.dark-theme .theme-toggle {
-  color: #c6d7f0;
-}
-
-.about-page .main-nav a.active,
-.about-page .main-nav a:hover {
-  color: #2563eb;
-}
-
-body.about-page.dark-theme .main-nav a.active,
-body.about-page.dark-theme .main-nav a:hover {
-  color: #36c5ff;
-}
-
-.about-page .theme-toggle,
-.about-page .menu-toggle {
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  color: #1e293b;
-}
-
-body.about-page.dark-theme .theme-toggle,
-body.about-page.dark-theme .menu-toggle {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(92, 138, 209, 0.24);
-  color: #dceaff;
-}
-
-.about-main {
-  padding: 22px 0 40px;
-}
-
-/* KHUNG NGOÀI RỘNG RA */
-.about-main .page-shell {
-  width: 100%;
-  max-width: 1820px;
-  margin: 0 auto;
-  padding: 0 18px;
-  box-sizing: border-box;
-}
-
-.about-hero-box {
-  background: rgba(255,255,255,0.72);
+.about-page .about-hero-box {
+  background: rgba(255,255,255,0.76);
   border: 1px solid rgba(205, 216, 232, 0.9);
   border-radius: 28px;
-  padding: 28px 28px 32px;
+  padding: 26px 28px 30px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
 }
 
+body.dark-theme.about-page .about-hero-box,
 body.about-page.dark-theme .about-hero-box {
-  background: rgba(8, 24, 50, 0.82);
-  border: 1px solid rgba(70, 116, 201, 0.20);
-  box-shadow: 0 18px 36px rgba(0,0,0,0.24);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(90, 129, 196, 0.18);
 }
 
-.about-label {
+.about-page .about-label {
   text-align: center;
   color: #2563eb;
   font-size: 16px;
-  font-weight: 800;
-  letter-spacing: .6px;
+  font-weight: 900;
   margin-bottom: 8px;
 }
 
+body.dark-theme.about-page .about-label,
 body.about-page.dark-theme .about-label {
-  color: #51caff;
+  color: #56ccff;
 }
 
-.about-hero h1 {
+.about-page .about-hero h1 {
   margin: 0;
   text-align: center;
-  font-size: clamp(54px, 6vw, 110px);
+  font-size: clamp(56px, 6vw, 112px);
   line-height: .95;
   font-weight: 900;
-  color: #0f3a8d;
+  color: #123f99;
 }
 
+body.dark-theme.about-page .about-hero h1,
 body.about-page.dark-theme .about-hero h1 {
-  color: #ffffff;
+  color: #f2f7ff;
 }
 
-.about-intro {
-  max-width: 1180px;
-  margin: 20px auto 34px;
+.about-page .about-intro {
+  max-width: 1200px;
+  margin: 18px auto 30px;
   text-align: center;
-  font-size: clamp(18px, 1.55vw, 28px);
-  line-height: 1.7;
-  color: #31415d;
+  font-size: clamp(18px, 1.7vw, 30px);
+  line-height: 1.75;
+  color: #2f4363;
 }
 
-.about-intro strong {
+.about-page .about-intro strong {
   color: #2563eb;
 }
 
+body.dark-theme.about-page .about-intro,
 body.about-page.dark-theme .about-intro {
-  color: #d6e4f8;
+  color: #d5e4f9;
 }
 
+body.dark-theme.about-page .about-intro strong,
 body.about-page.dark-theme .about-intro strong {
-  color: #58cfff;
+  color: #56ccff;
 }
 
-/* GRID 3 CỘT RỘNG HƠN */
-.about-card-grid {
+.about-page .about-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   align-items: stretch;
 }
 
-.about-card {
+.about-page .about-card {
   position: relative;
+  min-height: 840px;
   overflow: hidden;
-  min-height: 880px;
   border-radius: 24px;
-  border: 1px solid rgba(211, 220, 233, 0.95);
-  background: linear-gradient(180deg, #f6f9ff 0%, #edf3fb 100%);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(205, 216, 232, 0.95);
+  background: #edf3fb;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+  isolation: isolate;
 }
 
+body.dark-theme.about-page .about-card,
 body.about-page.dark-theme .about-card {
-  background: linear-gradient(180deg, rgba(10, 30, 62, 0.95), rgba(7, 22, 50, 0.95));
-  border: 1px solid rgba(84, 122, 194, 0.22);
-  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(90, 129, 196, 0.18);
 }
 
-.about-card-number {
+.about-page .about-card-number {
   position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-8%);
+  top: 20px;
+  left: 48%;
+  transform: translateX(-10%);
   font-size: 210px;
   line-height: 1;
   font-weight: 900;
@@ -166,11 +103,12 @@ body.about-page.dark-theme .about-card {
   pointer-events: none;
 }
 
+body.dark-theme.about-page .about-card-number,
 body.about-page.dark-theme .about-card-number {
-  color: rgba(88, 207, 255, 0.08);
+  color: rgba(86, 204, 255, 0.08);
 }
 
-.about-card-icon {
+.about-page .about-card-icon {
   position: absolute;
   top: 28px;
   left: 28px;
@@ -180,94 +118,109 @@ body.about-page.dark-theme .about-card-number {
   display: grid;
   place-items: center;
   font-size: 42px;
-  background: linear-gradient(180deg, #4f8cff 0%, #1459ea 100%);
+  background: linear-gradient(180deg, #5f97ff 0%, #2563eb 100%);
   color: #ffffff;
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
-  z-index: 3;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
+  z-index: 4;
 }
 
-/* CONTENT KHÔNG BỊ ĐÈ */
-.about-card-content {
+.about-page .about-card-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.about-page .about-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-page .about-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(238,243,251,0.97) 0%,
+    rgba(238,243,251,0.95) 35%,
+    rgba(238,243,251,0.72) 55%,
+    rgba(238,243,251,0.10) 100%
+  );
+}
+
+body.dark-theme.about-page .about-card-overlay,
+body.about-page.dark-theme .about-card-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(7,20,39,0.95) 0%,
+    rgba(7,20,39,0.88) 35%,
+    rgba(7,20,39,0.56) 58%,
+    rgba(7,20,39,0.10) 100%
+  );
+}
+
+.about-page .about-card-content {
   position: relative;
   z-index: 3;
-  padding: 190px 28px 30px;
-  width: 58%;
-  max-width: 58%;
-  min-width: 58%;
+  padding: 192px 28px 28px;
+  width: 56%;
+  max-width: 56%;
 }
 
-.about-card-content h3 {
+.about-page .about-card-content h3 {
   margin: 0;
-  font-size: clamp(34px, 2.3vw, 60px);
-  line-height: 1.02;
-  color: #1459ea;
+  font-size: clamp(34px, 2.2vw, 60px);
+  line-height: 1.03;
+  color: #2563eb;
   font-weight: 900;
-  word-break: keep-all;
 }
 
+body.dark-theme.about-page .about-card-content h3,
 body.about-page.dark-theme .about-card-content h3 {
-  color: #58cfff;
+  color: #56ccff;
 }
 
-.about-line {
+.about-page .about-line {
   display: block;
   width: 58px;
   height: 6px;
-  background: #2563eb;
   border-radius: 999px;
+  background: #2563eb;
   margin: 16px 0 22px;
 }
 
+body.dark-theme.about-page .about-line,
 body.about-page.dark-theme .about-line {
-  background: #58cfff;
+  background: #56ccff;
 }
 
-.about-card-content p {
+.about-page .about-card-content p {
   margin: 0;
   font-size: clamp(15px, 1.05vw, 22px);
   line-height: 1.95;
   color: #2e3e59;
 }
 
+body.dark-theme.about-page .about-card-content p,
 body.about-page.dark-theme .about-card-content p {
   color: #d5e4f9;
 }
 
-/* ẢNH CHIẾM BÊN PHẢI, KHÔNG ÉP ĐÈ CHỮ */
-.about-card-image {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 52%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.about-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center bottom;
-}
-
-/* CARD 3 */
-.core-list {
+.about-page .core-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.core-item {
+.about-page .core-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
 
-.core-check {
+.about-page .core-check {
   width: 40px;
   height: 40px;
   border-radius: 999px;
@@ -277,92 +230,64 @@ body.about-page.dark-theme .about-card-content p {
   color: #ffffff;
   font-weight: 900;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
+body.dark-theme.about-page .core-check,
 body.about-page.dark-theme .core-check {
-  background: #58cfff;
-  color: #05203d;
+  background: #56ccff;
+  color: #08203c;
 }
 
-.core-item h4 {
+.about-page .core-item h4 {
   margin: 0 0 6px;
-  font-size: clamp(22px, 1.35vw, 32px);
-  color: #1459ea;
+  font-size: clamp(22px, 1.3vw, 32px);
+  color: #2563eb;
   font-weight: 900;
 }
 
-.core-item p {
+body.dark-theme.about-page .core-item h4,
+body.about-page.dark-theme .core-item h4 {
+  color: #56ccff;
+}
+
+.about-page .core-item p {
   margin: 0;
   font-size: clamp(15px, 1vw, 21px);
   line-height: 1.8;
 }
 
-body.about-page.dark-theme .core-item h4 {
-  color: #58cfff;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1600px) {
-  .about-main .page-shell {
-    max-width: 100%;
-    padding: 0 16px;
-  }
-
-  .about-card {
-    min-height: 820px;
-  }
-
-  .about-card-content {
-    width: 56%;
-    max-width: 56%;
-    min-width: 56%;
-  }
-
-  .about-card-image {
-    width: 50%;
-  }
-}
-
+/* responsive */
 @media (max-width: 1300px) {
-  .about-card-grid {
+  .about-page .about-card-grid {
     grid-template-columns: 1fr;
   }
 
-  .about-card {
-    min-height: 760px;
+  .about-page .about-card {
+    min-height: 720px;
   }
 
-  .about-card-content {
-    width: 55%;
-    max-width: 55%;
-    min-width: 55%;
-  }
-
-  .about-card-image {
-    width: 45%;
+  .about-page .about-card-content {
+    width: 54%;
+    max-width: 54%;
   }
 }
 
-@media (max-width: 991px) {
-  .about-hero-box {
-    padding: 20px 16px 22px;
+@media (max-width: 900px) {
+  .about-page .about-hero-box {
+    padding: 18px 16px 20px;
   }
 
-  .about-intro {
-    margin: 16px auto 24px;
+  .about-page .about-card {
+    min-height: 620px;
   }
 
-  .about-card {
-    min-height: 680px;
-  }
-
-  .about-card-number {
+  .about-page .about-card-number {
     font-size: 150px;
-    top: 24px;
+    top: 22px;
   }
 
-  .about-card-icon {
+  .about-page .about-card-icon {
     width: 78px;
     height: 78px;
     font-size: 32px;
@@ -370,37 +295,25 @@ body.about-page.dark-theme .core-item h4 {
     left: 20px;
   }
 
-  .about-card-content {
+  .about-page .about-card-content {
     padding: 130px 20px 20px;
-    width: 56%;
-    max-width: 56%;
-    min-width: 56%;
-  }
-
-  .about-card-image {
-    width: 44%;
+    width: 58%;
+    max-width: 58%;
   }
 }
 
 @media (max-width: 767px) {
-  .about-main {
-    padding: 16px 0 28px;
+  .about-page .about-card {
+    min-height: 560px;
   }
 
-  .about-card {
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about-card-number {
+  .about-page .about-card-number {
     font-size: 96px;
     top: 16px;
     left: 52%;
-    transform: translateX(-10%);
   }
 
-  .about-card-icon {
+  .about-page .about-card-icon {
     width: 66px;
     height: 66px;
     font-size: 26px;
@@ -408,24 +321,30 @@ body.about-page.dark-theme .core-item h4 {
     left: 16px;
   }
 
-  .about-card-content {
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    padding: 106px 18px 16px;
+  .about-page .about-card-content {
+    width: 72%;
+    max-width: 72%;
+    padding: 104px 18px 18px;
   }
 
-  .about-card-image {
-    position: relative;
-    width: 100%;
-    height: auto;
-    min-height: 320px;
+  .about-page .about-card-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(238,243,251,0.98) 0%,
+      rgba(238,243,251,0.92) 50%,
+      rgba(238,243,251,0.44) 74%,
+      rgba(238,243,251,0.08) 100%
+    );
   }
 
-  .about-card-image img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    object-position: center;
+  body.dark-theme.about-page .about-card-overlay,
+  body.about-page.dark-theme .about-card-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(7,20,39,0.96) 0%,
+      rgba(7,20,39,0.88) 50%,
+      rgba(7,20,39,0.42) 74%,
+      rgba(7,20,39,0.08) 100%
+    );
   }
 }
