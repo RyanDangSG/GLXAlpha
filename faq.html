@@ -4,215 +4,168 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Logan Crypto | FAQ</title>
-  <link rel="icon" type="image/jpeg" href="logan-logo.jpg">
+  <link rel="icon" type="image/jpeg" href="./logan-logo.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    :root{
-      --bg:#04050a; --panel:rgba(10,15,28,.72); --border:rgba(255,255,255,.08); --text:#eef5ff; --soft:#94a3b8;
-      --header:rgba(4,5,10,.82); --overlay-left:rgba(4,5,10,.82); --overlay-mid:rgba(4,5,10,.36); --overlay-right:rgba(4,5,10,.76);
-      --footer:#06101d; --footer-card:rgba(255,255,255,.04);
-    }
-    body.light-theme{
-      --bg:#edf3f7; --panel:rgba(255,255,255,.82); --border:rgba(15,23,42,.08); --text:#0f172a; --soft:#475569;
-      --header:rgba(255,255,255,.90); --overlay-left:rgba(237,243,247,.68); --overlay-mid:rgba(237,243,247,.18); --overlay-right:rgba(237,243,247,.58);
-      --footer:#edf3f7; --footer-card:rgba(15,23,42,.04);
-    }
-    html,body{margin:0;padding:0;min-height:100%;background:var(--bg)!important;overflow-x:hidden;scroll-behavior:smooth}
-    *{box-sizing:border-box;font-family:"Times New Roman", Times, serif}
-    body{color:var(--text)}
-    .video-bg{position:fixed;inset:0;z-index:-3}.video-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
-    .video-overlay{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 18% 30%, rgba(0,234,255,.10), transparent 24%),radial-gradient(circle at 85% 70%, rgba(56,189,248,.10), transparent 28%),linear-gradient(to right,var(--overlay-left) 0%,var(--overlay-mid) 48%,var(--overlay-right) 100%)}
-    body::before{content:"";position:fixed;inset:0;background:var(--bg);opacity:.14;z-index:-1}
-    .glass-nav{background:var(--header);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-    .panel{background:var(--panel);border:1px solid var(--border);backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.28)}
-    .btn-primary{background:linear-gradient(135deg,#00f0ff,#2dd4bf 45%,#38bdf8 100%);color:#03131b!important;box-shadow:0 12px 28px rgba(0,240,255,.18)}
-    .btn-secondary{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text)}
-    body.light-theme .btn-secondary{background:rgba(255,255,255,.78)}
-    .section-kicker{display:inline-block;color:#00eaff;border:1px solid rgba(0,234,255,.25);padding:8px 18px;border-radius:999px;text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:700}
-    .theme-toggle{width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--text)}
-    .mobile-menu{transform:translateX(100%);transition:.35s ease;background:var(--header);backdrop-filter:blur(18px)} .mobile-menu.open{transform:translateX(0)}
-    .footer-wrap{background:var(--footer);border-top:1px solid var(--border)}
-    .footer-card{background:var(--footer-card);border:1px solid var(--border)}
-    .text-soft{color:var(--soft)}
-    .faq-answer{display:none}
-    .faq-item.active .faq-answer{display:block}
-    body.light-theme .force-white{color:#0f172a!important}
-    @media(max-width:1024px){.desktop-nav{display:none}} @media(min-width:1025px){.menu-btn{display:none}}
-  </style>
+  <link rel="stylesheet" href="./site.css">
 </head>
 <body>
-  <div class="video-bg"><video autoplay muted loop playsinline preload="auto"><source src="hero-bg.mp4" type="video/mp4"></video></div>
+  <div class="video-bg">
+    <video autoplay muted loop playsinline preload="auto" poster="./logan-logo.jpg">
+      <source src="./hero-bg.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="video-overlay"></div>
 
-  <header class="glass-nav fixed top-0 left-0 w-full z-[100] h-16 lg:h-20">
-    <div class="max-w-[1600px] mx-auto px-6 xl:px-10 h-full flex items-center justify-between">
-      <a href="./index.html" class="flex items-center gap-3">
-        <div class="w-11 h-11 lg:w-12 lg:h-12 rounded-xl overflow-hidden bg-white border border-cyan-300/30"><img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-contain"></div>
-        <div><div class="text-lg lg:text-xl font-black uppercase tracking-tight force-white">LOGAN <span class="text-cyan-300">CRYPTO</span></div><div class="text-[10px] uppercase tracking-[.18em] text-soft">Trading Ecosystem</div></div>
+  <header class="glass-nav">
+    <div class="container nav-inner">
+      <a href="./index.html" class="brand">
+        <div class="brand-logo"><img src="./logan-logo.jpg" alt="Logan Crypto"></div>
+        <div><div class="brand-title">LOGAN <span style="color:#67e8f9;">CRYPTO</span></div><div class="brand-sub">Trading Ecosystem</div></div>
       </a>
-      <nav class="desktop-nav flex items-center gap-8 text-[16px] font-semibold">
-        <a href="./index.html" class="text-soft hover:text-white transition">Trang chủ</a>
-        <a href="./services.html" class="text-soft hover:text-white transition">Dịch vụ</a>
-        <a href="./about.html" class="text-soft hover:text-white transition">Giới thiệu</a>
-        <a href="./reviews.html" class="text-soft hover:text-white transition">Phản hồi</a>
-        <a href="./faq.html" class="text-cyan-300">FAQ</a>
+      <nav class="nav-links">
+        <a href="./index.html">Trang chủ</a>
+        <a href="./services.html">Dịch vụ</a>
+        <a href="./about.html">Giới thiệu</a>
+        <a href="./reviews.html">Phản hồi</a>
+        <a href="./faq.html" class="active">FAQ</a>
       </nav>
-      <div class="flex items-center gap-3">
-        <button onclick="toggleTheme()" class="theme-toggle"><i id="theme-icon" class="fas fa-moon"></i></button>
-        <a href="./login.html" class="hidden lg:inline-flex btn-primary px-6 py-2.5 rounded-full font-bold text-[12px] uppercase items-center justify-center">Đăng nhập khóa học</a>
-        <button onclick="toggleMenu()" class="menu-btn text-2xl force-white"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" class="fas fa-moon"></i></button>
+        <a href="./login.html" class="btn-primary">Đăng nhập khóa học</a>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
       </div>
     </div>
   </header>
 
-  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[95] pt-24 px-6 lg:hidden">
-    <button onclick="toggleMenu()" class="absolute top-5 right-6 text-3xl force-white">&times;</button>
-    <div class="space-y-2">
-      <a href="./index.html" class="block py-4 border-b border-white/10 force-white font-bold">Trang chủ</a>
-      <a href="./services.html" class="block py-4 border-b border-white/10 force-white">Dịch vụ</a>
-      <a href="./about.html" class="block py-4 border-b border-white/10 force-white">Giới thiệu</a>
-      <a href="./reviews.html" class="block py-4 border-b border-white/10 force-white">Phản hồi</a>
-      <a href="./faq.html" class="block py-4 border-b border-white/10 text-cyan-300 font-bold">FAQ</a>
-      <a href="./login.html" class="block mt-6 btn-primary text-center py-4 rounded-2xl font-bold uppercase text-[12px]">Đăng nhập khóa học</a>
-    </div>
+  <div id="mobileMenu" class="mobile-menu">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="./index.html">Trang chủ</a>
+    <a href="./services.html">Dịch vụ</a>
+    <a href="./about.html">Giới thiệu</a>
+    <a href="./reviews.html">Phản hồi</a>
+    <a href="./faq.html" class="active">FAQ</a>
+    <a href="./login.html" class="btn-primary" style="margin-top:18px;">Đăng nhập khóa học</a>
   </div>
 
-  <main class="pt-28 lg:pt-32">
-    <section class="max-w-[1300px] mx-auto px-6 xl:px-10 py-14 text-center">
-      <span class="section-kicker">FAQ</span>
-      <h1 class="mt-5 text-4xl md:text-6xl xl:text-[72px] font-black leading-[1.04] tracking-tight force-white">
-        Những câu hỏi thường gặp<br><span class="text-cyan-300">để khách hàng nắm nhanh và rõ hơn</span>
-      </h1>
-      <p class="mt-6 text-soft max-w-4xl mx-auto text-lg md:text-[22px] leading-relaxed">
-        Trang này giúp khách hàng hiểu nhanh cách tham gia, cách sử dụng và cách tiếp cận hệ thống
-        mà không cần phải hỏi lại quá nhiều lần.
-      </p>
-    </section>
+  <main class="page">
+    <section class="section">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <span class="kicker">FAQ</span>
+          <h1 class="page-title">Những câu hỏi thường gặp để khách hàng nắm nhanh và rõ hơn</h1>
+          <p class="page-desc">
+            Trang này giúp khách hàng hiểu nhanh cách tham gia, cách sử dụng và cách tiếp cận hệ thống
+            mà không cần phải hỏi lại quá nhiều lần.
+          </p>
+        </div>
 
-    <section class="max-w-[1100px] mx-auto px-6 xl:px-10 pb-20 space-y-5">
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Tôi phù hợp với chỉ báo hay copytrade?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
-        </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ phù hợp hơn.
-          Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn,
-          copytrade sẽ là hướng đáng cân nhắc.
-        </div>
-      </div>
+        <div class="reveal" style="max-width:1100px;margin:28px auto 0;display:grid;gap:14px;">
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Tôi phù hợp với chỉ báo hay copytrade?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Nếu bạn muốn chủ động quan sát thị trường và tự đưa ra quyết định giao dịch, bộ chỉ báo sẽ phù hợp hơn.
+              Nếu bạn ưu tiên sự gọn gàng, tiết kiệm thời gian và muốn đi cùng đội ngũ theo một hệ thống rõ ràng hơn,
+              copytrade sẽ là hướng đáng cân nhắc.
+            </div>
+          </div>
 
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
-        </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập khu vực nội dung phù hợp.
-          Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.
-        </div>
-      </div>
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Sau khi tham gia, tôi sẽ tiếp cận nội dung như thế nào?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Sau khi đăng ký và tham gia hệ thống, bạn sẽ được hướng dẫn truy cập khu vực nội dung phù hợp.
+              Tại đó, bài học và tài liệu sẽ được sắp xếp theo lộ trình rõ ràng để bạn theo dõi thuận tiện hơn.
+            </div>
+          </div>
 
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Nội dung học có giống nhau cho tất cả khách hàng không?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
-        </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Không hoàn toàn giống nhau. Nội dung và lộ trình có thể khác nhau tùy theo giai đoạn tham gia
-          và nhóm giải pháp mà khách hàng đang sử dụng, nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn.
-        </div>
-      </div>
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Nội dung học có giống nhau cho tất cả khách hàng không?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Không hoàn toàn giống nhau. Nội dung và lộ trình có thể khác nhau tùy theo giai đoạn tham gia
+              và nhóm giải pháp mà khách hàng đang sử dụng, nhằm giúp mỗi người tiếp cận đúng phần cần thiết hơn.
+            </div>
+          </div>
 
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Trang chủ, dashboard và khóa học khác nhau ở điểm nào?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
-        </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Trang chủ được dùng để giới thiệu và tư vấn giải pháp. Dashboard là khu vực riêng sau đăng nhập.
-          Tại dashboard, khách hàng sẽ xem các khóa học và bài học tương ứng với cấp độ tài khoản của mình.
-        </div>
-      </div>
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Trang chủ, dashboard và khóa học khác nhau ở điểm nào?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Trang chủ được dùng để giới thiệu và tư vấn giải pháp. Dashboard là khu vực riêng sau đăng nhập.
+              Tại dashboard, khách hàng sẽ xem các khóa học và bài học tương ứng với cấp độ tài khoản của mình.
+            </div>
+          </div>
 
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Tôi có thể bắt đầu ngay cả khi chưa có nhiều kinh nghiệm không?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
-        </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Có. Hệ thống được thiết kế để cả người mới lẫn người đã có trải nghiệm đều có thể bắt đầu ở phần phù hợp với mình,
-          sau đó đi tiếp theo lộ trình rõ ràng hơn.
-        </div>
-      </div>
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Tôi có thể bắt đầu ngay cả khi chưa có nhiều kinh nghiệm không?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Có. Hệ thống được thiết kế để cả người mới lẫn người đã có trải nghiệm đều có thể bắt đầu ở phần phù hợp với mình,
+              sau đó đi tiếp theo lộ trình rõ ràng hơn.
+            </div>
+          </div>
 
-      <div class="faq-item panel rounded-[28px] p-6 cursor-pointer" onclick="toggleFaq(this)">
-        <div class="flex items-center justify-between gap-4">
-          <h3 class="text-2xl font-black force-white">Nếu tôi muốn được tư vấn trực tiếp thì làm thế nào?</h3>
-          <i class="fas fa-chevron-down text-soft"></i>
+          <div class="faq-item panel panel-pad" onclick="toggleFaq(this)">
+            <div class="faq-head">
+              <h3>Nếu tôi muốn được tư vấn trực tiếp thì làm thế nào?</h3>
+              <i class="faq-icon fas fa-chevron-down" style="color:var(--soft);"></i>
+            </div>
+            <div class="faq-answer">
+              Bạn chỉ cần để lại thông tin ở trang chủ, hệ thống sẽ ghi nhận và đội ngũ sẽ liên hệ để định hướng
+              giải pháp phù hợp hơn với mục tiêu hiện tại của bạn.
+            </div>
+          </div>
         </div>
-        <div class="faq-answer mt-4 pt-4 border-t border-white/10 text-soft text-lg leading-relaxed">
-          Bạn chỉ cần để lại thông tin ở trang chủ, hệ thống sẽ ghi nhận và đội ngũ sẽ liên hệ để định hướng
-          giải pháp phù hợp hơn với mục tiêu hiện tại của bạn.
-        </div>
-      </div>
 
-      <div class="panel rounded-[34px] p-8 md:p-12 text-center mt-10">
-        <h2 class="text-3xl md:text-5xl font-black force-white">Vẫn còn câu hỏi riêng cho trường hợp của bạn?</h2>
-        <p class="mt-4 text-soft text-lg max-w-3xl mx-auto leading-relaxed">
-          Hãy để lại thông tin hoặc xem tiếp trang dịch vụ để đội ngũ có thể định hướng nhanh hơn cho bạn.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <a href="./index.html#leadFormSection" class="btn-primary px-8 py-4 rounded-2xl font-bold uppercase text-[13px]">Nhận tư vấn</a>
-          <a href="./services.html" class="btn-secondary px-8 py-4 rounded-2xl font-bold uppercase text-[13px] text-center">Xem dịch vụ</a>
+        <div class="panel panel-pad reveal" style="margin-top:28px;text-align:center;border-radius:34px;">
+          <h2 style="margin:0;font-size:54px;line-height:1.1;font-weight:900;">Vẫn còn câu hỏi riêng cho trường hợp của bạn?</h2>
+          <p class="card-text" style="max-width:980px;margin-left:auto;margin-right:auto;">
+            Hãy để lại thông tin hoặc xem tiếp trang dịch vụ để đội ngũ có thể định hướng nhanh hơn cho bạn.
+          </p>
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+            <a href="./index.html#leadFormSection" class="btn-primary">Nhận tư vấn</a>
+            <a href="./services.html" class="btn-secondary">Xem dịch vụ</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer-wrap pt-20 pb-14">
-    <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#4b2230] text-[#ff8a8a] flex items-center justify-center text-2xl"><i class="fas fa-phone-alt"></i></div>
-          <div><div class="font-black uppercase force-white text-[15px]">HOTLINE</div><div class="text-soft text-[24px] font-bold">0899.125.048</div></div>
+  <footer class="footer-wrap">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-card">
+          <div class="footer-icon" style="background:#4b2230;color:#ff8a8a;"><i class="fas fa-phone-alt"></i></div>
+          <div><div class="footer-label">HOTLINE</div><div class="footer-value">0899.125.048</div></div>
         </div>
-        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#153b46] text-[#62e6d9] flex items-center justify-center text-2xl"><i class="far fa-envelope"></i></div>
-          <div><div class="font-black uppercase force-white text-[15px]">GMAIL</div><div class="text-soft text-[24px] font-bold">logan27xx@gmail.com</div></div>
+        <div class="footer-card">
+          <div class="footer-icon" style="background:#153b46;color:#62e6d9;"><i class="far fa-envelope"></i></div>
+          <div><div class="footer-label">GMAIL</div><div class="footer-value">logan27xx@gmail.com</div></div>
         </div>
-        <div class="footer-card rounded-2xl px-5 py-4 flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-[#37205c] text-[#c58cff] flex items-center justify-center text-2xl"><i class="far fa-clock"></i></div>
-          <div><div class="font-black uppercase force-white text-[15px]">HỖ TRỢ</div><div class="text-soft text-[24px] font-bold">24/7 Online</div></div>
+        <div class="footer-card">
+          <div class="footer-icon" style="background:#37205c;color:#c58cff;"><i class="far fa-clock"></i></div>
+          <div><div class="footer-label">HỖ TRỢ</div><div class="footer-value">24/7 Online</div></div>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-soft text-[15px] border-t border-white/10 pt-6">
+      <div class="footer-bottom">
         <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
-        <div><a href="./index.html" class="hover:text-cyan-300">Trang chủ</a> | <a href="./login.html" class="hover:text-cyan-300">Khóa học</a></div>
+        <div><a href="./index.html">Trang chủ</a> | <a href="./login.html">Khóa học</a></div>
       </div>
     </div>
   </footer>
 
-  <script>
-    function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
-    function toggleTheme(){
-      document.body.classList.toggle('light-theme');
-      const isLight = document.body.classList.contains('light-theme');
-      localStorage.setItem('logan-theme', isLight ? 'light' : 'dark');
-      document.getElementById('theme-icon').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-    }
-    function toggleFaq(el){
-      el.classList.toggle('active');
-      const icon = el.querySelector('i');
-      icon.classList.toggle('fa-chevron-down');
-      icon.classList.toggle('fa-chevron-up');
-    }
-    (function(){
-      const saved = localStorage.getItem('logan-theme');
-      if(saved === 'light') document.body.classList.add('light-theme');
-      document.getElementById('theme-icon').className = document.body.classList.contains('light-theme') ? 'fas fa-sun' : 'fas fa-moon';
-    })();
-  </script>
+  <script src="./site.js"></script>
 </body>
 </html>
