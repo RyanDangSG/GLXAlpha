@@ -7,11 +7,11 @@
   <link rel="icon" type="image/jpeg" href="./logan-logo.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./site.css?v=3">
 </head>
 <body>
   <div class="video-bg">
-    <video autoplay muted loop playsinline preload="auto" poster="./logan-logo.jpg">
+    <video autoplay muted loop playsinline preload="auto" poster="./nen.jpg">
       <source src="./hero-bg.mp4" type="video/mp4">
     </video>
   </div>
@@ -60,122 +60,76 @@
 
     <main class="page">
       <section class="hero">
-        <div class="container hero-shell">
-          <div class="hero-left reveal">
-            <span class="kicker">Hệ thống giao dịch</span>
-
-            <h1 class="hero-title">
-              Giúp bạn nhìn<br>
-              thị trường <span class="text-gradient">rõ hơn</span><br>
-              và đi theo một lộ trình<br>
-              bài bản <span class="text-gradient">hơn</span>
-            </h1>
-
-            <p class="hero-desc">
-              Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
-              giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
-              và tự tin hơn trên hành trình phát triển của mình.
-            </p>
-
-            <div class="hero-actions">
-              <button onclick="openAuthModal('register')" class="btn-primary">Nhận tư vấn ngay</button>
-              <a href="./services.html" class="btn-secondary">Xem dịch vụ</a>
+        <div class="container-wide">
+          <div class="hero-bg-shell">
+            <div class="hero-bg-image">
+              <img src="./nen.jpg" alt="Background Logan Crypto">
             </div>
+            <div class="hero-bg-mask"></div>
 
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <div class="hero-stat-icon"><i class="fas fa-shield-alt"></i></div>
-                <div>
-                  <strong>+1200</strong>
-                  <span>Học viên tin tưởng</span>
+            <div class="hero-content-wrap">
+              <div class="hero-main-grid">
+                <div class="hero-left reveal">
+                  <span class="kicker">Hệ thống giao dịch</span>
+
+                  <h1 class="hero-title">
+                    Giúp bạn nhìn<br>
+                    thị trường <span class="text-gradient">rõ hơn</span><br>
+                    và đi theo một lộ trình<br>
+                    bài bản <span class="text-gradient">hơn</span>
+                  </h1>
+
+                  <p class="hero-desc">
+                    Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu, giúp bạn nâng cao kỹ năng,
+                    tối ưu lợi nhuận và tự tin hơn trên hành trình phát triển của mình.
+                  </p>
+
+                  <div class="hero-actions">
+                    <button onclick="openAuthModal('register')" class="btn-primary">Nhận tư vấn ngay</button>
+                    <a href="./services.html" class="btn-secondary">Xem dịch vụ</a>
+                  </div>
+
+                  <div class="hero-stats">
+                    <div class="hero-stat">
+                      <div class="hero-stat-icon"><i class="fas fa-shield-alt"></i></div>
+                      <div>
+                        <strong>+1200</strong>
+                        <span>Học viên tin tưởng</span>
+                      </div>
+                    </div>
+
+                    <div class="hero-stat">
+                      <div class="hero-stat-icon"><i class="fas fa-chart-line"></i></div>
+                      <div>
+                        <strong>+35%</strong>
+                        <span>Hiệu suất trung bình</span>
+                      </div>
+                    </div>
+
+                    <div class="hero-stat">
+                      <div class="hero-stat-icon"><i class="fas fa-headset"></i></div>
+                      <div>
+                        <strong>24/7</strong>
+                        <span>Hỗ trợ chuyên sâu</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hero-right reveal">
+                  <img src="./7.jpg" alt="Hero Logan Crypto">
                 </div>
               </div>
 
-              <div class="hero-stat">
-                <div class="hero-stat-icon"><i class="fas fa-chart-line"></i></div>
-                <div>
-                  <strong>+35%</strong>
-                  <span>Hiệu suất trung bình</span>
+              <div class="hero-bottom-grid reveal">
+                <div class="mini-card">
+                  <img src="./1.jpg" alt="Visual 1">
                 </div>
-              </div>
-
-              <div class="hero-stat">
-                <div class="hero-stat-icon"><i class="fas fa-headset"></i></div>
-                <div>
-                  <strong>24/7</strong>
-                  <span>Hỗ trợ chuyên sâu</span>
+                <div class="mini-card">
+                  <img src="./2.jpg" alt="Visual 2">
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right reveal">
-            <img src="./Bia logancrpto.jpg" alt="Hero Logan Crypto">
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="grid-3 reveal">
-            <div class="image-card">
-              <img src="./Orderflow.png" alt="Phân tích chuyên sâu">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Phân tích chuyên sâu</h3>
-                <div class="image-card-text">
-                  Hiểu rõ thị trường, đón đầu xu hướng và tiếp cận cơ hội giao dịch với góc nhìn sắc bén hơn.
-                </div>
-              </div>
-            </div>
-
-            <div class="image-card">
-              <img src="./ICT.png" alt="Giao dịch kỷ luật">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Giao dịch kỷ luật</h3>
-                <div class="image-card-text">
-                  Chiến lược rõ ràng, quản trị rủi ro tối ưu và vận hành giao dịch theo hướng bài bản hơn.
-                </div>
-              </div>
-            </div>
-
-            <div class="image-card">
-              <img src="./DravasBox.png" alt="Đồng hành cùng bạn">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Đồng hành cùng bạn</h3>
-                <div class="image-card-text">
-                  Trên mọi hành trình chinh phục thị trường, Logan Crypto luôn hướng tới sự rõ ràng và bền vững.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-3 reveal" style="margin-top:16px;">
-            <div class="image-card">
-              <img src="./Bia logancrpto.jpg" alt="Kiến thức thực chiến">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Kiến thức thực chiến</h3>
-                <div class="image-card-text">
-                  Học từ kinh nghiệm, nâng cách quan sát thị trường và từng bước giao dịch tự tin hơn.
-                </div>
-              </div>
-            </div>
-
-            <div class="image-card">
-              <img src="./Orderflow.png" alt="Cộng đồng chất lượng">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Cộng đồng chất lượng</h3>
-                <div class="image-card-text">
-                  Kết nối, chia sẻ và cùng nhau phát triển trong một môi trường giao dịch tích cực hơn.
-                </div>
-              </div>
-            </div>
-
-            <div class="image-card">
-              <img src="./ICT.png" alt="Công cụ hiện đại">
-              <div class="image-card-content">
-                <h3 class="image-card-title">Công cụ hiện đại</h3>
-                <div class="image-card-text">
-                  Hỗ trợ phân tích, theo dõi cơ hội và nâng cao hiệu quả giao dịch theo cách rõ ràng hơn.
+                <div class="mini-card">
+                  <img src="./4.jpg" alt="Visual 3">
                 </div>
               </div>
             </div>
@@ -184,7 +138,7 @@
       </section>
 
       <section class="section">
-        <div class="container">
+        <div class="container-wide">
           <div class="feature-row reveal">
             <div class="panel panel-pad">
               <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
