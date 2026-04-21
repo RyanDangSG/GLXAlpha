@@ -43,7 +43,7 @@
       --input-bg: rgba(255,255,255,.92);
       --input-border: rgba(148,163,184,.45);
       --input-placeholder: rgba(71,85,105,.78);
-      --footer-bg: #edf3f7;
+      --er-bg: #edf3f7;
       --sticky-bg: rgba(255,255,255,.92);
     }
 
@@ -630,38 +630,136 @@
     </section>
   </main>
 
-  <footer class="bg-[#04050a] pt-24 md:pt-28 pb-24 md:pb-16 border-t border-white/5 relative z-10">
-    <div class="max-w-[1600px] mx-auto px-6 xl:px-10 text-center md:text-left">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16 md:mb-20">
-        <div class="md:col-span-1 flex flex-col items-center md:items-start">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden border border-cyan-300/40 bg-black">
-              <img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-cover">
-            </div>
-            <span class="text-xl md:text-2xl font-black text-white tracking-tight uppercase">LOGAN CRYPTO</span>
+  <footer class="bg-[#06101d] pt-20 md:pt-24 pb-24 md:pb-14 border-t border-white/5 relative z-10">
+  <div class="max-w-[1600px] mx-auto px-6 xl:px-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 md:gap-12 mb-14">
+      
+      <!-- Cột 1 -->
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-14 h-14 rounded-2xl overflow-hidden border border-cyan-300/30 bg-white shadow-[0_0_18px_rgba(0,240,255,.12)]">
+            <img src="logan-logo.jpg" alt="Logan Crypto" class="w-full h-full object-contain">
           </div>
-          <p class="text-slate-500 text-base leading-relaxed max-w-xs">Nền tảng chỉ báo và giải pháp đồng hành dành cho nhà giao dịch muốn quan sát rõ hơn, vận hành gọn hơn và đi xa hơn theo một hệ thống có chiều sâu.</p>
-        </div>
-        <div>
-          <h4 class="text-white font-black mb-6 md:mb-8 uppercase text-[10px] tracking-widest text-cyan-300">Liên hệ & hỗ trợ</h4>
-          <div class="space-y-3 text-slate-500 text-base leading-relaxed">
-            <p>Tư vấn giải pháp phù hợp theo mục tiêu hiện tại.</p>
-            <p>Hỗ trợ định hướng giữa chỉ báo, copytrade và lộ trình nâng cao.</p>
-            <button onclick="openAuthModal('register')" class="btn-zenith px-6 py-4 rounded-2xl font-bold uppercase text-[11px] mt-2">Nhận tư vấn miễn phí</button>
+          <div>
+            <div class="text-white text-2xl font-black uppercase leading-none">LOGAN CRYPTO</div>
+            <div class="text-slate-500 text-[11px] uppercase tracking-[0.18em] mt-1">Trading Ecosystem</div>
           </div>
         </div>
-        <div>
-          <h4 class="text-white font-black mb-6 md:mb-8 uppercase text-[10px] tracking-widest text-cyan-300">Điều quan trọng cần biết</h4>
-          <div class="space-y-3 text-slate-500 text-base leading-relaxed">
-            <p>Landing page chỉ để bán, dashboard chỉ để học.</p>
-            <p>Video học tập phát qua Vimeo.</p>
-            <p>Firebase chỉ lưu user, role và metadata nội dung.</p>
+
+        <p class="text-slate-400 text-[18px] leading-relaxed max-w-sm mb-6">
+          Logan Crypto xây dựng hệ sinh thái dành cho trader muốn giao dịch bài bản hơn, nhìn thị trường rõ hơn và phát triển theo lộ trình có chiều sâu hơn.
+        </p>
+
+        <div class="flex gap-3 flex-wrap">
+          <a href="#" class="w-12 h-12 rounded-xl bg-[#1877F2] text-white flex items-center justify-center text-xl hover:scale-105 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-xl bg-[#0068FF] text-white flex items-center justify-center text-lg font-black hover:scale-105 transition">
+            Z
+          </a>
+          <a href="#" class="w-12 h-12 rounded-xl bg-[#229ED9] text-white flex items-center justify-center text-xl hover:scale-105 transition">
+            <i class="fab fa-telegram-plane"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center text-xl hover:scale-105 transition">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center text-xl hover:scale-105 transition">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cột 2 -->
+      <div>
+        <h4 class="text-white text-2xl font-black mb-6">Liên Kết Nhanh</h4>
+        <div class="space-y-4 text-slate-400 text-[18px]">
+          <a href="#home" class="block hover:text-cyan-300 transition">Trang Chủ</a>
+          <a href="#about" class="block hover:text-cyan-300 transition">Giới Thiệu</a>
+          <a href="#reviews" class="block hover:text-cyan-300 transition">Phản Hồi</a>
+          <a href="#services-section" class="block hover:text-cyan-300 transition">Dịch Vụ</a>
+          <a href="./login.html" class="block hover:text-cyan-300 transition">Khóa Học</a>
+        </div>
+      </div>
+
+      <!-- Cột 3 -->
+      <div>
+        <h4 class="text-white text-2xl font-black mb-6">Dịch Vụ</h4>
+        <div class="space-y-4 text-slate-400 text-[18px]">
+          <div>Chỉ Báo Giao Dịch</div>
+          <div>Phân Tích Thị Trường</div>
+          <div>Copytrade</div>
+          <div>Tư Vấn 1:1</div>
+        </div>
+      </div>
+
+      <!-- Cột 4 -->
+      <div>
+        <h4 class="text-white text-2xl font-black mb-6">Nhận Tư Vấn Giao Dịch</h4>
+        <p class="text-slate-400 text-[18px] leading-relaxed mb-5">
+          Đăng ký email để nhận thông tin mới nhất về chỉ báo, chiến lược và các cập nhật từ Logan Crypto.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+            <i class="far fa-envelope text-slate-400 text-lg"></i>
+            <input type="email" placeholder="Nhập địa chỉ Gmail của bạn" class="bg-transparent outline-none border-none text-white placeholder:text-slate-500 w-full text-[17px]">
+          </div>
+
+          <button class="w-full rounded-2xl py-4 font-black text-[18px] btn-zenith">
+            ĐĂNG KÝ NGAY
+          </button>
+
+          <div class="text-green-400 text-[16px] flex items-center gap-2">
+            <i class="fas fa-check"></i>
+            <span>Miễn phí, có thể hủy bất kỳ lúc nào</span>
           </div>
         </div>
       </div>
-      <p class="text-slate-600 text-[9px] text-center uppercase tracking-[0.3em] md:tracking-[0.5em]">© 2026 LOGAN CRYPTO. ALL RIGHTS RESERVED.</p>
     </div>
-  </footer>
+
+    <!-- Thanh dưới -->
+    <div class="border-t border-white/10 pt-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+
+        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#4b2230] text-[#ff8a8a] flex items-center justify-center text-2xl">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div>
+            <div class="text-white text-[15px] font-black uppercase">HOTLINE</div>
+            <div class="text-slate-400 text-[24px] font-bold">0899.125.048</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#153b46] text-[#62e6d9] flex items-center justify-center text-2xl">
+            <i class="far fa-envelope"></i>
+          </div>
+          <div>
+            <div class="text-white text-[15px] font-black uppercase">GMAIL</div>
+            <div class="text-slate-400 text-[24px] font-bold">logan27xx@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-5 py-4">
+          <div class="w-14 h-14 rounded-2xl bg-[#37205c] text-[#c58cff] flex items-center justify-center text-2xl">
+            <i class="far fa-clock"></i>
+          </div>
+          <div>
+            <div class="text-white text-[15px] font-black uppercase">HỖ TRỢ</div>
+            <div class="text-slate-400 text-[24px] font-bold">24/7 Online</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-[15px]">
+        <div>© 2026 LOGAN CRYPTO. All rights reserved.</div>
+        <div>Điều Khoản | Bảo Mật</div>
+      </div>
+    </div>
+  </div>
+</footer>
 
   <div id="stickyBar" class="sticky-cta flex justify-between items-center z-[80]">
     <div class="hidden md:flex flex-col">
