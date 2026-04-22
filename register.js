@@ -31,6 +31,20 @@ async function createUserProfile(user, extraData = {}) {
   }
 }
 
+function getMessage(error) {
+  const code = error?.code || "";
+
+  if (code === "auth/email-already-in-use") return "Email này đã được sử dụng.";
+  if (code === "auth/weak-password") return "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
+  if (code === "auth/invalid-email") return "Email không hợp lệ.";
+  if (code === "auth/operation-not-allowed") return "Bạn chưa bật Email/Password trong Firebase Authentication.";
+  if (code === "auth/user-not-found") return "Không tìm thấy tài khoản.";
+  if (code === "auth/wrong-password") return "Sai mật khẩu.";
+  if (code === "auth/invalid-credential") return "Email hoặc mật khẩu không đúng.";
+  if (code === "permission-denied" || code === "firestore/permission-denied") return "Firestore Rules đang chặn quyền ghi dữ liệu.";
+  return `Lỗi: ${code || "unknown"}`;
+}
+
 if (registerForm) {
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -56,18 +70,8 @@ if (registerForm) {
       alert("Đăng ký thành công.");
       window.location.href = "./dashboard.html";
     } catch (error) {
-      console.error("Register error:", error);
-
-      let message = "Đăng ký thất bại.";
-      if (error.code === "auth/email-already-in-use") {
-        message = "Email này đã được sử dụng.";
-      } else if (error.code === "auth/weak-password") {
-        message = "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
-      } else if (error.code === "auth/invalid-email") {
-        message = "Email không hợp lệ.";
-      }
-
-      alert(message);
+      console.error("REGISTER ERROR:", error);
+      alert(getMessage(error));
     }
   });
 }
@@ -85,25 +89,12 @@ if (loginForm) {
     }
 
     try {
-      const cred = await signInWithEmailAndPassword(auth, email, password);
-
-      await createUserProfile(cred.user, {});
-
+      await signInWithEmailAndPassword(auth, email, password);
       alert("Đăng nhập thành công.");
       window.location.href = "./dashboard.html";
     } catch (error) {
-      console.error("Login error:", error);
-
-      let message = "Đăng nhập thất bại.";
-      if (error.code === "auth/user-not-found") {
-        message = "Không tìm thấy tài khoản.";
-      } else if (error.code === "auth/wrong-password") {
-        message = "Sai mật khẩu.";
-      } else if (error.code === "auth/invalid-credential") {
-        message = "Email hoặc mật khẩu không đúng.";
-      }
-
-      alert(message);
+      console.error("LOGIN ERROR:", error);
+      alert(getMessage(error));
     }
   });
 }
