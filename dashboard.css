@@ -200,4 +200,17 @@ body.dark-theme {
   .course-desc {
     min-height: auto;
   }
+  .admin-link-btn {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
 }
