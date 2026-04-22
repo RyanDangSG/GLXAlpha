@@ -1,37 +1,109 @@
-import { auth, db } from "./firebase.js";
+import { auth, db } from "./firebase-config.js";
 import {
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
 import {
   doc,
   setDoc,
+  getDoc,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { submitToSheet } from "./sheet-submit.js";
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-export async function registerUser(name, phone, email, password) {
-  if (!name || !phone || !email || !password) {
-    throw new Error("Vui lòng nhập đầy đủ họ tên, số điện thoại, email và mật khẩu.");
+const registerForm = document.getElementById("registerForm");
+const loginForm = document.getElementById("loginForm");
+
+async function createUserProfile(user, extraData = {}) {
+  const userRef = doc(db, "users", user.uid);
+  const userSnap = await getDoc(userRef);
+
+  if (!userSnap.exists()) {
+    await setDoc(userRef, {
+      uid: user.uid,
+      email: user.email || "",
+      name: extraData.name || "",
+      phone: extraData.phone || "",
+      role: "free",
+      provider: "password",
+      createdAt: serverTimestamp()
+    });
   }
+}
 
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  const uid = userCredential.user.uid;
+if (registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  await setDoc(doc(db, "users", uid), {
-    name,
-    phone,
-    email,
-    role: "free",
-    status: "active",
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp()
+    const name = document.getElementById("registerName")?.value.trim() || "";
+    const phone = document.getElementById("registerPhone")?.value.trim() || "";
+    const email = document.getElementById("registerEmail")?.value.trim() || "";
+    const password = document.getElementById("registerPassword")?.value || "";
+
+    if (!email || !password) {
+      alert("Vui lòng nhập email và mật khẩu.");
+      return;
+    }
+
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+      await createUserProfile(cred.user, {
+        name,
+        phone
+      });
+
+      alert("Đăng ký thành công.");
+      window.location.href = "./dashboard.html";
+    } catch (error) {
+      console.error("Register error:", error);
+
+      let message = "Đăng ký thất bại.";
+      if (error.code === "auth/email-already-in-use") {
+        message = "Email này đã được sử dụng.";
+      } else if (error.code === "auth/weak-password") {
+        message = "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
+      } else if (error.code === "auth/invalid-email") {
+        message = "Email không hợp lệ.";
+      }
+
+      alert(message);
+    }
   });
+}
 
-  try {
-    await submitToSheet({ name, phone, email });
-  } catch (error) {
-    console.error("Lỗi đẩy data sang Google Sheet:", error);
-  }
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  return userCredential.user;
+    const email = document.getElementById("loginEmail")?.value.trim() || "";
+    const password = document.getElementById("loginPassword")?.value || "";
+
+    if (!email || !password) {
+      alert("Vui lòng nhập email và mật khẩu.");
+      return;
+    }
+
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+
+      await createUserProfile(cred.user, {});
+
+      alert("Đăng nhập thành công.");
+      window.location.href = "./dashboard.html";
+    } catch (error) {
+      console.error("Login error:", error);
+
+      let message = "Đăng nhập thất bại.";
+      if (error.code === "auth/user-not-found") {
+        message = "Không tìm thấy tài khoản.";
+      } else if (error.code === "auth/wrong-password") {
+        message = "Sai mật khẩu.";
+      } else if (error.code === "auth/invalid-credential") {
+        message = "Email hoặc mật khẩu không đúng.";
+      }
+
+      alert(message);
+    }
+  });
 }
