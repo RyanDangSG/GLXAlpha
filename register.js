@@ -18,6 +18,7 @@ function mapAuthError(error) {
   if (code === "auth/invalid-email") return "Email không hợp lệ.";
   if (code === "auth/operation-not-allowed") return "Bạn chưa bật Email/Password trong Firebase Authentication.";
   if (code.includes("permission-denied")) return "Firestore Rules đang chặn quyền ghi dữ liệu.";
+
   return error?.message || "Đăng ký thất bại.";
 }
 
@@ -44,7 +45,11 @@ export async function registerUser(name, phone, email, password) {
       throw new Error("Vui lòng nhập email và mật khẩu.");
     }
 
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    const cred = await createUserWithEmailAndPassword(
+      auth,
+      email.trim(),
+      password
+    );
 
     await createUserProfile(cred.user, {
       name: name || "",
@@ -55,7 +60,7 @@ export async function registerUser(name, phone, email, password) {
       user: cred.user
     };
   } catch (error) {
-    console.error("REGISTER ERROR:", error);
+    console.error("REGISTER ERROR FULL:", error);
     throw new Error(mapAuthError(error));
   }
 }
