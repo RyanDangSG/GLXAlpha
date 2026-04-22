@@ -11,10 +11,11 @@ import {
 function mapAuthError(error) {
   const code = error?.code || "";
 
+  if (code === "auth/invalid-credential") return "Email hoặc mật khẩu không đúng.";
   if (code === "auth/user-not-found") return "Không tìm thấy tài khoản.";
   if (code === "auth/wrong-password") return "Sai mật khẩu.";
-  if (code === "auth/invalid-credential") return "Email hoặc mật khẩu không đúng.";
   if (code === "auth/invalid-email") return "Email không hợp lệ.";
+
   return error?.message || "Đăng nhập thất bại.";
 }
 
@@ -24,7 +25,11 @@ export async function loginUser(email, password) {
       throw new Error("Vui lòng nhập email và mật khẩu.");
     }
 
-    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const cred = await signInWithEmailAndPassword(
+      auth,
+      email.trim(),
+      password
+    );
 
     const userRef = doc(db, "users", cred.user.uid);
     const userSnap = await getDoc(userRef);
@@ -42,7 +47,7 @@ export async function loginUser(email, password) {
       profile
     };
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
+    console.error("LOGIN ERROR FULL:", error);
     throw new Error(mapAuthError(error));
   }
 }
