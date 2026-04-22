@@ -1,7 +1,6 @@
 import { auth, db } from "./firebase-config.js";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
 import {
@@ -11,8 +10,16 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-const registerForm = document.getElementById("registerForm");
-const loginForm = document.getElementById("loginForm");
+function mapAuthError(error) {
+  const code = error?.code || "";
+
+  if (code === "auth/email-already-in-use") return "Email này đã được sử dụng.";
+  if (code === "auth/weak-password") return "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
+  if (code === "auth/invalid-email") return "Email không hợp lệ.";
+  if (code === "auth/operation-not-allowed") return "Bạn chưa bật Email/Password trong Firebase Authentication.";
+  if (code.includes("permission-denied")) return "Firestore Rules đang chặn quyền ghi dữ liệu.";
+  return error?.message || "Đăng ký thất bại.";
+}
 
 async function createUserProfile(user, extraData = {}) {
   const userRef = doc(db, "users", user.uid);
@@ -31,70 +38,24 @@ async function createUserProfile(user, extraData = {}) {
   }
 }
 
-function getMessage(error) {
-  const code = error?.code || "";
-
-  if (code === "auth/email-already-in-use") return "Email này đã được sử dụng.";
-  if (code === "auth/weak-password") return "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
-  if (code === "auth/invalid-email") return "Email không hợp lệ.";
-  if (code === "auth/operation-not-allowed") return "Bạn chưa bật Email/Password trong Firebase Authentication.";
-  if (code === "auth/user-not-found") return "Không tìm thấy tài khoản.";
-  if (code === "auth/wrong-password") return "Sai mật khẩu.";
-  if (code === "auth/invalid-credential") return "Email hoặc mật khẩu không đúng.";
-  if (code === "permission-denied" || code === "firestore/permission-denied") return "Firestore Rules đang chặn quyền ghi dữ liệu.";
-  return `Lỗi: ${code || "unknown"}`;
-}
-
-if (registerForm) {
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("registerName")?.value.trim() || "";
-    const phone = document.getElementById("registerPhone")?.value.trim() || "";
-    const email = document.getElementById("registerEmail")?.value.trim() || "";
-    const password = document.getElementById("registerPassword")?.value || "";
-
+export async function registerUser(name, phone, email, password) {
+  try {
     if (!email || !password) {
-      alert("Vui lòng nhập email và mật khẩu.");
-      return;
+      throw new Error("Vui lòng nhập email và mật khẩu.");
     }
 
-    try {
-      const cred = await createUserWithEmailAndPassword(auth, email, password);
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-      await createUserProfile(cred.user, {
-        name,
-        phone
-      });
+    await createUserProfile(cred.user, {
+      name: name || "",
+      phone: phone || ""
+    });
 
-      alert("Đăng ký thành công.");
-      window.location.href = "./dashboard.html";
-    } catch (error) {
-      console.error("REGISTER ERROR:", error);
-      alert(getMessage(error));
-    }
-  });
-}
-
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById("loginEmail")?.value.trim() || "";
-    const password = document.getElementById("loginPassword")?.value || "";
-
-    if (!email || !password) {
-      alert("Vui lòng nhập email và mật khẩu.");
-      return;
-    }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Đăng nhập thành công.");
-      window.location.href = "./dashboard.html";
-    } catch (error) {
-      console.error("LOGIN ERROR:", error);
-      alert(getMessage(error));
-    }
-  });
+    return {
+      user: cred.user
+    };
+  } catch (error) {
+    console.error("REGISTER ERROR:", error);
+    throw new Error(mapAuthError(error));
+  }
 }
