@@ -122,6 +122,7 @@ function renderCourseList() {
     const div = document.createElement("div");
     div.className = "list-item";
     div.innerHTML = `
+      ${item.thumbnailUrl ? `<img src="${item.thumbnailUrl}" alt="${item.title || ""}" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:12px;">` : ""}
       <h4>${item.title || ""}</h4>
       <p>${item.description || ""}</p>
       <div class="list-meta">
@@ -162,6 +163,7 @@ async function loadLessons() {
     const block = document.createElement("div");
     block.className = "list-item";
     block.innerHTML = `<h4>${course.title}</h4>`;
+
     snap.docs.forEach((docSnap) => {
       const item = docSnap.data();
       const lessonDiv = document.createElement("div");
@@ -241,6 +243,7 @@ courseForm.addEventListener("submit", async (e) => {
       title: document.getElementById("courseTitle").value.trim(),
       subtitle: document.getElementById("courseSubtitle").value.trim(),
       levelLabel: document.getElementById("courseLevelLabel").value.trim(),
+      thumbnailUrl: document.getElementById("courseThumbnailUrl").value.trim(),
       requiredRole: document.getElementById("courseRequiredRole").value,
       description: document.getElementById("courseDescription").value.trim(),
       order: Number(document.getElementById("courseOrder").value || 1),
