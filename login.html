@@ -58,31 +58,29 @@
     <p class="msg">Chưa có tài khoản? <a href="./register.html">Đăng ký</a></p>
   </div>
 
-  <script type="module">
-    import { loginUser } from "./login.js";
-    import { redirectByRole } from "./redirect-by-role.js";
+ <script type="module">
+  import { loginUser } from "./login.js";
+  import { redirectByRole } from "./redirect-by-role.js";
 
-    const form = document.getElementById("loginForm");
-    const msg = document.getElementById("loginMsg");
+  const form = document.getElementById("loginForm");
+  const errorEl = document.getElementById("errorMessage");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      msg.textContent = "Đang xử lý...";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.textContent = "";
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      try {
-        const result = await loginUser(email, password);
-        msg.textContent = "Đăng nhập thành công. Đang chuyển trang...";
-        setTimeout(() => {
-          redirectByRole(result.profile);
-        }, 700);
-      } catch (error) {
-        console.error(error);
-        msg.textContent = "Lỗi: " + error.message;
-      }
-    });
-  </script>
+    try {
+      const result = await loginUser(email, password);
+      alert("Đăng nhập thành công");
+      redirectByRole(result.profile);
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = err.message || "Đăng nhập thất bại";
+    }
+  });
+</script>
 </body>
 </html>
