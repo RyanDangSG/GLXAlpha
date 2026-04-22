@@ -61,31 +61,29 @@
   </div>
 
   <script type="module">
-    import { registerUser } from "./register.js";
+  import { registerUser } from "./register.js";
 
-    const form = document.getElementById("registerForm");
-    const msg = document.getElementById("registerMsg");
+  const form = document.getElementById("registerForm");
+  const errorEl = document.getElementById("errorMessage");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      msg.textContent = "Đang xử lý...";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.textContent = "";
 
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      try {
-        await registerUser(name, phone, email, password);
-        msg.textContent = "Đăng ký thành công. Đang chuyển trang...";
-        setTimeout(() => {
-          window.location.href = "./dashboard.html";
-        }, 1000);
-      } catch (error) {
-        console.error(error);
-        msg.textContent = "Lỗi: " + error.message;
-      }
-    });
-  </script>
+    try {
+      await registerUser(name, phone, email, password);
+      alert("Đăng ký thành công");
+      window.location.href = "./dashboard.html";
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = err.message || "Đăng ký thất bại";
+    }
+  });
+</script>
 </body>
 </html>
