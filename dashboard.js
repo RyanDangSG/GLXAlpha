@@ -10,7 +10,6 @@ import {
   collection,
   getDocs,
   query,
-  where,
   orderBy
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
@@ -127,29 +126,29 @@ async function loadUserRole(uid) {
 
 async function loadCourses() {
   try {
-    const q = query(
-      collection(db, "courses"),
-      where("isPublished", "==", true),
-      orderBy("order", "asc")
-    );
+    const q = query(collection(db, "courses"), orderBy("order", "asc"));
     const snap = await getDocs(q);
 
     const courses = [];
+
     for (const docSnap of snap.docs) {
-      const courseId = docSnap.id;
       const courseData = docSnap.data();
+      if (courseData.isPublished !== true) continue;
+
+      const courseId = docSnap.id;
 
       const lessonQ = query(
         collection(db, "courses", courseId, "lessons"),
-        where("isPublished", "==", true),
         orderBy("order", "asc")
       );
       const lessonSnap = await getDocs(lessonQ);
 
-      const lessons = lessonSnap.docs.map((lessonDoc) => ({
-        id: lessonDoc.id,
-        ...lessonDoc.data()
-      }));
+      const lessons = lessonSnap.docs
+        .map((lessonDoc) => ({
+          id: lessonDoc.id,
+          ...lessonDoc.data()
+        }))
+        .filter((lesson) => lesson.isPublished === true);
 
       courses.push({
         id: courseId,
@@ -200,10 +199,18 @@ function renderCourses() {
     ].join(" ");
 
     card.innerHTML = `
-      <div class="course-card-top">
-        <div class="course-level">${course.levelLabel || ""}</div>
-        <div class="course-open-tag ${unlocked ? "open" : "closed"}">
-          ${unlocked ? "Đã mở" : "Bị khóa"}
+      <div class="course-thumb-wrap">
+        ${
+          course.thumbnailUrl
+            ? `<img class="course-thumb" src="${course.thumbnailUrl}" alt="${course.title || ""}">`
+            : `<div class="course-thumb course-thumb-fallback">LOGAN CRYPTO</div>`
+        }
+
+        <div class="course-card-top overlay">
+          <div class="course-level">${course.levelLabel || ""}</div>
+          <div class="course-open-tag ${unlocked ? "open" : "closed"}">
+            ${unlocked ? "Đã mở" : "Bị khóa"}
+          </div>
         </div>
       </div>
 
@@ -398,17 +405,15 @@ dictionarySearch?.addEventListener("input", (e) => {
 
 async function loadNews() {
   try {
-    const q = query(
-      collection(db, "news"),
-      where("isPublished", "==", true),
-      orderBy("publishedAt", "desc")
-    );
+    const q = query(collection(db, "news"), orderBy("publishedAt", "desc"));
     const snap = await getDocs(q);
 
-    allNews = snap.docs.map((d) => ({
-      id: d.id,
-      ...d.data()
-    }));
+    allNews = snap.docs
+      .map((d) => ({
+        id: d.id,
+        ...d.data()
+      }))
+      .filter((item) => item.isPublished === true);
 
     statNews.textContent = String(allNews.length);
     renderNews();
@@ -417,7 +422,7 @@ async function loadNews() {
     newsGrid.innerHTML = `
       <div class="empty-state small">
         <strong>Lỗi tải tin tức</strong>
-        <span>Kiểm tra collection news và index Firestore.</span>
+        <span>Kiểm tra collection news.</span>
       </div>
     `;
   }
