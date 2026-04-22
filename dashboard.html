@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Dashboard</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./dashboard.css?v=1" />
+  <link rel="stylesheet" href="./dashboard.css?v=3" />
 </head>
 <body class="dashboard-body light-theme">
   <div class="dashboard-shell">
+    <!-- HEADER -->
     <header class="dashboard-header">
       <div class="dashboard-header-left">
         <a href="./index.html" class="dashboard-brand">
@@ -22,11 +23,17 @@
 
       <div class="dashboard-header-right">
         <div class="role-badge" id="roleBadge">FREE</div>
+
+        <a href="./admin.html" class="admin-link-btn" id="adminLinkBtn" style="display:none;">
+          Admin
+        </a>
+
         <button class="theme-toggle-btn" id="themeToggleBtn" type="button">☀</button>
         <button class="logout-btn" id="logoutBtn" type="button">Đăng xuất</button>
       </div>
     </header>
 
+    <!-- HERO -->
     <section class="dashboard-hero">
       <div class="dashboard-hero-card">
         <div class="dashboard-hero-content">
@@ -62,30 +69,40 @@
       </div>
     </section>
 
+    <!-- TABS -->
     <section class="dashboard-tabs-wrap">
       <div class="dashboard-tabs">
-        <button class="dashboard-tab active" data-tab="courses">Khóa học</button>
-        <button class="dashboard-tab" data-tab="dictionary">Từ điển Crypto</button>
-        <button class="dashboard-tab" data-tab="news">Tin tức</button>
+        <button class="dashboard-tab active" data-tab="courses" type="button">Khóa học</button>
+        <button class="dashboard-tab" data-tab="dictionary" type="button">Từ điển Crypto</button>
+        <button class="dashboard-tab" data-tab="news" type="button">Tin tức</button>
       </div>
     </section>
 
+    <!-- TAB: COURSES -->
     <section class="tab-panel active" id="tab-courses">
       <section class="dashboard-section">
         <div class="section-heading">
           <h2>Khóa học của bạn</h2>
           <p>Các khóa học sẽ tự mở theo cấp độ thành viên của bạn.</p>
         </div>
-        <div class="course-grid" id="courseGrid"></div>
+
+        <div class="course-grid" id="courseGrid">
+          <div class="empty-state small">
+            <strong>Đang tải khóa học...</strong>
+            <span>Vui lòng chờ trong giây lát.</span>
+          </div>
+        </div>
       </section>
 
       <section class="dashboard-section">
         <div class="learning-layout">
+          <!-- LEFT -->
           <aside class="sidebar-panel">
             <div class="panel-head">
               <h3>Danh sách bài học</h3>
               <span id="selectedCourseName">Chọn khóa học</span>
             </div>
+
             <div class="lesson-list" id="lessonList">
               <div class="empty-state small">
                 <strong>Chưa có bài học hiển thị</strong>
@@ -94,15 +111,19 @@
             </div>
           </aside>
 
+          <!-- RIGHT -->
           <div class="content-panel">
             <div class="panel-head">
               <h3>Nội dung bài học</h3>
               <span id="lessonStatus">Sẵn sàng học</span>
             </div>
+
             <div class="lesson-content" id="lessonContent">
               <div class="empty-state">
                 <strong>Chào mừng đến với Logan Crypto Dashboard</strong>
-                <span>Hãy chọn một khóa học ở phía trên, sau đó chọn bài học để bắt đầu.</span>
+                <span>
+                  Hãy chọn một khóa học ở phía trên, sau đó chọn bài học để bắt đầu.
+                </span>
               </div>
             </div>
           </div>
@@ -110,6 +131,7 @@
       </section>
     </section>
 
+    <!-- TAB: DICTIONARY -->
     <section class="tab-panel" id="tab-dictionary">
       <section class="dashboard-section">
         <div class="section-heading">
@@ -118,13 +140,23 @@
         </div>
 
         <div class="dictionary-toolbar">
-          <input type="text" id="dictionarySearch" placeholder="Tìm thuật ngữ: FVG, liquidity, ATR..." />
+          <input
+            type="text"
+            id="dictionarySearch"
+            placeholder="Tìm thuật ngữ: FVG, liquidity, ATR..."
+          />
         </div>
 
-        <div class="dictionary-grid" id="dictionaryGrid"></div>
+        <div class="dictionary-grid" id="dictionaryGrid">
+          <div class="empty-state small">
+            <strong>Đang tải từ điển...</strong>
+            <span>Vui lòng chờ trong giây lát.</span>
+          </div>
+        </div>
       </section>
     </section>
 
+    <!-- TAB: NEWS -->
     <section class="tab-panel" id="tab-news">
       <section class="dashboard-section">
         <div class="section-heading">
@@ -132,10 +164,49 @@
           <p>Cập nhật tin tức và bài viết nội bộ ngay trong dashboard.</p>
         </div>
 
-        <div class="news-grid" id="newsGrid"></div>
+        <div class="news-grid" id="newsGrid">
+          <div class="empty-state small">
+            <strong>Đang tải tin tức...</strong>
+            <span>Vui lòng chờ trong giây lát.</span>
+          </div>
+        </div>
       </section>
     </section>
   </div>
+
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+    const adminLinkBtn = document.getElementById("adminLinkBtn");
+    const roleBadge = document.getElementById("roleBadge");
+
+    function updateAdminButtonByRole(roleText) {
+      const role = (roleText || "").toLowerCase();
+      if (role === "admin") {
+        adminLinkBtn.style.display = "inline-flex";
+      } else {
+        adminLinkBtn.style.display = "none";
+      }
+    }
+
+    // Theo dõi role badge sau khi dashboard.js load xong dữ liệu
+    const roleObserver = new MutationObserver(() => {
+      updateAdminButtonByRole(roleBadge.textContent.trim());
+    });
+
+    roleObserver.observe(roleBadge, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        adminLinkBtn.style.display = "none";
+      }
+    });
+  </script>
 
   <script type="module" src="./dashboard.js"></script>
 </body>
