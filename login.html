@@ -97,7 +97,6 @@
       cursor:pointer;
       font-size:18px;
     }
-    .btn:hover{filter:brightness(1.03)}
     #errorMessage{
       min-height:22px;
       margin:0;
@@ -132,7 +131,6 @@
     <form id="loginForm" class="form">
       <input id="email" class="input" type="email" placeholder="Email" required />
       <input id="password" class="input" type="password" placeholder="Mật khẩu" required />
-
       <button type="submit" class="btn">Đăng nhập</button>
       <p id="errorMessage"></p>
     </form>
@@ -151,10 +149,11 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      errorEl.textContent = "";
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+      if (errorEl) errorEl.textContent = "";
+
+      const email = document.getElementById("email")?.value.trim() || "";
+      const password = document.getElementById("password")?.value || "";
 
       try {
         const result = await loginUser(email, password);
@@ -162,7 +161,11 @@
         redirectByRole(result.profile);
       } catch (err) {
         console.error("LOGIN PAGE ERROR:", err);
-        errorEl.textContent = err.message || "Đăng nhập thất bại";
+        if (errorEl) {
+          errorEl.textContent = err.message || "Đăng nhập thất bại";
+        } else {
+          alert(err.message || "Đăng nhập thất bại");
+        }
       }
     });
   </script>
