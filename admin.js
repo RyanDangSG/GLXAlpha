@@ -58,7 +58,7 @@ logoutBtn.addEventListener("click", async () => {
     await signOut(auth);
     window.location.href = "./login.html";
   } catch (error) {
-    console.error(error);
+    console.error("Logout error:", error);
     alert("Đăng xuất thất bại.");
   }
 });
@@ -101,13 +101,18 @@ async function checkAdmin(uid) {
 }
 
 async function loadCourses() {
-  const q = query(collection(db, "courses"), orderBy("order", "asc"));
-  const snap = await getDocs(q);
-  allCourses = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  try {
+    const q = query(collection(db, "courses"), orderBy("order", "asc"));
+    const snap = await getDocs(q);
+    allCourses = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
-  renderCourseList();
-  renderCourseSelect();
-  await loadLessons();
+    renderCourseList();
+    renderCourseSelect();
+    await loadLessons();
+  } catch (error) {
+    console.error("Load courses error:", error);
+    courseList.innerHTML = `<div class="empty-admin">Lỗi tải khóa học</div>`;
+  }
 }
 
 function renderCourseList() {
@@ -122,7 +127,11 @@ function renderCourseList() {
     const div = document.createElement("div");
     div.className = "list-item";
     div.innerHTML = `
-      ${item.thumbnailUrl ? `<img src="${item.thumbnailUrl}" alt="${item.title || ""}" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:12px;">` : ""}
+      ${
+        item.thumbnailUrl
+          ? `<img src="${item.thumbnailUrl}" alt="${item.title || ""}" style="width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:12px;">`
+          : ""
+      }
       <h4>${item.title || ""}</h4>
       <p>${item.description || ""}</p>
       <div class="list-meta">
@@ -138,10 +147,11 @@ function renderCourseList() {
 
 function renderCourseSelect() {
   lessonCourseId.innerHTML = `<option value="">Chọn khóa học</option>`;
+
   allCourses.forEach((course) => {
     const opt = document.createElement("option");
     opt.value = course.id;
-    opt.textContent = course.title;
+    opt.textContent = course.title || "Khóa học";
     lessonCourseId.appendChild(opt);
   });
 }
@@ -155,7 +165,10 @@ async function loadLessons() {
   }
 
   for (const course of allCourses) {
-    const q = query(collection(db, "courses", course.id, "lessons"), orderBy("order", "asc"));
+    const q = query(
+      collection(db, "courses", course.id, "lessons"),
+      orderBy("order", "asc")
+    );
     const snap = await getDocs(q);
 
     if (snap.empty) continue;
@@ -183,59 +196,69 @@ async function loadLessons() {
 }
 
 async function loadDictionary() {
-  const q = query(collection(db, "dictionary"), orderBy("order", "asc"));
-  const snap = await getDocs(q);
+  try {
+    const q = query(collection(db, "dictionary"), orderBy("order", "asc"));
+    const snap = await getDocs(q);
 
-  dictionaryList.innerHTML = "";
-  if (snap.empty) {
-    dictionaryList.innerHTML = `<div class="empty-admin">Chưa có thuật ngữ</div>`;
-    return;
+    dictionaryList.innerHTML = "";
+    if (snap.empty) {
+      dictionaryList.innerHTML = `<div class="empty-admin">Chưa có thuật ngữ</div>`;
+      return;
+    }
+
+    snap.docs.forEach((docSnap) => {
+      const item = docSnap.data();
+      const div = document.createElement("div");
+      div.className = "list-item";
+      div.innerHTML = `
+        <h4>${item.term || ""}</h4>
+        <p>${item.definition || ""}</p>
+        <div class="list-meta">
+          <span class="meta-pill">${item.shortMeaning || ""}</span>
+          <span class="meta-pill">${item.category || "Crypto"}</span>
+        </div>
+      `;
+      dictionaryList.appendChild(div);
+    });
+  } catch (error) {
+    console.error("Load dictionary error:", error);
+    dictionaryList.innerHTML = `<div class="empty-admin">Lỗi tải thuật ngữ</div>`;
   }
-
-  snap.docs.forEach((docSnap) => {
-    const item = docSnap.data();
-    const div = document.createElement("div");
-    div.className = "list-item";
-    div.innerHTML = `
-      <h4>${item.term || ""}</h4>
-      <p>${item.definition || ""}</p>
-      <div class="list-meta">
-        <span class="meta-pill">${item.shortMeaning || ""}</span>
-        <span class="meta-pill">${item.category || "Crypto"}</span>
-      </div>
-    `;
-    dictionaryList.appendChild(div);
-  });
 }
 
 async function loadNews() {
-  const q = query(collection(db, "news"), orderBy("publishedAt", "desc"));
-  const snap = await getDocs(q);
+  try {
+    const q = query(collection(db, "news"), orderBy("publishedAt", "desc"));
+    const snap = await getDocs(q);
 
-  newsList.innerHTML = "";
-  if (snap.empty) {
-    newsList.innerHTML = `<div class="empty-admin">Chưa có tin tức</div>`;
-    return;
+    newsList.innerHTML = "";
+    if (snap.empty) {
+      newsList.innerHTML = `<div class="empty-admin">Chưa có tin tức</div>`;
+      return;
+    }
+
+    snap.docs.forEach((docSnap) => {
+      const item = docSnap.data();
+      const div = document.createElement("div");
+      div.className = "list-item";
+      div.innerHTML = `
+        <h4>${item.title || ""}</h4>
+        <p>${item.summary || ""}</p>
+        <div class="list-meta">
+          <span class="meta-pill">${item.sourceName || "Logan Crypto"}</span>
+          <span class="meta-pill">${item.isPublished ? "Published" : "Hidden"}</span>
+        </div>
+      `;
+      newsList.appendChild(div);
+    });
+  } catch (error) {
+    console.error("Load news error:", error);
+    newsList.innerHTML = `<div class="empty-admin">Lỗi tải tin tức</div>`;
   }
-
-  snap.docs.forEach((docSnap) => {
-    const item = docSnap.data();
-    const div = document.createElement("div");
-    div.className = "list-item";
-    div.innerHTML = `
-      <h4>${item.title || ""}</h4>
-      <p>${item.summary || ""}</p>
-      <div class="list-meta">
-        <span class="meta-pill">${item.sourceName || "Logan Crypto"}</span>
-        <span class="meta-pill">${item.isPublished ? "Published" : "Hidden"}</span>
-      </div>
-    `;
-    newsList.appendChild(div);
-  });
 }
 
 /* CREATE COURSE */
-courseForm.addEventListener("submit", async (e) => {
+courseForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
@@ -257,13 +280,13 @@ courseForm.addEventListener("submit", async (e) => {
     document.getElementById("courseOrder").value = 1;
     await loadCourses();
   } catch (error) {
-    console.error(error);
+    console.error("Create course error:", error);
     alert("Lưu khóa học thất bại.");
   }
 });
 
 /* CREATE LESSON */
-lessonForm.addEventListener("submit", async (e) => {
+lessonForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const courseId = lessonCourseId.value;
@@ -295,13 +318,13 @@ lessonForm.addEventListener("submit", async (e) => {
     document.getElementById("lessonOrder").value = 1;
     await loadLessons();
   } catch (error) {
-    console.error(error);
+    console.error("Create lesson error:", error);
     alert("Lưu bài học thất bại.");
   }
 });
 
 /* CREATE DICTIONARY */
-dictionaryForm.addEventListener("submit", async (e) => {
+dictionaryForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
@@ -326,13 +349,13 @@ dictionaryForm.addEventListener("submit", async (e) => {
     document.getElementById("dictionaryOrder").value = 1;
     await loadDictionary();
   } catch (error) {
-    console.error(error);
+    console.error("Create dictionary error:", error);
     alert("Lưu thuật ngữ thất bại.");
   }
 });
 
 /* CREATE NEWS */
-newsForm.addEventListener("submit", async (e) => {
+newsForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
@@ -359,7 +382,7 @@ newsForm.addEventListener("submit", async (e) => {
     document.getElementById("newsPublished").checked = true;
     await loadNews();
   } catch (error) {
-    console.error(error);
+    console.error("Create news error:", error);
     alert("Lưu tin tức thất bại.");
   }
 });
