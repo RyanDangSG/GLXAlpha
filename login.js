@@ -1,35 +1,48 @@
-import { auth, db } from "./firebase.js";
+import { auth, db } from "./firebase-config.js";
 import {
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
 import {
   doc,
   getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+function mapAuthError(error) {
+  const code = error?.code || "";
+
+  if (code === "auth/user-not-found") return "Không tìm thấy tài khoản.";
+  if (code === "auth/wrong-password") return "Sai mật khẩu.";
+  if (code === "auth/invalid-credential") return "Email hoặc mật khẩu không đúng.";
+  if (code === "auth/invalid-email") return "Email không hợp lệ.";
+  return error?.message || "Đăng nhập thất bại.";
+}
 
 export async function loginUser(email, password) {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  const uid = userCredential.user.uid;
+  try {
+    if (!email || !password) {
+      throw new Error("Vui lòng nhập email và mật khẩu.");
+    }
 
-  const userRef = doc(db, "users", uid);
-  const userSnap = await getDoc(userRef);
+    const cred = await signInWithEmailAndPassword(auth, email, password);
 
-  if (!userSnap.exists()) {
-    throw new Error("Không tìm thấy hồ sơ người dùng trong Firestore.");
+    const userRef = doc(db, "users", cred.user.uid);
+    const userSnap = await getDoc(userRef);
+
+    const profile = userSnap.exists()
+      ? userSnap.data()
+      : {
+          uid: cred.user.uid,
+          email: cred.user.email || "",
+          role: "free"
+        };
+
+    return {
+      user: cred.user,
+      profile
+    };
+  } catch (error) {
+    console.error("LOGIN ERROR:", error);
+    throw new Error(mapAuthError(error));
   }
-
-  return {
-    firebaseUser: userCredential.user,
-    profile: userSnap.data()
-  };
-}
-
-export async function logoutUser() {
-  await signOut(auth);
-}
-
-export function watchAuth(callback) {
-  onAuthStateChanged(auth, callback);
 }
