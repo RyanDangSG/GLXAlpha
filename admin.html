@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto | Admin</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./admin.css?v=2" />
+  <link rel="stylesheet" href="./admin.css?v=3" />
 </head>
 <body class="admin-body light-theme">
   <div class="admin-shell">
@@ -39,10 +39,10 @@
 
     <section class="admin-tabs-wrap">
       <div class="admin-tabs">
-        <button class="admin-tab active" data-tab="courses">Khóa học</button>
-        <button class="admin-tab" data-tab="lessons">Bài học</button>
-        <button class="admin-tab" data-tab="dictionary">Từ điển</button>
-        <button class="admin-tab" data-tab="news">Tin tức</button>
+        <button class="admin-tab active" data-tab="courses" type="button">Khóa học</button>
+        <button class="admin-tab" data-tab="lessons" type="button">Bài học</button>
+        <button class="admin-tab" data-tab="dictionary" type="button">Từ điển</button>
+        <button class="admin-tab" data-tab="news" type="button">Tin tức</button>
       </div>
     </section>
 
@@ -58,18 +58,23 @@
             <input id="courseTitle" type="text" placeholder="Tên khóa học" required />
             <input id="courseSubtitle" type="text" placeholder="Phụ đề khóa học" />
             <input id="courseLevelLabel" type="text" placeholder="Ví dụ: 🥈 Silver / 🥇 Gold / 💎 Diamond" />
-            <input id="courseThumbnailUrl" type="text" placeholder="Link hình thumbnail" />
+            <input id="courseThumbnailUrl" type="text" placeholder="Link hình thumbnail khóa học" />
+
             <select id="courseRequiredRole" required>
               <option value="free">Free</option>
               <option value="medium">Medium</option>
               <option value="pro">Pro</option>
             </select>
+
             <textarea id="courseDescription" placeholder="Mô tả khóa học"></textarea>
+
             <input id="courseOrder" type="number" placeholder="Thứ tự hiển thị" value="1" />
+
             <label class="checkbox-line">
               <input id="coursePublished" type="checkbox" checked />
               <span>Hiển thị khóa học</span>
             </label>
+
             <button type="submit" class="primary-btn">Lưu khóa học</button>
           </form>
         </div>
@@ -95,16 +100,19 @@
             <select id="lessonCourseId" required>
               <option value="">Chọn khóa học</option>
             </select>
+
             <input id="lessonTitle" type="text" placeholder="Tên bài học" required />
             <input id="lessonDuration" type="text" placeholder="Ví dụ: 12 phút" />
             <input id="lessonVimeoUrl" type="text" placeholder="Vimeo Embed URL" />
             <textarea id="lessonDescription" placeholder="Mô tả bài học"></textarea>
             <textarea id="lessonNotes" placeholder="Mỗi dòng là 1 note"></textarea>
             <input id="lessonOrder" type="number" placeholder="Thứ tự hiển thị" value="1" />
+
             <label class="checkbox-line">
               <input id="lessonPublished" type="checkbox" checked />
               <span>Hiển thị bài học</span>
             </label>
+
             <button type="submit" class="primary-btn">Lưu bài học</button>
           </form>
         </div>
@@ -134,6 +142,7 @@
             <textarea id="dictionaryDefinition" placeholder="Giải thích chi tiết"></textarea>
             <input id="dictionaryKeywords" type="text" placeholder="Keywords, ngăn cách bằng dấu phẩy" />
             <input id="dictionaryOrder" type="number" placeholder="Thứ tự hiển thị" value="1" />
+
             <button type="submit" class="primary-btn">Lưu thuật ngữ</button>
           </form>
         </div>
@@ -163,10 +172,12 @@
             <textarea id="newsSummary" placeholder="Tóm tắt ngắn"></textarea>
             <textarea id="newsContent" placeholder="Nội dung chi tiết"></textarea>
             <input id="newsTags" type="text" placeholder="Tags, ngăn cách bằng dấu phẩy" />
+
             <label class="checkbox-line">
               <input id="newsPublished" type="checkbox" checked />
               <span>Hiển thị tin tức</span>
             </label>
+
             <button type="submit" class="primary-btn">Lưu tin tức</button>
           </form>
         </div>
