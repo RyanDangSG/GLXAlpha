@@ -3,171 +3,314 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Đăng ký | Logan Crypto</title>
+  <title>Phản hồi | Logan Crypto</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <style>
-    :root{
-      --bg:#07111f;
-      --card:#0d1726;
-      --card-2:#101d30;
-      --text:#edf5ff;
-      --muted:#a8bdd8;
-      --border:rgba(90,129,196,.18);
-      --accent:#22d3ee;
-      --accent-2:#38bdf8;
-      --danger:#ff6b6b;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:"Times New Roman", Times, serif;
-      background:
-        radial-gradient(circle at top left, rgba(34,211,238,.10), transparent 18%),
-        linear-gradient(180deg,#040b16 0%, #07111f 100%);
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-    }
-    .auth-wrap{
-      width:min(100%, 520px);
-      background:linear-gradient(180deg, rgba(13,23,38,.96), rgba(10,20,34,.98));
-      border:1px solid var(--border);
-      border-radius:24px;
-      box-shadow:0 20px 50px rgba(0,0,0,.35);
-      padding:28px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-      text-decoration:none;
-      color:inherit;
-    }
-    .brand img{
-      width:46px;
-      height:46px;
-      border-radius:12px;
-      object-fit:cover;
-    }
-    .brand-title{
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:.5px;
-    }
-    .brand-title span{color:var(--accent)}
-    .brand-sub{
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:1px;
-    }
-    h1{
-      margin:0 0 18px;
-      font-size:28px;
-      font-weight:900;
-    }
-    .form{
-      display:grid;
-      gap:14px;
-    }
-    .input{
-      width:100%;
-      min-height:54px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:var(--card-2);
-      color:var(--text);
-      padding:0 16px;
-      outline:none;
-    }
-    .input:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(34,211,238,.10);
-    }
-    .btn{
-      min-height:54px;
-      border:none;
-      border-radius:16px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#062033;
-      font-weight:900;
-      cursor:pointer;
-      font-size:18px;
-    }
-    .btn:hover{filter:brightness(1.03)}
-    #errorMessage{
-      min-height:22px;
-      margin:0;
-      color:var(--danger);
-      font-size:16px;
-      line-height:1.4;
-    }
-    .auth-links{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:17px;
-    }
-    .auth-links a{
-      color:var(--accent);
-      font-weight:700;
-      text-decoration:none;
-    }
-  </style>
+  <link rel="stylesheet" href="./site.css" />
 </head>
-<body>
-  <div class="auth-wrap">
-    <a href="./index.html" class="brand">
-      <img src="./logan-logo.jpg" alt="Logan Crypto">
-      <div>
-        <div class="brand-title">LOGAN <span>CRYPTO</span></div>
-        <div class="brand-sub">TRADE SMART - TRADE LIKE A PRO</div>
+<body class="light-mode">
+  <div class="page-shell">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="./index.html" class="brand">
+          <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
+          <div class="brand-text">
+            <div class="brand-title">LOGAN <span>CRYPTO</span></div>
+            <div class="brand-sub">TRADE SMART - TRADE LIKE A PRO</div>
+          </div>
+        </a>
+
+        <nav class="main-nav" id="mainNav">
+          <a href="./index.html">Trang chủ</a>
+          <a href="./services.html">Dịch vụ</a>
+          <a href="./about.html">Giới thiệu</a>
+          <a href="./reviews.html" class="active">Phản hồi</a>
+          <a href="./faq.html">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Đổi giao diện">☀</button>
+          <a href="./login.html" class="btn btn-primary">Đăng nhập khóa học</a>
+          <button class="mobile-toggle" id="mobileToggle" type="button">☰</button>
+        </div>
       </div>
-    </a>
+    </header>
 
-    <h1>Đăng ký</h1>
-
-    <form id="registerForm" class="form">
-      <input id="name" class="input" type="text" placeholder="Họ và tên" />
-      <input id="phone" class="input" type="text" placeholder="Số điện thoại / Zalo" />
-      <input id="email" class="input" type="email" placeholder="Email" required />
-      <input id="password" class="input" type="password" placeholder="Mật khẩu" required />
-
-      <button type="submit" class="btn">Đăng ký</button>
-      <p id="errorMessage"></p>
-    </form>
-
-    <div class="auth-links">
-      Đã có tài khoản? <a href="./login.html">Đăng nhập</a>
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="./index.html">Trang chủ</a>
+      <a href="./services.html">Dịch vụ</a>
+      <a href="./about.html">Giới thiệu</a>
+      <a href="./reviews.html" class="active">Phản hồi</a>
+      <a href="./faq.html">FAQ</a>
+      <a href="./login.html" class="mobile-login-link">Đăng nhập khóa học</a>
     </div>
+
+    <!-- HERO -->
+    <section class="page-hero review-hero">
+      <div class="container">
+        <div class="page-hero-card">
+          <div class="section-chip">• PHẢN HỒI TỪ HỌC VIÊN •</div>
+          <h1>Phản hồi thực tế từ cộng đồng Logan Crypto</h1>
+          <p>
+            Những chia sẻ dưới đây đến từ học viên và thành viên cộng đồng đã trực tiếp sử dụng hệ thống,
+            chỉ báo và lộ trình của Logan Crypto trong quá trình giao dịch thực chiến.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="review-overview">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Điều cộng đồng đánh giá cao</h2>
+          <p>Không phải lời nói hoa mỹ, mà là trải nghiệm thực tế sau khi áp dụng đúng hệ thống.</p>
+        </div>
+
+        <div class="review-overview-grid">
+          <article class="info-card">
+            <div class="info-icon">📌</div>
+            <h3>Vào lệnh rõ ràng hơn</h3>
+            <p>Học viên dễ xác định POI, vùng vào lệnh và tránh vào theo cảm tính.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">🛡</div>
+            <h3>Quản trị rủi ro tốt hơn</h3>
+            <p>Biết cách đặt SL, giữ kỷ luật và tránh bị cuốn theo thị trường.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">📈</div>
+            <h3>Lộ trình học dễ áp dụng</h3>
+            <p>Nội dung được sắp xếp theo từng bước, phù hợp cả người mới lẫn người cần hệ thống lại kiến thức.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">🤝</div>
+            <h3>Cộng đồng hỗ trợ liên tục</h3>
+            <p>Được đồng hành, giải đáp và chia sẻ kinh nghiệm trong quá trình học và giao dịch.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="review-testimonials">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Chia sẻ từ học viên</h2>
+          <p>Những phản hồi phổ biến nhất sau khi tham gia hệ thống.</p>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">A</div>
+              <div>
+                <h3>Anh Minh</h3>
+                <span>Trader Futures</span>
+              </div>
+            </div>
+            <p>
+              “Trước đây mình vào lệnh khá cảm tính. Sau khi học và dùng hệ thống của Logan Crypto,
+              mình biết chờ vùng đẹp hơn, vào lệnh có lý do hơn và bớt bị quét stoploss.”
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">T</div>
+              <div>
+                <h3>Tuấn Anh</h3>
+                <span>Học viên mới</span>
+              </div>
+            </div>
+            <p>
+              “Điểm mình thích là nội dung không quá rối. Có lộ trình rõ, dễ hiểu và có người hỗ trợ khi chưa nắm được bài.”
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">H</div>
+              <div>
+                <h3>Hải Nam</h3>
+                <span>Trader bán thời gian</span>
+              </div>
+            </div>
+            <p>
+              “Mình không có nhiều thời gian ngồi chart nhưng nhờ cách phân tích và quản lý lệnh trong hệ thống,
+              việc giao dịch trở nên gọn và đỡ áp lực hơn.”
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">L</div>
+              <div>
+                <h3>Lâm</h3>
+                <span>Thành viên cộng đồng</span>
+              </div>
+            </div>
+            <p>
+              “Quan trọng nhất là tư duy. Sau khi theo cộng đồng, mình hiểu hơn về kỷ luật, chờ setup đúng
+              chứ không còn vào lệnh liên tục như trước.”
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">P</div>
+              <div>
+                <h3>Phúc</h3>
+                <span>Trader Crypto</span>
+              </div>
+            </div>
+            <p>
+              “Mình đánh giá cao phần hỗ trợ. Có vấn đề là hỏi được, có người giải thích lại nên cảm giác học không bị một mình.”
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar">K</div>
+              <div>
+                <h3>Khánh</h3>
+                <span>Học viên trung cấp</span>
+              </div>
+            </div>
+            <p>
+              “Không chỉ là chỉ báo, mà là cách nhìn thị trường bài bản hơn. Đó là thứ giúp mình giữ được sự ổn định.”
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEFORE AFTER -->
+    <section class="review-compare">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Trước và sau khi có hệ thống</h2>
+          <p>Khác biệt lớn nhất không chỉ ở lệnh thắng, mà là ở cách giao dịch.</p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="compare-card before">
+            <div class="compare-label">TRƯỚC</div>
+            <h3>Trade theo cảm tính</h3>
+            <ul>
+              <li>Vào lệnh không có kế hoạch rõ ràng</li>
+              <li>Dễ FOMO khi thị trường chạy mạnh</li>
+              <li>Stoploss đặt cảm giác</li>
+              <li>Không có quy trình giữ lệnh</li>
+              <li>Tâm lý dễ dao động sau vài lệnh thua</li>
+            </ul>
+          </article>
+
+          <article class="compare-card after">
+            <div class="compare-label">SAU</div>
+            <h3>Trade có hệ thống</h3>
+            <ul>
+              <li>Biết chờ vùng đẹp và xác nhận rõ ràng</li>
+              <li>Có kế hoạch vào lệnh, SL và TP</li>
+              <li>Quản trị vốn và rủi ro tốt hơn</li>
+              <li>Giữ được kỷ luật khi thị trường biến động</li>
+              <li>Tự tin hơn trong quá trình giao dịch</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT BLOCK -->
+    <section class="review-results">
+      <div class="container">
+        <div class="result-box">
+          <div class="result-content">
+            <div class="section-chip">• GIÁ TRỊ CỐT LÕI •</div>
+            <h2>Điều Logan Crypto muốn mang lại</h2>
+            <p>
+              Không hứa hẹn làm giàu nhanh. Mục tiêu là giúp trader có tư duy đúng,
+              hệ thống rõ ràng và hành trình phát triển bền vững hơn trên thị trường.
+            </p>
+          </div>
+
+          <div class="result-stats">
+            <div class="result-stat">
+              <strong>Kỷ luật</strong>
+              <span>Giao dịch theo kế hoạch thay vì cảm xúc</span>
+            </div>
+            <div class="result-stat">
+              <strong>Logic</strong>
+              <span>Hiểu lý do vào lệnh và lý do thoát lệnh</span>
+            </div>
+            <div class="result-stat">
+              <strong>Đồng hành</strong>
+              <span>Luôn có cộng đồng và đội ngũ hỗ trợ phía sau</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="review-cta">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <div class="section-chip">• BẮT ĐẦU CÙNG LOGAN CRYPTO •</div>
+            <h2>Bạn muốn tiếp tục trade cảm tính hay đi theo một lộ trình rõ ràng hơn?</h2>
+            <p>
+              Tham gia cộng đồng và bắt đầu xây dựng nền tảng giao dịch bài bản ngay từ bây giờ.
+            </p>
+          </div>
+
+          <div class="cta-actions">
+            <a href="./services.html" class="btn btn-primary">Xem dịch vụ</a>
+            <a href="./login.html" class="btn btn-outline">Đăng nhập khóa học</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <img src="./logan-logo.jpg" alt="Logan Crypto" class="footer-logo" />
+          <div>
+            <div class="footer-title">LOGAN CRYPTO</div>
+            <p>Kỷ luật, Logic — Lợi nhuận bền vững.</p>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Điều hướng</h4>
+          <a href="./index.html">Trang chủ</a>
+          <a href="./services.html">Dịch vụ</a>
+          <a href="./about.html">Giới thiệu</a>
+          <a href="./reviews.html">Phản hồi</a>
+          <a href="./faq.html">FAQ</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Liên hệ</h4>
+          <p>0899 125 048</p>
+          <p>0702 092 148</p>
+          <p>0927 987 236</p>
+          <p>logan27xx@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Logan Crypto. All rights reserved.</p>
+      </div>
+    </footer>
   </div>
 
-  <script type="module">
-    import { registerUser } from "./register.js";
-
-    const form = document.getElementById("registerForm");
-    const errorEl = document.getElementById("errorMessage");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      errorEl.textContent = "";
-
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      try {
-        await registerUser(name, phone, email, password);
-        alert("Đăng ký thành công");
-        window.location.href = "./dashboard.html";
-      } catch (err) {
-        console.error("REGISTER PAGE ERROR:", err);
-        errorEl.textContent = err.message || "Đăng ký thất bại";
-      }
-    });
-  </script>
+  <script src="./site.js"></script>
 </body>
 </html>
