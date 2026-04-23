@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logan Crypto</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./site.css?v=20" />
+  <link rel="stylesheet" href="./site.css?v=30" />
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="site-header" id="siteHeader">
+  <header class="site-header">
     <div class="container header-inner">
       <a href="./index.html" class="brand">
         <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
@@ -35,7 +34,6 @@
     </div>
   </header>
 
-  <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileNav">
     <a href="./index.html" class="active">Trang chủ</a>
     <a href="./services.html">Dịch vụ</a>
@@ -65,16 +63,16 @@
         <div class="hero-chip">HỆ THỐNG GIAO DỊCH</div>
 
         <h1>
-          Giúp bạn nhìn<br>
-          thị trường <span>rõ hơn</span><br>
-          và đi theo một lộ trình<br>
+          Giúp bạn nhìn<br />
+          thị trường <span>rõ hơn</span><br />
+          và đi theo một lộ<br />
+          trình<br />
           bài bản <span>hơn</span>
         </h1>
 
         <p>
-          Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
-          giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
-          và tự tin hơn trên mọi thị trường.
+          Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu, giúp bạn nâng cao kỹ năng,
+          tối ưu lợi nhuận và tự tin hơn trên mọi thị trường.
         </p>
 
         <div class="hero-actions">
@@ -100,10 +98,10 @@
     </div>
   </section>
 
-  <!-- SECTION SAU HERO -->
-  <section class="home-after-hero">
+  <!-- GIỮ PHẦN DƯỚI ĐƠN GIẢN, KHÔNG ĐỤNG FOOTER -->
+  <section class="home-section">
     <div class="container">
-      <div class="after-hero-box">
+      <div class="simple-box">
         <div class="section-chip">• LOGAN CRYPTO •</div>
         <h2>Nền tảng giúp trader đi từ cảm tính sang bài bản</h2>
         <p>
@@ -115,36 +113,38 @@
     </div>
   </section>
 
-  <!-- SECTION DỊCH VỤ NHANH -->
-  <section class="home-services-preview">
-    <div class="container">
-      <div class="section-head center">
-        <div class="section-chip">• DỊCH VỤ NỔI BẬT •</div>
-        <h2>Những gì Logan Crypto đang tập trung xây dựng</h2>
-        <p>Không chỉ là công cụ giao dịch, mà là cả một hệ sinh thái để trader phát triển dài hạn.</p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="./logan-logo.jpg" alt="Logan Crypto" class="footer-logo" />
+        <div>
+          <div class="footer-title">LOGAN CRYPTO</div>
+          <p>Kỷ luật, Logic — Lợi nhuận bền vững.</p>
+        </div>
       </div>
 
-      <div class="services-preview-grid">
-        <article class="service-preview-card">
-          <div class="service-preview-icon">📊</div>
-          <h3>Chỉ báo giao dịch</h3>
-          <p>Hỗ trợ nhìn vùng vào lệnh, cấu trúc thị trường và setup rõ ràng hơn.</p>
-        </article>
+      <div class="footer-col">
+        <h4>Điều hướng</h4>
+        <a href="./index.html">Trang chủ</a>
+        <a href="./services.html">Dịch vụ</a>
+        <a href="./about.html">Giới thiệu</a>
+        <a href="./reviews.html">Phản hồi</a>
+        <a href="./faq.html">FAQ</a>
+      </div>
 
-        <article class="service-preview-card">
-          <div class="service-preview-icon">🧠</div>
-          <h3>Lộ trình học</h3>
-          <p>Hệ thống hóa kiến thức từ cơ bản đến nâng cao theo từng cấp độ thành viên.</p>
-        </article>
-
-        <article class="service-preview-card">
-          <div class="service-preview-icon">🤝</div>
-          <h3>Cộng đồng đồng hành</h3>
-          <p>Kết nối, hỗ trợ và cùng nhau xây dựng tư duy giao dịch bền vững hơn.</p>
-        </article>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <p>0899 125 048</p>
+        <p>0702 092 148</p>
+        <p>0927 987 236</p>
+        <p>logan27xx@gmail.com</p>
       </div>
     </div>
-  </section>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Logan Crypto. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script>
     const mobileToggle = document.getElementById("mobileToggle");
@@ -155,6 +155,11 @@
       mobileNav.classList.toggle("open");
     });
 
+    const savedTheme = localStorage.getItem("site-theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+
     themeToggle?.addEventListener("click", () => {
       document.body.classList.toggle("light-mode");
       localStorage.setItem(
@@ -162,11 +167,6 @@
         document.body.classList.contains("light-mode") ? "light" : "dark"
       );
     });
-
-    const savedTheme = localStorage.getItem("site-theme");
-    if (savedTheme === "light") {
-      document.body.classList.add("light-mode");
-    }
   </script>
 </body>
 </html>
