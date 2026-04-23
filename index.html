@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logan Crypto | Trang chủ</title>
+  <title>Logan Crypto</title>
   <link rel="icon" href="./logan-logo.jpg" />
-  <link rel="stylesheet" href="./site.css?v=1" />
-  <link rel="stylesheet" href="./index.css?v=1" />
+  <link rel="stylesheet" href="./site.css?v=20" />
 </head>
-<body class="light-theme">
-  <header class="site-header">
-    <div class="page-shell header-inner">
+<body>
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
       <a href="./index.html" class="brand">
         <img src="./logan-logo.jpg" alt="Logan Crypto" class="brand-logo" />
         <div class="brand-text">
@@ -28,278 +28,145 @@
       </nav>
 
       <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">☀</button>
-        <a href="./login.html" class="btn btn-primary login-btn">Đăng nhập khóa học</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Đổi giao diện">☀</button>
+        <a href="./login.html" class="btn btn-primary header-login-btn">Đăng nhập khóa học</a>
+        <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Mở menu">☰</button>
       </div>
     </div>
   </header>
 
-  <main class="home-main">
-    <section class="hero-home">
-      <div class="page-shell hero-home-grid">
-        <div class="hero-home-copy">
-          <div class="hero-chip">HỆ THỐNG GIAO DỊCH</div>
-          <h1>
-            GIÚP BẠN NHÌN<br />
-            THỊ TRƯỜNG <span>RÕ HƠN</span><br />
-            VÀ ĐI THEO MỘT LỘ TRÌNH<br />
-            BÀI BẢN <span>HƠN</span>
-          </h1>
-          <p>
-            Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
-            giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
-            và tự tin hơn trên mọi thị trường.
-          </p>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="./index.html" class="active">Trang chủ</a>
+    <a href="./services.html">Dịch vụ</a>
+    <a href="./about.html">Giới thiệu</a>
+    <a href="./reviews.html">Phản hồi</a>
+    <a href="./faq.html">FAQ</a>
+    <a href="./login.html" class="mobile-login-link">Đăng nhập khóa học</a>
+  </div>
 
-          <div class="hero-home-actions">
-            <a href="./register.html" class="btn btn-primary">Nhận tư vấn ngay</a>
-            <a href="./services.html" class="btn btn-outline">Xem dịch vụ</a>
-          </div>
+  <!-- HERO VIDEO -->
+  <section class="hero-video-section">
+    <video
+      class="hero-video-bg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src="./hero-bg.mp4" type="video/mp4" />
+    </video>
 
-          <div class="hero-home-stats">
-            <div class="stat-box">
-              <strong>+1200</strong>
-              <span>Học viên tin tưởng</span>
-            </div>
-            <div class="stat-box">
-              <strong>+35%</strong>
-              <span>Hiệu suất trung bình</span>
-            </div>
-            <div class="stat-box">
-              <strong>24/7</strong>
-              <span>Hỗ trợ chuyên sâu</span>
-            </div>
-          </div>
+    <div class="hero-video-overlay"></div>
+
+    <div class="container hero-video-content">
+      <div class="hero-copy">
+        <div class="hero-chip">HỆ THỐNG GIAO DỊCH</div>
+
+        <h1>
+          Giúp bạn nhìn<br>
+          thị trường <span>rõ hơn</span><br>
+          và đi theo một lộ trình<br>
+          bài bản <span>hơn</span>
+        </h1>
+
+        <p>
+          Logan Crypto cung cấp các giải pháp giao dịch chuyên sâu,
+          giúp bạn nâng cao kỹ năng, tối ưu lợi nhuận
+          và tự tin hơn trên mọi thị trường.
+        </p>
+
+        <div class="hero-actions">
+          <a href="./services.html" class="btn btn-primary">Nhận tư vấn ngay</a>
+          <a href="./login.html" class="btn btn-outline">Đăng nhập khóa học</a>
         </div>
 
-        <div class="hero-home-media">
-          <img src="./7.jpg" alt="Logan Crypto Hero" />
-        </div>
-      </div>
-    </section>
-
-    <section class="home-cards">
-      <div class="page-shell">
-        <div class="home-card-grid">
-          <a class="home-feature-card" href="./services.html">
-            <img src="./1.jpg" alt="">
-            <div class="overlay dark"></div>
-            <div class="content white">
-              <h3>PHÂN TÍCH<br>CHUYÊN SÂU</h3>
-              <p>Hiểu rõ thị trường<br>Đón đầu xu hướng</p>
-            </div>
-          </a>
-
-          <a class="home-feature-card" href="./services.html">
-            <img src="./2.jpg" alt="">
-            <div class="overlay light"></div>
-            <div class="content dark">
-              <h3>GIAO DỊCH KỶ<br>LUẬT</h3>
-              <p>Chiến lược rõ ràng<br>Quản trị rủi ro tối ưu</p>
-            </div>
-          </a>
-
-          <a class="home-feature-card" href="./about.html">
-            <img src="./3.jpg" alt="">
-            <div class="overlay light"></div>
-            <div class="content dark">
-              <h3>ĐỒNG HÀNH<br>CÙNG BẠN</h3>
-              <p>Trên mọi hành trình<br>chinh phục thị trường</p>
-            </div>
-          </a>
-
-          <a class="home-feature-card" href="./about.html">
-            <img src="./4.jpg" alt="">
-            <div class="overlay light"></div>
-            <div class="content dark">
-              <h3>KIẾN THỨC<br>THỰC CHIẾN</h3>
-              <p>Học từ kinh nghiệm<br>giao dịch tự tin</p>
-            </div>
-          </a>
-
-          <a class="home-feature-card" href="./reviews.html">
-            <img src="./5.jpg" alt="">
-            <div class="overlay dark"></div>
-            <div class="content white">
-              <h3>CỘNG ĐỒNG<br>CHẤT LƯỢNG</h3>
-              <p>Kết nối – Chia sẻ<br>Phát triển bền vững</p>
-            </div>
-          </a>
-
-          <a class="home-feature-card" href="./faq.html">
-            <img src="./6.jpg" alt="">
-            <div class="overlay light"></div>
-            <div class="content dark">
-              <h3>CÔNG CỤ HIỆN ĐẠI</h3>
-              <p>Hỗ trợ phân tích<br>và giao dịch hiệu quả</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="home-benefits">
-      <div class="page-shell">
-        <div class="benefits-row">
-          <div class="benefit-card">
-            <div class="icon">🛡️</div>
-            <h4>CHIẾN LƯỢC RÕ RÀNG</h4>
-            <p>Hệ thống chiến lược bài bản, dễ hiểu, dễ áp dụng.</p>
+        <div class="hero-stats">
+          <div class="hero-stat-card">
+            <strong>01</strong>
+            <span>Chỉ báo được tối ưu để hỗ trợ trader nhìn thị trường rõ và gọn hơn.</span>
           </div>
-          <div class="benefit-card">
-            <div class="icon">📊</div>
-            <h4>PHÂN TÍCH CHUYÊN SÂU</h4>
-            <p>Phân tích đa khung thời gian, tìm điểm vào lệnh tối ưu.</p>
+          <div class="hero-stat-card">
+            <strong>02</strong>
+            <span>Copytrade và lộ trình học giúp tiết kiệm thời gian và đi đúng hướng hơn.</span>
           </div>
-          <div class="benefit-card">
-            <div class="icon">✅</div>
-            <h4>QUẢN TRỊ RỦI RO</h4>
-            <p>Kiểm soát vốn chặt chẽ, bảo vệ tài khoản hiệu quả.</p>
-          </div>
-          <div class="benefit-card">
-            <div class="icon">🎧</div>
-            <h4>HỖ TRỢ 24/7</h4>
-            <p>Đội ngũ hỗ trợ tận tâm, giải đáp mọi thắc mắc.</p>
-          </div>
-          <div class="benefit-card">
-            <div class="icon">👥</div>
-            <h4>CỘNG ĐỒNG UY TÍN</h4>
-            <p>Môi trường giao lưu tích cực, cùng nhau phát triển.</p>
+          <div class="hero-stat-card">
+            <strong>03</strong>
+            <span>Khu vực học tập riêng theo từng cấp độ, rõ ràng và dễ theo dõi.</span>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-bg-pattern"></div>
-
-    <div class="page-shell">
-      <div class="footer-top">
-        <div class="footer-col footer-brand-col">
-          <div class="footer-brand">
-            <img src="./logan-logo.jpg" alt="Logan Crypto" class="footer-logo" />
-            <div>
-              <div class="footer-brand-title">LOGAN <span>CRYPTO</span></div>
-              <div class="footer-brand-sub">TRADE SMART – TRADE LIKE A PRO</div>
-            </div>
-          </div>
-
-          <p class="footer-desc">
-            Logan Crypto cung cấp hệ thống chỉ báo giao dịch thông minh, giúp trader tối ưu điểm vào lệnh,
-            quản lý vốn và kiểm soát rủi ro hiệu quả trên mọi thị trường.
-          </p>
-
-          <div class="footer-socials">
-            <a href="#">f</a>
-            <a href="#">✈</a>
-            <a href="#">▶</a>
-            <a href="#">♪</a>
-            <a href="#">Z</a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>LIÊN KẾT NHANH</h4>
-          <ul class="footer-links">
-            <li><a href="./index.html">Trang chủ</a></li>
-            <li><a href="./about.html">Giới thiệu</a></li>
-            <li><a href="./about.html">Kiến thức</a></li>
-            <li><a href="./reviews.html">Cộng đồng</a></li>
-            <li><a href="./services.html">Dịch vụ</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>DỊCH VỤ</h4>
-          <ul class="footer-links">
-            <li><a href="./services.html">Thông tin thị trường</a></li>
-            <li><a href="./services.html">Phân tích kỹ thuật</a></li>
-            <li><a href="./services.html">Tín hiệu giao dịch</a></li>
-            <li><a href="./services.html">Quản lý vốn</a></li>
-            <li><a href="./services.html">Tư vấn 1:1</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>HỖ TRỢ</h4>
-          <ul class="footer-links">
-            <li><a href="./faq.html">Hướng dẫn sử dụng</a></li>
-            <li><a href="./faq.html">Câu hỏi thường gặp</a></li>
-            <li><a href="./faq.html">Chính sách bảo mật</a></li>
-            <li><a href="./faq.html">Điều khoản sử dụng</a></li>
-            <li><a href="./faq.html">Liên hệ</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col footer-newsletter">
-          <h4>NHẬN TIN TỪ <span>LOGAN CRYPTO</span></h4>
-          <p>Đăng ký email để nhận chiến lược, tín hiệu và kiến thức giao dịch mới nhất.</p>
-          <form class="footer-form">
-            <input type="email" placeholder="Nhập email của bạn" />
-            <button type="submit">ĐĂNG KÝ NGAY</button>
-          </form>
-          <div class="footer-note">Chúng tôi cam kết bảo mật thông tin của bạn.</div>
-        </div>
-      </div>
-
-      <div class="footer-contact-grid">
-        <div class="footer-contact-card">
-          <div class="footer-contact-icon">☎</div>
-          <div>
-            <h5>HOTLINE</h5>
-            <p>0899 125 048</p>
-            <p>0702 092 148</p>
-            <p>0927 987 236</p>
-          </div>
-        </div>
-
-        <div class="footer-contact-card">
-          <div class="footer-contact-icon">✉</div>
-          <div>
-            <h5>EMAIL</h5>
-            <p>logan27xx@gmail.com</p>
-          </div>
-        </div>
-
-        <div class="footer-contact-card">
-          <div class="footer-contact-icon">🎧</div>
-          <div>
-            <h5>HỖ TRỢ</h5>
-            <p>24/7 Online</p>
-            <small>Đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc.</small>
-          </div>
-        </div>
-
-        <div class="footer-contact-card">
-          <div class="footer-contact-icon">📍</div>
-          <div>
-            <h5>ĐỊA CHỈ</h5>
-            <p>120 Đ. Ung Văn Khiêm, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam, Binh Thanh, Vietnam, 32000</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Logan Crypto. All rights reserved.</div>
-
-        <div class="footer-center-logo">
-          <span class="footer-line"></span>
-          <img src="./logan-logo.jpg" alt="Logan Crypto" />
-          <span class="footer-line"></span>
-        </div>
-
-        <div class="footer-policy-links">
-          <a href="./faq.html">Chính sách bảo mật</a>
-          <a href="./faq.html">Điều khoản sử dụng</a>
-        </div>
-
-        <a href="#" class="footer-top-btn">↑</a>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script src="./site.js"></script>
+  <!-- SECTION SAU HERO -->
+  <section class="home-after-hero">
+    <div class="container">
+      <div class="after-hero-box">
+        <div class="section-chip">• LOGAN CRYPTO •</div>
+        <h2>Nền tảng giúp trader đi từ cảm tính sang bài bản</h2>
+        <p>
+          Từ chỉ báo, tư duy, lộ trình học cho tới cộng đồng đồng hành —
+          mọi thứ được xây dựng để trader nhìn rõ hơn, vào lệnh có logic hơn
+          và phát triển bền vững hơn.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION DỊCH VỤ NHANH -->
+  <section class="home-services-preview">
+    <div class="container">
+      <div class="section-head center">
+        <div class="section-chip">• DỊCH VỤ NỔI BẬT •</div>
+        <h2>Những gì Logan Crypto đang tập trung xây dựng</h2>
+        <p>Không chỉ là công cụ giao dịch, mà là cả một hệ sinh thái để trader phát triển dài hạn.</p>
+      </div>
+
+      <div class="services-preview-grid">
+        <article class="service-preview-card">
+          <div class="service-preview-icon">📊</div>
+          <h3>Chỉ báo giao dịch</h3>
+          <p>Hỗ trợ nhìn vùng vào lệnh, cấu trúc thị trường và setup rõ ràng hơn.</p>
+        </article>
+
+        <article class="service-preview-card">
+          <div class="service-preview-icon">🧠</div>
+          <h3>Lộ trình học</h3>
+          <p>Hệ thống hóa kiến thức từ cơ bản đến nâng cao theo từng cấp độ thành viên.</p>
+        </article>
+
+        <article class="service-preview-card">
+          <div class="service-preview-icon">🤝</div>
+          <h3>Cộng đồng đồng hành</h3>
+          <p>Kết nối, hỗ trợ và cùng nhau xây dựng tư duy giao dịch bền vững hơn.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileNav = document.getElementById("mobileNav");
+    const themeToggle = document.getElementById("themeToggle");
+
+    mobileToggle?.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+
+    themeToggle?.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      localStorage.setItem(
+        "site-theme",
+        document.body.classList.contains("light-mode") ? "light" : "dark"
+      );
+    });
+
+    const savedTheme = localStorage.getItem("site-theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light-mode");
+    }
+  </script>
 </body>
 </html>
