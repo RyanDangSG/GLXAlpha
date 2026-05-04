@@ -143,34 +143,46 @@
   </div>
 
   <script type="module">
-    import { registerUser } from "./register.js";
+  import { registerUser } from "./register.js";
 
-    const form = document.getElementById("registerForm");
-    const errorEl = document.getElementById("errorMessage");
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbx1BHACxoHMvnyDJP-iOWjc8FjFZM-wNpEFn0nwU50dHmAtliWJ4LI7hmq47q2yqq-N/exec";
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const form = document.getElementById("registerForm");
+  const errorEl = document.getElementById("errorMessage");
 
-      if (errorEl) errorEl.textContent = "";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const name = document.getElementById("name")?.value.trim() || "";
-      const phone = document.getElementById("phone")?.value.trim() || "";
-      const email = document.getElementById("email")?.value.trim() || "";
-      const password = document.getElementById("password")?.value || "";
+    if (errorEl) errorEl.textContent = "";
 
-      try {
-        await registerUser(name, phone, email, password);
-        alert("Đăng ký thành công");
-        window.location.href = "./dashboard.html";
-      } catch (err) {
-        console.error("REGISTER PAGE ERROR:", err);
-        if (errorEl) {
-          errorEl.textContent = err.message || "Đăng ký thất bại";
-        } else {
-          alert(err.message || "Đăng ký thất bại");
-        }
-      }
-    });
-  </script>
+    const name = document.getElementById("name")?.value.trim() || "";
+    const phone = document.getElementById("phone")?.value.trim() || "";
+    const email = document.getElementById("email")?.value.trim() || "";
+    const password = document.getElementById("password")?.value || "";
+
+    try {
+      await registerUser(name, phone, email, password);
+
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          package: "Đăng ký tài khoản",
+          note: "Đăng ký từ register.html"
+        })
+      });
+
+      alert("Đăng ký thành công");
+      window.location.href = "./dashboard.html";
+
+    } catch (err) {
+      console.error("REGISTER PAGE ERROR:", err);
+      errorEl.textContent = err.message || "Đăng ký thất bại";
+    }
+  });
+</script>
 </body>
 </html>
