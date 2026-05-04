@@ -160,19 +160,30 @@
     const email = document.getElementById("email")?.value.trim() || "";
     const password = document.getElementById("password")?.value || "";
 
+    if (!name) {
+      errorEl.textContent = "Vui lòng nhập họ và tên";
+      return;
+    }
+
+    if (!phone) {
+      errorEl.textContent = "Vui lòng nhập số điện thoại / Zalo";
+      return;
+    }
+
     try {
       await registerUser(name, phone, email, password);
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("email", email);
+      formData.append("package", "Đăng ký tài khoản");
+      formData.append("note", "Đăng ký từ register.html");
 
       await fetch(SHEET_URL, {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          package: "Đăng ký tài khoản",
-          note: "Đăng ký từ register.html"
-        })
+        body: formData
       });
 
       alert("Đăng ký thành công");
