@@ -15,7 +15,7 @@ import {
 /* =========================
    CONFIG
 ========================= */
-const SHEET_WEB_APP_URL = "DAN_LINK_WEB_APP_APPS_SCRIPT_CUA_BAN";
+const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby0yc2bHZyc-RHiaS4qXw0TSMLjYf__q1XftXKwj8KtowmOHPQvgGlrVxFpdj7IfupC/exec";
 
 /* =========================
    DOM
