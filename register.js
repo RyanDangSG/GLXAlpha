@@ -29,6 +29,7 @@ const otpSuccess = document.getElementById("otpSuccess");
 
 let recaptchaVerifier = null;
 let confirmationResult = null;
+let otpCooldown = false;
 
 function setText(el, text = "") {
   if (el) el.textContent = text;
@@ -41,8 +42,31 @@ function clearMessages() {
   setText(otpSuccess, "");
 }
 
-function normalizePhone(phone) {
-  return phone.trim();
+function normalizeVietnamPhone(raw) {
+  let phone = (raw || "").trim();
+
+  // bỏ khoảng trắng, dấu chấm, dấu gạch
+  phone = phone.replace(/[\s\.\-]/g, "");
+
+  // nếu user nhập +84...
+  if (phone.startsWith("+84")) {
+    phone = phone.slice(3);
+  }
+
+  // nếu user nhập 84...
+  if (phone.startsWith("84")) {
+    phone = phone.slice(2);
+  }
+
+  // nếu user nhập 0...
+  if (phone.startsWith("0")) {
+    phone = phone.slice(1);
+  }
+
+  // chỉ giữ số
+  phone = phone.replace(/\D/g, "");
+
+  return `+84${phone}`;
 }
 
 function mapFirebaseError(error) {
@@ -56,7 +80,7 @@ function mapFirebaseError(error) {
     case "auth/weak-password":
       return "Mật khẩu quá yếu. Hãy dùng ít nhất 6 ký tự.";
     case "auth/invalid-phone-number":
-      return "Số điện thoại không đúng định dạng. Hãy dùng dạng +84...";
+      return "Số điện thoại không đúng định dạng.";
     case "auth/too-many-requests":
       return "Bạn thao tác quá nhiều lần. Vui lòng thử lại sau.";
     case "auth/captcha-check-failed":
@@ -113,8 +137,8 @@ registerForm.addEventListener("submit", async (e) => {
   clearMessages();
 
   const name = document.getElementById("name").value.trim();
-  const zalo = document.getElementById("zalo").value.trim();
-  const phone = normalizePhone(document.getElementById("phone").value);
+  const zaloRaw = document.getElementById("zalo").value.trim();
+  const phone = normalizeVietnamPhone(zaloRaw);
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
@@ -124,8 +148,13 @@ registerForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  if (!phone) {
-    setText(registerError, "Vui lòng nhập số điện thoại.");
+  if (!zaloRaw) {
+    setText(registerError, "Vui lòng nhập Zalo / số điện thoại.");
+    return;
+  }
+
+  if (!/^\+84\d{8,11}$/.test(phone)) {
+    setText(registerError, "Số điện thoại không hợp lệ.");
     return;
   }
 
@@ -147,7 +176,7 @@ registerForm.addEventListener("submit", async (e) => {
       uid: user.uid,
       name,
       email,
-      zalo,
+      zalo: zaloRaw,
       phone
     });
 
@@ -169,32 +198,53 @@ registerForm.addEventListener("submit", async (e) => {
 sendOtpBtn.addEventListener("click", async () => {
   clearMessages();
 
+  if (otpCooldown) {
+    setText(otpError, "Vui lòng chờ một chút rồi thử gửi OTP lại.");
+    return;
+  }
+
   const user = auth.currentUser;
-  const phone = normalizePhone(document.getElementById("phone").value);
+  const zaloRaw = document.getElementById("zalo").value.trim();
+  const phone = normalizeVietnamPhone(zaloRaw);
 
   if (!user) {
     setText(otpError, "Không tìm thấy phiên đăng ký. Hãy đăng ký lại.");
     return;
   }
 
-  if (!phone) {
-    setText(otpError, "Vui lòng nhập số điện thoại.");
+  if (!zaloRaw) {
+    setText(otpError, "Vui lòng nhập Zalo / số điện thoại.");
     return;
   }
 
   sendOtpBtn.disabled = true;
   sendOtpBtn.textContent = "Đang gửi OTP...";
+  otpCooldown = true;
 
   try {
     const appVerifier = initRecaptcha();
     confirmationResult = await linkWithPhoneNumber(user, phone, appVerifier);
 
     verifyBox.classList.remove("hidden");
-    setText(otpSuccess, "Đã gửi mã OTP. Hãy kiểm tra điện thoại.");
+    setText(otpSuccess, `Đã gửi mã OTP tới ${phone}`);
+
+    let seconds = 60;
+    const timer = setInterval(() => {
+      seconds--;
+      sendOtpBtn.textContent = `Gửi lại sau ${seconds}s`;
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        otpCooldown = false;
+        sendOtpBtn.disabled = false;
+        sendOtpBtn.textContent = "Gửi mã OTP";
+      }
+    }, 1000);
   } catch (error) {
     console.error("Send OTP error:", error);
     setText(otpError, mapFirebaseError(error));
-  } finally {
+
+    otpCooldown = false;
     sendOtpBtn.disabled = false;
     sendOtpBtn.textContent = "Gửi mã OTP";
   }
