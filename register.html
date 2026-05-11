@@ -72,6 +72,24 @@
       outline:none;
     }
     input::placeholder{color:#86a1c0}
+
+    .phone-group{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:12px;
+    }
+    .phone-prefix{
+      min-height:52px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--card-2);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+    }
+
     button{
       min-height:52px;
       border:none;
@@ -129,6 +147,7 @@
     @media (max-width:640px){
       .row{grid-template-columns:1fr}
       .wrap{padding:20px}
+      .phone-group{grid-template-columns:74px 1fr}
     }
   </style>
 </head>
@@ -145,11 +164,16 @@
 
     <form id="registerForm" class="form-grid">
       <input id="name" type="text" placeholder="Họ và tên" required />
-      <input id="zalo" type="text" placeholder="Zalo / số liên hệ" />
-      <input id="phone" type="tel" placeholder="Số điện thoại nhận OTP. Ví dụ: +84901234567" required />
+
+      <div class="phone-group">
+        <div class="phone-prefix">+84</div>
+        <input id="zalo" type="tel" placeholder="Zalo / Số điện thoại, ví dụ: 898983066" required />
+      </div>
+
       <input id="email" type="email" placeholder="Email" required />
       <input id="password" type="password" placeholder="Mật khẩu" required />
       <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" required />
+
       <button type="submit" id="registerBtn">Tạo tài khoản</button>
     </form>
 
