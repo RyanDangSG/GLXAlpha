@@ -11,71 +11,59 @@
       --card:#0d1726;
       --card-2:#101d30;
       --text:#edf5ff;
-      --muted:#a8bdd8;
+      --sub:#a8bdd8;
+      --accent:#56ccff;
+      --accent2:#7dd3fc;
       --border:rgba(90,129,196,.18);
-      --accent:#22d3ee;
-      --accent-2:#38bdf8;
-      --danger:#ff6b6b;
+      --danger:#ff7b7b;
+      --success:#69db7c;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      min-height:100vh;
       font-family:"Times New Roman", Times, serif;
-      background:
-        radial-gradient(circle at top left, rgba(34,211,238,.10), transparent 18%),
-        linear-gradient(180deg,#040b16 0%, #07111f 100%);
+      background:linear-gradient(180deg,#06101d,#0a1526);
       color:var(--text);
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:24px;
     }
-    .auth-wrap{
-      width:min(100%, 520px);
-      background:linear-gradient(180deg, rgba(13,23,38,.96), rgba(10,20,34,.98));
+    .wrap{
+      width:min(100%,560px);
+      background:var(--card);
       border:1px solid var(--border);
       border-radius:24px;
-      box-shadow:0 20px 50px rgba(0,0,0,.35);
       padding:28px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
     }
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
       margin-bottom:18px;
-      text-decoration:none;
-      color:inherit;
     }
     .brand img{
-      width:46px;
-      height:46px;
-      border-radius:12px;
-      object-fit:cover;
+      width:52px;height:52px;border-radius:14px;object-fit:cover;
     }
-    .brand-title{
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:.5px;
+    .brand h1{
+      margin:0;font-size:28px;line-height:1;
     }
-    .brand-title span{color:var(--accent)}
-    .brand-sub{
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:1px;
+    .brand h1 span{color:var(--accent)}
+    .sub{
+      margin:0 0 20px;
+      color:var(--sub);
+      line-height:1.7;
+      font-size:16px;
     }
-    h1{
-      margin:0 0 18px;
-      font-size:28px;
-      font-weight:900;
-    }
-    .form{
+    .form-grid{
       display:grid;
       gap:14px;
     }
-    .input{
+    input{
       width:100%;
-      min-height:54px;
+      min-height:52px;
       border-radius:16px;
       border:1px solid var(--border);
       background:var(--card-2);
@@ -83,117 +71,123 @@
       padding:0 16px;
       outline:none;
     }
-    .input:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(34,211,238,.10);
-    }
-    .btn{
-      min-height:54px;
+    input::placeholder{color:#86a1c0}
+    button{
+      min-height:52px;
       border:none;
       border-radius:16px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#062033;
-      font-weight:900;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#082032;
+      font-weight:800;
       cursor:pointer;
-      font-size:18px;
     }
-    #errorMessage{
-      min-height:22px;
-      margin:0;
+    button.secondary{
+      background:transparent;
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+    .muted{
+      color:var(--sub);
+      font-size:14px;
+      line-height:1.7;
+    }
+    .error{
       color:var(--danger);
-      font-size:16px;
-      line-height:1.4;
+      font-size:14px;
+      line-height:1.6;
+      min-height:22px;
     }
-    .auth-links{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:17px;
+    .success{
+      color:var(--success);
+      font-size:14px;
+      line-height:1.6;
+      min-height:22px;
     }
-    .auth-links a{
-      color:var(--accent);
-      font-weight:700;
-      text-decoration:none;
+    .otp-box{
+      margin-top:20px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
+    }
+    .otp-box.hidden,
+    .verify-box.hidden{
+      display:none;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .bottom{
+      margin-top:16px;
+      font-size:15px;
+      color:var(--sub);
+    }
+    .bottom a{color:var(--accent)}
+    #recaptcha-container{
+      margin-top:14px;
+    }
+    @media (max-width:640px){
+      .row{grid-template-columns:1fr}
+      .wrap{padding:20px}
     }
   </style>
 </head>
 <body>
-  <div class="auth-wrap">
-    <a href="./index.html" class="brand">
-      <img src="./logan-logo.jpg" alt="Logan Crypto">
-      <div>
-        <div class="brand-title">LOGAN <span>CRYPTO</span></div>
-        <div class="brand-sub">TRADE SMART - TRADE LIKE A PRO</div>
-      </div>
-    </a>
+  <div class="wrap">
+    <div class="brand">
+      <img src="./logan-logo.jpg" alt="Logan Crypto" />
+      <h1>LOGAN <span>CRYPTO</span></h1>
+    </div>
 
-    <h1>Đăng ký</h1>
+    <p class="sub">
+      Tạo tài khoản mới. Hệ thống sẽ yêu cầu xác thực số điện thoại và email trước khi kích hoạt đăng nhập.
+    </p>
 
-    <form id="registerForm" class="form">
-      <input id="name" class="input" type="text" placeholder="Họ và tên" />
-      <input id="phone" class="input" type="text" placeholder="Số điện thoại / Zalo" />
-      <input id="email" class="input" type="email" placeholder="Email" required />
-      <input id="password" class="input" type="password" placeholder="Mật khẩu" required />
-      <button type="submit" class="btn">Đăng ký</button>
-      <p id="errorMessage"></p>
+    <form id="registerForm" class="form-grid">
+      <input id="name" type="text" placeholder="Họ và tên" required />
+      <input id="zalo" type="text" placeholder="Zalo / số liên hệ" />
+      <input id="phone" type="tel" placeholder="Số điện thoại nhận OTP. Ví dụ: +84901234567" required />
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="password" type="password" placeholder="Mật khẩu" required />
+      <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" required />
+      <button type="submit" id="registerBtn">Tạo tài khoản</button>
     </form>
 
-    <div class="auth-links">
+    <div id="registerError" class="error"></div>
+    <div id="registerSuccess" class="success"></div>
+
+    <div class="otp-box hidden" id="otpBox">
+      <p class="muted">
+        Bước 2: Gửi OTP để xác thực số điện thoại.
+      </p>
+
+      <div class="row">
+        <button type="button" id="sendOtpBtn">Gửi mã OTP</button>
+        <button type="button" id="resendEmailBtn" class="secondary">Gửi lại email xác minh</button>
+      </div>
+
+      <div id="recaptcha-container"></div>
+
+      <div class="verify-box hidden" id="verifyBox">
+        <div class="form-grid" style="margin-top:14px;">
+          <input id="otpCode" type="text" placeholder="Nhập mã OTP" />
+          <button type="button" id="verifyOtpBtn">Xác thực OTP</button>
+        </div>
+      </div>
+
+      <div id="otpError" class="error"></div>
+      <div id="otpSuccess" class="success"></div>
+
+      <p class="muted" style="margin-top:10px;">
+        Sau khi xác thực OTP xong, hãy mở email và bấm link xác minh. Sau đó bạn có thể đăng nhập.
+      </p>
+    </div>
+
+    <div class="bottom">
       Đã có tài khoản? <a href="./login.html">Đăng nhập</a>
     </div>
   </div>
 
-  <script type="module">
-  import { registerUser } from "./register.js";
-
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbx1BHACxoHMvnyDJP-iOWjc8FjFZM-wNpEFn0nwU50dHmAtliWJ4LI7hmq47q2yqq-N/exec";
-
-  const form = document.getElementById("registerForm");
-  const errorEl = document.getElementById("errorMessage");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (errorEl) errorEl.textContent = "";
-
-    const name = document.getElementById("name")?.value.trim() || "";
-    const phone = document.getElementById("phone")?.value.trim() || "";
-    const email = document.getElementById("email")?.value.trim() || "";
-    const password = document.getElementById("password")?.value || "";
-
-    if (!name) {
-      errorEl.textContent = "Vui lòng nhập họ và tên";
-      return;
-    }
-
-    if (!phone) {
-      errorEl.textContent = "Vui lòng nhập số điện thoại / Zalo";
-      return;
-    }
-
-    try {
-      await registerUser(name, phone, email, password);
-
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("phone", phone);
-      formData.append("email", email);
-      formData.append("package", "Đăng ký tài khoản");
-      formData.append("note", "Đăng ký từ register.html");
-
-      await fetch(SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
-
-      alert("Đăng ký thành công");
-      window.location.href = "./dashboard.html";
-
-    } catch (err) {
-      console.error("REGISTER PAGE ERROR:", err);
-      errorEl.textContent = err.message || "Đăng ký thất bại";
-    }
-  });
-</script>
+  <script type="module" src="./register.js"></script>
 </body>
 </html>
