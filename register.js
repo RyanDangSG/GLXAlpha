@@ -12,6 +12,14 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
+/* =========================
+   CONFIG
+========================= */
+const SHEET_WEB_APP_URL = "DAN_LINK_WEB_APP_APPS_SCRIPT_CUA_BAN";
+
+/* =========================
+   DOM
+========================= */
 const registerForm = document.getElementById("registerForm");
 const registerBtn = document.getElementById("registerBtn");
 
@@ -31,6 +39,9 @@ let recaptchaVerifier = null;
 let confirmationResult = null;
 let otpCooldown = false;
 
+/* =========================
+   HELPERS
+========================= */
 function setText(el, text = "") {
   if (el) el.textContent = text;
 }
@@ -45,7 +56,7 @@ function clearMessages() {
 function normalizeVietnamPhone(raw) {
   let phone = (raw || "").trim();
 
-  // bỏ khoảng trắng, dấu chấm, dấu gạch
+  // bỏ khoảng trắng, dấu chấm, gạch ngang
   phone = phone.replace(/[\s\.\-]/g, "");
 
   // nếu user nhập +84...
@@ -63,7 +74,7 @@ function normalizeVietnamPhone(raw) {
     phone = phone.slice(1);
   }
 
-  // chỉ giữ số
+  // chỉ giữ ký tự số
   phone = phone.replace(/\D/g, "");
 
   return `+84${phone}`;
@@ -123,7 +134,7 @@ async function savePendingUserProfile({
       zalo,
       phone,
       role: "free",
-      status: "pending_email",
+      status: "registered",
       emailVerified: false,
       phoneVerified: false,
       createdAt: serverTimestamp()
@@ -132,6 +143,35 @@ async function savePendingUserProfile({
   );
 }
 
+async function sendLeadToSheet({ name, email, zalo, phone, status }) {
+  if (!SHEET_WEB_APP_URL || SHEET_WEB_APP_URL === "DAN_LINK_WEB_APP_APPS_SCRIPT_CUA_BAN") {
+    console.warn("Chưa điền SHEET_WEB_APP_URL.");
+    return;
+  }
+
+  try {
+    await fetch(SHEET_WEB_APP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        name,
+        email,
+        zalo,
+        phone,
+        status,
+        source: "firebase_register"
+      })
+    });
+  } catch (error) {
+    console.error("Send lead to sheet error:", error);
+  }
+}
+
+/* =========================
+   REGISTER SUBMIT
+========================= */
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessages();
@@ -158,6 +198,16 @@ registerForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (!email) {
+    setText(registerError, "Vui lòng nhập email.");
+    return;
+  }
+
+  if (!password) {
+    setText(registerError, "Vui lòng nhập mật khẩu.");
+    return;
+  }
+
   if (password !== confirmPassword) {
     setText(registerError, "Mật khẩu nhập lại không khớp.");
     return;
@@ -170,8 +220,10 @@ registerForm.addEventListener("submit", async (e) => {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     const user = cred.user;
 
+    // gửi email verify
     await sendEmailVerification(user);
 
+    // lưu firestore
     await savePendingUserProfile({
       uid: user.uid,
       name,
@@ -180,11 +232,20 @@ registerForm.addEventListener("submit", async (e) => {
       phone
     });
 
+    // gửi ngay về sheet + telegram
+    await sendLeadToSheet({
+      name,
+      email,
+      zalo: zaloRaw,
+      phone,
+      status: "registered"
+    });
+
     otpBox.classList.remove("hidden");
 
     setText(
       registerSuccess,
-      "Đăng ký thành công. Hệ thống đã gửi email xác minh. Bây giờ hãy xác thực số điện thoại bằng OTP."
+      "Đăng ký thành công. Dữ liệu đã được gửi về hệ thống. Hệ thống đã gửi email xác minh, bây giờ hãy xác thực số điện thoại bằng OTP."
     );
   } catch (error) {
     console.error("Register error:", error);
@@ -195,6 +256,9 @@ registerForm.addEventListener("submit", async (e) => {
   }
 });
 
+/* =========================
+   SEND OTP
+========================= */
 sendOtpBtn.addEventListener("click", async () => {
   clearMessages();
 
@@ -250,6 +314,9 @@ sendOtpBtn.addEventListener("click", async () => {
   }
 });
 
+/* =========================
+   VERIFY OTP
+========================= */
 verifyOtpBtn.addEventListener("click", async () => {
   clearMessages();
 
@@ -277,11 +344,13 @@ verifyOtpBtn.addEventListener("click", async () => {
   try {
     await confirmationResult.confirm(code);
 
+    const finalStatus = user.emailVerified ? "active" : "pending_email";
+
     await setDoc(
       doc(db, "users", user.uid),
       {
         phoneVerified: true,
-        status: user.emailVerified ? "active" : "pending_email"
+        status: finalStatus
       },
       { merge: true }
     );
@@ -299,6 +368,9 @@ verifyOtpBtn.addEventListener("click", async () => {
   }
 });
 
+/* =========================
+   RESEND EMAIL VERIFY
+========================= */
 resendEmailBtn.addEventListener("click", async () => {
   clearMessages();
 
