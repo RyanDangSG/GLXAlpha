@@ -6,168 +6,193 @@
   <title>Đăng nhập | Logan Crypto</title>
   <link rel="icon" href="./logan-logo.jpg" />
   <style>
-    :root{
-      --bg:#07111f;
-      --card:#0d1726;
-      --card-2:#101d30;
-      --text:#edf5ff;
-      --muted:#a8bdd8;
-      --border:rgba(90,129,196,.18);
-      --accent:#22d3ee;
-      --accent-2:#38bdf8;
-      --danger:#ff6b6b;
+    :root {
+      --bg: #07111f;
+      --card: #0d1726;
+      --card-2: #101d30;
+      --text: #edf5ff;
+      --sub: #a8bdd8;
+      --accent: #56ccff;
+      --accent2: #7dd3fc;
+      --border: rgba(90, 129, 196, 0.18);
+      --danger: #ff7b7b;
+      --success: #69db7c;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:"Times New Roman", Times, serif;
-      background:
-        radial-gradient(circle at top left, rgba(34,211,238,.10), transparent 18%),
-        linear-gradient(180deg,#040b16 0%, #07111f 100%);
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+
+    * {
+      box-sizing: border-box;
     }
-    .auth-wrap{
-      width:min(100%, 520px);
-      background:linear-gradient(180deg, rgba(13,23,38,.96), rgba(10,20,34,.98));
-      border:1px solid var(--border);
-      border-radius:24px;
-      box-shadow:0 20px 50px rgba(0,0,0,.35);
-      padding:28px;
+
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      background: linear-gradient(180deg, #06101d, #0a1526);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-      text-decoration:none;
-      color:inherit;
+
+    .wrap {
+      width: min(100%, 520px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
-    .brand img{
-      width:46px;
-      height:46px;
-      border-radius:12px;
-      object-fit:cover;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
     }
-    .brand-title{
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:.5px;
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
     }
-    .brand-title span{color:var(--accent)}
-    .brand-sub{
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:1px;
+
+    .brand h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1;
     }
-    h1{
-      margin:0 0 18px;
-      font-size:28px;
-      font-weight:900;
+
+    .brand h1 span {
+      color: var(--accent);
     }
-    .form{
-      display:grid;
-      gap:14px;
+
+    .sub {
+      margin: 0 0 20px;
+      color: var(--sub);
+      line-height: 1.7;
+      font-size: 16px;
     }
-    .input{
-      width:100%;
-      min-height:54px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:var(--card-2);
-      color:var(--text);
-      padding:0 16px;
-      outline:none;
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
     }
-    .input:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(34,211,238,.10);
+
+    input {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card-2);
+      color: var(--text);
+      padding: 0 16px;
+      outline: none;
     }
-    .btn{
-      min-height:54px;
-      border:none;
-      border-radius:16px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#062033;
-      font-weight:900;
-      cursor:pointer;
-      font-size:18px;
+
+    input::placeholder {
+      color: #86a1c0;
     }
-    #errorMessage{
-      min-height:22px;
-      margin:0;
-      color:var(--danger);
-      font-size:16px;
-      line-height:1.4;
+
+    button {
+      min-height: 52px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #082032;
+      font-weight: 800;
+      cursor: pointer;
     }
-    .auth-links{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:17px;
+
+    .secondary-btn {
+      margin-top: 10px;
+      width: 100%;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      display: none;
     }
-    .auth-links a{
-      color:var(--accent);
-      font-weight:700;
-      text-decoration:none;
+
+    .error {
+      color: var(--danger);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 22px;
+      margin-top: 12px;
+    }
+
+    .success {
+      color: var(--success);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 22px;
+      margin-top: 8px;
+    }
+
+    .bottom {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--sub);
+    }
+
+    .bottom a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .helper {
+      margin-top: 12px;
+      color: var(--sub);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 20px;
+      }
+
+      .brand h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="auth-wrap">
-    <a href="./index.html" class="brand">
-      <img src="./logan-logo.jpg" alt="Logan Crypto">
-      <div>
-        <div class="brand-title">LOGAN <span>CRYPTO</span></div>
-        <div class="brand-sub">TRADE SMART - TRADE LIKE A PRO</div>
-      </div>
-    </a>
+  <div class="wrap">
+    <div class="brand">
+      <img src="./logan-logo.jpg" alt="Logan Crypto" />
+      <h1>LOGAN <span>CRYPTO</span></h1>
+    </div>
 
-    <h1>Đăng nhập</h1>
+    <p class="sub">
+      Đăng nhập để vào khu vực học tập. Tài khoản chỉ được kích hoạt khi đã xác minh email và số điện thoại.
+    </p>
 
-    <form id="loginForm" class="form">
-      <input id="email" class="input" type="email" placeholder="Email" required />
-      <input id="password" class="input" type="password" placeholder="Mật khẩu" required />
-      <button type="submit" class="btn">Đăng nhập</button>
-      <p id="errorMessage"></p>
+    <form id="loginForm" class="form-grid">
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="password" type="password" placeholder="Mật khẩu" required />
+      <button id="loginBtn" type="submit">Đăng nhập</button>
     </form>
 
-    <div class="auth-links">
-      Chưa có tài khoản? <a href="./register.html">Đăng ký</a>
+    <button id="resendVerifyBtn" type="button" class="secondary-btn">
+      Gửi lại email xác minh
+    </button>
+
+    <div id="loginError" class="error"></div>
+    <div id="loginSuccess" class="success"></div>
+
+    <p class="helper">
+      Nếu bạn đã đăng ký nhưng chưa vào được, hãy kiểm tra:
+      email đã xác minh chưa và số điện thoại đã OTP xong chưa.
+    </p>
+
+    <div class="bottom">
+      Chưa có tài khoản? <a href="./register.html">Đăng ký ngay</a>
     </div>
   </div>
 
-  <script type="module">
-    import { loginUser } from "./login.js";
-    import { redirectByRole } from "./redirect-by-role.js";
-
-    const form = document.getElementById("loginForm");
-    const errorEl = document.getElementById("errorMessage");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      if (errorEl) errorEl.textContent = "";
-
-      const email = document.getElementById("email")?.value.trim() || "";
-      const password = document.getElementById("password")?.value || "";
-
-      try {
-        const result = await loginUser(email, password);
-        alert("Đăng nhập thành công");
-        redirectByRole(result.profile);
-      } catch (err) {
-        console.error("LOGIN PAGE ERROR:", err);
-        if (errorEl) {
-          errorEl.textContent = err.message || "Đăng nhập thất bại";
-        } else {
-          alert(err.message || "Đăng nhập thất bại");
-        }
-      }
-    });
-  </script>
+  <script type="module" src="./login.js"></script>
 </body>
 </html>
